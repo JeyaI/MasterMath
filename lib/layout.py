@@ -11,6 +11,8 @@ from __future__ import annotations
 
 from manim import config, ManimColor
 
+BRAND = "Master Math USA"
+
 # --- frame -------------------------------------------------------------------
 config.frame_height = 16.0
 config.frame_width = 9.0

@@ -1,5 +1,7 @@
 # Math Shorts pipeline — project brief
 
+**Channel brand: Master Math USA** (`lib.layout.BRAND`). Check handle availability at channel creation.
+
 Anonymous YouTube Shorts channel: animated math-puzzle solutions, modelled loosely on
 "Master Catur Indonesia" (chess puzzles) but with the solution *animated* 3Blue1Brown-style.
 Proof-of-concept stage: prove people watch to the end before automating anything.
@@ -9,7 +11,10 @@ Proof-of-concept stage: prove people watch to the end before automating anything
 - Beats: hook title (0–3 s) → problem builds piece by piece → "Pause and try it" + 5 s countdown
   → animated insight + solution → ✓ payoff → **Level 2** challenge (same trick, one step harder,
   NOT solved) → "Comment just the number ↓" held ~12 s.
-- Level 2 answer is revealed at the start of the next Short and in a pinned comment after ~24 h.
+- **The call to action is open-ended and promises nothing** — no "answer tomorrow", no "first correct
+  gets pinned". Each Short stands alone; nothing in an old video can go stale. After ~24 h the human
+  may pin a comment (first correct, a clever wrong one, or none) and reply with the one-line why.
+  Level 2 answers are always a single number or word, listed in `level2.accept`.
 - Short captions (2–6 words) synced to each animation beat replace narration.
 - Music: public-domain compositions **rendered by us** (`lib/audio.py`) so we own the recording and
   Content ID can't claim it. Plus synthesised sfx (tick/pop/snip/chime) on key moments.
@@ -68,9 +73,13 @@ approve render mix`. Batch: `ms render --all && ms mix --all`.
    angle marker, "answer to yesterday" opener.
 5. Make 8–10 Shorts by hand, upload manually (YouTube Studio scheduling), and watch "viewed vs swiped
    away" and average % viewed before automating further.
-6. **`ms upload`** (later): YouTube Data API `videos.insert` with `status.publishAt`. Unaudited API
+6. **`ms answers`** (helper, optional): for published Shorts, read comments via the YouTube Data API
+   (`commentThreads.list`, order=time), find the earliest one containing a value from `level2.accept`,
+   print its link plus a drafted reply. Pinning is manual (the API can reply but, as far as we know,
+   not pin). Held-for-review comments don't appear in the API — check the Studio inbox too.
+7. **`ms upload`** (later): YouTube Data API `videos.insert` with `status.publishAt`. Unaudited API
    projects created after 28 Jul 2020 upload as locked-private — request the audit first; until then
    upload by hand. Quota is fine for ≤4/day.
-7. **Phase 2 cloud:** same image on a scheduled runner (GitHub Actions, or a t3.small — t3.micro's
+8. **Phase 2 cloud:** same image on a scheduled runner (GitHub Actions, or a t3.small — t3.micro's
    1 GB is tight for LaTeX). Swap `out/` to object storage behind one small interface. Note AWS's
    free tier for new accounts is credit-based (~6 months), not free forever.

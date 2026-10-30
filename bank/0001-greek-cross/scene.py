@@ -164,7 +164,7 @@ class Short(Scene):
         self.play(Write(ask), run_time=0.6)
 
         cap.show("Comment just the number ↓", ACCENT)
-        hint = label("nearest degree · answer tomorrow", 34, MUTED)
+        hint = label("nearest degree", 34, MUTED)
         hint.move_to([CENTRE_X, credit.get_y() + 0.02, 0])
         self.play(FadeOut(credit), FadeIn(hint), run_time=0.4)   # credit stays in the description
         for _ in range(3):

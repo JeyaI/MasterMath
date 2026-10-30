@@ -20,7 +20,8 @@ level1:
 level2:
   statement: "How many degrees does each cut tilt from horizontal? (nearest degree)"
   answer: 27              # atan(1/2) = 26.57°, checked in verify.py
-  reveal: next-short      # open tomorrow's Short with the answer, also pin a comment after ~24 h
+  accept: [27, 26.6, 26.57, 26.565]   # values that count as correct in comments
+  why: "The cut is the diagonal of a 2×1 box, so tan θ = 1/2 → θ ≈ 26.57° ≈ 27°."
 
 # Caption beats, in order (2–6 words each). The scene shows these in sync with the animation.
 captions:
