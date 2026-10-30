@@ -1,0 +1,5 @@
+asset,used_in,source_url,license,notes
+"Greek cross dissection (puzzle idea)",0001,https://www.gutenberg.org/ebooks/16713,"Public domain (USA); Dudeney d. 1930","Wording, drawings and animation are original. Confirm exact puzzle number at ingest."
+"J. S. Bach - Prelude in C, BWV 846, bars 1-11",all,,"Public domain composition","Recording synthesised in lib/audio.py - we own it; no Content ID exposure."
+"Sound effects tick/pop/snip/chime",all,,"Original","Synthesised in lib/audio.py."
+"Inter typeface",all,https://github.com/rsms/inter,"SIL Open Font License 1.1",""

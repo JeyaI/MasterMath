@@ -1,0 +1,26 @@
+[project]
+name = "mathshorts"
+version = "0.1.0"
+description = "Pipeline for animated math-puzzle YouTube Shorts"
+requires-python = ">=3.11"
+dependencies = [
+    "manim==0.22.1",      # Manim Community Edition - pinned so scenes keep rendering identically
+    "shapely>=2.0",       # exact geometry for dissections; verify.py and scenes share it
+    "numpy>=1.26",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+upload = ["google-api-python-client>=2.0", "google-auth-oauthlib>=1.0"]
+draft = ["anthropic>=0.40"]
+dev = ["pytest>=8"]
+
+[project.scripts]
+ms = "pipeline.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["pipeline", "lib"]

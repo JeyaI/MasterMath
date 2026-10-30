@@ -1,0 +1,8 @@
+out/
+__pycache__/
+*.egg-info/
+.venv/
+.env
+client_secret*.json
+token*.json
+media/

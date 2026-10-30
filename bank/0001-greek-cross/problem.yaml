@@ -1,0 +1,51 @@
+# One file per Short. The CLI reads/writes `status`; everything else is content.
+id: "0001"
+slug: greek-cross
+status: final          # ingested > drafted > verified > approved > rendered > final > scheduled > published
+
+source:
+  kind: classic           # dudeney | loyd | classic | original | gsm8k
+  credit: "Classic dissection, after H. E. Dudeney"
+  ref: "Greek cross dissections, Amusements in Mathematics (1917) — confirm puzzle number at ingest"
+  license: public-domain  # problem idea; our wording, drawings and animation are original
+
+format: level1-level2
+visual_potential: 5       # 1-5; only 4-5 get made
+
+level1:
+  statement: "Cut a plus-shaped cross of five 1×1 squares into 4 pieces that form a square."
+  answer: "Two perpendicular cuts through the centre with slopes 1/2 and -2; the 4 pieces slide into a √5 × √5 square."
+  insight: "Area 5 means side √5, which is the diagonal of a 2×1 box — so cut along those diagonals."
+
+level2:
+  statement: "How many degrees does each cut tilt from horizontal? (nearest degree)"
+  answer: 27              # atan(1/2) = 26.57°, checked in verify.py
+  reveal: next-short      # open tomorrow's Short with the answer, also pin a comment after ~24 h
+
+# Caption beats, in order (2–6 words each). The scene shows these in sync with the animation.
+captions:
+  - "5 squares, each 1×1"
+  - "Cut it into 4 pieces…"
+  - "Pause and try it"
+  - "A square of area 5…"
+  - "has side √5"
+  - "…the diagonal of a 2×1 box!"
+  - "Cut along it…"
+  - "…and once more at 90°"
+  - "4 identical pieces"
+  - "Slide them over…"
+  - "One perfect square ✓"
+  - "Comment just the number ↓"
+
+music:
+  piece: "J. S. Bach — Prelude in C major, BWV 846 (bars 1–11, self-rendered)"
+  license: public-domain composition; recording synthesised by lib/audio.py
+
+youtube:
+  title: "Can you turn this cross into a square? (4 pieces)"
+  description: |
+    Five squares, four pieces, one perfect square. Level 2: how steep is each cut? Comment just the number.
+    Classic dissection puzzle, after H. E. Dudeney. Music: J. S. Bach, Prelude in C, BWV 846.
+  tags: [math puzzle, geometry, dissection, puzzle, brain teaser]
+  video_id: null
+  publish_at: null
