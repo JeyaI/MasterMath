@@ -18,6 +18,7 @@ from .shorts import Short
 
 PREVIEW = (540, 960, 15)
 FINAL = (1080, 1920, 30)
+THUMB_LEAD = 0.1  # seconds before the pause beat: its caption crossfade starts exactly on the beat
 
 
 class RenderError(RuntimeError):
@@ -162,11 +163,28 @@ def compare(short: Short) -> Path:
 
 # --- final render + mix -----------------------------------------------------------------
 def render_final(short: Short, build: Path) -> tuple[Path, str]:
-    src, log = manim(short, FINAL, f"{short.name}-final")
     build.mkdir(parents=True, exist_ok=True)
+    beats_path = build / "beats.json"
+    beats_path.unlink(missing_ok=True)
+    src, log = manim(short, FINAL, f"{short.name}-final", env={"MS_BEATS_PATH": str(beats_path)})
     raw = build / "raw.mp4"
     shutil.copy(src, raw)
     return raw, log
+
+
+def thumbnail(video: Path, beats_path: Path, dest: Path) -> Path:
+    """Save the frame just before "Pause and try it", when the problem is fully posed.
+
+    Takes beats from this render, not out/preview, which can be stale or absent on a batch machine.
+    """
+    bs = json.loads(beats_path.read_text(encoding="utf-8")) if beats_path.exists() else []
+    t = next((b["t"] for b in bs if "pause" in b["name"].lower()), None)
+    if t is None:
+        raise RenderError(f"no thumbnail: {video.parent.name} has no \"Pause and try it\" beat")
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", f"{max(t - THUMB_LEAD, 0):.3f}", "-i", str(video),
+                    "-frames:v", "1", "-update", "1", str(dest)], check=True)
+    return dest
 
 
 def mix(raw: Path, final: Path, music_gain: float = 0.28, lufs: float = -14.0) -> Path:

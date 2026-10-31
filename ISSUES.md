@@ -6,7 +6,7 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **19**
+Next id: **20**
 
 ## Open
 
@@ -71,6 +71,10 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #19 · Thumbnail PNG in the upload kit
+status: done · 2026-10-31
+`ms batch` now writes `thumbnail.png` to the kit, the frame 0.1 s before the "Pause and try it" beat, using beats recorded during the final render, not `out/preview`. A Short with no such beat is marked `failed`. `upload.txt` and OPERATING.md mention it; checked on 0001 and 0002 in a throwaway batch.
 
 ### #2 · 0001's Level 2 needs a calculator
 status: done · 2026-10-31

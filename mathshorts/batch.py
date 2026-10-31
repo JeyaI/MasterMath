@@ -4,6 +4,7 @@ One broken Short never stops the others: it's marked `failed` with a log in out/
 A lock file stops two batches running at once (e.g. a manual run during the nightly one).
 
     out/ready/<short>/<short>.mp4   the finished video
+    out/ready/<short>/thumbnail.png the frame where the problem is fully posed
     out/ready/<short>/upload.txt    title, description, tags to paste into YouTube Studio
 """
 from __future__ import annotations
@@ -48,6 +49,7 @@ def upload_text(short: Short) -> str:
         f"TITLE (max 100 chars)\n{(yt.get('title') or d.get('title') or short.name).strip()}\n\n"
         f"DESCRIPTION\n{(yt.get('description') or '').strip()}\n\n#shorts #math #puzzle\n\n"
         f"TAGS (comma-separated)\n{', '.join(tags)}\n\n"
+        f"THUMBNAIL\nthumbnail.png (in this folder)\n\n"
         f"AFTER UPLOADING\nms published {short.number} <video URL>\n"
     )
 
@@ -64,6 +66,7 @@ def build_one(short: Short, log) -> Path:
     if kit.exists():
         shutil.rmtree(kit)
     final = render.mix(raw, kit / f"{short.name}.mp4")
+    render.thumbnail(raw, build / "beats.json", kit / "thumbnail.png")
     (kit / "upload.txt").write_text(upload_text(short), encoding="utf-8")
     return final
 

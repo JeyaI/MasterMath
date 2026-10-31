@@ -17,7 +17,7 @@ You're the editor: you pick puzzles, direct the animation, approve, watch the fi
 |---|---|---|
 | `drafting` | Being made in Claude Code | Give feedback until it's right, then say "approve" |
 | `approved` | Waiting for tonight's render | Nothing |
-| `ready` | Finished MP4 and upload kit in `out/ready/` | Watch it on your phone, then upload or reject |
+| `ready` | Finished MP4, thumbnail and upload kit in `out/ready/` | Watch it on your phone, then upload or reject |
 | `failed` | Tonight's render broke | Open it in Claude Code: `/draft-short <n>` |
 | `published` | Live on YouTube | Comments, if you like |
 
@@ -82,7 +82,7 @@ For each Short:
 
 ## Nightly (automatic)
 
-`scripts/nightly.sh` runs `ms batch`: every `approved` Short is rendered at 1080×1920, mixed with the music bed, normalized for loudness, and put in `out/ready/<short>/` with its `upload.txt`. Status changes are committed.
+`scripts/nightly.sh` runs `ms batch`: every `approved` Short is rendered at 1080×1920, mixed with the music bed, normalized for loudness, and put in `out/ready/<short>/` with its `thumbnail.png` and `upload.txt`. Status changes are committed.
 
 If one Short fails, it's marked `failed` with a log in `out/logs/` and the others still build. The batch's own log is `out/logs/nightly.log`. If it ends with `ERROR: status changes not committed`, the videos are fine: run the git command it prints.
 
@@ -96,8 +96,9 @@ If one Short fails, it's marked `failed` with a log in `out/logs/` and the other
 4. **Upload by hand**, one per publishing day:
    1. YouTube Studio → Create → Upload, choose `out/ready/<short>/<short>.mp4`.
    2. Paste the title, description and tags from `upload.txt`.
-   3. Schedule it for your fixed daily slot (same time every day; don't change it for a few weeks).
-   4. `ms published <n> <the video URL>`.
+   3. If Studio offers a custom thumbnail, use `out/ready/<short>/thumbnail.png`.
+   4. Schedule it for your fixed daily slot (same time every day; don't change it for a few weeks).
+   5. `ms published <n> <the video URL>`.
 5. Keep about a week of `ready` Shorts as a buffer. If it drops below 3, plan an extra drafting session.
 
 ## Evenings (optional, ~5 min)
