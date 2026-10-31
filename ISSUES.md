@@ -10,10 +10,6 @@ Next id: **19**
 
 ## Open
 
-### #2 · 0001's Level 2 needs a calculator
-status: open · P1 · content
-θ = arctan(1/2) ≈ 26.57° can't be worked out from what the video teaches. Change Level 2 to "What's the slope of the yellow cut?" (answer 1/2; accept 1/2, 0.5, .5), add the check to `verify.py`, update `short.yaml`, re-render. 0001 is `ready`, so start with `ms reject 1 "Level 2: switch to slope"`.
-
 ### #3 · Link 0001 to its catalog puzzle
 status: open · P2 · content
 The Greek-cross-to-square dissection has no number of its own: Dudeney gives it in the unnumbered article before #142 (his Fig. 39), and the parser drops those articles. The closest entry is `dudeney-amusements-142` (The Silk Patchwork), which cites it and asks the reverse. Decide whether that is the right link, then set `catalog_id` in `shorts/0001-greek-cross/short.yaml`, so the selector never suggests it again. Update `source.credit` and the `LICENSES.csv` note.
@@ -75,6 +71,10 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #2 · 0001's Level 2 needs a calculator
+status: done · 2026-10-31
+Level 2 is now "What's the slope of the yellow cut?" (answer 1/2; accept 1/2, 0.5, .5), checked in `verify.py`; `short.yaml` updated and re-rendered.
 
 ### #4 · Confirm the Docker image builds and renders on WSL
 status: done · 2026-10-31

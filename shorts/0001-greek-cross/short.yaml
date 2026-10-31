@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0001'
 title: Greek cross to square
-status: drafting
+status: approved
 catalog_id:
 tags:
   - dissection
@@ -17,10 +17,10 @@ level1:
   insight: "Area 5 means side √5, which is the diagonal of a 2×1 box — so cut along those diagonals."
 
 level2:
-  statement: "How many degrees does each cut tilt from horizontal? (nearest degree)"
-  answer: 27              # atan(1/2) = 26.57°, checked in verify.py
-  accept: [27, 26.6, 26.57, 26.565]   # values that count as correct in comments
-  why: "The cut is the diagonal of a 2×1 box, so tan θ = 1/2 → θ ≈ 26.57° ≈ 27°."
+  statement: "What's the slope of the yellow cut?"
+  answer: "1/2"           # checked in verify.py
+  accept: ["1/2", 0.5, ".5"]   # values that count as correct in comments
+  why: "The cut is the diagonal of a 2×1 box: it rises 1 over a run of 2, so the slope is 1/2."
 
 # Caption beats, in order (2–6 words each). The scene shows these in sync with the animation.
 captions:
@@ -44,7 +44,7 @@ music:
 youtube:
   title: "Can you turn this cross into a square? (4 pieces)"
   description: |
-    Five squares, four pieces, one perfect square. Level 2: how steep is each cut? Comment just the number.
+    Five squares, four pieces, one perfect square. Level 2: what's the slope of the yellow cut? Comment just the number.
     Classic dissection puzzle, after H. E. Dudeney. Music: J. S. Bach, Prelude in C, BWV 846.
   tags: [math puzzle, geometry, dissection, puzzle, brain teaser]
   video_id:
