@@ -74,7 +74,10 @@ def manim(short: Short, size: tuple[int, int, int], name: str, extra: list[str] 
     cmd = ["manim", "render", "--resolution", f"{w},{h}", "--fps", str(fps), "--media_dir", str(media),
            "--disable_caching", "--progress_bar", "none", "-o", name, *extra,
            str(short.folder / "scene.py"), "Short"]
-    r = subprocess.run(cmd, capture_output=True, text=True, env={**os.environ, **(env or {})})
+    # Run from the repo root, not the caller's folder: under /mnt/c on WSL that folder can stop
+    # resolving (see scripts/nightly.sh), and manim crashes on getcwd() at import.
+    r = subprocess.run(cmd, capture_output=True, text=True, cwd=paths.root(),
+                       env={**os.environ, **(env or {})})
     log = f"$ {' '.join(cmd)}\n{r.stdout}\n{r.stderr}"
     if r.returncode != 0:
         tail = "\n".join(r.stderr.strip().splitlines()[-15:])

@@ -2,7 +2,7 @@
 import pytest
 from conftest import FIXTURES
 
-from mathshorts import batch, catalog, cli
+from mathshorts import batch, catalog, cli, render
 from mathshorts.shorts import StatusError, all_shorts, find, used_catalog_ids
 
 
@@ -66,3 +66,15 @@ def test_reject_and_published(root, capsys):
     s.update(status="ready")
     cli.main(["published", "1", "https://youtube.com/shorts/AbC_dEf-123"])
     assert s.status == "published" and s.data()["youtube"]["video_id"] == "AbC_dEf-123"
+
+
+def test_render_survives_a_working_directory_that_no_longer_resolves(root, tmp_path, monkeypatch):
+    # Under /mnt/c on WSL a shell's working directory can stop resolving; manim dies on getcwd().
+    gone = tmp_path / "gone"
+    gone.mkdir()
+    monkeypatch.chdir(gone)
+    gone.rmdir()
+    short = make_short(root, "0001", "approved")
+    with pytest.raises(render.RenderError) as e:
+        render.manim(short, (90, 160, 5), "cwd-test")
+    assert "broken scene" in e.value.output      # manim started and reached the scene
