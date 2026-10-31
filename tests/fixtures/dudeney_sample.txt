@@ -1,0 +1,84 @@
+The Project Gutenberg EBook of Sample Puzzles (synthetic test fixture)
+
+Puzzle headings follow the confirmed layout of Gutenberg #16713; the
+SOLUTIONS layout is assumed (both "N.--" and "N." forms are exercised).
+
+*** START OF THIS PROJECT GUTENBERG EBOOK SAMPLE PUZZLES ***
+
+                            CONTENTS
+
+    MONEY PUZZLES                                          1
+    GREEK CROSS PUZZLES                                    3
+    SOLUTIONS                                              9
+
+
+AMUSEMENTS IN MATHEMATICS.
+
+    "Some quoted line."
+
+    OLIVER WENDELL HOLMES.
+
+
+MONEY PUZZLES.
+
+
+1.--A POST-OFFICE PERPLEXITY.
+
+A lady asked for change of a crown in pence and shillings, and the
+clerk was perplexed. How many ways could it be done?
+
+
+2.--YOUTHFUL PRECOCITY.
+
+A boy of 12 had saved 3s. 4d. by the age of ten years old. What did
+he save each year?
+3. This line starts with a number but is prose, not a puzzle.
+
+
+GREEK CROSS PUZZLES.
+
+
+3.--THE CROSS AND THE SQUARE.
+
+Cut a Greek cross into four pieces that will fit together and form a
+perfect square. The cut lines may be drawn on the figure.
+
+[Illustration]
+
+A NOTE IN CAPITALS INSIDE THE TEXT
+continues on the next line and must stay part of puzzle 3.
+
+
+4.--THE SQUARE OF CROSSES.
+
+Here is a figure of five crosses arranged in a grid.
+
+[Illustration:
+
+    +---+---+
+    | X | X |
+    +---+---+
+
+]
+
+
+SOLUTIONS.
+
+
+MONEY PUZZLES.
+
+
+1.--It can be done in 1,000 different ways when the coins are taken as
+listed.
+
+2.--YOUTHFUL PRECOCITY.
+
+He saved 1s. 8d. each year.
+3. A prose line that starts with a number must stay inside solution 2.
+
+3.--Make two straight cuts through the centre at right angles, each
+joining a corner to the middle of an opposite arm.
+
+4.--Arrange them as in the figure.
+
+*** END OF THIS PROJECT GUTENBERG EBOOK SAMPLE PUZZLES ***

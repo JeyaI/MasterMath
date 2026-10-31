@@ -1,20 +1,19 @@
-# One file per Short. The CLI reads/writes `status`; everything else is content.
-id: "0001"
-slug: greek-cross
-status: final          # ingested > drafted > verified > approved > rendered > final > scheduled > published
-
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0001'
+title: Greek cross to square
+status: ready
+catalog_id:
+tags:
+  - dissection
 source:
-  kind: classic           # dudeney | loyd | classic | original | gsm8k
-  credit: "Classic dissection, after H. E. Dudeney"
-  ref: "Greek cross dissections, Amusements in Mathematics (1917) — confirm puzzle number at ingest"
+  kind: dudeney-amusements  # catalog source id, or "original"
+  credit: "Classic dissection, after H. E. Dudeney (Greek cross puzzles)"
   license: public-domain  # problem idea; our wording, drawings and animation are original
-
-format: level1-level2
-visual_potential: 5       # 1-5; only 4-5 get made
 
 level1:
   statement: "Cut a plus-shaped cross of five 1×1 squares into 4 pieces that form a square."
-  answer: "Two perpendicular cuts through the centre with slopes 1/2 and -2; the 4 pieces slide into a √5 × √5 square."
+  answer: "Two perpendicular cuts through the centre with slopes 1/2 and -2; the 4 pieces slide into a
+    √5 × √5 square."
   insight: "Area 5 means side √5, which is the diagonal of a 2×1 box — so cut along those diagonals."
 
 level2:
@@ -48,5 +47,8 @@ youtube:
     Five squares, four pieces, one perfect square. Level 2: how steep is each cut? Comment just the number.
     Classic dissection puzzle, after H. E. Dudeney. Music: J. S. Bach, Prelude in C, BWV 846.
   tags: [math puzzle, geometry, dissection, puzzle, brain teaser]
-  video_id: null
-  publish_at: null
+  video_id:
+  url:
+  published_at:
+built_at: 20261031-101439
+last_error:

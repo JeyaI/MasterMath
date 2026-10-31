@@ -24,7 +24,7 @@ from manim import (  # noqa: E402
 import numpy as np  # noqa: E402
 
 from lib.layout import ACCENT, GOOD, GRID, INK, MUTED, PIECES, STAGE_Y  # noqa: E402
-from lib.components import CENTRE_X, Captions, badge, countdown, footer, hook, label  # noqa: E402
+from lib.components import CENTRE_X, Captions, badge, beat, countdown, footer, hook, label  # noqa: E402
 from lib.audio import write_sfx  # noqa: E402
 from verify import cross, pieces_and_targets  # noqa: E402
 
@@ -48,6 +48,7 @@ class Short(Scene):
         cap = Captions(self)
 
         # --- 0-3 s  hook: the cross builds square by square -------------------
+        beat(self, "hook")
         title = hook("Make a square", "from this cross, in 4 pieces")
         cells = VGroup(*[
             Square(side_length=S, fill_color=GRID, fill_opacity=1, stroke_color=INK, stroke_width=3).move_to(P(x, y))
@@ -137,6 +138,7 @@ class Short(Scene):
         self.wait(1.6)
 
         # --- 31-46 s  Level 2: comment challenge ---------------------------------
+        beat(self, "Level 2")
         solved = VGroup(pieces, outline, side)
         self.play(FadeOut(title), solved.animate.scale(0.42).move_to([CENTRE_X - 2.3, 5.9, 0]), run_time=0.8)
         tag = badge("LEVEL 2").move_to([CENTRE_X + 1.1, 6.35, 0])

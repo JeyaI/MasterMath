@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 COPY pyproject.toml ./
-COPY pipeline ./pipeline
+COPY mathshorts ./mathshorts
 COPY lib ./lib
 RUN pip install -e .
 

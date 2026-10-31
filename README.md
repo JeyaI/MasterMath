@@ -1,14 +1,13 @@
-# mathshorts
+# Master Math USA
 
 Animated math-puzzle YouTube Shorts, rendered with Manim Community Edition.
 
-```bash
-pip install -e .            # needs ffmpeg, LaTeX + dvisvgm, Cairo/Pango, Inter font (or use the Dockerfile)
-ms status
-ms verify 0001              # check every answer in code
-ms preview 0001             # fast 540x960 draft -> out/preview/
-ms approve 0001             # your sign-off
-ms render 0001 && ms mix 0001   # 1080x1920 + music -> out/final/
-```
+- **Running the channel:** [OPERATING.md](OPERATING.md), the playbook.
+- **Improving the software:** [ISSUES.md](ISSUES.md), the backlog (`/work-issue` in Claude Code).
+- **How the code is organized:** [CLAUDE.md](CLAUDE.md).
 
-See `CLAUDE.md` for the format, licensing rules, status flow and the roadmap.
+```bash
+pip install -e ".[dev]"     # plus ffmpeg, LaTeX + dvisvgm, Cairo/Pango, Inter (see OPERATING.md), or use the Dockerfile
+ms status
+python -m pytest -q
+```

@@ -6,6 +6,9 @@ video original).
 """
 from __future__ import annotations
 
+import json
+import os
+
 from manim import (
     DOWN, LEFT, ORIGIN, PI, RIGHT, TAU, UP,
     Arc, Circle, FadeIn, FadeOut, RoundedRectangle, Scene, Text, ValueTracker,
@@ -18,6 +21,20 @@ from .layout import (
 )
 
 CENTRE_X = (SAFE_LEFT + SAFE_RIGHT) / 2
+
+
+def beat(scene: Scene, name: str) -> None:
+    """Mark the start of a beat. `ms preview` writes these to beats.json so review notes like
+    "0:12 too fast" map to a spot in the scene, and `ms preview --at 0:12` re-renders just that beat.
+    Captions.show() calls this automatically; call it yourself for beats without a caption."""
+    r = scene.renderer
+    beats = getattr(scene, "_ms_beats", [])
+    beats.append({"t": round(float(r.time), 2), "anim": int(r.num_plays), "name": name})
+    scene._ms_beats = beats
+    path = os.environ.get("MS_BEATS_PATH")
+    if path:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(beats, f, indent=1, ensure_ascii=False)
 
 
 def label(text: str, size: float = SIZE_CAPTION, color=INK, weight=SEMIBOLD) -> Text:
@@ -46,7 +63,7 @@ def footer(text: str) -> Text:
 class Captions:
     """One caption on screen at a time, cross-faded on each beat.
 
-    Each call to show() is a 'caption beat' from problem.yaml; keep them to 2-6 words.
+    Each call to show() is a beat (see beat()); keep captions to 2-6 words.
     """
 
     def __init__(self, scene: Scene, y: float = CAPTION_Y):
@@ -59,6 +76,7 @@ class Captions:
         return m.move_to([CENTRE_X, self.y, 0])
 
     def show(self, content, color=INK, run_time: float = 0.45, extra=()):
+        beat(self.scene, content if isinstance(content, str) else "caption")
         new = self._make(content, color)
         anims = [FadeIn(new, shift=0.25 * UP)]
         if self.current is not None:

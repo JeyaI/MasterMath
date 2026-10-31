@@ -8,6 +8,7 @@ dependencies = [
     "shapely>=2.0",       # exact geometry for dissections; verify.py and scenes share it
     "numpy>=1.26",
     "pyyaml>=6.0",
+    "ruamel.yaml>=0.18", # round-trip YAML: keeps comments in short.yaml / annotations.yaml
 ]
 
 [project.optional-dependencies]
@@ -16,11 +17,11 @@ draft = ["anthropic>=0.40"]
 dev = ["pytest>=8"]
 
 [project.scripts]
-ms = "pipeline.cli:main"
+ms = "mathshorts.cli:main"
 
 [build-system]
 requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-packages = ["pipeline", "lib"]
+packages = ["mathshorts", "mathshorts.sources", "lib"]

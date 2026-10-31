@@ -1,7 +1,7 @@
 """Master Math USA logo: the 4-piece square from Short 0001 (cross -> square dissection).
 
 The square keeps its natural tilt, atan(1/2) ~ 26.6 deg, the Level 2 answer of the first Short.
-Geometry comes straight from bank/0001-greek-cross/verify.py.
+Geometry comes straight from shorts/0001-greek-cross/verify.py.
 
 Renders (python brand/logo.py does all three):
     Avatar   800x800    channel profile picture (YouTube crops it to a circle)
@@ -16,7 +16,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
-sys.path[:0] = [str(REPO), str(REPO / "bank" / "0001-greek-cross")]
+sys.path[:0] = [str(REPO), str(REPO / "shorts" / "0001-greek-cross")]
 
 from manim import (  # noqa: E402
     DOWN, LEFT, RIGHT, UP, Circle, Polygon, Scene, Text, VGroup, config, BOLD, MEDIUM,

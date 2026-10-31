@@ -1,87 +1,64 @@
-# Math Shorts pipeline — project brief
+# Master Math USA: project brief for Claude Code
 
-**Channel brand: Master Math USA** (`lib/brand.py`: name, tagline, palette). Check handle availability at
-channel creation. Logo = the 4-piece square from Short 0001 at its natural tilt (atan 1/2); regenerate
-avatar/banner/mark with `python brand/logo.py` (outputs to `brand/out/`, gitignored).
+An anonymous YouTube Shorts channel of animated math-puzzle solutions (Manim, 3Blue1Brown-style), loosely modeled on "Master Catur Indonesia". The human runs it from **OPERATING.md**; the backlog is **ISSUES.md**. Brand: `lib/brand.py`. Logo: `python brand/logo.py`.
 
-Anonymous YouTube Shorts channel: animated math-puzzle solutions, modelled loosely on
-"Master Catur Indonesia" (chess puzzles) but with the solution *animated* 3Blue1Brown-style.
-Proof-of-concept stage: prove people watch to the end before automating anything.
-
-## The format (every Short)
-- 9:16, 1080×1920, 30 fps, ~40–50 s, **silent narration** (no voiceover for now).
-- Beats: hook title (0–3 s) → problem builds piece by piece → "Pause and try it" + 5 s countdown
-  → animated insight + solution → ✓ payoff → **Level 2** challenge (same trick, one step harder,
-  NOT solved) → "Comment just the number ↓" held ~12 s.
-- **The call to action is open-ended and promises nothing** — no "answer tomorrow", no "first correct
-  gets pinned". Each Short stands alone; nothing in an old video can go stale. After ~24 h the human
-  may pin a comment (first correct, a clever wrong one, or none) and reply with the one-line why.
-  Level 2 answers are always a single number or word, listed in `level2.accept`.
-- Short captions (2–6 words) synced to each animation beat replace narration.
-- Music: public-domain compositions **rendered by us** (`lib/audio.py`) so we own the recording and
-  Content ID can't claim it. Plus synthesised sfx (tick/pop/snip/chime) on key moments.
-- Footer credit to the puzzle's source. No real-person interview clips or photos of living people.
+## Skills
+- `/draft-short <catalog-id | number>`: draft or revise a Short with the user (`.claude/skills/draft-short`).
+- `/work-issue [id]`: work the backlog (`.claude/skills/work-issue`).
 
 ## Non-negotiables
-1. **Originality / YouTube "inauthentic content" policy.** Each video must be materially different
-   and educational. Every Short gets a *different* puzzle and a *custom* solution animation; the
-   shared template (hook, captions, countdown, Level 2 card) is fine, but never ship a video that is
-   just a new problem dropped into the same animation. Max 1–2 uploads/day, 4/day hard ceiling.
-2. **Sources must be licensed.** Allowed: Dudeney (*Amusements in Mathematics* 1917, *The Canterbury
-   Puzzles* 1907/1919 — Project Gutenberg, public domain), Sam Loyd *Cyclopedia of Puzzles* (1914),
-   famous named problems retold in our own words, our own problems, GSM8K (MIT). **Not allowed
-   without written permission:** AMC/AIME (MAA), AoPS, Brilliant, MATH dataset, Project Euler.
-   Log every asset in `LICENSES.csv`.
-3. **Every answer is checked in code.** `verify.py` must pass before a Short can be approved, and the
-   scene should import geometry/numbers from it so the video shows exactly what was verified.
-4. **Two human checkpoints:** approve the scene (`ms approve`) and watch the final MP4 before upload.
-5. **Anonymity:** separate Google account for the channel; no personal name/email in repo metadata,
-   YouTube descriptions, or committed config. Secrets only via env vars (`.env` is gitignored).
+1. **Originality (YouTube "inauthentic content" policy).** Every Short gets a different puzzle and a custom solution animation. The shared template (hook, captions, countdown, Level 2 card) is fine; a new problem dropped into the same animation is not. At most 1–2 uploads a day.
+2. **Licensed sources only.** Allowed: Dudeney (*Amusements in Mathematics*, *The Canterbury Puzzles*, public domain), famous named problems retold in our own words, our own problems, GSM8K (MIT). **Not allowed:** AMC/AIME (MAA), AoPS, Brilliant, the MATH dataset, Project Euler. Log assets in `LICENSES.csv`.
+3. **Every answer is checked in code.** `verify.py` must pass before `ms approve` will run, and the scene imports its shapes and numbers from `verify.py`.
+4. **The human approves and the human uploads.** Never approve a Short or change `status` without the user explicitly saying so; status changes only go through `ms` commands.
+5. **Level 2 is solvable without a calculator**, with a single number or word as the answer (listed in `level2.accept`). The call to action promises nothing ("Comment just the number ↓"; no "answer tomorrow").
+6. **Anonymity.** Commits are by `mathshorts`. No personal names or emails in the repo, descriptions or config. Secrets only in env vars.
+
+## The format (every Short)
+9:16, 1080×1920, 30 fps, 40–50 s, no narration. Beats: hook (0–3 s), problem builds, "Pause and try it" with a 5 s countdown, animated insight and solution, ✓ payoff, Level 2 card (same trick, one step further, not solved), "Comment just the number ↓" held about 12 s. Captions are 2–6 words. Music is a public-domain composition synthesized by `lib/audio.py` (we own the recording), plus sound effects.
+
+## Architecture: five modules, connected only through files
+| Module | Code | Data | Run |
+|---|---|---|---|
+| Sources → catalog | `mathshorts/catalog.py`, `mathshorts/sources/` | `catalog/sources.yaml`, `catalog/<src>.jsonl` (regenerated), `catalog/annotations.yaml` (judgements; never overwritten) | rarely |
+| Draft selector | `mathshorts/selector.py` (pure `rank()`) | `config/selector.yaml` | `ms suggest` |
+| Drafting | `.claude/skills/draft-short`, `mathshorts/render.py` (preview, compare) | `shorts/NNNN-slug/{short.yaml, verify.py, scene.py, NOTES.md}` | weekly, with the user |
+| Nightly batch | `mathshorts/batch.py`, `scripts/nightly.sh` | `out/ready/<short>/`, `out/logs/` | nightly |
+| Upload | manual for now (`upload.txt` in each kit) | `short.yaml` `youtube.*` | `ms published` |
+
+Shared: `mathshorts/shorts.py` (Short folder + status machine), `mathshorts/yamlio.py` (round-trip YAML, atomic writes), `mathshorts/paths.py` (`MS_ROOT`, `MS_OUT`, `MS_CACHE`), `lib/` (Manim layout, components, audio, brand).
+
+**Status machine** (`mathshorts/shorts.py: TRANSITIONS`): `drafting → approved → ready → published`; batch failure → `failed`; `reject` returns approved/ready/failed to `drafting`; `approve` also works from `failed`.
+
+**Catalog ids** are `<source>-<number>` (e.g. `dudeney-amusements-087`). A Short records its `catalog_id`; "used" is derived from that, never stored in the catalog.
+
+**Beats.** `lib.components.beat()` (called by every `Captions.show`) logs `{t, anim, name}`. A full `ms preview` writes `out/preview/<short>/beats.json`. `ms preview --at M:SS` renders only that beat (Manim `-n start,end`), and `ms note` tags notes with their beat.
 
 ## Layout
 ```
-bank/NNNN-slug/   problem.yaml (content + status) · verify.py · scene.py (class Short)
-lib/              layout.py (9:16 frame, palette, safe zones) · components.py · audio.py
-pipeline/cli.py   the `ms` command
-assets/sfx/       generated by lib/audio.py
-out/              preview/ render/ final/ audio/ media/  (gitignored)
+catalog/   sources.yaml · <src>.jsonl · annotations.yaml
+config/    selector.yaml
+shorts/    NNNN-slug/ short.yaml · verify.py · scene.py (class Short) · NOTES.md
+lib/       brand.py (no side effects) · layout.py (9:16 frame, safe zone) · components.py · audio.py
+mathshorts/ the `ms` CLI and modules
+brand/     logo.py → brand/out/ (gitignored)
+scripts/   nightly.sh
+tests/     pytest; fixtures/ has parser samples
+out/       preview/ build/ ready/ logs/ media/ (gitignored)
 ```
-Safe zone: Shorts UI covers the bottom ~20% and a right-hand column. Keep content inside
-x ∈ [-3.8, 3.2], y ∈ [-4.6, 7.0] (frame is 9×16 units). Use `lib.components.CENTRE_X`.
+Safe zone: the Shorts UI covers the bottom ~20% and a right-hand column. Keep content in x ∈ [-3.8, 3.2], y ∈ [-4.6, 7.0] (the frame is 9×16 units). Use `lib.components.CENTRE_X`.
 
-## Status flow
-`ingested → drafted → verified → approved → rendered → final → scheduled → published`
-Commands only act on Shorts in the right status (`--force` overrides). Built: `status verify preview
-approve render mix`. Batch: `ms render --all && ms mix --all`.
+## Conventions
+- Run `python -m pytest -q` after code changes. Tests use a temp root via `MS_ROOT`, so they never touch real data.
+- Changes to `lib/` affect every Short. Re-preview at least one existing Short and look at the frames.
+- When the human workflow changes, update OPERATING.md in the same commit.
+- New ideas or bugs go to ISSUES.md (next id at the top).
+- Commit messages: `0007: approved`, `#12: <issue title>`, `catalog: add <source>`, `batch <date>`.
 
-## Gotchas already hit
-- `LaggedStart(GrowFromCenter(c) for c in group)` adds children individually → `self.remove(*group)`.
-- Manim's audio track ends at the last `add_sound`; `ms mix` pads it (`apad`) before mixing music.
-- Manim `-q` flags override pixel size; the CLI passes `--resolution` and `lib/layout.py` only forces
-  1080×1920 if nothing else set a portrait size.
-- font_size values are ~2× Manim defaults because the frame is 16 units tall.
-
-## Next work (in order)
-1. **Docker:** `docker build -t mathshorts .` then `docker run --rm -v "$PWD":/app mathshorts ms preview 0001`
-   and confirm it matches the cloud render.
-2. **`ms ingest dudeney`:** download Gutenberg #16713 (and #27635), split into numbered
-   puzzle/solution pairs, write `bank/NNNN-slug/problem.yaml` with `status: ingested`,
-   `visual_potential` 1–5 (geometry/dissection/counting/probability high; currency/word-heavy low).
-   Keep Dudeney's puzzle number in `source.ref`.
-3. **`ms draft NNNN`:** an LLM (Anthropic API, key via env) writes the Level 2 variant, caption beats,
-   `verify.py`, and a first `scene.py` built from `lib/components.py`. Status → drafted. The human edits
-   the scene; that editing is the creative input.
-4. Grow `lib/components.py` as patterns repeat: dot grid, area model, number line, probability tree,
-   angle marker, "answer to yesterday" opener.
-5. Make 8–10 Shorts by hand, upload manually (YouTube Studio scheduling), and watch "viewed vs swiped
-   away" and average % viewed before automating further.
-6. **`ms answers`** (helper, optional): for published Shorts, read comments via the YouTube Data API
-   (`commentThreads.list`, order=time), find the earliest one containing a value from `level2.accept`,
-   print its link plus a drafted reply. Pinning is manual (the API can reply but, as far as we know,
-   not pin). Held-for-review comments don't appear in the API — check the Studio inbox too.
-7. **`ms upload`** (later): YouTube Data API `videos.insert` with `status.publishAt`. Unaudited API
-   projects created after 28 Jul 2020 upload as locked-private — request the audit first; until then
-   upload by hand. Quota is fine for ≤4/day.
-8. **Phase 2 cloud:** same image on a scheduled runner (GitHub Actions, or a t3.small — t3.micro's
-   1 GB is tight for LaTeX). Swap `out/` to object storage behind one small interface. Note AWS's
-   free tier for new accounts is credit-based (~6 months), not free forever.
+## Gotchas
+- `LaggedStart(GrowFromCenter(c) for c in group)` adds children individually, so use `self.remove(*group)`.
+- Manim's audio track ends at the last `add_sound`; `render.mix` pads it (`apad`) before mixing in music.
+- `lib/layout.py` sets config on import (9:16). Brand colors for other frame shapes come from `lib/brand.py`.
+- `--resolution` from the CLI wins; `layout.py` only forces 1080×1920 if nothing else set a portrait size.
+- font_size values are about 2× Manim defaults because the frame is 16 units tall.
+- The Gutenberg solutions layout for Dudeney is unconfirmed (ISSUES #1). The parser tolerates both `N.--` and `N.` styles.

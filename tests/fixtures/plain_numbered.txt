@@ -1,0 +1,20 @@
+*** START OF THE PROJECT GUTENBERG EBOOK PLAIN SAMPLE ***
+
+VARIOUS PUZZLES.
+
+1.--THE FIRST ONE.
+
+Puzzle text one.
+
+2.--THE SECOND ONE.
+
+Puzzle text two.
+
+SOLUTIONS.
+
+1. Answer one.
+
+2. Answer two,
+over two lines.
+
+*** END OF THE PROJECT GUTENBERG EBOOK PLAIN SAMPLE ***

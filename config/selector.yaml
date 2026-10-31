@@ -1,0 +1,19 @@
+# Draft selector settings (`ms suggest`). Tune these after each weekly review.
+
+min_visual: 4             # never suggest puzzles scored below this
+recent_window: 3          # how many of the latest Shorts count as "recent" for variety
+
+weights:
+  visual: 1.0             # per point of visual_potential
+  repeat_tag: -1.5        # per tag shared with a recent Short
+  repeat_source: -0.3     # if the latest Short came from the same source
+  has_solution: 0.5       # the book's own solution is there to check against
+  has_figure: 0.3         # a figure usually means a strong visual
+
+# Bump what holds viewers, demote what doesn't. Unlisted tags count 0.
+tag_weights:
+  dissection: 0.5
+  geometry: 0.3
+  routes: 0.2
+  money: -1.0
+  age: -1.0
