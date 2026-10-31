@@ -1,6 +1,8 @@
 # Math Shorts pipeline — project brief
 
-**Channel brand: Master Math USA** (`lib.layout.BRAND`). Check handle availability at channel creation.
+**Channel brand: Master Math USA** (`lib/brand.py`: name, tagline, palette). Check handle availability at
+channel creation. Logo = the 4-piece square from Short 0001 at its natural tilt (atan 1/2); regenerate
+avatar/banner/mark with `python brand/logo.py` (outputs to `brand/out/`, gitignored).
 
 Anonymous YouTube Shorts channel: animated math-puzzle solutions, modelled loosely on
 "Master Catur Indonesia" (chess puzzles) but with the solution *animated* 3Blue1Brown-style.
