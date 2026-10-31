@@ -6,7 +6,7 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **17**
+Next id: **19**
 
 ## Open
 
@@ -17,10 +17,6 @@ status: open · P1 · content
 ### #3 · Link 0001 to its catalog puzzle
 status: open · P2 · content
 The Greek-cross-to-square dissection has no number of its own: Dudeney gives it in the unnumbered article before #142 (his Fig. 39), and the parser drops those articles. The closest entry is `dudeney-amusements-142` (The Silk Patchwork), which cites it and asks the reverse. Decide whether that is the right link, then set `catalog_id` in `shorts/0001-greek-cross/short.yaml`, so the selector never suggests it again. Update `source.credit` and the `LICENSES.csv` note.
-
-### #4 · Confirm the Docker image builds and renders on WSL
-status: open · P2 · chore
-`docker build -t mathshorts .`, then `MS_USE_DOCKER=1 scripts/nightly.sh` on an approved test Short. Check file ownership in `out/`, and that the output matches the native render.
 
 ### #5 · Scrape The Canterbury Puzzles
 status: open · P2 · feature
@@ -70,7 +66,19 @@ status: open · P3 · chore
 status: open · P3 · chore
 On the real catalog the heuristic gives 175 of 430 puzzles 5/5, because the has-figure and keyword bonuses stack on high section scores, so `ms suggest` barely separates them. Rebalance the bonuses (or let #7 replace them).
 
+### #17 · Native batch can't find manim when run via `MS_BIN`
+status: open · P2 · bug
+With `MS_BIN=~/.venvs/mathshorts/bin/ms` and the venv not on PATH (as under a scheduler), `render.manim` looks `manim` up on PATH and every Short fails with `[Errno 13] Permission denied: 'manim'`. Run the `manim` next to `sys.executable`, and fix the scheduler lines in OPERATING.md if needed: `bash -lc` doesn't activate the venv either.
+
+### #18 · Final mix measures -16 LUFS, not the -14 target
+status: open · P3 · bug
+`render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
+
 ## Done
+
+### #4 · Confirm the Docker image builds and renders on WSL
+status: done · 2026-10-31
+No-cache build works (about 7 min, 3 GB); `nightly.sh` rendered 0001 to `ready` in throwaway clones on `/mnt/c` and on WSL's own filesystem, identical streams on both, `out/` owned by the host user. Against native: same format, duration and layout, but not bit-identical (Inter 4.1 vs 3.19, SSIM 0.985). Fixed `nightly.sh` silently skipping its commit when the working directory went stale on `/mnt/c`; it now retries and exits non-zero on failure.
 
 ### #1 · Check the Dudeney parser against the real Gutenberg file
 status: done · 2026-10-31

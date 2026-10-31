@@ -36,7 +36,7 @@ You're the editor: you pick puzzles, direct the animation, approve, watch the fi
      4. `source ~/.venvs/mathshorts/bin/activate`, then `pip install -e ".[dev]"` from the repo.
 
      Run `source ~/.venvs/mathshorts/bin/activate` in every new terminal before using `ms`.
-   - **Docker:** `docker build -t mathshorts .`, then set `MS_USE_DOCKER=1` for the nightly script.
+   - **Docker:** `docker build -t mathshorts .` (about 7 minutes uncached), then set `MS_USE_DOCKER=1` for the nightly script. The image has Inter 4.1, while Ubuntu 22.04's `fonts-inter` is 3.19, so type looks very slightly different between native previews and Docker renders. Layout and timing match.
    - Check: `ms status` shows `0001-greek-cross`, and `python -m pytest -q` passes.
 3. **Claude Code** in WSL: `curl -fsSL https://claude.ai/install.sh | bash`, then `cd ~/mathshorts && claude`. It reads CLAUDE.md automatically, and the skills `/draft-short` and `/work-issue` are in `.claude/skills/`.
 4. **Anonymity.** The repo is already set to commit as `mathshorts`. Keep it that way (`git config user.name` should print `mathshorts`). Use the channel's own Google account and a separate GitHub account if you push anywhere.
@@ -84,7 +84,7 @@ For each Short:
 
 `scripts/nightly.sh` runs `ms batch`: every `approved` Short is rendered at 1080×1920, mixed with the music bed, normalized for loudness, and put in `out/ready/<short>/` with its `upload.txt`. Status changes are committed.
 
-If one Short fails, it's marked `failed` with a log in `out/logs/` and the others still build. The batch's own log is `out/logs/nightly.log`.
+If one Short fails, it's marked `failed` with a log in `out/logs/` and the others still build. The batch's own log is `out/logs/nightly.log`. If it ends with `ERROR: status changes not committed`, the videos are fine: run the git command it prints.
 
 ---
 
