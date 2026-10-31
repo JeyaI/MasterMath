@@ -29,7 +29,13 @@ You're the editor: you pick puzzles, direct the animation, approve, watch the fi
 
 1. **WSL + repo.** Keep the repo inside the WSL filesystem (`~/mathshorts`), not under `/mnt/c`. Renders write many files, and the Windows drive is slow for that.
 2. **Install, either way:**
-   - **Native (simplest):** `sudo apt install ffmpeg texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-science dvisvgm fonts-inter libcairo2-dev libpango1.0-dev pkg-config`, then `pip install -e ".[dev]"` (use a virtualenv if you like).
+   - **Native (simplest):** needs Python 3.11 or later. Ubuntu 22.04 ships 3.10, and its `python3.11` package is only a release candidate, so use uv to get a current Python without touching the system one.
+     1. `sudo apt install ffmpeg texlive-latex-base texlive-latex-extra texlive-fonts-recommended texlive-science dvisvgm fonts-inter libcairo2-dev libpango1.0-dev pkg-config`
+     2. `curl -LsSf https://astral.sh/uv/install.sh | sh`, then open a new terminal.
+     3. `uv python install 3.13`, then `uv venv --seed --python 3.13 ~/.venvs/mathshorts`
+     4. `source ~/.venvs/mathshorts/bin/activate`, then `pip install -e ".[dev]"` from the repo.
+
+     Run `source ~/.venvs/mathshorts/bin/activate` in every new terminal before using `ms`.
    - **Docker:** `docker build -t mathshorts .`, then set `MS_USE_DOCKER=1` for the nightly script.
    - Check: `ms status` shows `0001-greek-cross`, and `python -m pytest -q` passes.
 3. **Claude Code** in WSL: `curl -fsSL https://claude.ai/install.sh | bash`, then `cd ~/mathshorts && claude`. It reads CLAUDE.md automatically, and the skills `/draft-short` and `/work-issue` are in `.claude/skills/`.
