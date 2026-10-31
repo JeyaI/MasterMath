@@ -1,7 +1,7 @@
 The Project Gutenberg EBook of Sample Puzzles (synthetic test fixture)
 
-Puzzle headings follow the confirmed layout of Gutenberg #16713; the
-SOLUTIONS layout is assumed (both "N.--" and "N." forms are exercised).
+Follows the layout of Gutenberg #16713, plus variations the parser tolerates
+(both "N.--" and "N." solution forms). dudeney_excerpt.txt is the real text.
 
 *** START OF THIS PROJECT GUTENBERG EBOOK SAMPLE PUZZLES ***
 

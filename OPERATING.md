@@ -45,7 +45,7 @@ You're the editor: you pick puzzles, direct the animation, approve, watch the fi
    - Or cron inside WSL (needs systemd enabled): `0 2 * * * bash -lc ~/mathshorts/scripts/nightly.sh`
    - If the laptop was off, nothing breaks: run `ms batch` in the morning instead.
 6. **YouTube channel:** upload `brand/out/avatar.png` and `brand/out/banner.png` (generate them with `python brand/logo.py`). Check the handle is free.
-7. **First real scrape:** `ms sources add dudeney-amusements` (see "Rarely" below). This is issue #1: check the counts look right.
+7. **Catalog:** `catalog/dudeney-amusements.jsonl` is already in the repo (430 puzzles). To add another book, see "Rarely" below.
 
 ---
 

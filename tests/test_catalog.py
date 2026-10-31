@@ -25,6 +25,27 @@ def test_plain_numbered_solutions():
     assert [r["solution"] for r in recs] == ["Answer one.", "Answer two,\nover two lines."]
 
 
+def test_real_gutenberg_excerpt():
+    """Verbatim from #16713, picked for the places the real text trips a parser."""
+    text = (FIXTURES / "dudeney_excerpt.txt").read_text(encoding="utf-8")
+    recs = {r["number"]: r for r in parse(text, "s")}
+    # headings with no period, and the misprinted "384.--" that must become 284
+    assert sorted(recs) == [33, 44, 47, 85, 96, 180, 283, 284, 285]
+    assert recs[44]["title"] == "A Census Puzzle"
+    assert recs[284]["title"] == "The Cross Target"
+    assert recs[285]["section"] == "Combination And Group Problems"
+    assert all(r["solution"] for r in recs.values())
+    # prose like "96--namely" stays inside solution 85 instead of starting solution 96
+    assert "96--namely" in recs[85]["solution"]
+    assert recs[96]["solution"].startswith("The sum of all the numbers")
+    # a reworded title in the solutions is dropped; the index is not part of the last solution
+    assert "REVERSALS" not in recs[33]["solution"]
+    assert "Abbot" not in recs[285]["solution"]
+    # possessives survive title-casing; box art counts as a figure
+    assert recs[47]["title"] == "Rover's Age"
+    assert recs[284]["has_figure"] and recs[285]["has_figure"]
+
+
 def test_add_source_never_overwrites_human_annotations(root):
     f = FIXTURES / "dudeney_sample.txt"
     catalog.add_source("dudeney-amusements", file=f)

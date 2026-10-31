@@ -61,4 +61,4 @@ Safe zone: the Shorts UI covers the bottom ~20% and a right-hand column. Keep co
 - `lib/layout.py` sets config on import (9:16). Brand colors for other frame shapes come from `lib/brand.py`.
 - `--resolution` from the CLI wins; `layout.py` only forces 1080×1920 if nothing else set a portrait size.
 - font_size values are about 2× Manim defaults because the frame is 16 units tall.
-- The Gutenberg solutions layout for Dudeney is unconfirmed (ISSUES #1). The parser tolerates both `N.--` and `N.` styles.
+- Gutenberg #16713 has heading slips (`44--TITLE`, a misprinted `384.--`). `TYPOS` and `NO_PERIOD` in `sources/dudeney.py` handle them. One wrong number silently loses every puzzle up to it, so check the counts after any re-scrape (430 puzzles, 429 solutions; #163 has none in the book).

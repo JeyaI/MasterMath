@@ -6,13 +6,9 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **16**
+Next id: **17**
 
 ## Open
-
-### #1 · Check the Dudeney parser against the real Gutenberg file
-status: open · P1 · chore
-`ms sources add dudeney-amusements` was built against a fixture: the workspace it was written in couldn't reach Gutenberg. Run it on the real file and check: about 430 puzzles, solutions attached to the right numbers, sections look right (e.g. "Greek Cross Puzzles"), figure flags make sense. The puzzle heading format (`1.--A POST-OFFICE PERPLEXITY.`) is confirmed; the SOLUTIONS layout is not. Fix the parser if needed and add a short real excerpt to `tests/fixtures/`.
 
 ### #2 · 0001's Level 2 needs a calculator
 status: open · P1 · content
@@ -20,7 +16,7 @@ status: open · P1 · content
 
 ### #3 · Link 0001 to its catalog puzzle
 status: open · P2 · content
-After #1, find the Greek-cross-to-square puzzle in the catalog and set `catalog_id` in `shorts/0001-greek-cross/short.yaml`, so the selector never suggests it again. Update `source.credit` with the puzzle number.
+The Greek-cross-to-square dissection has no number of its own: Dudeney gives it in the unnumbered article before #142 (his Fig. 39), and the parser drops those articles. The closest entry is `dudeney-amusements-142` (The Silk Patchwork), which cites it and asks the reverse. Decide whether that is the right link, then set `catalog_id` in `shorts/0001-greek-cross/short.yaml`, so the selector never suggests it again. Update `source.credit` and the `LICENSES.csv` note.
 
 ### #4 · Confirm the Docker image builds and renders on WSL
 status: open · P2 · chore
@@ -40,7 +36,7 @@ Replace the keyword heuristic with an Anthropic API call per puzzle (key from en
 
 ### #8 · Show a puzzle's original figure while drafting
 status: open · P3 · feature
-`ms show <id> --figure` fetches the matching illustration from the HTML edition into `out/figures/`, so Claude Code can look at it when recreating the figure.
+`ms show <id> --figure` fetches the matching illustration from the HTML edition into `out/figures/`, so Claude Code can look at it when recreating the figure. In the text edition a figure can sit above its heading (e.g. #71), so 63 puzzles end in a placeholder that may belong to the next puzzle. Match by position in the HTML, not by the text placeholder.
 
 ### #9 · Automate uploads
 status: open · P3 · feature
@@ -70,7 +66,15 @@ Add to `lib/components.py` as Shorts need them: dot grid, area model, number lin
 status: open · P3 · chore
 `ms preview --at` renders from the start of the beat. Consider including the last second of the previous beat for context.
 
+### #16 · Visual scores are bunched at the top
+status: open · P3 · chore
+On the real catalog the heuristic gives 175 of 430 puzzles 5/5, because the has-figure and keyword bonuses stack on high section scores, so `ms suggest` barely separates them. Rebalance the bonuses (or let #7 replace them).
+
 ## Done
+
+### #1 · Check the Dudeney parser against the real Gutenberg file
+status: done · 2026-10-31
+Ran on the real #16713: now 430 puzzles and 429 solutions (#163 has none in the book), up from 326; fixed misprinted and period-less headings, the index leaking into #430, figure flags and section tags, and added `tests/fixtures/dudeney_excerpt.txt`.
 
 ### #0 · Split the pipeline into modules
 status: done · 2026-10-31

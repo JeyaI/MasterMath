@@ -1,0 +1,503 @@
+*** START OF THE PROJECT GUTENBERG EBOOK AMUSEMENTS IN MATHEMATICS ***
+
+Real text from Gutenberg #16713, only whole puzzles cut out. Do not tidy: its slips are the point.
+
+
+MONEY PUZZLES.
+
+
+33.--PUZZLE IN REVERSALS.
+
+Most people know that if you take any sum of money in pounds, shillings,
+and pence, in which the number of pounds (less than £12) exceeds that of
+the pence, reverse it (calling the pounds pence and the pence pounds),
+find the difference, then reverse and add this difference, the result is
+always £12, 18s. 11d. But if we omit the condition, "less than £12," and
+allow nought to represent shillings or pence--(1) What is the lowest
+amount to which the rule will not apply? (2) What is the highest amount
+to which it will apply? Of course, when reversing such a sum as £14,
+15s. 3d. it may be written £3, 16s. 2d., which is the same as £3, 15s.
+14d.
+
+
+
+AGE AND KINSHIP PUZZLES.
+
+
+44--A CENSUS PUZZLE.
+
+Mr. and Mrs. Jorkins have fifteen children, all born at intervals of one
+year and a half. Miss Ada Jorkins, the eldest, had an objection to state
+her age to the census man, but she admitted that she was just seven
+times older than little Johnnie, the youngest of all. What was Ada's
+age? Do not too hastily assume that you have solved this little poser.
+You may find that you have made a bad blunder!
+
+
+47--ROVER'S AGE.
+
+"Now, then, Tommy, how old is Rover?" Mildred's young man asked her
+brother.
+
+"Well, five years ago," was the youngster's reply, "sister was four
+times older than the dog, but now she is only three times as old."
+
+Can you tell Rover's age?
+
+
+
+DIGITAL PUZZLES.
+
+
+85.--THE CAB NUMBERS.
+
+A London policeman one night saw two cabs drive off in opposite
+directions under suspicious circumstances. This officer was a
+particularly careful and wide-awake man, and he took out his pocket-book
+to make an entry of the numbers of the cabs, but discovered that he had
+lost his pencil. Luckily, however, he found a small piece of chalk, with
+which he marked the two numbers on the gateway of a wharf close by. When
+he returned to the same spot on his beat he stood and looked again at
+the numbers, and noticed this peculiarity, that all the nine digits (no
+nought) were used and that no figure was repeated, but that if he
+multiplied the two numbers together they again produced the nine digits,
+all once, and once only. When one of the clerks arrived at the wharf in
+the early morning, he observed the chalk marks and carefully rubbed them
+out. As the policeman could not remember them, certain mathematicians
+were then consulted as to whether there was any known method for
+discovering all the pairs of numbers that have the peculiarity that the
+officer had noticed; but they knew of none. The investigation, however,
+was interesting, and the following question out of many was proposed:
+What two numbers, containing together all the nine digits, will, when
+multiplied together, produce another number (the _highest possible_)
+containing also all the nine digits? The nought is not allowed anywhere.
+
+
+96.--THE DICE NUMBERS.
+
+[Illustration]
+
+I have a set of four dice, not marked with spots in the ordinary way,
+but with Arabic figures, as shown in the illustration. Each die, of
+course, bears the numbers 1 to 6. When put together they will form a
+good many, different numbers. As represented they make the number 1246.
+Now, if I make all the different four-figure numbers that are possible
+with these dice (never putting the same figure more than once in any
+number), what will they all add up to? You are allowed to turn the 6
+upside down, so as to represent a 9. I do not ask, or expect, the reader
+to go to all the labour of writing out the full list of numbers and then
+adding them up. Life is not long enough for such wasted energy. Can you
+get at the answer in any other way?
+
+
+
+
+
+VARIOUS GEOMETRICAL PUZZLES.
+
+
+180.--THE FOUR SONS.
+
+Readers will recognize the diagram as a familiar friend of their youth.
+A man possessed a square-shaped estate. He bequeathed to his widow the
+quarter of it that is shaded off. The remainder was to be divided
+equitably amongst his four sons, so that each should receive land of
+exactly the same area and exactly similar in shape. We are shown how
+this was done. But the remainder of the story is not so generally known.
+In the centre of the estate was a well, indicated by the dark spot, and
+Benjamin, Charles, and David complained that the division was not
+"equitable," since Alfred had access to this well, while they could not
+reach it without trespassing on somebody else's land. The puzzle is to
+show how the estate is to be apportioned so that each son shall have
+land of the same shape and area, and each have access to the well
+without going off his own land.
+
+[Illustration]
+
+
+
+COMBINATION AND GROUP PROBLEMS.
+
+
+283.--THE FIFTEEN DOMINOES.
+
+In this case we do not use the complete set of twenty-eight dominoes to
+be found in the ordinary box. We dispense with all those dominoes that
+have a five or a six on them and limit ourselves to the fifteen that
+remain, where the double-four is the highest.
+
+In how many different ways may the fifteen dominoes be arranged in a
+straight line in accordance with the simple rule of the game that a
+number must always be placed against a similar number--that is, a four
+against a four, a blank against a blank, and so on? Left to right and
+right to left of the same arrangement are to be counted as two different
+ways.
+
+
+384.--THE CROSS TARGET.
+
+        +-+-+
+        |*|*|
+        +-+-+
+        |*|*|
+    +-+-+-+-+-+-+
+    | | | |*| | |
+    +-+-+-+-+-+-+
+    | | |*| |*| |
+    +-+-+-+-+-+-+
+        | |*|
+        +-+-+
+        | | |
+        +-+-+
+
+In the illustration we have a somewhat curious target designed by an
+eccentric sharpshooter. His idea was that in order to score you must hit
+four circles in as many shots so that those four shots shall form a
+square. It will be seen by the results recorded on the target that two
+attempts have been successful. The first man hit the four circles at the
+top of the cross, and thus formed his square. The second man intended to
+hit the four in the bottom arm, but his second shot, on the left, went
+too high. This compelled him to complete his four in a different way
+than he intended. It will thus be seen that though it is immaterial
+which circle you hit at the first shot, the second shot may commit you
+to a definite procedure if you are to get your square. Now, the puzzle
+is to say in just how many different ways it is possible to form a
+square on the target with four shots.
+
+
+285.--THE FOUR POSTAGE STAMPS.
+
+    +---+----+----+----+
+    | 1 |  2 |  3 |  4 |
+    +---+----+----+----+
+    | 5 |  6 |  7 |  8 |
+    +---+----+----+----+
+    | 9 | 10 | 11 | 12 |
+    +---+----+----+----+
+
+"It is as easy as counting," is an expression one sometimes hears. But
+mere counting may be puzzling at times. Take the following simple
+example. Suppose you have just bought twelve postage stamps, in this
+form--three by four--and a friend asks you to oblige him with four
+stamps, all joined together--no stamp hanging on by a mere corner. In
+how many different ways is it possible for you to tear off those four
+stamps? You see, you can give him 1, 2, 3, 4, or 2, 3, 6, 7, or 1, 2, 3,
+6, or 1, 2, 3, 7, or 2, 3, 4, 8, and so on. Can you count the number of
+different ways in which those four stamps might be delivered? There are
+not many more than fifty ways, so it is not a big count. Can you get the
+exact number?
+
+
+
+SOLUTIONS.
+
+
+33.--A PUZZLE IN REVERSALS.
+
+(i) £13. (2) £23, 19s. 11d. The words "the number of pounds exceeds that
+of the pence" exclude such sums of money as £2, 16s. 2d. and all sums
+under £1.
+
+
+44.--A CENSUS PUZZLE.
+
+Miss Ada Jorkins must have been twenty-four and her little brother
+Johnnie three years of age, with thirteen brothers and sisters between.
+There was a trap for the solver in the words "seven times older than
+little Johnnie." Of course, "seven times older" is equal to eight times
+as old. It is surprising how many people hastily assume that it is the
+same as "seven times as old." Some of the best writers have committed
+this blunder. Probably many of my readers thought that the ages 24½
+and 3½ were correct.
+
+
+47.--ROVER'S AGE.
+
+Rover's present age is ten years and Mildred's thirty years. Five years
+ago their respective ages were five and twenty-five. Remember that we
+said "four times older than the dog," which is the same as "five times
+as old." (See answer to No. 44.)
+
+
+85.--THE CAB NUMBERS.
+
+The highest product is, I think, obtained by multiplying 8,745,231 by
+96--namely, 839,542,176.
+
+Dealing here with the problem generally, I have shown in the last puzzle
+that with three digits there are only two possible solutions, and with
+four digits only six different solutions.
+
+These cases have all been given. With five digits there are just
+twenty-two solutions, as follows:--
+
+       3 × 4128 = 12384
+       3 × 4281 = 12843
+       3 × 7125 = 21375
+       3 × 7251 = 21753
+    2541 × 6    = 15246
+     651 × 24   = 15624
+     678 × 42   = 28476
+     246 × 51   = 12546
+      57 × 834  = 47538
+      75 × 231  = 17325
+     624 × 78   = 48672
+     435 × 87   = 37845
+           ------
+       9 × 7461 = 67149
+      72 × 936  = 67392
+           ------
+       2 × 8714 = 17428
+       2 × 8741 = 17482
+      65 × 281  = 18265
+      65 × 983  = 63985
+           ------
+    4973 × 8    = 39784
+    6521 × 8    = 52168
+      14 × 926  = 12964
+      86 × 251  = 21586
+
+Now, if we took every possible combination and tested it by
+multiplication, we should need to make no fewer than 30,240 trials, or,
+if we at once rejected the number 1 as a multiplier, 28,560 trials--a
+task that I think most people would be inclined to shirk. But let us
+consider whether there be no shorter way of getting at the results
+required. I have already explained that if you add together the digits
+of any number and then, as often as necessary, add the digits of the
+result, you must ultimately get a number composed of one figure. This
+last number I call the "digital root." It is necessary in every solution
+of our problem that the root of the sum of the digital roots of our
+multipliers shall be the same as the root of their product. There are
+only four ways in which this can happen: when the digital roots of the
+multipliers are 3 and 6, or 9 and 9, or 2 and 2, or 5 and 8. I have
+divided the twenty-two answers above into these four classes. It is thus
+evident that the digital root of any product in the first two classes
+must be 9, and in the second two classes 4.
+
+Owing to the fact that no number of five figures can have a digital sum
+less than 15 or more than 35, we find that the figures of our product
+must sum to either 18 or 27 to produce the root 9, and to either 22 or
+31 to produce the root 4. There are 3 ways of selecting five different
+figures that add up to 18, there are 11 ways of selecting five figures
+that add up to 27, there are 9 ways of selecting five figures that add
+up to 22, and 5 ways of selecting five figures that add up to 31. There
+are, therefore, 28 different groups, and no more, from any one of which
+a product may be formed.
+
+We next write out in a column these 28 sets of five figures, and proceed
+to tabulate the possible factors, or multipliers, into which they may be
+split. Roughly speaking, there would now appear to be about 2,000
+possible cases to be tried, instead of the 30,240 mentioned above; but
+the process of elimination now begins, and if the reader has a quick eye
+and a clear head he can rapidly dispose of the large bulk of these
+cases, and there will be comparatively few test multiplications
+necessary. It would take far too much space to explain my own method in
+detail, but I will take the first set of figures in my table and show
+how easily it is done by the aid of little tricks and dodges that should
+occur to everybody as he goes along.
+
+My first product group of five figures is 84,321. Here, as we have seen,
+the root of each factor must be 3 or a multiple of 3. As there is no 6
+or 9, the only single multiplier is 3. Now, the remaining four figures
+can be arranged in 24 different ways, but there is no need to make 24
+multiplications. We see at a glance that, in order to get a five-figure
+product, either the 8 or the 4 must be the first figure to the left. But
+unless the 2 is preceded on the right by the 8, it will produce when
+multiplied either a 6 or a 7, which must not occur. We are, therefore,
+reduced at once to the two cases, 3 × 4,128 and 3 x 4,281, both of which
+give correct solutions. Suppose next that we are trying the two-figure
+factor, 21. Here we see that if the number to be multiplied is under 500
+the product will either have only four figures or begin with 10.
+Therefore we have only to examine the cases 21 × 843 and 21 × 834. But
+we know that the first figure will be repeated, and that the second
+figure will be twice the first figure added to the second. Consequently,
+as twice 3 added to 4 produces a nought in our product, the first case
+is at once rejected. It only remains to try the remaining case by
+multiplication, when we find it does not give a correct answer. If we
+are next trying the factor 12, we see at the start that neither the 8
+nor the 3 can be in the units place, because they would produce a 6, and
+so on. A sharp eye and an alert judgment will enable us thus to run
+through our table in a much shorter time than would be expected. The
+process took me a little more than three hours.
+
+I have not attempted to enumerate the solutions in the cases of six,
+seven, eight, and nine digits, but I have recorded nearly fifty examples
+with nine digits alone.
+
+
+96.--THE DICE NUMBERS.
+
+The sum of all the numbers that can be formed with any given set of four
+different figures is always 6,666 multiplied by the sum of the four
+figures. Thus, 1, 2, 3, 4 add up 10, and ten times 6,666 is 66,660. Now,
+there are thirty-five different ways of selecting four figures from the
+seven on the dice--remembering the 6 and 9 trick. The figures of all
+these thirty-five groups add up to 600. Therefore 6,666 multiplied by
+600 gives us 3,999,600 as the correct answer.
+
+Let us discard the dice and deal with the problem generally, using the
+nine digits, but excluding nought. Now, if you were given simply the sum
+of the digits--that is, if the condition were that you could use any
+four figures so long as they summed to a given amount--then we have to
+remember that several combinations of four digits will, in many cases,
+make the same sum.
+
+    10 11 12 13 14 15 16 17 18 19 20
+     1  1  2  3  5  6  8  9 11 11 12
+
+    21 22 23 24 25 26 27 28 29 30
+    11 11  9  8  6  5  3  2  1  1
+
+Here the top row of numbers gives all the possible sums of four
+different figures, and the bottom row the number of different ways in
+which each sum may be made. For example 13 may be made in three ways:
+1237, 1246, and 1345. It will be found that the numbers in the bottom
+row add up to 126, which is the number of combinations of nine figures
+taken four at a time. From this table we may at once calculate the
+answer to such a question as this: What is the sum of all the numbers
+composed of our different digits (nought excluded) that add up to 14?
+Multiply 14 by the number beneath t in the table, 5, and multiply the
+result by 6,666, and you will have the answer. It follows that, to know
+the sum of all the numbers composed of four different digits, if you
+multiply all the pairs in the two rows and then add the results
+together, you will get 2,520, which, multiplied by 6,666, gives the
+answer 16,798,320.
+
+The following general solution for any number of digits will doubtless
+interest readers. Let n represent number of digits, then 5 (10^n - 1) 8!
+divided by (9 - n)! equals the required sum. Note that 0! equals 1. This
+may be reduced to the following practical rule: Multiply together 4 × 7
+× 6 × 5 ... to (n - 1) factors; now add (n + 1) ciphers to the right,
+and from this result subtract the same set of figures with a single
+cipher to the right. Thus for n = 4 (as in the case last mentioned), 4 ×
+7 × 6 = 168. Therefore 16,800,000 less 1,680 gives us 16,798,320 in
+another way.
+
+
+180-- THE FOUR SONS.
+
+[Illustration]
+
+The diagram shows the most equitable division of the land possible, "so
+that each son shall receive land of exactly the same area and exactly
+similar in shape," and so that each shall have access to the well in
+the centre without trespass on another's land. The conditions do not
+require that each son's land shall be in one piece, but it is necessary
+that the two portions assigned to an individual should be kept apart, or
+two adjoining portions might be held to be one piece, in which case the
+condition as to shape would have to be broken. At present there is only
+one shape for each piece of land--half a square divided diagonally. And
+A, B, C, and D can each reach their land from the outside, and have each
+equal access to the well in the centre.
+
+
+283.--THE FIFTEEN DOMINOES.
+
+The reader may have noticed that at each end of the line I give is a
+four, so that, if we like, we can form a ring instead of a line. It can
+easily be proved that this must always be so. Every line arrangement
+will make a circular arrangement if we like to join the ends. Now,
+curious as it may at first appear, the following diagram exactly
+represents the conditions when we leave the doubles out of the question
+and devote our attention to forming circular arrangements. Each number,
+or half domino, is in line with every other number, so that if we start
+at any one of the five numbers and go over all the lines of the pentagon
+once and once only we shall come back to the starting place, and the
+order of our route will give us one of the circular arrangements for the
+ten dominoes. Take your pencil and follow out the following route,
+starting at the 4: 41304210234. You have been over all the lines once
+only, and by repeating all these figures in this way,
+41--13--30--04--42--21--10--02--23--34, you get an arrangement of the
+dominoes (without the doubles) which will be perfectly clear. Take other
+routes and you will get other arrangements. If, therefore, we can
+ascertain just how many of these circular routes are obtainable from
+the pentagon, then the rest is very easy.
+
+Well, the number of different circular routes over the pentagon is 264.
+How I arrive at these figures I will not at present explain, because it
+would take a lot of space. The dominoes may, therefore, be arranged in a
+circle in just 264 different ways, leaving out the doubles. Now, in any
+one of these circles the five doubles may be inserted in 2^5 = 32
+different ways. Therefore when we include the doubles there are 264 × 32
+= 8,448 different circular arrangements. But each of those circles may
+be broken (so as to form our straight line) in any one of 15 different
+places. Consequently, 8,448 × 15 gives 126,720 different ways as the
+correct answer to the puzzle.
+
+[Illustration:
+
+                -----
+               |     |
+            /  |     |  \
+           /    -----    \
+          /     .  .      \
+     -----     .    .       -----
+    |     |   .      .     | o o |
+    |  o  | -.--------.--- |     |
+    |     | .          . . | o o |
+     ----- .  .        ..   -----
+        \ .     .    .   .  /
+       -----      ..     -----
+      |  o  |    .  .   |o    |
+      |     | --------- |  o  |
+      |  o  |.         .|    o|
+       -----             -----
+
+]
+
+I purposely refrained from asking the reader to discover in just how
+many different ways the full set of twenty-eight dominoes may be
+arranged in a straight line in accordance with the ordinary rules of the
+game, left to right and right to left of any arrangement counting as
+different ways. It is an exceedingly difficult problem, but the correct
+answer is 7,959,229,931,520 ways. The method of solving is very complex.
+
+
+284.--THE CROSS TARGET.
+
+[Illustration:
+
+             --  --
+            (CD)(  )
+             --  --
+            (AE)(A )
+     --  --  --  --  --  --
+    (CE)(E )(A )(AB)(C )(D )
+     --  --  --  --  --  --
+    (D )(  )(B )(E )(EB)(  )
+     --  --  --  --  --  --
+            (C )(B )
+             --  --
+            (  )(ED)
+             --  --
+
+
+]
+
+Twenty-one different squares may be selected. Of these nine will be of
+the size shown by the four A's in the diagram, four of the size shown by
+the B's, four of the size shown by the C's, two of the size shown by the
+D's, and two of the size indicated by the upper single A, the upper
+single E, the lower single C, and the EB. It is an interesting fact that
+you cannot form any one of these twenty-one squares without using at
+least one of the six circles marked E.
+
+
+285.--THE FOUR POSTAGE STAMPS.
+
+Referring to the original diagram, the four stamps may be given in the
+shape 1, 2, 3, 4, in three ways; in the shape 1, 2, 5, 6, in six ways;
+in the shape 1, 2, 3, 5, or 1, 2, 3, 7, or 1, 5, 6, 7, or 3, 5, 6, 7, in
+twenty-eight ways; in shape 1, 2, 3, 6, or 2, 5, 6, 7, in fourteen ways;
+in shape 1, 2, 6, 7, or 2, 3, 5, 6, or 1, 5, 6, 10, or 2, 5, 6, 9, in
+fourteen ways. Thus there are sixty-five ways in all.
+
+
+
+INDEX.
+
+
+        Abbot's Puzzle, The, 20, 161.
+          ---- Window, The, 87, 213.
+
+*** END OF THE PROJECT GUTENBERG EBOOK AMUSEMENTS IN MATHEMATICS ***

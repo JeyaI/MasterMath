@@ -81,9 +81,9 @@ def annotations():
 # Section keywords -> (tag, base visual score). First match wins; checked against section name.
 SECTION_RULES = [
     ("greek cross", "dissection", 5), ("dissection", "dissection", 5), ("patchwork", "dissection", 4),
-    ("geometrical", "geometry", 4), ("points and lines", "geometry", 4), ("chessboard", "chessboard", 4),
+    ("geometrical", "geometry", 4), ("points and lines", "geometry", 4), ("chess", "chessboard", 4),
     ("moving counter", "counters", 4), ("unicursal", "routes", 4), ("route", "routes", 4),
-    ("maze", "mazes", 4), ("magic square", "magic-squares", 3), ("combination", "combinatorics", 3),
+    ("maze", "mazes", 4), ("magic", "magic-squares", 3), ("combination", "combinatorics", 3),
     ("crossing river", "logic", 3), ("measuring", "measuring", 3), ("games", "games", 3),
     ("clock", "clocks", 3), ("locomotion", "speed", 2), ("speed", "speed", 2), ("digital", "digits", 2),
     ("age and kinship", "age", 1), ("money", "money", 1), ("paradox", "paradox", 2),
