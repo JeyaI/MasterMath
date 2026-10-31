@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0001'
 title: Greek cross to square
-status: ready
+status: drafting
 catalog_id:
 tags:
   - dissection
@@ -50,5 +50,5 @@ youtube:
   video_id:
   url:
   published_at:
-built_at: 20261031-101439
+built_at:
 last_error:
