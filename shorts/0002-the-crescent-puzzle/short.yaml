@@ -1,0 +1,71 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0002'
+title: The Crescent Puzzle
+status: approved
+catalog_id: dudeney-amusements-191
+tags:
+  - geometry
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 191
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    [Illustration]
+
+    Here is an easy geometrical puzzle. The crescent is formed by two
+    circles, and C is the centre of the larger circle. The width of the
+    crescent between B and D is 9 inches, and between E and F 5 inches. What
+    are the diameters of the two circles?
+  solution: |
+    Referring to the original diagram, let AC be x, let CD be x - 9, and let
+    EC be x - 5. Then x - 5 is a mean proportional between x - 9 and x, from
+    which we find that x equals 25. Therefore the diameters are 50 in. and
+    41 in. respectively.
+level1:
+  statement: "A crescent is made by two circles touching at one point. Its widest part is 9 inches, and
+    straight up from the big circle's centre it is 5 inches. Find both diameters."
+  answer: "50 inches and 41 inches."
+  insight: "Join the ends of the small circle's diameter to the top point: a right angle. A quarter turn
+    and a scale-up land one half of that triangle exactly on the other, so (x-5)^2 = x(x-9), and the x^2
+    terms cancel."
+level2:
+  statement: "New crescent, same setup. The big circle is 32 across and the widest part is 7. How big
+    is the gap straight up from the centre?"
+  answer: 4
+  accept: [4, "4 in", "4 inches", "four"]
+  why: "Radius 16, so the other part is 16 - 7 = 9. The height squared is 16 × 9 = 144, so the height
+    is 12 and the gap is 16 - 12 = 4."
+captions:
+  - "They touch at this point"
+  - "Centre of the big circle"
+  - "Widest part: 9 inches"
+  - "Straight up: 5 inches"
+  - "Pause and try it"
+  - "Call the big radius x"
+  - "So this is x − 9"
+  - "And this is x − 5"
+  - "Semicircle = right angle!"
+  - "Two triangles…"
+  - "Turn one…"
+  - "…and scale it up"
+  - "Same shape, same ratio"
+  - "Diameters: 50 and 41 ✓"
+  - "Comment just the number ↓"
+music:
+  piece: "J. S. Bach — Prelude in C major, BWV 846 (bars 1–11, self-rendered)"
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "Can you figure out the diameters of the two circles?"
+  description: |
+    Only two widths are given, and that is enough. Level 2: how big is the gap? Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 191. Music: J. S. Bach, Prelude in C, BWV 846.
+  tags:
+    - math puzzle
+    - geometry
+    - circles
+    - puzzle
+    - brain teaser
+  video_id:
+  url:
+  published_at:

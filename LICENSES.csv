@@ -3,3 +3,4 @@ asset,used_in,source_url,license,notes
 "J. S. Bach - Prelude in C, BWV 846, bars 1-11",all,,"Public domain composition","Recording synthesised in lib/audio.py - we own it; no Content ID exposure."
 "Sound effects tick/pop/snip/chime",all,,"Original","Synthesised in lib/audio.py."
 "Inter typeface",all,https://github.com/rsms/inter,"SIL Open Font License 1.1",""
+"The Crescent Puzzle (Dudeney no. 191, puzzle idea)",0002,https://www.gutenberg.org/ebooks/16713,"Public domain (USA); Dudeney d. 1930","Figure redrawn in Manim; wording and animation are original."
