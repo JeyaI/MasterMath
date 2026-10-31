@@ -14,17 +14,18 @@ Read CLAUDE.md first if you haven't this session (rules, format, layout).
 - **Short number** (e.g. `7`): read `shorts/0007-*/short.yaml`, `NOTES.md` (open items are your to-do list) and the latest `out/preview/0007-*/beats.json`.
 
 ## 2. Pitch before animating (new Shorts only)
-Before writing any scene code, give the user a 4-line pitch and wait for an OK:
+Before writing any scene code, run `ms music`, then give the user a 5-line pitch and wait for an OK:
 - **Hook** (the first 3 seconds of on-screen text)
 - **Insight** (the one visual idea that solves it)
 - **Level 2** (same trick, one step further; a single number or word; solvable without a calculator)
 - **Risk** (anything ambiguous in the original wording, or a figure we must recreate)
+- **Music** (a library key that fits the Short's mood; prefer the pieces `ms music` lists first and avoid the last few used)
 
 ## 3. Verify first
 Write `verify.py`: check every claim the video makes, in code (geometry with shapely, numbers with fractions or sympy). Expose the exact shapes and numbers the scene will draw, so the video shows what was checked. Run `ms verify <n>` until it passes.
 
 ## 4. Fill short.yaml
-`title`, `level1`, `level2` (with `accept`: every reasonable way a commenter writes the answer, and a one-line `why`), `captions`, `youtube` (title under 100 chars, description crediting the source and the music), `source.credit`. Change `status` only through `ms` commands.
+`title`, `level1`, `level2` (with `accept`: every reasonable way a commenter writes the answer, and a one-line `why`), `captions`, `music.piece` (the agreed library key), `youtube` (title under 100 chars, description crediting the source and, word for word, `Music: <credit>` from `ms music`; `ms approve` refuses otherwise), `source.credit`. Change `status` only through `ms` commands.
 
 ## 5. Build the scene
 `scene.py`, class `Short`, built from `lib/components.py`: `hook`, `Captions` (every `show` marks a beat), `countdown`, `badge`, `footer`, plus `beat(self, "name")` for beats without a caption. The format, in order: hook, problem builds, "Pause and try it" with a 5-second countdown, animated insight and solution, ✓ payoff, Level 2 card, "Comment just the number ↓" held about 12 seconds. Aim for 40–50 seconds. Keep everything inside the safe zone in `lib/layout.py`.

@@ -15,7 +15,7 @@ An anonymous YouTube Shorts channel of animated math-puzzle solutions (Manim, 3B
 6. **Anonymity.** Commits are by `mathshorts`. No personal names or emails in the repo, descriptions or config. Secrets only in env vars.
 
 ## The format (every Short)
-9:16, 1080×1920, 30 fps, 40–50 s, no narration. Beats: hook (0–3 s), problem builds, "Pause and try it" with a 5 s countdown, animated insight and solution, ✓ payoff, Level 2 card (same trick, one step further, not solved), "Comment just the number ↓" held about 12 s. Captions are 2–6 words. Music is a public-domain composition synthesized by `lib/audio.py` (we own the recording), plus sound effects.
+9:16, 1080×1920, 30 fps, 40–50 s, no narration. Beats: hook (0–3 s), problem builds, "Pause and try it" with a 5 s countdown, animated insight and solution, ✓ payoff, Level 2 card (same trick, one step further, not solved), "Comment just the number ↓" held about 12 s. Captions are 2–6 words. Music is a public-domain composition synthesized by `lib/audio.py` (we own the recording), chosen by the `music.piece` key from its `PIECES` library, plus sound effects.
 
 ## Architecture: five modules, connected only through files
 | Module | Code | Data | Run |

@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0001'
 title: Greek cross to square
-status: approved
+status: ready
 catalog_id:
 tags:
   - dissection
@@ -38,7 +38,7 @@ captions:
   - "Comment just the number ↓"
 
 music:
-  piece: "J. S. Bach — Prelude in C major, BWV 846 (bars 1–11, self-rendered)"
+  piece: bwv846
   license: public-domain composition; recording synthesised by lib/audio.py
 
 youtube:
@@ -50,5 +50,5 @@ youtube:
   video_id:
   url:
   published_at:
-built_at:
+built_at: 20261031-135324
 last_error:

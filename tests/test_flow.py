@@ -5,6 +5,7 @@ import subprocess
 import pytest
 from conftest import FIXTURES
 
+from lib import audio
 from mathshorts import batch, catalog, cli, render
 from mathshorts.shorts import StatusError, all_shorts, find, used_catalog_ids
 
@@ -46,6 +47,74 @@ def test_new_from_catalog_then_approve_guards(root):
     s.notes_path.write_text(s.notes_path.read_text().replace("- [ ]", "- [x]"))
     cli.main(["approve", "1"])
     assert s.status == "approved"
+
+
+def set_music(s, piece, description):
+    s.update(music={"piece": piece}, youtube={"description": description})
+
+
+def test_new_short_defaults_to_the_library_default_and_credits_it(root, capsys):
+    cli.main(["new", "--blank", "T"])
+    s = all_shorts()[0]
+    assert s.data()["music"]["piece"] == audio.DEFAULT
+    assert f"Music: {audio.PIECES[audio.DEFAULT].credit}" in s.data()["youtube"]["description"]
+
+
+def test_approve_requires_a_known_piece_and_its_credit(root):
+    s = make_short(root, "0001", "drafting")
+    set_music(s, "wrong-key", "Music: J. S. Bach, Prelude in C, BWV 846.")
+    with pytest.raises(SystemExit, match="unknown music piece"):
+        cli.main(["approve", "1"])
+    set_music(s, "k545", "Music: J. S. Bach, Prelude in C, BWV 846.")
+    with pytest.raises(SystemExit, match="must credit its music"):
+        cli.main(["approve", "1"])
+    assert s.status == "drafting"
+    set_music(s, "k545", "Music: W. A. Mozart, Piano Sonata in C, K. 545.")
+    cli.main(["approve", "1"])
+    assert s.status == "approved"
+
+
+def test_ms_music_lists_least_recent_first_and_writes_a_wav(root, capsys, monkeypatch):
+    make_short(root, "0001", "drafting")                                  # no music: the default
+    set_music(make_short(root, "0002", "drafting"), "k545", "")
+    cli.main(["music"])
+    lines = capsys.readouterr().out.splitlines()[1:]
+    assert len(lines) == len(audio.PIECES)
+    assert lines[-1].split()[:2] == ["k545", "0002"]
+    assert lines[-2].split()[:2] == ["bwv846", "0001"]
+    written = []
+    monkeypatch.setattr(audio, "write_music", lambda path, dur, key: written.append((path, key)) or path)
+    cli.main(["music", "k545"])
+    assert written == [(root / "out" / "music" / "k545.wav", "k545")]
+    with pytest.raises(SystemExit, match="unknown music piece"):
+        cli.main(["music", "nope"])
+
+
+def test_batch_mixes_the_shorts_piece_and_fails_early_on_an_unknown_one(root, monkeypatch):
+    good = make_short(root, "0001", "approved")
+    good.update(music={"piece": "k545"})
+    bad = make_short(root, "0002", "approved")
+    bad.update(music={"piece": "J. S. Bach (free text)"})
+    rendered, mixed = [], []
+
+    def fake_final(short, build):
+        rendered.append(short.number)
+        build.mkdir(parents=True, exist_ok=True)
+        return build / "raw.mp4", ""
+
+    def fake_mix(raw, final, piece):
+        mixed.append(piece)
+        final.parent.mkdir(parents=True, exist_ok=True)
+        return final
+
+    monkeypatch.setattr(render, "render_final", fake_final)
+    monkeypatch.setattr(render, "mix", fake_mix)
+    monkeypatch.setattr(render, "thumbnail", lambda *a: None)
+    monkeypatch.setattr(render, "duration", lambda v: 45.0)
+    batch.run()
+    assert rendered == ["0001"] and mixed == ["k545"]
+    assert good.status == "ready"
+    assert bad.status == "failed" and "unknown music piece" in bad.data()["last_error"]
 
 
 def test_batch_isolates_failures(root):

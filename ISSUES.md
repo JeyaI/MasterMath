@@ -6,7 +6,7 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **20**
+Next id: **21**
 
 ## Open
 
@@ -71,6 +71,10 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #20 · More classical music, chosen per Short
+status: done · 2026-10-31
+`lib/audio.py` now has a six-piece `PIECES` library, and `music.piece` selects from it, defaulting to an unchanged BWV 846. Batch fails early on an unknown key, `ms approve` requires the exact `Music: <credit>` line, `ms music` lists use and writes WAVs, and `/draft-short` pitches a piece. Notes were checked against Mutopia scores; checked end to end in a throwaway batch.
 
 ### #19 · Thumbnail PNG in the upload kit
 status: done · 2026-10-31

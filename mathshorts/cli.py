@@ -12,6 +12,7 @@ Drafting (weekly session, mostly via Claude Code /draft-short)
   ms preview <short> [--at 0:12]      full preview, or just the beat containing 0:12 (--open)
   ms compare <short>                  newest preview next to the previous one (--open)
   ms note <short> "0:12 text"         add a review note (open notes block approval)
+  ms music [<key>]                    the music library and who used what; a key writes a WAV to hear
   ms approve <short>                  human sign-off -> built in tonight's batch
 
 Nightly (automatic)
@@ -127,7 +128,11 @@ def _new_short(record: dict | None, title: str | None):
     d["level2"] = CommentedMap(statement="TODO: same trick, one step further; solvable without a calculator",
                                answer="TODO", accept=[], why="TODO")
     d["captions"] = []
-    d["youtube"] = CommentedMap(title="TODO", description="TODO", tags=["math puzzle", "puzzle"],
+    audio = render._audio()
+    d["music"] = CommentedMap(piece=audio.DEFAULT,
+                              license="public-domain composition; recording synthesised by lib/audio.py")
+    d["youtube"] = CommentedMap(title="TODO", description=L(f"TODO\nMusic: {audio.PIECES[audio.DEFAULT].credit}.\n"),
+                                tags=["math puzzle", "puzzle"],
                                 video_id=None, url=None, published_at=None)
     yamlio.write_atomic(folder / "short.yaml",
                         "# One Short. Change `status` only through ms commands (see OPERATING.md).\n" + yamlio.dump_str(d))
@@ -225,11 +230,39 @@ def cmd_note(a):
     p(s.add_note(text, beat))
 
 
+def cmd_music(a):
+    audio = render._audio()
+    if a.key:
+        try:
+            audio.piece(a.key)
+        except ValueError as e:
+            sys.exit(f"ms: {e}")
+        path = audio.write_music(paths.out() / "music" / f"{a.key}.wav", 46.0, a.key)
+        p(f"{a.key}: {path}")
+        if a.open:
+            render.open_file(path)
+        return
+    used: dict[str, list[str]] = {}
+    for s in reversed(all_shorts()):     # newest Short first
+        used.setdefault((s.data().get("music") or {}).get("piece") or audio.DEFAULT, []).append(s.number)
+    newest = lambda key: int(used[key][0]) if key in used else 0  # noqa: E731
+    p("least recently used first:")
+    for key in sorted(audio.PIECES, key=newest):
+        piece = audio.PIECES[key]
+        p(f"  {key:<16} {', '.join(used.get(key, [])) or 'unused':<20} {piece.credit} ({piece.mood})")
+
+
 def cmd_approve(a):
     s = find(a.short)
     for f in ("scene.py", "verify.py"):
         if not (s.folder / f).exists():
             sys.exit(f"ms: {s.name} has no {f}")
+    try:
+        credit = f"Music: {render.music_piece(s).credit}"
+    except ValueError as e:
+        sys.exit(f"ms: {s.name}: {e}")
+    if credit not in ((s.data().get("youtube") or {}).get("description") or ""):
+        sys.exit(f"ms: {s.name}'s YouTube description must credit its music: \"{credit}\"")
     ok, out = s.verify()
     if not ok:
         sys.exit(f"ms: verify.py fails, not approving.\n{out}")
@@ -341,6 +374,9 @@ def main(argv=None):
     sp = add("note", cmd_note, "add a review note")
     sp.add_argument("short")
     sp.add_argument("text", help='e.g. "0:12 slide is too fast"')
+    sp = add("music", cmd_music, "the music library; a key writes a WAV to listen to")
+    sp.add_argument("key", nargs="?")
+    sp.add_argument("--open", action="store_true", help="open the WAV when done")
     sp = add("approve", cmd_approve, "human sign-off")
     sp.add_argument("short")
     sp.add_argument("--force", action="store_true", help="approve despite open notes")

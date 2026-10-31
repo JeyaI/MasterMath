@@ -55,6 +55,7 @@ def upload_text(short: Short) -> str:
 
 
 def build_one(short: Short, log) -> Path:
+    piece = render.music_piece(short)     # an unknown key should fail before the slow render
     ok, out = short.verify()
     log(f"verify: {'OK' if ok else 'FAILED'}\n{out}\n")
     if not ok:
@@ -65,7 +66,7 @@ def build_one(short: Short, log) -> Path:
     kit = ready_dir(short)
     if kit.exists():
         shutil.rmtree(kit)
-    final = render.mix(raw, kit / f"{short.name}.mp4")
+    final = render.mix(raw, kit / f"{short.name}.mp4", piece.key)
     render.thumbnail(raw, build / "beats.json", kit / "thumbnail.png")
     (kit / "upload.txt").write_text(upload_text(short), encoding="utf-8")
     return final

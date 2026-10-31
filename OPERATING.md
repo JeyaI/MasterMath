@@ -65,7 +65,7 @@ You're the editor: you pick puzzles, direct the animation, approve, watch the fi
 For each Short:
 
 1. **Pick.** `ms suggest`. Read the promising ones with `ms show <id>`. Choose one.
-2. **Start.** In Claude Code: `/draft-short <id>`. It replies with a 4-line pitch (hook, insight, Level 2, risks). Push back now; it's the cheapest moment to change direction.
+2. **Start.** In Claude Code: `/draft-short <id>`. It replies with a 5-line pitch (hook, insight, Level 2, risks, music). To hear a piece first, run `ms music <key> --open`. Push back now; it's the cheapest moment to change direction.
 3. **First preview.** It writes `verify.py` (the answers, checked in code), then the scene, renders a preview and opens it, listing the beats with timestamps.
 4. **Direct.** Reply in plain language, with a timestamp first when you can:
    - "0:12 the slide is too fast"
@@ -82,7 +82,7 @@ For each Short:
 
 ## Nightly (automatic)
 
-`scripts/nightly.sh` runs `ms batch`: every `approved` Short is rendered at 1080×1920, mixed with the music bed, normalized for loudness, and put in `out/ready/<short>/` with its `thumbnail.png` and `upload.txt`. Status changes are committed.
+`scripts/nightly.sh` runs `ms batch`: every `approved` Short is rendered at 1080×1920, mixed with the piece named in its `music.piece`, normalized for loudness, and put in `out/ready/<short>/` with its `thumbnail.png` and `upload.txt`. Status changes are committed.
 
 If one Short fails, it's marked `failed` with a log in `out/logs/` and the others still build. The batch's own log is `out/logs/nightly.log`. If it ends with `ERROR: status changes not committed`, the videos are fine: run the git command it prints.
 
@@ -151,7 +151,8 @@ Keep software sessions separate from drafting sessions.
 | | `ms preview <n> [--at 0:12] [--open]` | Full preview, or one beat |
 | | `ms compare <n> [--open]` | Before/after side by side |
 | | `ms note <n> "0:12 text"` | Log a review note |
-| | `ms approve <n>` | Your sign-off |
+| | `ms music [<key>] [--open]` | List the music library, least recently used first; a key writes a 46 s WAV to `out/music/` |
+| | `ms approve <n>` | Your sign-off; refuses if the description doesn't credit the Short's piece |
 | Nightly | `ms batch [<n>]` | Render and mix approved Shorts |
 | Mornings | `ms inbox` | What needs you |
 | | `ms reject <n> "note"` | Back to drafting |

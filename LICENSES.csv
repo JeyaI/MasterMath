@@ -1,6 +1,11 @@
 asset,used_in,source_url,license,notes
 "Greek cross dissection (puzzle idea)",0001,https://www.gutenberg.org/ebooks/16713,"Public domain (USA); Dudeney d. 1930","Wording, drawings and animation are original. Confirm exact puzzle number at ingest."
-"J. S. Bach - Prelude in C, BWV 846, bars 1-11",all,,"Public domain composition","Recording synthesised in lib/audio.py - we own it; no Content ID exposure."
+"J. S. Bach - Prelude in C, BWV 846, bars 1-11",default; selected in short.yaml,,"Public domain composition","Recording synthesised in lib/audio.py - we own it; no Content ID exposure."
+"Johann Pachelbel - Canon in D, bars 1-12",selected in short.yaml,https://www.mutopiaproject.org/,"Public domain composition","Recording synthesised in lib/audio.py - we own it. Notes checked against Mutopia Canon_per_3_Violini_e_Basso (edition CC BY 4.0, reference only; none of its files are used)."
+"Erik Satie - Gymnopedie No. 1, bars 1-21",selected in short.yaml,https://www.mutopiaproject.org/,"Public domain composition; Satie d. 1925","Recording synthesised in lib/audio.py - we own it. Notes checked against Mutopia gymnopedie_1 (public domain edition)."
+"W. A. Mozart - Piano Sonata in C K. 545, first movement, bars 1-12",selected in short.yaml,https://www.mutopiaproject.org/,"Public domain composition","Recording synthesised in lib/audio.py - we own it. Notes checked against Mutopia K545-1 (edition CC BY-SA 3.0, reference only; none of its files are used)."
+"Christian Petzold - Minuet in G BWV Anh. 114, bars 1-16",selected in short.yaml,https://www.mutopiaproject.org/,"Public domain composition","Recording synthesised in lib/audio.py - we own it. Notes checked against Mutopia anna-magdalena-04 (public domain edition). Ornaments omitted."
+"L. van Beethoven - Fur Elise WoO 59, opening section",selected in short.yaml,https://www.mutopiaproject.org/,"Public domain composition","Recording synthesised in lib/audio.py - we own it. Notes checked against Mutopia fur_Elise_WoO59 (public domain edition)."
 "Sound effects tick/pop/snip/chime",all,,"Original","Synthesised in lib/audio.py."
 "Inter typeface",all,https://github.com/rsms/inter,"SIL Open Font License 1.1",""
 "The Crescent Puzzle (Dudeney no. 191, puzzle idea)",0002,https://www.gutenberg.org/ebooks/16713,"Public domain (USA); Dudeney d. 1930","Figure redrawn in Manim; wording and animation are original."

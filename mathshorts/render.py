@@ -187,13 +187,21 @@ def thumbnail(video: Path, beats_path: Path, dest: Path) -> Path:
     return dest
 
 
-def mix(raw: Path, final: Path, music_gain: float = 0.28, lufs: float = -14.0) -> Path:
+def _audio():
     import sys
     sys.path.insert(0, str(paths.REPO))
-    from lib.audio import write_music
+    from lib import audio
+    return audio
 
+
+def music_piece(short: Short):
+    """The library Piece a Short asked for. Raises ValueError on an unknown key."""
+    return _audio().piece((short.data().get("music") or {}).get("piece"))
+
+
+def mix(raw: Path, final: Path, piece: str | None = None, music_gain: float = 0.28, lufs: float = -14.0) -> Path:
     dur = duration(raw)
-    music = write_music(raw.parent / "music.wav", dur)
+    music = _audio().write_music(raw.parent / "music.wav", dur, piece)
     final.parent.mkdir(parents=True, exist_ok=True)
     norm = f"loudnorm=I={lufs}:TP=-1.5:LRA=11"
     if has_audio(raw):
