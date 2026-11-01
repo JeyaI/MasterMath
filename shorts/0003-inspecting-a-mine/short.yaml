@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0003'
 title: Inspecting A Mine
-status: approved
+status: published
 catalog_id: dudeney-amusements-247
 tags:
   - routes
@@ -81,6 +81,8 @@ youtube:
     - euler path
     - puzzle
     - brain teaser
-  video_id:
-  url:
-  published_at:
+  video_id: zeSggSh4uM4
+  url: https://www.youtube.com/shorts/zeSggSh4uM4
+  published_at: '2026-11-01'
+built_at: 20261101-133053
+last_error:
