@@ -1,0 +1,108 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0004'
+title: Bishops In Convocation
+status: approved
+catalog_id: dudeney-amusements-299
+tags:
+  - chessboard
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 299
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    [Illustration:
+
+        +---+---+---+---+---+---+---+---+
+        | B | B | B | B | B | B | B | B |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   | B | B | B | B | B | B |   |
+        +---+---+---+---+---+---+---+---+
+
+    ]
+
+    The greatest number of bishops that can be placed at the same time on
+    the chessboard, without any bishop attacking another, is fourteen. I
+    show, in diagram, the simplest way of doing this. In fact, on a square
+    chequered board of any number of squares the greatest number of bishops
+    that can be placed without attack is always two less than twice the
+    number of squares on the side. It is an interesting puzzle to discover
+    in just how many different ways the fourteen bishops may be so placed
+    without mutual attack. I shall give an exceedingly simple rule for
+    determining the number of ways for a square chequered board of any
+    number of squares.
+  solution: |
+    The fourteen bishops may be placed in 256 different ways. But every
+    bishop must always be placed on one of the sides of the board--that
+    is, somewhere on a row or file on the extreme edge. The puzzle,
+    therefore, consists in counting the number of different ways that we
+    can arrange the fourteen round the edge of the board without attack.
+    This is not a difficult matter. On a chessboard of n² squares 2n - 2
+    bishops (the maximum number) may always be placed in 2^n ways without
+    attacking. On an ordinary chessboard n would be 8; therefore 14
+    bishops may be placed in 256 different ways. It is rather curious that
+    the general result should come out in so simple a form.
+
+    [Illustration]
+level1:
+  statement: "14 bishops is the most a chessboard can hold with none attacking another. How many different
+    ways can they be placed?"
+  answer: "256 ways."
+  insight: "Every bishop sits on the edge. Bounce a diagonal off the edges and it closes into a loop;
+    a loop holds 2 bishops at opposite corners, in 2 possible settings. There are 6 loops and 2 long diagonals
+    (1 bishop, 2 ends). No two tracks share a diagonal, so the choices multiply: 2^8 = 256."
+level2:
+  statement: "Same trick on a 10 by 10 board, with 18 bishops. How many ways?"
+  answer: 1024
+  accept: [1024, "1,024", "1024 ways", "1,024 ways", "2^10", "2¹⁰", "one thousand twenty four", "one thousand
+        and twenty four", "one thousand twenty-four"]
+  why: "A 10 by 10 board has 8 loops and 2 long diagonals, so 10 tracks with 2 choices each: 2^10 = 1024."
+captions:
+  - "Bishops attack diagonally"
+  - "14 is the most that fit"
+  - "Another way"
+  - "And another"
+  - "How many in all?"
+  - "Pause and try it"
+  - "Every bishop sits on the edge"
+  - "Bounce a line off the edges"
+  - "It closes into a loop"
+  - "Neighbors attack"
+  - "So: opposite corners"
+  - "That's 2 choices"
+  - "Now the other loops"
+  - "No two share a diagonal"
+  - "So the choices multiply"
+  - "Long diagonals: 2 ends each"
+  - "2⁸ = 256"
+  - "256 ways ✓"
+  - "Comment just the number ↓"
+music:
+  piece: pachelbel-canon
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "How many ways can 14 bishops share a chessboard?"
+  description: |
+    14 bishops, none attacking another. How many ways can they be placed? Level 2: a 10 by 10 board with 18 bishops. Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 299. Music: Johann Pachelbel, Canon in D.
+  tags:
+    - math puzzle
+    - chess puzzle
+    - combinatorics
+    - puzzle
+    - brain teaser
+  video_id:
+  url:
+  published_at:
