@@ -1,0 +1,86 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0003'
+title: Inspecting A Mine
+status: approved
+catalog_id: dudeney-amusements-247
+tags:
+  - routes
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 247
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    The diagram is supposed to represent the passages or galleries in a
+    mine. We will assume that every passage, A to B, B to C, C to H, H to I,
+    and so on, is one furlong in length. It will be seen that there are
+    thirty-one of these passages. Now, an official has to inspect all of
+    them, and he descends by the shaft to the point A. How far must he
+    travel, and what route do you recommend? The reader may at first say,
+    "As there are thirty-one passages, each a furlong in length, he will
+    have to travel just thirty-one furlongs." But this is assuming that he
+    need never go along a passage more than once, which is not the case.
+    Take your pencil and try to find the shortest route. You will soon
+    discover that there is room for considerable judgment. In fact, it is a
+    perplexing puzzle.
+
+    [Illustration]
+  solution: |
+    Starting from A, the inspector need only travel 36 furlongs if he takes
+    the following route: A to B, G, H, C, D, I, H, M, N, I, J, O, N, S, R,
+    M, L, G, F, K, L, Q, R, S, T, O, J, E, D, C, B, A, F, K, P, Q. He thus
+    passes between A and B twice, between C and D twice, between F and K
+    twice, between J and O twice, and between R and S twice--five
+    repetitions. Therefore 31 passages plus 5 repeated equal 36 furlongs.
+    The little pitfall in this puzzle lies in the fact that we start from an
+    even node. Otherwise we need only travel 35 furlongs.
+level1:
+  statement: "A mine is a 5 by 4 grid of junctions joined by 31 passages, each 1 mile long. Start at corner
+    A, walk every passage, and finish anywhere. What is the shortest route?"
+  answer: "36 miles."
+  insight: "A junction with 3 passages traps you: in, out, in. There are 10 of those, and starting at
+    corner A traps you too, so 11 stuck spots. The finish absorbs one, and each repeated passage clears
+    two, so at least 5 repeats: 31 + 5 = 36. Dudeney's route does it."
+level2:
+  statement: "Same mine, same start at A. What if we have to end back at A too?"
+  answer: 38
+  accept: [38, "38 miles", "38 mi", "thirty-eight", "thirty eight"]
+  why: "Now all 10 three-way junctions need clearing. The top row has 3 of them in a line, and so does
+    the bottom, so one from each can't pair with a neighbour. Those two sit 3 passages apart, which makes
+    4 + 3 = 7 repeats, and 31 + 7 = 38."
+captions:
+  - "Each passage: 1 mile"
+  - "Start here, at A"
+  - "Finish anywhere"
+  - "One try…"
+  - "Another…"
+  - "Can you beat that?"
+  - "Pause and try it"
+  - "Take a 3-way junction"
+  - "In, out, in…"
+  - "…and you're stuck"
+  - "10 junctions like that"
+  - "A too: out, in, stuck"
+  - "The finish saves one"
+  - "A repeat clears two"
+  - "So 5 repeats, at least"
+  - "Now walk it"
+  - "36 miles ✓"
+  - "Comment just the number ↓"
+music:
+  piece: fur-elise
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "What's the shortest route through all 31 passages?"
+  description: |
+    Every passage is one mile, and you must walk them all. Level 2: what if we have to end back at A too? Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 247. Music: L. van Beethoven, Für Elise, WoO 59.
+  tags:
+    - math puzzle
+    - graph theory
+    - euler path
+    - puzzle
+    - brain teaser
+  video_id:
+  url:
+  published_at:
