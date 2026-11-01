@@ -3,6 +3,7 @@
 Catalog (rarely)
   ms sources list                     registered sources and how many puzzles each has
   ms sources add <source> [--file F]  scrape a source into catalog/ (F = a downloaded .txt)
+                          [--rescore]  also re-run the heuristic on entries it scored
   ms show <catalog-id>                read one puzzle, its solution and annotation
 
 Drafting (weekly session, mostly via Claude Code /draft-short)
@@ -53,10 +54,11 @@ def cmd_sources(a):
     if not a.source:
         sys.exit("ms: which source? see `ms sources list`")
     from pathlib import Path
-    info = catalog.add_source(a.source, Path(a.file) if a.file else None, a.refresh)
+    info = catalog.add_source(a.source, Path(a.file) if a.file else None, a.refresh, a.rescore)
     p(f"{a.source}: {info['puzzles']} puzzles ({info['with_solution']} with solutions, "
       f"{info['with_figure']} with figures) -> {info['path'].relative_to(paths.root())}")
-    p(f"annotations: {info['annotations_added']} new heuristic entries in catalog/annotations.yaml")
+    p(f"annotations: {info['annotations_added']} new heuristic entries in catalog/annotations.yaml"
+      + (f", {info['annotations_rescored']} rescored" if a.rescore else ""))
     p(f"sections: {', '.join(info['sections'][:12])}{' …' if len(info['sections']) > 12 else ''}")
     p("next: skim the top of `ms suggest`, fix any scores that look wrong (scored_by: human), commit.")
 
@@ -358,6 +360,8 @@ def main(argv=None):
     sp.add_argument("source", nargs="?")
     sp.add_argument("--file", help="parse this downloaded .txt instead of fetching")
     sp.add_argument("--refresh", action="store_true", help="re-download even if cached")
+    sp.add_argument("--rescore", action="store_true",
+                    help="re-run the heuristic on entries still marked scored_by: heuristic")
     add("show", cmd_show, "read one catalog puzzle").add_argument("id")
     add("suggest", cmd_suggest, "ranked shortlist for the next Short").add_argument("-n", type=int, default=5)
     sp = add("new", cmd_new, "create a Short from a catalog puzzle")

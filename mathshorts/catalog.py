@@ -79,8 +79,9 @@ def annotations():
 
 
 # Section keywords -> (tag, base visual score). First match wins; checked against section name.
+# Bases stop at 4: a 5 has to be earned by the puzzle itself, not by its section.
 SECTION_RULES = [
-    ("greek cross", "dissection", 5), ("dissection", "dissection", 5), ("patchwork", "dissection", 4),
+    ("greek cross", "dissection", 4), ("dissection", "dissection", 4), ("patchwork", "dissection", 4),
     ("geometrical", "geometry", 4), ("points and lines", "geometry", 4), ("chess", "chessboard", 4),
     ("moving counter", "counters", 4), ("unicursal", "routes", 4), ("route", "routes", 4),
     ("maze", "mazes", 4), ("magic", "magic-squares", 3), ("combination", "combinatorics", 3),
@@ -104,9 +105,7 @@ def heuristic(record: dict) -> CommentedMap:
             break
     text = record.get("text") or ""
     visual_hits, wordy_hits = len(VISUAL_WORDS.findall(text)), len(WORDY_WORDS.findall(text))
-    if record.get("has_figure"):
-        score += 1
-    if visual_hits >= 4:
+    if record.get("has_figure") and visual_hits >= 4:   # one point for both; alone, they say little
         score += 1
     if wordy_hits >= 2:
         score -= 1
@@ -128,17 +127,38 @@ def merge_heuristics(recs: list[dict]) -> int:
             ann[r["id"]] = heuristic(r)
             added += 1
     if added:
-        ordered = CommentedMap()
-        for k in sorted(ann):
-            ordered[k] = ann[k]
-        header = ("# Judgements about catalog puzzles. Edit freely; set scored_by: human on anything\n"
-                  "# you change so it's clear a person looked. Fields: visual_potential (1-5), tags,\n"
-                  "# skip (true = never suggest), notes. Re-scraping never overwrites entries here.\n")
-        yamlio.write_atomic(annotations_path(), header + yamlio.dump_str(ordered))
+        _save_annotations(ann)
     return added
 
 
-def add_source(source_id: str, file: Path | None = None, refresh: bool = False) -> dict:
+def rescore_heuristics(recs: list[dict]) -> int:
+    """Re-run the heuristic on entries it scored; skip, notes and human entries stay. Returns count changed."""
+    ann = annotations()
+    changed = 0
+    for r in recs:
+        old = ann.get(r["id"])
+        if old is None or old.get("scored_by") != "heuristic":
+            continue
+        new = heuristic(r)
+        if (old.get("visual_potential"), list(old.get("tags") or [])) != (new["visual_potential"], new["tags"]):
+            old["visual_potential"], old["tags"] = new["visual_potential"], new["tags"]
+            changed += 1
+    if changed:
+        _save_annotations(ann)
+    return changed
+
+
+def _save_annotations(ann) -> None:
+    ordered = CommentedMap()
+    for k in sorted(ann):
+        ordered[k] = ann[k]
+    header = ("# Judgements about catalog puzzles. Edit freely; set scored_by: human on anything\n"
+              "# you change so it's clear a person looked. Fields: visual_potential (1-5), tags,\n"
+              "# skip (true = never suggest), notes. Re-scraping never overwrites entries here.\n")
+    yamlio.write_atomic(annotations_path(), header + yamlio.dump_str(ordered))
+
+
+def add_source(source_id: str, file: Path | None = None, refresh: bool = False, rescore: bool = False) -> dict:
     srcs = sources()
     if source_id not in srcs:
         raise SystemExit(f"ms: unknown source {source_id!r}; registered: {', '.join(srcs)}")
@@ -147,7 +167,9 @@ def add_source(source_id: str, file: Path | None = None, refresh: bool = False) 
     if not recs:
         raise SystemExit(f"ms: parser found no puzzles in {source_id}; check the raw file format")
     path = write_records(source_id, recs)
+    rescored = rescore_heuristics(recs) if rescore else 0
     added = merge_heuristics(recs)
     return {"path": path, "puzzles": len(recs), "with_solution": sum(1 for r in recs if r["solution"]),
             "with_figure": sum(1 for r in recs if r["has_figure"]), "annotations_added": added,
+            "annotations_rescored": rescored,
             "sections": sorted({r["section"] for r in recs if r["section"]})}

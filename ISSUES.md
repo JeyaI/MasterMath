@@ -58,10 +58,6 @@ Add to `lib/components.py` as Shorts need them: dot grid, area model, number lin
 status: open · P3 · chore
 `ms preview --at` renders from the start of the beat. Consider including the last second of the previous beat for context.
 
-### #16 · Visual scores are bunched at the top
-status: open · P3 · chore
-On the real catalog the heuristic gives 175 of 430 puzzles 5/5, because the has-figure and keyword bonuses stack on high section scores, so `ms suggest` barely separates them. Rebalance the bonuses (or let #7 replace them).
-
 ### #17 · Native batch can't find manim when run via `MS_BIN`
 status: open · P2 · bug
 With `MS_BIN=~/.venvs/mathshorts/bin/ms` and the venv not on PATH (as under a scheduler), `render.manim` looks `manim` up on PATH and every Short fails with `[Errno 13] Permission denied: 'manim'`. Run the `manim` next to `sys.executable`, and fix the scheduler lines in OPERATING.md if needed: `bash -lc` doesn't activate the venv either.
@@ -71,6 +67,10 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #16 · Visual scores are bunched at the top
+status: done · 2026-11-01
+The figure and keyword bonuses now give one point together, not one each, and dissection sections start at 4 like the other visual sections. 5/5 drops from 175 to 67 of 430, across five tags, and the puzzles behind 0002 and 0003 still clear `min_visual`. Added `ms sources add <src> --rescore`, which updates `scored_by: heuristic` entries only, and applied it. Scores are whole numbers, so the top band still ties; #7 is the way to split it further.
 
 ### #20 · More classical music, chosen per Short
 status: done · 2026-10-31

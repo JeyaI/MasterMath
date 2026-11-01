@@ -144,6 +144,7 @@ Keep software sessions separate from drafting sessions.
 |---|---|---|
 | Rarely | `ms sources list` | Sources and puzzle counts |
 | | `ms sources add <src> [--file F]` | Scrape a source into the catalog |
+| | `ms sources add <src> --rescore` | Same, and re-run the heuristic on `scored_by: heuristic` entries (after changing it) |
 | Drafting | `ms suggest [-n 5]` | Ranked shortlist with reasons |
 | | `ms show <catalog-id>` | Read a puzzle and its solution |
 | | `ms new <catalog-id>` / `--blank "Title"` | Create a Short (Claude Code usually does this) |

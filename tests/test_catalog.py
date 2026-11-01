@@ -63,3 +63,36 @@ def test_add_source_never_overwrites_human_annotations(root):
     assert info["annotations_added"] == 0
     assert catalog.annotations()[key]["visual_potential"] == 2
     assert catalog.get(key)["title"] == "The Cross And The Square"
+    # --rescore leaves it alone too
+    catalog.add_source("dudeney-amusements", file=f, rescore=True)
+    assert catalog.annotations()[key]["visual_potential"] == 2
+
+
+def test_rescore_updates_heuristic_entries_only_and_keeps_notes(root):
+    from mathshorts import yamlio
+    f = FIXTURES / "dudeney_sample.txt"
+    catalog.add_source("dudeney-amusements", file=f)
+    ann = catalog.annotations()
+    key = "dudeney-amusements-003"
+    want = ann[key]["visual_potential"]
+    ann[key]["visual_potential"] = 1 if want != 1 else 2    # a score from an older heuristic
+    ann[key]["notes"] = "keep me"
+    ann[key]["skip"] = True
+    yamlio.save(catalog.annotations_path(), ann)
+    info = catalog.add_source("dudeney-amusements", file=f, rescore=True)
+    assert info["annotations_rescored"] == 1
+    entry = catalog.annotations()[key]
+    assert entry["visual_potential"] == want
+    assert entry["notes"] == "keep me" and entry["skip"] is True
+
+
+def test_heuristic_bonuses_do_not_stack():
+    wordy = "cut the square into pieces along the line of the figure"
+    rec = {"section": "Various Geometrical Puzzles", "solution": "x"}
+    score = lambda **kw: catalog.heuristic({**rec, **kw})["visual_potential"]
+    assert score(text="", has_figure=False) == 4
+    assert score(text="", has_figure=True) == 4             # a figure alone earns nothing
+    assert score(text=wordy, has_figure=False) == 4         # nor do keywords alone
+    assert score(text=wordy, has_figure=True) == 5
+    dissection = {**rec, "section": "Various Dissection Puzzles"}
+    assert catalog.heuristic({**dissection, "text": "", "has_figure": True})["visual_potential"] == 4

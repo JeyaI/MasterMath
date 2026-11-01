@@ -122,7 +122,7 @@ dudeney-amusements-024:
     - money
   scored_by: heuristic
 dudeney-amusements-025:
-  visual_potential: 2
+  visual_potential: 1
   tags:
     - money
   scored_by: heuristic
@@ -302,17 +302,17 @@ dudeney-amusements-060:
     - clocks
   scored_by: heuristic
 dudeney-amusements-061:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - clocks
   scored_by: heuristic
 dudeney-amusements-062:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - clocks
   scored_by: heuristic
 dudeney-amusements-063:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - clocks
   scored_by: heuristic
@@ -347,12 +347,12 @@ dudeney-amusements-069:
     - speed
   scored_by: heuristic
 dudeney-amusements-070:
-  visual_potential: 3
+  visual_potential: 2
   tags:
     - speed
   scored_by: heuristic
 dudeney-amusements-071:
-  visual_potential: 3
+  visual_potential: 2
   tags:
     - speed
   scored_by: heuristic
@@ -377,12 +377,12 @@ dudeney-amusements-075:
     - speed
   scored_by: heuristic
 dudeney-amusements-076:
-  visual_potential: 3
+  visual_potential: 2
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-077:
-  visual_potential: 3
+  visual_potential: 2
   tags:
     - digits
   scored_by: heuristic
@@ -392,7 +392,7 @@ dudeney-amusements-078:
     - digits
   scored_by: heuristic
 dudeney-amusements-079:
-  visual_potential: 3
+  visual_potential: 2
   tags:
     - digits
   scored_by: heuristic
@@ -402,7 +402,7 @@ dudeney-amusements-080:
     - digits
   scored_by: heuristic
 dudeney-amusements-081:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - digits
   scored_by: heuristic
@@ -417,7 +417,7 @@ dudeney-amusements-083:
     - digits
   scored_by: heuristic
 dudeney-amusements-084:
-  visual_potential: 3
+  visual_potential: 2
   tags:
     - digits
   scored_by: heuristic
@@ -432,7 +432,7 @@ dudeney-amusements-086:
     - digits
   scored_by: heuristic
 dudeney-amusements-087:
-  visual_potential: 3
+  visual_potential: 2
   tags:
     - digits
   scored_by: heuristic
@@ -472,17 +472,17 @@ dudeney-amusements-094:
     - digits
   scored_by: heuristic
 dudeney-amusements-095:
-  visual_potential: 3
+  visual_potential: 2
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-096:
-  visual_potential: 3
+  visual_potential: 2
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-097:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-098:
@@ -490,7 +490,7 @@ dudeney-amusements-098:
   tags: []
   scored_by: heuristic
 dudeney-amusements-099:
-  visual_potential: 3
+  visual_potential: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-100:
@@ -530,7 +530,7 @@ dudeney-amusements-108:
   tags: []
   scored_by: heuristic
 dudeney-amusements-109:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-110:
@@ -538,7 +538,7 @@ dudeney-amusements-110:
   tags: []
   scored_by: heuristic
 dudeney-amusements-111:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-112:
@@ -546,11 +546,11 @@ dudeney-amusements-112:
   tags: []
   scored_by: heuristic
 dudeney-amusements-113:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-114:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-115:
@@ -562,11 +562,11 @@ dudeney-amusements-116:
   tags: []
   scored_by: heuristic
 dudeney-amusements-117:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-118:
-  visual_potential: 5
+  visual_potential: 4
   tags: []
   scored_by: heuristic
 dudeney-amusements-119:
@@ -574,7 +574,7 @@ dudeney-amusements-119:
   tags: []
   scored_by: heuristic
 dudeney-amusements-120:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-121:
@@ -610,15 +610,15 @@ dudeney-amusements-128:
   tags: []
   scored_by: heuristic
 dudeney-amusements-129:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-130:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-131:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-132:
@@ -634,7 +634,7 @@ dudeney-amusements-134:
   tags: []
   scored_by: heuristic
 dudeney-amusements-135:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-136:
@@ -642,15 +642,15 @@ dudeney-amusements-136:
   tags: []
   scored_by: heuristic
 dudeney-amusements-137:
-  visual_potential: 3
+  visual_potential: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-138:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-139:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-140:
@@ -667,17 +667,17 @@ dudeney-amusements-142:
     - dissection
   scored_by: heuristic
 dudeney-amusements-143:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-144:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-145:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - dissection
   scored_by: heuristic
@@ -692,12 +692,12 @@ dudeney-amusements-147:
     - dissection
   scored_by: heuristic
 dudeney-amusements-148:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-149:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - dissection
   scored_by: heuristic
@@ -717,7 +717,7 @@ dudeney-amusements-152:
     - dissection
   scored_by: heuristic
 dudeney-amusements-153:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - dissection
   scored_by: heuristic
@@ -757,17 +757,17 @@ dudeney-amusements-160:
     - dissection
   scored_by: heuristic
 dudeney-amusements-161:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-162:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-163:
-  visual_potential: 5
+  visual_potential: 3
   tags:
     - dissection
   scored_by: heuristic
@@ -782,22 +782,22 @@ dudeney-amusements-165:
     - dissection
   scored_by: heuristic
 dudeney-amusements-166:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-167:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-168:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-169:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - dissection
   scored_by: heuristic
@@ -837,7 +837,7 @@ dudeney-amusements-176:
     - dissection
   scored_by: heuristic
 dudeney-amusements-177:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - dissection
   scored_by: heuristic
@@ -867,7 +867,7 @@ dudeney-amusements-182:
     - geometry
   scored_by: heuristic
 dudeney-amusements-183:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
@@ -887,12 +887,12 @@ dudeney-amusements-186:
     - geometry
   scored_by: heuristic
 dudeney-amusements-187:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-188:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
@@ -902,17 +902,17 @@ dudeney-amusements-189:
     - geometry
   scored_by: heuristic
 dudeney-amusements-190:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-191:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-192:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
@@ -922,17 +922,17 @@ dudeney-amusements-193:
     - geometry
   scored_by: heuristic
 dudeney-amusements-194:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-195:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-196:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
@@ -947,7 +947,7 @@ dudeney-amusements-198:
     - geometry
   scored_by: heuristic
 dudeney-amusements-199:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
@@ -962,17 +962,17 @@ dudeney-amusements-201:
     - geometry
   scored_by: heuristic
 dudeney-amusements-202:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-203:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-204:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
@@ -982,17 +982,17 @@ dudeney-amusements-205:
     - geometry
   scored_by: heuristic
 dudeney-amusements-206:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-207:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-208:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
@@ -1002,17 +1002,17 @@ dudeney-amusements-209:
     - geometry
   scored_by: heuristic
 dudeney-amusements-210:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-211:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-212:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - geometry
   scored_by: heuristic
@@ -1027,12 +1027,12 @@ dudeney-amusements-214:
     - counters
   scored_by: heuristic
 dudeney-amusements-215:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-216:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
@@ -1047,17 +1047,17 @@ dudeney-amusements-218:
     - counters
   scored_by: heuristic
 dudeney-amusements-219:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-220:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-221:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
@@ -1072,17 +1072,17 @@ dudeney-amusements-223:
     - counters
   scored_by: heuristic
 dudeney-amusements-224:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-225:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-226:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
@@ -1092,7 +1092,7 @@ dudeney-amusements-227:
     - counters
   scored_by: heuristic
 dudeney-amusements-228:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
@@ -1102,22 +1102,22 @@ dudeney-amusements-229:
     - counters
   scored_by: heuristic
 dudeney-amusements-230:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-231:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-232:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-233:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
@@ -1132,17 +1132,17 @@ dudeney-amusements-235:
     - counters
   scored_by: heuristic
 dudeney-amusements-236:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-237:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-238:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - counters
   scored_by: heuristic
@@ -1152,12 +1152,12 @@ dudeney-amusements-239:
     - routes
   scored_by: heuristic
 dudeney-amusements-240:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-241:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
@@ -1167,12 +1167,12 @@ dudeney-amusements-242:
     - routes
   scored_by: heuristic
 dudeney-amusements-243:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-244:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
@@ -1187,62 +1187,62 @@ dudeney-amusements-246:
     - routes
   scored_by: heuristic
 dudeney-amusements-247:
-  visual_potential: 5
-  tags:
-    - routes
-  scored_by: heuristic
-dudeney-amusements-248:
-  visual_potential: 5
-  tags:
-    - routes
-  scored_by: heuristic
-dudeney-amusements-249:
-  visual_potential: 5
-  tags:
-    - routes
-  scored_by: heuristic
-dudeney-amusements-250:
   visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
+dudeney-amusements-248:
+  visual_potential: 4
+  tags:
+    - routes
+  scored_by: heuristic
+dudeney-amusements-249:
+  visual_potential: 4
+  tags:
+    - routes
+  scored_by: heuristic
+dudeney-amusements-250:
+  visual_potential: 3
+  tags:
+    - routes
+  scored_by: heuristic
 dudeney-amusements-251:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-252:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-253:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-254:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-255:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-256:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-257:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-258:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
@@ -1252,17 +1252,17 @@ dudeney-amusements-259:
     - routes
   scored_by: heuristic
 dudeney-amusements-260:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-261:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-262:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - combinatorics
   scored_by: heuristic
@@ -1302,7 +1302,7 @@ dudeney-amusements-269:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-270:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - combinatorics
   scored_by: heuristic
@@ -1322,27 +1322,27 @@ dudeney-amusements-273:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-274:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-275:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-276:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-277:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-278:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - combinatorics
   scored_by: heuristic
@@ -1352,17 +1352,17 @@ dudeney-amusements-279:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-280:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-281:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-282:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - combinatorics
   scored_by: heuristic
@@ -1372,12 +1372,12 @@ dudeney-amusements-283:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-284:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-285:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - combinatorics
   scored_by: heuristic
@@ -1397,7 +1397,7 @@ dudeney-amusements-288:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-289:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1412,12 +1412,12 @@ dudeney-amusements-291:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-292:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-293:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1432,7 +1432,7 @@ dudeney-amusements-295:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-296:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1457,7 +1457,7 @@ dudeney-amusements-300:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-301:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1477,17 +1477,17 @@ dudeney-amusements-304:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-305:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-306:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-307:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1497,12 +1497,12 @@ dudeney-amusements-308:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-309:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-310:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1522,7 +1522,7 @@ dudeney-amusements-313:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-314:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1532,7 +1532,7 @@ dudeney-amusements-315:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-316:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1562,17 +1562,17 @@ dudeney-amusements-321:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-322:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-323:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-324:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1587,7 +1587,7 @@ dudeney-amusements-326:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-327:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1597,22 +1597,22 @@ dudeney-amusements-328:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-329:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-330:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-331:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-332:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1627,12 +1627,12 @@ dudeney-amusements-334:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-335:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-336:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1642,7 +1642,7 @@ dudeney-amusements-337:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-338:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1657,7 +1657,7 @@ dudeney-amusements-340:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-341:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1667,17 +1667,17 @@ dudeney-amusements-342:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-343:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-344:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-345:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1692,7 +1692,7 @@ dudeney-amusements-347:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-348:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1702,7 +1702,7 @@ dudeney-amusements-349:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-350:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1712,12 +1712,12 @@ dudeney-amusements-351:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-352:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-353:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1727,7 +1727,7 @@ dudeney-amusements-354:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-355:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1737,7 +1737,7 @@ dudeney-amusements-356:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-357:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - chessboard
   scored_by: heuristic
@@ -1757,7 +1757,7 @@ dudeney-amusements-360:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-361:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - chessboard
   scored_by: heuristic
@@ -1772,7 +1772,7 @@ dudeney-amusements-363:
     - measuring
   scored_by: heuristic
 dudeney-amusements-364:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - measuring
   scored_by: heuristic
@@ -1812,7 +1812,7 @@ dudeney-amusements-371:
     - measuring
   scored_by: heuristic
 dudeney-amusements-372:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - measuring
   scored_by: heuristic
@@ -1832,7 +1832,7 @@ dudeney-amusements-375:
     - logic
   scored_by: heuristic
 dudeney-amusements-376:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - logic
   scored_by: heuristic
@@ -1842,37 +1842,37 @@ dudeney-amusements-377:
     - logic
   scored_by: heuristic
 dudeney-amusements-378:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-379:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-380:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-381:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-382:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-383:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-384:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - games
   scored_by: heuristic
@@ -1882,7 +1882,7 @@ dudeney-amusements-385:
     - games
   scored_by: heuristic
 dudeney-amusements-386:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - games
   scored_by: heuristic
@@ -1917,17 +1917,17 @@ dudeney-amusements-392:
     - games
   scored_by: heuristic
 dudeney-amusements-393:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-394:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-395:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - games
   scored_by: heuristic
@@ -1947,47 +1947,47 @@ dudeney-amusements-398:
     - games
   scored_by: heuristic
 dudeney-amusements-399:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-400:
-  visual_potential: 5
+  visual_potential: 4
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-401:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-402:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-403:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-404:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-405:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-406:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-407:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - magic-squares
   scored_by: heuristic
@@ -1997,12 +1997,12 @@ dudeney-amusements-408:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-409:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-410:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - magic-squares
   scored_by: heuristic
@@ -2017,7 +2017,7 @@ dudeney-amusements-412:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-413:
-  visual_potential: 4
+  visual_potential: 3
   tags:
     - paradox
   scored_by: heuristic
@@ -2034,7 +2034,7 @@ dudeney-amusements-416:
   tags: []
   scored_by: heuristic
 dudeney-amusements-417:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-418:
@@ -2046,11 +2046,11 @@ dudeney-amusements-419:
   tags: []
   scored_by: heuristic
 dudeney-amusements-420:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-421:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-422:
@@ -2058,19 +2058,19 @@ dudeney-amusements-422:
   tags: []
   scored_by: heuristic
 dudeney-amusements-423:
-  visual_potential: 5
+  visual_potential: 4
   tags: []
   scored_by: heuristic
 dudeney-amusements-424:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-425:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-426:
-  visual_potential: 3
+  visual_potential: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-427:
@@ -2078,14 +2078,14 @@ dudeney-amusements-427:
   tags: []
   scored_by: heuristic
 dudeney-amusements-428:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-429:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-430:
-  visual_potential: 4
+  visual_potential: 3
   tags: []
   scored_by: heuristic
