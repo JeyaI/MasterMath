@@ -14,5 +14,6 @@ description: Work an item from ISSUES.md, the project's backlog. Use for /work-i
    - If the human workflow changed: update OPERATING.md in the same change.
 5. **Close.** Move the issue to **Done** with today's date and a one-line resolution. Add any follow-ups you discovered as new issues (next id at the top of the file).
 6. **Commit:** `git commit -m "#<id>: <title>"`.
+7. **Push to remote.** Get human confirmation before doing this.
 
 If you hit something you can't resolve (missing access, an unclear product decision), set the issue to `blocked`, write why in it, and tell the user.
