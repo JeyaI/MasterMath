@@ -6,9 +6,13 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **21**
+Next id: **22**
 
 ## Open
+
+### #21 · Thumbnail can catch a fade in progress
+status: open · P2 · bug
+`render.thumbnail` takes the frame `THUMB_LEAD` (0.1 s) before the "Pause and try it" beat. If a scene is still fading something out then, it lands in the thumbnail: 0003's has a ghost "41 miles" and the "Can you beat that?" caption. The frame also isn't always the best one once a Short has beats before the pause. Let a Short choose its frame (say a `thumbnail_at` key or a named beat), or warn when the frame is mid-animation.
 
 ### #3 · Link 0001 to its catalog puzzle
 status: open · P2 · content
