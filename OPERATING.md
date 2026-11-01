@@ -64,8 +64,8 @@ You're the editor: you pick puzzles, direct the animation, approve, watch the fi
 
 For each Short:
 
-1. **Pick.** `ms suggest`. Read the promising ones with `ms show <id>`. Choose one.
-2. **Start.** In Claude Code: `/draft-short <id>`. It replies with a 5-line pitch (hook, insight, Level 2, risks, music). To hear a piece first, run `ms music <key> --open`. Push back now; it's the cheapest moment to change direction.
+1. **Pick.** `ms suggest`. Read the promising ones with `ms show <id>`. Choose one. Or skip this and let Claude Code choose with `/draft-short pick`.
+2. **Start.** In Claude Code: `/draft-short <id>` (or `pick`, whose pitch also names the puzzle, why, and a runner-up). It replies with a 5-line pitch (hook, insight, Level 2, risks, music). To hear a piece first, run `ms music <key> --open`. Push back now; it's the cheapest moment to change direction.
 3. **First preview.** It writes `verify.py` (the answers, checked in code), then the scene, renders a preview and opens it, listing the beats with timestamps.
 4. **Direct.** Reply in plain language, with a timestamp first when you can:
    - "0:12 the slide is too fast"

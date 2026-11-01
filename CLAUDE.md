@@ -3,7 +3,7 @@
 An anonymous YouTube Shorts channel of animated math-puzzle solutions (Manim, 3Blue1Brown-style), loosely modeled on "Master Catur Indonesia". The human runs it from **OPERATING.md**; the backlog is **ISSUES.md**. Brand: `lib/brand.py`. Logo: `python brand/logo.py`.
 
 ## Skills
-- `/draft-short <catalog-id | number>`: draft or revise a Short with the user (`.claude/skills/draft-short`).
+- `/draft-short <catalog-id | pick | number>`: draft or revise a Short with the user; `pick` has Claude choose from `ms suggest` (`.claude/skills/draft-short`).
 - `/work-issue [id]`: work the backlog (`.claude/skills/work-issue`).
 
 ## Non-negotiables
