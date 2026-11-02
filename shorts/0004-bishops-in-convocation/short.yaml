@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0004'
 title: Bishops In Convocation
-status: approved
+status: published
 catalog_id: dudeney-amusements-299
 tags:
   - chessboard
@@ -103,6 +103,8 @@ youtube:
     - combinatorics
     - puzzle
     - brain teaser
-  video_id:
-  url:
-  published_at:
+  video_id: Hts9qRK2yrk
+  url: https://youtube.com/shorts/Hts9qRK2yrk
+  published_at: '2026-11-01'
+built_at: 20261101-172056
+last_error:
