@@ -1,0 +1,105 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0005'
+title: The Potato Puzzle
+status: approved
+catalog_id: dudeney-amusements-164
+tags:
+  - counting
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 164
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    Take a circular slice of potato, place it on the table, and see into how
+    large a number of pieces you can divide it with six cuts of a knife. Of
+    course you must not readjust the pieces or pile them after a cut. What
+    is the greatest number of pieces you can make?
+
+    [Illustration:
+
+              --------
+            /   \ 1/   \
+           / \ 2 \/ 3 / \
+          /   \  /\  /   \
+         / \ 4 \/ 5\/ 6 / \
+        |   \  /\  /\  /   |
+         \  7\/ 8\/ 9\/10 /
+          \  /\  /\  /\  /
+           \/11\/12\/13\/
+            \  /\  /\  /
+             \/14\/15\/
+              \  /\  /
+               \/16\/
+               -----
+
+    ]
+
+    The illustration shows how to make sixteen pieces. This can, of course,
+    be easily beaten.
+  solution: |
+    As many as twenty-two pieces may be obtained by the six cuts. The
+    illustration shows a pretty symmetrical solution. The rule in such cases
+    is that every cut shall intersect every other cut and no two
+    intersections coincide; that is to say, every line passes through every
+    other line, but more than two lines do not cross at the same point
+    anywhere. There are other ways of making the cuts, but this rule must
+    always be observed if we are to get the full number of pieces.
+
+    The general formula is that with n cuts we can always produce
+    ((n(n+1))/2)+1 . One of the problems proposed by the late Sam Loyd was to
+    produce the maximum number of pieces by n straight cuts through a
+    solid cheese. Of course, again, the pieces cut off may not be moved or
+    piled. Here we have to deal with the intersection of planes (instead
+    of lines), and the general formula is that with n cuts we may produce
+    ((n - 1)n(n + 1))/6 + n + 1 pieces. It is extremely difficult to "see"
+    the direction and effects of the successive cuts for more than a few
+    of the lowest values of n.
+level1:
+  statement: "What is the greatest number of pieces you can cut a round slice of potato into with 6 straight
+    cuts, without moving or stacking the pieces?"
+  answer: "22 pieces."
+  insight: "A new cut gains one piece for every piece it runs through, and it runs through one more piece
+    than the number of cuts it crosses. Parallel cuts waste crossings, so a grid stops at 16. Let every
+    cut cross every earlier cut, at a new point: the cuts add 1, 2, 3, 4, 5, 6, and 1 + 21 = 22."
+level2:
+  statement: "Same potato, 10 straight cuts. What is the most pieces?"
+  answer: 56
+  accept: [56, "56 pieces", "fifty six", "fifty-six"]
+  why: "Every cut crosses all the earlier ones, so the cuts add 1, 2, ..., 10: 1 + 55 = 56."
+captions:
+  - "Straight cuts only"
+  - "No moving the pieces"
+  - "Three cuts one way"
+  - "Three cuts the other way"
+  - "16 pieces. Can you beat it?"
+  - "Pause and try it"
+  - "Parallel cuts never cross"
+  - "So cross every cut"
+  - "First cut: 2 pieces"
+  - "Cross it: 2 more"
+  - "Cross 2 cuts: 3 more"
+  - "Cross 3 cuts: 4 more"
+  - "Cross 4 cuts: 5 more"
+  - "Cross 5 cuts: 6 more"
+  - "No cut can cross more"
+  - "1 + 1 + 2 + 3 + 4 + 5 + 6 = 22"
+  - "22 pieces ✓"
+  - "Comment just the number ↓"
+music:
+  piece: minuet-g
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "What's the most pieces you can make with 6 straight cuts?"
+  description: |
+    A round slice of potato, 6 straight cuts, no moving the pieces. How many pieces can you make? Level 2: 10 cuts. Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 164. Music: Christian Petzold, Minuet in G, BWV Anh. 114.
+  tags:
+    - math puzzle
+    - counting
+    - geometry
+    - puzzle
+    - brain teaser
+  video_id:
+  url:
+  published_at:
