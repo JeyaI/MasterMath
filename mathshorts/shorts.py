@@ -8,19 +8,21 @@
 
 Status flow (every change goes through `transition`, never hand-edit `status`):
 
-    scripting --script_done--> script_review --comment (your reply)--> revise
-        |                       |    ^                                   |
-        |                       |    +---------------revised-------------+
-        |                       +--abandon (your cross; also from revise, needs_attention)--> abandoned
-        | job_failed (twice)    | accept_script (your check mark)
-        v                       v
-    needs_attention        drafting --approve--> approved --batch--> ready --published--> published
-                               ^                     |                 |
-                               |                     +--batch fails--> failed
-                               +-- reject (from approved / ready / failed / needs_attention) --+
+    scripting --script_done--> script_review <--comment / revised--> revise
+                                    | accept_script (your check mark)
+    drafting --animate-->      animating --animated--> video_review <--comment_video / revised_video--> revise_video
+       |                                                    | approve_video (your check mark on this version)
+       |                                                scheduled --released (YouTube made it public)--> published
+       |                                                    +--stop (your stop sign)--> video_review
+       +--approve--> approved --batch--> ready --published--> published      (the manual path)
+                         +--batch fails--> failed
 
-The script loop (scripting .. script_review) is driven by `ms tick` from your Discord reactions
-and replies (#28, docs/pipeline-design.md). From `drafting` on, you still animate interactively.
+    abandon (your cross): any loop state or needs_attention --> abandoned
+    job_failed (twice):   scripting, revise, animating, revise_video --> needs_attention
+    reject:               approved, ready, failed, needs_attention --> drafting
+
+Both loops are driven by `ms tick` from your Discord reactions and replies (#28, #29,
+docs/pipeline-design.md). `drafting` is the interactive path: /draft-short, then `ms approve`.
 Each Short also keeps an append-only events.jsonl.
 """
 from __future__ import annotations
@@ -36,7 +38,9 @@ from pathlib import Path
 from . import paths, yamlio
 
 SCRIPT_LOOP = ["scripting", "script_review", "revise"]
-STATUSES = [*SCRIPT_LOOP, "needs_attention", "drafting", "approved", "ready", "failed", "published", "abandoned"]
+VIDEO_LOOP = ["animating", "video_review", "revise_video"]
+STATUSES = [*SCRIPT_LOOP, *VIDEO_LOOP, "needs_attention", "drafting", "approved", "ready", "failed",
+            "scheduled", "published", "abandoned"]
 
 # action -> (allowed current statuses, new status)
 TRANSITIONS = {
@@ -49,9 +53,17 @@ TRANSITIONS = {
     "script_done": ({"scripting"}, "script_review"),
     "comment": ({"script_review"}, "revise"),
     "revised": ({"revise"}, "script_review"),
-    "accept_script": ({"script_review"}, "drafting"),
-    "abandon": ({*SCRIPT_LOOP, "needs_attention"}, "abandoned"),
-    "job_failed": ({"scripting", "revise"}, "needs_attention"),
+    "accept_script": ({"script_review"}, "animating"),
+    "abandon": ({*SCRIPT_LOOP, *VIDEO_LOOP, "needs_attention"}, "abandoned"),
+    "job_failed": ({"scripting", "revise", "animating", "revise_video"}, "needs_attention"),
+    # video loop (#29): `ms animate` hands a drafting Short over; the rest is `ms tick`
+    "animate": ({"drafting"}, "animating"),
+    "animated": ({"animating"}, "video_review"),
+    "comment_video": ({"video_review"}, "revise_video"),
+    "revised_video": ({"revise_video"}, "video_review"),
+    "approve_video": ({"video_review"}, "scheduled"),
+    "stop": ({"scheduled"}, "video_review"),
+    "released": ({"scheduled"}, "published"),
 }
 
 

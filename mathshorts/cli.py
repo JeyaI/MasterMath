@@ -24,10 +24,14 @@ Mornings
   ms reject <short> "note"            back to drafting with a note
   ms published <short> <url>          record the upload
 
-Script loop (automatic, scripts/tick.sh; you act in Discord)
-  ms tick [--draft]                   read your Discord reactions/replies, run revise jobs;
+Script and video loops (automatic, scripts/tick.sh; you act in Discord)
+  ms tick [--draft]                   read your Discord reactions/replies, run jobs, upload review
+                                      videos, schedule what you approve, record releases;
                                       --draft also writes one new script if the queue has room
+  ms animate <short> [--as-is]        hand a drafting Short to the video loop: the animate job
+                                      writes the scene, or --as-is sends your scene for review
   ms discord hello                    check the bot's token, channel and permissions
+  ms youtube login | hello            sign in as the channel / check the token
 
 Anytime
   ms status                           every Short by status
@@ -37,6 +41,7 @@ from __future__ import annotations
 import argparse
 import re
 import sys
+from pathlib import Path
 
 from . import batch, catalog, check, paths, render, selector, yamlio
 from .shorts import STATUSES, Short, StatusError, all_shorts, find, next_number, slugify, used_catalog_ids
@@ -292,6 +297,16 @@ def cmd_approve(a):
     p(f"{s.name}: approved. Tonight's batch will render it (or run `ms batch {s.number}` now).")
 
 
+def cmd_render(a):
+    """The final video for a review version (#29); `ms tick` runs it in the sandbox. No status change."""
+    s = find(a.short)
+    try:
+        final = batch.build_one(s, lambda text: None, Path(a.out))
+    except Exception as e:  # noqa: BLE001
+        sys.exit(f"ms: render failed: {str(e)[:2000]}\n{getattr(e, 'output', '')[-3000:]}")
+    p(f"{final}  ({render.duration(final):.1f}s)")
+
+
 # --- batch & mornings -------------------------------------------------------------------
 def cmd_batch(a):
     only = find(a.short) if a.short else None
@@ -322,6 +337,11 @@ def cmd_inbox(a):
     review = [s.name for s in by["script_review"]]
     busy = [s.name for s in by["scripting"] + by["revise"]]
     p(f"SCRIPTS IN DISCORD ({len(review)}): {', '.join(review) or '-'}" + (f"; being written: {', '.join(busy)}" if busy else ""))
+    review = [s.name for s in by["video_review"]]
+    busy = [s.name for s in by["animating"] + by["revise_video"]]
+    p(f"VIDEOS IN DISCORD ({len(review)}): {', '.join(review) or '-'}" + (f"; being made: {', '.join(busy)}" if busy else ""))
+    for s in by["scheduled"]:
+        p(f"SCHEDULED  {s.name:<32} {(s.data().get('youtube') or {}).get('publish_at')}")
 
 
 def cmd_reject(a):
@@ -381,6 +401,33 @@ def cmd_status(a):
 
 
 # --- script loop (#28) -------------------------------------------------------------------
+def cmd_animate(a):
+    s = find(a.short)
+    if not (s.folder / "SCRIPT.md").exists() and not a.as_is:
+        sys.exit(f"ms: {s.name} has no SCRIPT.md for the animate job to build from; use --as-is to send your scene")
+    try:
+        s.transition("animate")
+    except StatusError as e:
+        sys.exit(f"ms: {e}")
+    v = dict(s.data().get("video") or {})
+    v["as_is"] = bool(a.as_is)
+    s.update(video=v)
+    s.log_event("animate", status="animating", as_is=bool(a.as_is))
+    what = "rendered and sent as it is" if a.as_is else "animated by the job"
+    p(f"{s.name}: animating. The next `ms tick` has it {what}, then posts the video in Discord.")
+    commit_short(s, f"{s.number}: to the video loop")
+
+
+def cmd_youtube(a):
+    from . import youtube
+    try:
+        if a.action == "login":
+            youtube.credentials(interactive=True)
+        p(f"YouTube ok: channel {youtube.Client().hello()!r}")
+    except (youtube.YouTubeError, OSError) as e:
+        sys.exit(f"ms: YouTube: {e}")
+
+
 def cmd_tick(a):
     from . import discord, tick
     try:
@@ -393,6 +440,8 @@ def cmd_tick(a):
         sys.exit(f"ms: Discord: {e}")
     summary = ", ".join(f"{len(v)} {k}" for k, v in r.items() if isinstance(v, list) and v)
     p(f"tick: {summary or 'nothing to do'}" + (f" (no new script: {r['skipped']})" if r["skipped"] else ""))
+    if r["paused"]:
+        p(f"tick: {r['paused']}")
     sys.exit(1 if r["failed"] else 0)
 
 
@@ -446,6 +495,9 @@ def main(argv=None):
     sp = add("approve", cmd_approve, "human sign-off")
     sp.add_argument("short")
     sp.add_argument("--force", action="store_true", help="approve despite open notes")
+    sp = add("render", cmd_render, "final video into a folder, no status change (used by ms tick)")
+    sp.add_argument("short")
+    sp.add_argument("--out", required=True)
     sp = add("batch", cmd_batch, "render + mix approved Shorts")
     sp.add_argument("short", nargs="?")
     sp.add_argument("--commit", action="store_true", help="git-commit the status changes")
@@ -460,6 +512,11 @@ def main(argv=None):
     sp = add("tick", cmd_tick, "read Discord, advance the script loop, run jobs")
     sp.add_argument("--draft", action="store_true", help="also start one script job if the queue has room")
     add("discord", cmd_discord, "check the Discord setup").add_argument("action", choices=["hello"])
+    sp = add("animate", cmd_animate, "hand a drafting Short to the video loop")
+    sp.add_argument("short")
+    sp.add_argument("--as-is", action="store_true", help="skip the animate job: render and send your scene")
+    add("youtube", cmd_youtube, "sign in as the channel, or check the token").add_argument(
+        "action", choices=["login", "hello"])
 
     a = ap.parse_args(argv)
     a.fn(a)

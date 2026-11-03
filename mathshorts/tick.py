@@ -1,33 +1,43 @@
-"""`ms tick`: the orchestrator for the script loop (#28, docs/pipeline-design.md).
+"""`ms tick`: the orchestrator for the script and video loops (#28, #29, docs/pipeline-design.md).
 
 Run every few minutes (scripts/tick.sh). Each tick, under a lock:
 
-1. Reads each script thread in Discord. Only your account counts:
-   - a cross on any version            -> abandoned
-   - a reply                           -> revise, with your words as the job's brief
+1. Reads each Short's Discord thread. Only your account counts:
+   - a cross on any version              -> abandoned (its review videos are deleted)
+   - a reply                             -> a revise job, with your words as its brief
      (a reply wins over a check mark left at the same time; the bot says so)
-   - a check mark on the newest version -> drafting: you take it from there with /draft-short
-   - a check mark on an older version  -> nothing; the bot says which version is current
-2. Runs the revise job for each Short in `revise` (one try and one retry), then posts the new version.
-3. With --draft, starts one script job if the queue has room, and posts the script.
+   - a check mark on the newest script   -> animating
+   - a check mark on the newest video    -> scheduled: that exact upload is set to go public at the
+     next open slot (config/pipeline.yaml `release:`), and YouTube releases it
+   - a stop sign on the scheduled notice -> back to video_review, unlisted again
+   - a check mark on an older version    -> nothing; the bot says which version is current
+2. For scheduled Shorts past their release time, checks YouTube and records them as published.
+3. Runs revise jobs, then animate and video revise jobs. A video version is rendered, uploaded
+   unlisted and posted. If YouTube is down, the render waits and the upload is retried next tick.
+4. With --draft, starts one script job if the queue has room, and posts the script.
 
-A job's own claims are not trusted: tick runs verify.py itself before anything is posted.
-No model decides an approval: reactions are read as data. Every change is committed, one Short per
-commit, and logged to the Short's events.jsonl.
+A job's own claims are not trusted: tick runs verify.py, `ms check` and the final render itself,
+in the sandbox (mathshorts/sandbox.py), before anything is posted. No model decides an approval:
+reactions are read as data. Every change is committed, one Short per commit, and logged to the
+Short's events.jsonl.
 """
 from __future__ import annotations
 
+import datetime as dt
 import fcntl
+import hashlib
 import shutil
 import subprocess
 from contextlib import contextmanager
+from pathlib import Path
 from typing import Callable
 
-from . import jobs, paths, yamlio
-from .discord import ACCEPT, CROSS
-from .shorts import SCRIPT_LOOP, Short, all_shorts
+from . import jobs, paths, release, sandbox, youtube, yamlio
+from .discord import ACCEPT, CROSS, STOP
+from .shorts import SCRIPT_LOOP, VIDEO_LOOP, Short, all_shorts
 
 ATTEMPTS = 2
+LATE = dt.timedelta(hours=1)          # a release this late gets flagged
 
 
 def limits() -> dict:
@@ -53,21 +63,59 @@ def lock():
         f.close()
 
 
+def sha256(path: Path) -> str:
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def review_video(s: Short, version: int) -> Path:
+    return paths.out() / "review" / s.name / f"v{version}.mp4"
+
+
 class Tick:
-    def __init__(self, discord, user_id: str, runner: Callable = jobs.run, echo=print, commit: bool = True):
+    def __init__(self, discord, user_id: str, runner: Callable = jobs.run, echo=print, commit: bool = True,
+                 youtube_client=None, checks=None, now: Callable[[], dt.datetime] | None = None):
         self.d, self.user, self.runner, self.echo, self.commit_on = discord, str(user_id), runner, echo, commit
+        self._yt, self.yt_error = youtube_client, None
+        self.checks = checks or sandbox.Checks()
+        self.now = now or (lambda: dt.datetime.now(dt.timezone.utc))
+
+    def yt(self):
+        """The YouTube client, made on first use. None (with yt_error set) if it can't be had."""
+        if self._yt is None:
+            try:
+                self._yt = youtube.Client()
+            except Exception as e:  # noqa: BLE001 - a missing token or library must not stop the script loop
+                self._yt, self.yt_error = False, str(e)[:300]
+        return self._yt or None
 
     # --- entry point -----------------------------------------------------------------
     def run(self, draft: bool = False) -> dict:
-        done = {"accepted": [], "abandoned": [], "revised": [], "scripted": [], "failed": [], "skipped": None}
+        done = {"accepted": [], "abandoned": [], "revised": [], "scripted": [], "videos": [], "approved": [],
+                "stopped": [], "released": [], "failed": [], "skipped": None, "paused": None}
         with lock() as got:
             if not got:
                 done["skipped"] = "another tick is running"
                 return done
-            for s in [s for s in all_shorts() if s.status == "script_review"]:
-                self.read_thread(s, done)
+            for s in all_shorts():
+                if s.status == "script_review":
+                    self.read_thread(s, done)
+                elif s.status == "video_review":
+                    self.read_video(s, done)
+                elif s.status == "scheduled":
+                    self.watch_scheduled(s, done)
             for s in [s for s in all_shorts() if s.status == "revise"]:
                 self.revise(s, done)
+            video = [s for s in all_shorts() if s.status in ("animating", "revise_video")]
+            if video and not self.yt():
+                done["paused"] = f"video jobs paused, YouTube unavailable: {self.yt_error}"
+                self.echo(f"  {done['paused']}")
+            else:
+                for s in video:
+                    self.make_video(s, done)
             if draft:
                 why = self.no_room()
                 if why:
@@ -78,33 +126,39 @@ class Tick:
 
     def no_room(self) -> str | None:
         lim, shorts = limits(), all_shorts()
-        waiting = sum(s.status in SCRIPT_LOOP for s in shorts)
-        queued = sum(s.status in ("approved", "ready") for s in shorts)
+        waiting = sum(s.status in (*SCRIPT_LOOP, *VIDEO_LOOP) for s in shorts)
+        queued = sum(s.status in ("approved", "ready", "scheduled") for s in shorts)
         if waiting >= lim["max_waiting"]:
-            return f"{waiting} scripts already waiting on you (max_waiting: {lim['max_waiting']})"
+            return f"{waiting} drafts already in the loops (max_waiting: {lim['max_waiting']})"
         if queued >= lim["max_queued"]:
-            return f"{queued} Shorts already approved or ready (max_queued: {lim['max_queued']})"
+            return f"{queued} Shorts already approved or scheduled (max_queued: {lim['max_queued']})"
         return None
 
-    # --- 1. your reactions and replies ---------------------------------------------------
+    def mine(self, thread: str, message: str, emoji: str) -> bool:
+        return self.user in self.d.reactors(thread, message, emoji)
+
+    def my_replies(self, thread: str, rv: dict) -> str:
+        """Your new messages in the thread, joined; advances rv['last_seen']."""
+        new = [m for m in self.d.messages_after(thread, rv.get("last_seen"))
+               if m["author_id"] == self.user and not m["bot"]]
+        if new:
+            rv["last_seen"] = new[-1]["id"]
+        return "\n\n".join(m["content"].strip() for m in new if m["content"].strip())
+
+    # --- 1a. scripts: your reactions and replies ---------------------------------------------
     def read_thread(self, s: Short, done: dict) -> None:
         rv = dict(s.data().get("review") or {})
         thread, current = rv["thread_id"], int(rv["version"])
         versions = {int(k): str(v) for k, v in (rv.get("messages") or {}).items()}
-        mine = lambda mid, emoji: self.user in self.d.reactors(thread, mid, emoji)  # noqa: E731
 
-        if any(mine(mid, CROSS) for mid in versions.values()):
+        if any(self.mine(thread, mid, CROSS) for mid in versions.values()):
             self.change(s, "abandon", f"{s.number}: abandoned", event={"version": current})
             self.d.post(thread, "❌ Abandoned. Its puzzle goes back in the pool.")
             done["abandoned"].append(s.name)
             return
 
-        new = [m for m in self.d.messages_after(thread, rv.get("last_seen"))
-               if m["author_id"] == self.user and not m["bot"]]
-        comment = "\n\n".join(m["content"].strip() for m in new if m["content"].strip())
-        if new:
-            rv["last_seen"] = new[-1]["id"]
-        accepted = mine(versions[current], ACCEPT)
+        comment = self.my_replies(thread, rv)
+        accepted = self.mine(thread, versions[current], ACCEPT)
 
         if comment:
             rv["comment"] = comment
@@ -117,22 +171,143 @@ class Tick:
         if accepted:
             s.update(review=rv)
             self.change(s, "accept_script", f"{s.number}: script v{current} accepted", event={"version": current})
-            self.d.post(thread, f"✅ v{current} accepted. Animate it in Claude Code: `/draft-short {s.number}`.")
+            self.d.post(thread, f"✅ v{current} accepted. Animating it now; the video comes back here for review.")
             done["accepted"].append(s.name)
             return
 
-        told = set(int(v) for v in rv.get("told_superseded") or [])
-        for v, mid in versions.items():
-            if v < current and v not in told and mine(mid, ACCEPT):
-                self.d.post(thread, f"v{v} is superseded. React ✅ on v{current} to accept it.")
-                told.add(v)
-        if told != set(int(v) for v in rv.get("told_superseded") or []):
-            rv["told_superseded"] = sorted(told)
+        told = self.superseded(thread, versions, current, rv.get("told_superseded"))
+        if told is not None:
+            rv["told_superseded"] = told
         if rv != (s.data().get("review") or {}):
             s.update(review=rv)
             self.commit(s, f"{s.number}: review read")
 
-    # --- 2. revise ---------------------------------------------------------------------
+    def superseded(self, thread: str, versions: dict[int, str], current: int, told_) -> list[int] | None:
+        """Tell you once about a check mark on an old version. Returns the new told list, if it grew."""
+        told = set(int(v) for v in told_ or [])
+        before = set(told)
+        for v, mid in versions.items():
+            if v < current and v not in told and self.mine(thread, mid, ACCEPT):
+                self.d.post(thread, f"v{v} is superseded. React ✅ on v{current} to approve it.")
+                told.add(v)
+        return sorted(told) if told != before else None
+
+    # --- 1b. videos: your reactions and replies ---------------------------------------------
+    def read_video(self, s: Short, done: dict) -> None:
+        rv, v = dict(s.data().get("review") or {}), dict(s.data().get("video") or {})
+        thread, current = rv["thread_id"], int(v["version"])
+        versions = {int(k): dict(x) for k, x in (v.get("versions") or {}).items()}
+
+        if any(self.mine(thread, str(x["message"]), CROSS) for x in versions.values()):
+            gone = self.delete_videos(versions.values())
+            self.change(s, "abandon", f"{s.number}: abandoned", event={"version": current, "deleted": gone})
+            self.d.post(thread, "❌ Abandoned. Its review videos are deleted, and its puzzle goes back in the pool.")
+            done["abandoned"].append(s.name)
+            return
+
+        comment = self.my_replies(thread, rv)
+        accepted = self.mine(thread, str(versions[current]["message"]), ACCEPT)
+        if comment:
+            v["comment"] = comment
+            s.update(review=rv, video=v)
+            self.change(s, "comment_video", f"{s.number}: revising video v{current}",
+                        event={"version": current, "comment": comment})
+            note = " Your ✅ was set aside, since a comment wins; react again on the new version." if accepted else ""
+            self.d.post(thread, f"Revising video v{current} with your comment.{note}")
+            return
+        if accepted:
+            s.update(review=rv)
+            self.approve(s, v, versions[current], current, thread, done)
+            return
+
+        told = self.superseded(thread, {k: str(x["message"]) for k, x in versions.items()}, current,
+                               v.get("told_superseded"))
+        if told is not None:
+            v["told_superseded"] = told
+        if rv != (s.data().get("review") or {}) or v != (s.data().get("video") or {}):
+            s.update(review=rv, video=v)
+            self.commit(s, f"{s.number}: review read")
+
+    def approve(self, s: Short, v: dict, ver: dict, n: int, thread: str, done: dict) -> None:
+        """Your check mark on video v{n}: schedule exactly that upload. Retried next tick if YouTube fails."""
+        yt = self.yt()
+        cfg = release.settings()
+        taken = [d for x in all_shorts() if x.status in ("scheduled", "published")
+                 if (d := release.local_date((x.data().get("youtube") or {}).get("publish_at")
+                                             or (x.data().get("youtube") or {}).get("published_at"), cfg))]
+        slot = release.next_slot(self.now(), taken, cfg)
+        try:
+            if not yt:
+                raise youtube.YouTubeError(self.yt_error or "no client")
+            yt.schedule(ver["video_id"], slot)
+        except youtube.YouTubeError as e:
+            self.warn_once(s, v, thread, f"⚠️ Couldn't schedule v{n}: {str(e)[:300]}\nI'll retry on the next tick.")
+            return
+        when = slot.strftime("%a %d %b, %I:%M %p %Z").replace(" 0", " ")
+        mid = self.d.post(thread, f"✅ v{n} approved. It goes public **{when}**. React {STOP} here to stop it "
+                                  f"before then.", reactions=(STOP,))
+        v.update(approved={"version": n, "video_id": ver["video_id"], "sha256": ver.get("sha256"), "message": mid},
+                 warned=None)
+        s.update(video=v, **{"youtube.video_id": ver["video_id"], "youtube.url": youtube.url(ver["video_id"]),
+                             "youtube.publish_at": slot.isoformat()})
+        self.change(s, "approve_video", f"{s.number}: video v{n} approved, release {slot.isoformat()}",
+                    event={"version": n, "video_id": ver["video_id"], "publish_at": slot.isoformat()})
+        done["approved"].append(s.name)
+
+    # --- 2. scheduled: the stop sign and the release check -----------------------------------
+    def watch_scheduled(self, s: Short, done: dict) -> None:
+        d = s.data()
+        rv, v, yt_ = dict(d.get("review") or {}), dict(d.get("video") or {}), dict(d.get("youtube") or {})
+        thread, ap = rv["thread_id"], dict(v.get("approved") or {})
+        if ap.get("message") and self.mine(thread, str(ap["message"]), STOP):
+            self.stop(s, rv, v, ap, thread, done)
+            return
+        if self.my_replies(thread, rv):
+            self.d.post(thread, f"It's scheduled, so replies don't change it. React {STOP} on the scheduled "
+                                f"message first, then reply.")
+            s.update(review=rv)
+            self.commit(s, f"{s.number}: review read")
+        publish_at = dt.datetime.fromisoformat(str(yt_["publish_at"]))
+        if self.now() < publish_at:
+            return
+        yt = self.yt()
+        if not yt:
+            return
+        try:
+            st = yt.status(ap["video_id"])
+        except youtube.YouTubeError as e:
+            self.echo(f"  {s.name}: release check failed: {e}")
+            return
+        if st.get("privacyStatus") == "public":
+            s.update(video=v, **{"youtube.published_at": release.local_date(yt_["publish_at"]).isoformat()})
+            self.change(s, "released", f"{s.number}: published", event={"video_id": ap["video_id"]})
+            self.d.post(thread, f"🎉 Live: {youtube.url(ap['video_id'])}")
+            done["released"].append(s.name)
+        elif self.now() > publish_at + LATE:
+            self.warn_once(s, v, thread, f"⚠️ It was due to go public at {publish_at.isoformat()}, but YouTube "
+                                         f"says {st.get('privacyStatus') or 'the video is gone'}. Check YouTube "
+                                         f"Studio.")
+
+    def stop(self, s: Short, rv: dict, v: dict, ap: dict, thread: str, done: dict) -> None:
+        yt = self.yt()
+        try:
+            if not yt:
+                raise youtube.YouTubeError(self.yt_error or "no client")
+            yt.unschedule(ap["video_id"])
+        except youtube.YouTubeError as e:
+            self.warn_once(s, v, thread, f"⚠️ Couldn't stop it: {str(e)[:300]}\nRetrying next tick. If the "
+                                         f"release is close, set it to private in YouTube Studio.")
+            return
+        n = int(ap["version"])
+        # The old check mark stays on the old message, so post this version afresh for a new decision.
+        versions = {int(k): dict(x) for k, x in (v.get("versions") or {}).items()}
+        versions[n]["message"] = self.post_video(thread, s, n, ap["video_id"], f"Stopped and unlisted again.")
+        v.update(versions=versions, approved=None, warned=None)
+        s.update(review=rv, video=v, **{"youtube.publish_at": None, "youtube.video_id": None, "youtube.url": None})
+        self.change(s, "stop", f"{s.number}: release stopped", event={"version": n})
+        done["stopped"].append(s.name)
+
+    # --- 3. jobs ------------------------------------------------------------------------
     def revise(self, s: Short, done: dict) -> None:
         rv = dict(s.data().get("review") or {})
         result, error = self.attempt("revise", s.name, rv.get("comment", ""))
@@ -147,7 +322,54 @@ class Tick:
         self.change(s, "revised", f"{s.number}: script v{version}", event={"version": version, "usage": result.usage})
         done["revised"].append(s.name)
 
-    # --- 3. a new script -----------------------------------------------------------------
+    def make_video(self, s: Short, done: dict) -> None:
+        """Animate (or revise), render and check in the sandbox, then upload unlisted and post."""
+        kind = "animate" if s.status == "animating" else "revise_video"
+        v = dict(s.data().get("video") or {})
+        version = int(v.get("version") or 0) + 1
+        pending = dict(v.get("pending") or {})
+        if int(pending.get("version") or 0) != version or not Path(pending.get("file", "")).exists():
+            dest = review_video(s, version)
+            if v.get("as_is") and kind == "animate":       # `ms animate --as-is`: your scene, no job
+                problem = self.problem(kind, s.name, dest)
+                result, error = (jobs.JobResult(True, s.name, "Your scene, as it is."), None) if not problem \
+                    else (None, problem)
+            else:
+                result, error = self.attempt(kind, s.name, v.get("comment") if kind == "revise_video" else None,
+                                             video=dest)
+            if result is None:
+                self.fail(s, error, done, thread=(s.data().get("review") or {}).get("thread_id"))
+                return
+            pending = {"version": version, "file": str(dest), "sha256": sha256(dest),
+                       "summary": result.summary, "usage": result.usage}
+            v["pending"] = pending
+            s.update(video=v)
+            self.commit(s, f"{s.number}: video v{version} rendered")
+        thread = self.thread(s)
+        yt = self.yt()
+        video_id = None
+        try:
+            video_id = yt.upload(Path(pending["file"]), youtube.metadata(s.data()), "unlisted")
+            st = yt.wait_processed(video_id)
+            if st.get("processingStatus") != "succeeded":
+                raise youtube.YouTubeError(f"processing {st.get('processingStatus') or 'timed out'}")
+        except youtube.YouTubeError as e:
+            if video_id:
+                self.delete_videos([{"video_id": video_id}])
+            self.warn_once(s, v, thread, f"⚠️ Video v{version} is rendered, but the upload failed: "
+                                         f"{str(e)[:300]}\nI'll retry on the next tick.")
+            return
+        mid = self.post_video(thread, s, version, video_id, pending.get("summary", ""))
+        versions = {int(k): dict(x) for k, x in (v.get("versions") or {}).items()}
+        self.delete_videos(versions.values())                  # superseded drafts don't pile up
+        versions[version] = {"message": mid, "video_id": video_id, "sha256": pending["sha256"]}
+        v.update(version=version, versions=versions, pending=None, comment=None, warned=None, as_is=None)
+        s.update(video=v)
+        self.change(s, "animated" if kind == "animate" else "revised_video", f"{s.number}: video v{version}",
+                    event={"version": version, "video_id": video_id, "sha256": pending["sha256"],
+                           "usage": pending.get("usage")})
+        done["videos"].append(s.name)
+
     def script(self, done: dict) -> None:
         result, error = self.attempt("script")
         if result is None:
@@ -170,31 +392,85 @@ class Tick:
         done["scripted"].append(s.name)
 
     # --- helpers -----------------------------------------------------------------------
-    def attempt(self, kind: str, short: str | None = None, comment: str | None = None):
-        """Run a job up to ATTEMPTS times; a run only counts if verify.py passes here, in the main checkout.
+    def attempt(self, kind: str, short: str | None = None, comment: str | None = None, video: Path | None = None):
+        """Run a job up to ATTEMPTS times; a run only counts if its checks pass here, in the sandbox.
         Returns (result, None) or (None, error); for script jobs the error is (folder name or None, text)."""
         error, name = "", short
         for n in range(ATTEMPTS):
             r = self.runner(kind, short, comment)
             name = r.short or name
             if r.ok:
-                ok, out = Short(paths.shorts() / r.short).verify()
-                if ok and (paths.shorts() / r.short / "SCRIPT.md").exists():
+                problem = self.problem(kind, r.short, video)
+                if not problem:
                     return r, None
-                r.error = "verify.py fails" if not ok else "no SCRIPT.md"
-                if not ok:
-                    r.error += f": {out.splitlines()[-1] if out else ''}"
+                r.error = problem
                 if kind == "script" and n < ATTEMPTS - 1:
                     shutil.rmtree(paths.shorts() / r.short)    # uncommitted; the retry starts fresh
             error = r.error
             self.echo(f"  {kind} job: {error}")
         return None, ((name, error) if kind == "script" else error)
 
+    def problem(self, kind: str, name: str, video: Path | None) -> str | None:
+        s = Short(paths.shorts() / name)
+        ok, out = self.checks.verify(s)
+        if not ok:
+            return f"verify.py fails: {out.splitlines()[-1] if out else ''}"
+        if kind in ("script", "revise"):
+            return None if (s.folder / "SCRIPT.md").exists() else "no SCRIPT.md"
+        if not (s.folder / "scene.py").exists():
+            return "no scene.py"
+        ok, out = self.checks.check(s)
+        if not ok:
+            errors = [l.strip() for l in out.splitlines() if "error" in l.lower()][:3]
+            return "ms check: " + "; ".join(errors or out.splitlines()[-1:])
+        ok, out = self.checks.render(s, video)
+        if not ok:
+            return f"final render failed: {' '.join(out.splitlines()[-3:])[:300]}"
+        return None
+
+    def thread(self, s: Short) -> str:
+        """The Short's thread; a Short handed over with `ms animate` may not have one yet."""
+        rv = dict(s.data().get("review") or {})
+        if not rv.get("thread_id"):
+            rv["thread_id"] = self.d.open_thread(f"{s.number} · {s.data().get('title') or s.name}")
+            s.update(review=rv)
+        return rv["thread_id"]
+
     def post_version(self, thread: str, s: Short, version: int, summary: str) -> str:
         head = (f"**Script v{version}** · {s.data().get('title') or s.name}\n{summary.strip()}\n\n"
                 f"React {ACCEPT} to accept, {CROSS} to abandon, or reply to revise.")
         return self.d.post(thread, head, files={f"{s.number}-script-v{version}.md": s.folder / "SCRIPT.md"},
                            reactions=(ACCEPT, CROSS))
+
+    def post_video(self, thread: str, s: Short, version: int, video_id: str, summary: str) -> str:
+        cfg = release.settings()
+        head = (f"**Video v{version}** · {s.data().get('title') or s.name}\n{youtube.url(video_id)}\n"
+                f"{summary.strip()}\n\nReact {ACCEPT} to approve: this exact upload goes public at the next "
+                f"open {cfg['time']} slot. {CROSS} abandons; a reply revises.")
+        return self.d.post(thread, head, reactions=(ACCEPT, CROSS))
+
+    def delete_videos(self, versions) -> list[str]:
+        """Delete review uploads; best effort, since a leftover unlisted draft is harmless."""
+        yt, gone = self.yt(), []
+        for x in versions:
+            vid = x.get("video_id")
+            if not vid or not yt:
+                continue
+            try:
+                yt.delete(vid)
+                gone.append(vid)
+            except youtube.YouTubeError as e:
+                self.echo(f"  couldn't delete {vid}: {e}")
+        return gone
+
+    def warn_once(self, s: Short, v: dict, thread: str, text: str) -> None:
+        """Post a warning unless the same one is already up; it's cleared when things move on."""
+        if v.get("warned") != text[:120]:
+            self.d.post(thread, text)
+            v["warned"] = text[:120]
+            s.update(video=v)
+            self.commit(s, f"{s.number}: warned")
+        self.echo(f"  {s.name}: {text.splitlines()[0]}")
 
     def fail(self, s: Short, error: str, done: dict, thread: str | None = None) -> None:
         s.update(last_error=error[:200])

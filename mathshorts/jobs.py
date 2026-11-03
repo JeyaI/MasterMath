@@ -3,6 +3,8 @@
 The job sees a clean checkout at HEAD, writes one Short's folder, and that folder is copied back.
 It holds no Discord or YouTube credentials, cannot run git or change a status, and is denied any
 command not on the allowlist instead of waiting for a person. Prompts are in scripts/jobs/.
+With `sandbox: docker` (the default, #29) the job runs in the mathshorts-job container with only
+its worktree mounted, so the code it writes and runs can't reach ~/.config (mathshorts/sandbox.py).
 
 Every run is logged to out/logs/jobs.jsonl with its seconds, turns and `total_cost_usd`
 (an estimate; jobs run on the Pro token, so it isn't a bill).
@@ -17,13 +19,15 @@ import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from . import paths
+from . import paths, sandbox
 
 PROMPTS = paths.REPO / "scripts" / "jobs"
-BUDGET_USD = {"script": 10, "revise": 10}
+KINDS = ("script", "revise", "animate", "revise_video")
+BUDGET_USD = {"script": 10, "revise": 10, "animate": 15, "revise_video": 10}
 ALLOWED = ["Read", "Write", "Edit", "Glob", "Grep",
            "Bash(ms show:*)", "Bash(ms suggest:*)", "Bash(ms new:*)", "Bash(ms verify:*)", "Bash(ms music:*)",
            "Bash(ms status:*)", "Bash(python:*)", "Bash(ls:*)"]
+ALLOWED_VIDEO = [*ALLOWED, "Bash(ms preview:*)", "Bash(ms check:*)", "Bash(ffmpeg:*)", "Bash(ffprobe:*)"]
 DENIED = ["Bash(git:*)", "Bash(ms approve:*)", "Bash(ms reject:*)", "Bash(ms published:*)",
           "Bash(ms batch:*)", "Bash(ms tick:*)", "Bash(ms discord:*)"]
 SCHEMA = {"type": "object", "required": ["short", "verify_passed", "summary"],
@@ -56,7 +60,10 @@ def _env(tree: Path) -> dict:
 def prompt(kind: str, short: str | None = None, comment: str | None = None) -> str:
     if kind == "script":
         return "Run the script job for a new Master Math USA Short."
-    return (f"Run the revise job for Short {short}. The reviewer's comment, verbatim:\n\n"
+    if kind == "animate":
+        return f"Run the animate job for Short {short}."
+    label = "revise job" if kind == "revise" else "video revise job"
+    return (f"Run the {label} for Short {short}. The reviewer's comment, verbatim:\n\n"
             f"<comment>\n{comment}\n</comment>")
 
 
@@ -74,14 +81,20 @@ def run(kind: str, short: str | None = None, comment: str | None = None) -> JobR
     log.parent.mkdir(parents=True, exist_ok=True)
     started = dt.datetime.now()
     try:
+        docker = sandbox.mode() == "docker"
         cmd = ["claude", "-p", prompt(kind, short, comment),
-               "--append-system-prompt-file", str(PROMPTS / f"{kind}.md"),
+               "--append-system-prompt-file", f"scripts/jobs/{kind}.md" if docker else str(PROMPTS / f"{kind}.md"),
                "--permission-prompts", "none",
-               "--allowedTools", *ALLOWED, "--disallowedTools", *DENIED,
+               "--allowedTools", *(ALLOWED if kind in ("script", "revise") else ALLOWED_VIDEO),
+               "--disallowedTools", *DENIED,
                "--max-budget-usd", str(BUDGET_USD[kind]),
                "--output-format", "stream-json", "--verbose", "--json-schema", json.dumps(SCHEMA)]
+        env = _env(tree)
+        if docker:
+            cmd = sandbox.docker(cmd, [(tree, "/app", "rw")], {"MS_ROOT": "/app"},
+                                 pass_env=("CLAUDE_CODE_OAUTH_TOKEN",))
         with open(log, "w") as out, open(log.with_suffix(".err"), "w") as err:
-            code = subprocess.run(cmd, cwd=tree, env=_env(tree), stdout=out, stderr=err).returncode
+            code = subprocess.run(cmd, cwd=tree, env=env, stdout=out, stderr=err).returncode
         result = parse(log)
         usage = {"job": kind, "short": short, "exit": code,
                  "seconds": int((dt.datetime.now() - started).total_seconds()),

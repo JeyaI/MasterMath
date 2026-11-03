@@ -57,6 +57,8 @@ Only when the user explicitly says "approve" (or equivalent):
 3. Commit: `git add shorts/<folder> && git commit -m "<number>: approved"`.
 4. Tell them it renders in tonight's batch, or now with `ms batch <n>`.
 
+Alternatively, if the user says to send it to Discord instead (the video loop, #29): `ms animate <n> --as-is`. The next `ms tick` renders and uploads it unlisted, and the user approves it there with ✅. Don't run both.
+
 ## Don'ts
 - Don't edit `status` by hand or approve without the user's explicit OK.
 - Don't use AMC/AIME/AoPS/Brilliant problems or any unlicensed material.

@@ -27,7 +27,7 @@ from pathlib import Path
 
 API = "https://discord.com/api/v10"
 GATEWAY = "gateway.discord.gg"
-ACCEPT, CROSS = "✅", "❌"
+ACCEPT, CROSS, STOP = "✅", "❌", "🛑"
 LIMIT = 2000                          # characters per message
 
 

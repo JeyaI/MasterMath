@@ -6,9 +6,29 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **38**
+Next id: **43**
 
 ## Open
+
+### #38 · A crash between upload and saving the video id leaves a stray upload
+status: open · P3 · bug
+`ms tick` uploads, waits for processing, then records the id. If it dies in between, the next tick uploads again and the first copy stays unlisted on the channel. The design says to find it by file hash (`video.pending.sha256`) and delete it; YouTube doesn't expose hashes, so match on title and upload time instead, or record the id before waiting for processing.
+
+### #39 · Wire `filecheck.check_upload` into the video loop
+status: open · P2 · feature
+Once #27's checks exist, run `check_upload` after each review upload (title, description, tags, duration against the file) and before scheduling on ✅. `video.versions[n].sha256` already records the file.
+
+### #40 · ❌ is only read once a video is up for review
+status: open · P3 · bug
+A cross on the script message while the Short is `animating` or `revise_video` is ignored, and the job runs anyway (its video then arrives and can be crossed). Read crosses in every loop state before starting a job.
+
+### #41 · Thumbnails for scheduled Shorts
+status: open · P3 · feature
+The manual path makes `thumbnail.png`; the video loop sets none. Shorts mostly ignore custom thumbnails, and `thumbnails.set` needs a verified channel. Decide whether it matters.
+
+### #42 · Tick runs long while a video job works
+status: open · P3 · chore
+An animate job plus render and upload takes 10–20 minutes, and the tick lock makes the 5-minute ticks skip meanwhile, so replies on other threads wait. Fine at today's volume; if it bites, read threads in a separate quick tick and run jobs in another.
 
 ### #33 · `ms check` misses mid-animation faults
 status: open · P3 · feature
@@ -45,12 +65,14 @@ File and upload match checks, plus a base class that owns the frame only, never 
 **2026-11-02:** stubbed `mathshorts/filecheck.py` (`check_kit`, `check_upload`). They raise `NotImplementedError` and nothing calls them yet. Needed before Phase 3 (#29), when the system uploads. The base class is in doubt: the frame is already in `lib/components.py`, `ms check` catches frame faults, and all five Shorts are published, so moving one onto it changes code behind a live video. Build it only if Phase 2 jobs keep getting the frame wrong, or start with 0006.
 
 ### #29 · Phase 3: video loop
-status: open · P2 · feature
+status: doing · P2 · feature
 Animate and revise jobs in containers, private uploads, approval by check mark. The human still releases by hand. Rule 4 now allows it (reworded 2026-11-03); still needs #31 and the real #27 file checks. Absorbs #9. Done when five Shorts are approved without a terminal.
+**2026-11-03: built**, with two changes the human asked for: review uploads are **unlisted**, and a ✅ also **schedules the release** (next 5:00 PM New York slot, 1 a day, ≥2 h lead, `release:` in `config/pipeline.yaml`), with 🛑 to pull it and a release check that records `published`. That pulls #30's scheduling, stop sign and release check in. #31 and #27 were not waited for: a lapsed token pauses video jobs and the bot says so; `filecheck` stays a stub. Jobs and every check of job-written code run in `mathshorts-job` (`Dockerfile.job`, `mathshorts/sandbox.py`). `ms animate <n> [--as-is]` hands a `drafting` Short over. Remaining: a live run, then the five-Short bar.
 
 ### #30 · Phase 4: auto release
 status: open · P2 · feature
 Scheduling (5:00 PM slot), release check, stop sign. Retire the nightly batch, ready kits and `ms published`. Done after two weeks with no action needed after any approval.
+**2026-11-03:** scheduling, the stop sign and the release check were built in #29. Left: the soft rule that consecutive Shorts don't share a main tag, the low-schedule alert (under 3 days), and retiring the manual path once nobody uses it.
 
 ### #21 · Thumbnail can catch a fade in progress
 status: open · P2 · bug
@@ -95,6 +117,7 @@ Record viewed-vs-swiped-away and average % viewed per Short (entered by hand, or
 ### #13 · Phase 2: nightly batch in the cloud
 status: open · P3 · chore
 Run the same Docker image on a schedule (GitHub Actions, or a t3.small; t3.micro's 1 GB is tight for LaTeX). Put `out/ready/` behind a small storage interface so it can be object storage. Note: AWS's free tier for new accounts is credit-based, about 6 months.
+**Same-path rule (2026-11-03, #29):** if `ms tick` itself runs in a container, it starts job containers through the host's Docker socket, so `-v` paths are resolved on the host. Mount the repo and `MS_CACHE` at the same absolute path inside and out (e.g. `/srv/mathshorts`), or set `MS_HOST_MAP` (`mathshorts/sandbox.py`).
 
 ### #14 · Grow the component library
 status: open · P3 · feature

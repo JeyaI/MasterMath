@@ -24,12 +24,14 @@ An anonymous YouTube Shorts channel of animated math-puzzle solutions (Manim, 3B
 | Draft selector | `mathshorts/selector.py` (pure `rank()`) | `config/selector.yaml` | `ms suggest` |
 | Drafting | `.claude/skills/draft-short`, `mathshorts/render.py` (preview, compare), `mathshorts/check.py` + `probe.py` (`ms check`) | `shorts/NNNN-slug/{short.yaml, verify.py, scene.py, NOTES.md}` | weekly, with the user |
 | Nightly batch | `mathshorts/batch.py`, `scripts/nightly.sh` | `out/ready/<short>/`, `out/logs/` | nightly |
-| Script loop | `mathshorts/tick.py` (`ms tick`), `discord.py`, `jobs.py`, `scripts/jobs/*.md`, `scripts/tick.sh` | `config/pipeline.yaml`, `SCRIPT.md` and `events.jsonl` in the Short, `out/logs/jobs.jsonl` | every 5 min; `--draft` nightly |
-| Upload | manual for now (`upload.txt` in each kit) | `short.yaml` `youtube.*` | `ms published` |
+| Script and video loops | `mathshorts/tick.py` (`ms tick`), `discord.py`, `jobs.py`, `sandbox.py`, `scripts/jobs/*.md`, `scripts/tick.sh`, `Dockerfile.job` | `config/pipeline.yaml`, `SCRIPT.md`, `events.jsonl` and `review`/`video` in the Short, `out/review/`, `out/logs/jobs.jsonl` | every 5 min; `--draft` nightly |
+| Upload and release | `mathshorts/youtube.py`, `release.py` (pure `next_slot()`), called only by `ms tick`; manual path: `upload.txt` + `ms published` | `short.yaml` `youtube.*` | `ms tick` |
 
 Shared: `mathshorts/shorts.py` (Short folder + status machine), `mathshorts/yamlio.py` (round-trip YAML, atomic writes), `mathshorts/paths.py` (`MS_ROOT`, `MS_OUT`, `MS_CACHE`), `lib/` (Manim layout, components, audio, brand).
 
-**Status machine** (`mathshorts/shorts.py: TRANSITIONS`): `drafting → approved → ready → published`; batch failure → `failed`; `reject` returns approved/ready/failed/needs_attention to `drafting`; `approve` also works from `failed`. In front of it, the script loop (#28): `scripting → script_review ⇄ revise`, then the human's ✅ → `drafting`, ❌ → `abandoned`, a job failing twice → `needs_attention`. Only `ms tick` moves those, and only from the human's own Discord reactions and replies (rule 4 still holds: a reaction is the user explicitly saying so). Each Short keeps an append-only `events.jsonl`.
+**Status machine** (`mathshorts/shorts.py: TRANSITIONS`). The loops (#28, #29): `scripting → script_review ⇄ revise`, the human's ✅ → `animating → video_review ⇄ revise_video`, ✅ on that exact video version → `scheduled` (YouTube `publishAt` at the next slot) → `published` once YouTube shows it public; 🛑 returns `scheduled` to `video_review`; ❌ → `abandoned`; a job failing twice → `needs_attention`. Only `ms tick` moves those, and only from the human's own Discord reactions and replies (rule 4 holds: a reaction is the user explicitly saying so). The manual path: `drafting → approved → ready → published`; batch failure → `failed`; `reject` returns approved/ready/failed/needs_attention to `drafting`; `ms animate` hands a `drafting` Short to the video loop. Each Short keeps an append-only `events.jsonl`.
+
+**Jobs are sandboxed.** `claude -p` jobs, and tick's verify/check/render of the code they write, run in the `mathshorts-job` image (`mathshorts/sandbox.py`) with only their files mounted and only `CLAUDE_CODE_OAUTH_TOKEN` passed. The YouTube and Discord tokens never enter a container. Rebuild the image after changing `pyproject.toml` dependencies.
 
 **Catalog ids** are `<source>-<number>` (e.g. `dudeney-amusements-087`). A Short records its `catalog_id`; "used" is derived from that, never stored in the catalog.
 

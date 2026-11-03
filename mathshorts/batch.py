@@ -54,7 +54,7 @@ def upload_text(short: Short) -> str:
     )
 
 
-def build_one(short: Short, log) -> Path:
+def build_one(short: Short, log, kit: Path | None = None) -> Path:
     piece = render.music_piece(short)     # an unknown key should fail before the slow render
     ok, out = short.verify()
     log(f"verify: {'OK' if ok else 'FAILED'}\n{out}\n")
@@ -63,7 +63,7 @@ def build_one(short: Short, log) -> Path:
     build = paths.out() / "build" / short.name
     raw, mlog = render.render_final(short, build)
     log(mlog)
-    kit = ready_dir(short)
+    kit = kit or ready_dir(short)
     if kit.exists():
         shutil.rmtree(kit)
     final = render.mix(raw, kit / f"{short.name}.mp4", piece.key)

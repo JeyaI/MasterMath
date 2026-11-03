@@ -1,0 +1,14 @@
+# The sandbox for unattended jobs (#29): the render image plus Claude Code.
+#   docker build -t mathshorts .                              (first, the base)
+#   docker build -t mathshorts-job -f Dockerfile.job .
+# `ms tick` runs every job and every check of job-written code in it, with only the job's own
+# files mounted and only CLAUDE_CODE_OAUTH_TOKEN passed in (mathshorts/sandbox.py).
+FROM mathshorts
+
+ARG CLAUDE_CODE_VERSION=2.1.317
+RUN apt-get update && apt-get install -y --no-install-recommends nodejs npm \
+    && rm -rf /var/lib/apt/lists/* \
+    && npm install -g "@anthropic-ai/claude-code@${CLAUDE_CODE_VERSION}" \
+    && npm cache clean --force
+
+ENV HOME=/tmp/home DISABLE_AUTOUPDATER=1
