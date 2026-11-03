@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0001'
 title: Greek cross to square
-status: ready
+status: published
 catalog_id:
 tags:
   - dissection
@@ -47,8 +47,8 @@ youtube:
     Five squares, four pieces, one perfect square. Level 2: what's the slope of the yellow cut? Comment just the number.
     Classic dissection puzzle, after H. E. Dudeney. Music: J. S. Bach, Prelude in C, BWV 846.
   tags: [math puzzle, geometry, dissection, puzzle, brain teaser]
-  video_id:
-  url:
-  published_at:
+  video_id: R9VkTrW9JH8
+  url: https://youtube.com/shorts/R9VkTrW9JH8
+  published_at: '2026-11-02'
 built_at: 20261031-135324
 last_error:

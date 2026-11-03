@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0002'
 title: The Crescent Puzzle
-status: ready
+status: published
 catalog_id: dudeney-amusements-191
 tags:
   - geometry
@@ -66,8 +66,8 @@ youtube:
     - circles
     - puzzle
     - brain teaser
-  video_id:
-  url:
-  published_at:
+  video_id: 6f2L-LECwbo
+  url: https://youtube.com/shorts/6f2L-LECwbo
+  published_at: '2026-11-02'
 last_error:
 built_at: 20261031-131209

@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0005'
 title: The Potato Puzzle
-status: approved
+status: published
 catalog_id: dudeney-amusements-164
 tags:
   - counting
@@ -100,6 +100,8 @@ youtube:
     - geometry
     - puzzle
     - brain teaser
-  video_id:
-  url:
-  published_at:
+  video_id: wicu0eET2og
+  url: https://youtube.com/shorts/wicu0eET2og
+  published_at: '2026-11-01'
+built_at: 20261101-214326
+last_error:
