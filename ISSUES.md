@@ -31,18 +31,15 @@ The app is in Testing, so its refresh tokens expire after 7 days, which would st
 3. The current `~/.config/mathshorts-youtube-token.json` was issued in Testing and still dies 7 days after issue. Delete it and sign in again as the channel, without uploading anything: `python -c "import sys; sys.path.insert(0, 'scripts'); import youtube_test; youtube_test.credentials()"`.
 4. Done when Audience shows "In production" and a new token still refreshes after 8 days.
 
-### #32 · Job allowlist and prompts for unattended runs
-status: open · P2 · chore
-In the #25 trial, each job had 3 commands denied: compound shell commands and scratch scripts don't match a `Bash(prefix:*)` allowlist. Widen it, or tell jobs to run one command at a time. Jobs in a worktree also don't load auto-memory, so job prompts must carry the user's preferences (e.g. the plain-question hook). Needed for #28.
-
 ### #27 · Phase 1: file checks and scene base class
 status: open · P2 · feature
 File and upload match checks, plus a base class that owns the frame only, never the solution animation (YouTube's inauthentic content policy). Done when one existing Short runs on it and has been re-previewed.
 **2026-11-02:** stubbed `mathshorts/filecheck.py` (`check_kit`, `check_upload`). They raise `NotImplementedError` and nothing calls them yet. Needed before Phase 3 (#29), when the system uploads. The base class is in doubt: the frame is already in `lib/components.py`, `ms check` catches frame faults, and all five Shorts are published, so moving one onto it changes code behind a live video. Build it only if Phase 2 jobs keep getting the frame wrong, or start with 0006.
 
 ### #28 · Phase 2: script loop
-status: open · P2 · feature
+status: doing · P2 · feature
 New statuses, `ms tick`, Discord bot, script job. Needs from the human: a Discord server and bot. The human still animates interactively. Done after one week of real scripts, with usage per job logged.
+**2026-11-02:** built and tested against a fake Discord and job runner (`mathshorts/tick.py`, `discord.py`, `jobs.py`, `scripts/jobs/`, `scripts/tick.sh`, `config/pipeline.yaml`; OPERATING.md has the setup and daily steps). Not yet run live: `DISCORD_BOT_TOKEN` is rejected (401; it looks like the client secret). Next: the right token, `ms discord hello` (also the first live test of its minimal gateway client), schedule `tick.sh`, then the first real `ms tick --draft`.
 
 ### #29 · Phase 3: video loop
 status: open · P2 · feature
@@ -109,6 +106,10 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #32 · Job allowlist and prompts for unattended runs
+status: done · 2026-11-02
+Script and revise jobs (`mathshorts/jobs.py`) get a per-command `ms` allowlist plus Read/Write/Edit, deny git and every status-changing command, and their prompts (`scripts/jobs/`) say one command per call, no scratch scripts, and carry the plain-question hook rule. The animate job gets its own in #29.
 
 ### #26 · Phase 1: `ms check` and on-screen match
 status: done · 2026-11-02

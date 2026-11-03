@@ -15,7 +15,7 @@ Read CLAUDE.md first if you haven't this session (rules, format, layout).
   1. Run `ms suggest -n 10`. Ties are listed in id order, so if the ten are bunched in one or two sections, run `ms suggest -n 30` to see past them.
   2. `ms show` your 3–4 favourites and choose the one with a single visual insight that fits 40–50 seconds, a statement short enough to retell in a few captions, an answer you can check in code, and a natural Level 2. Avoid the tags of the latest Shorts. The score is a coarse first pass (a keyword heuristic); use your judgement over it.
   3. Go to step 2. Add the puzzle's id, one line on why you chose it, and a runner-up to the top of the pitch. Run `ms new <id>` only after the user OKs the pitch, so a rejected pick leaves no folder behind.
-- **Short number** (e.g. `7`): read `shorts/0007-*/short.yaml`, `NOTES.md` (open items are your to-do list) and the latest `out/preview/0007-*/beats.json`.
+- **Short number** (e.g. `7`): read `shorts/0007-*/short.yaml`, `NOTES.md` (open items are your to-do list) and the latest `out/preview/0007-*/beats.json`. If it has a `SCRIPT.md` (a script the user accepted in Discord), that is the agreed pitch: skip step 2, keep `verify.py` passing, and build the scene from its beats.
 
 ## 2. Pitch before animating (new Shorts only)
 Before writing any scene code, run `ms music`, then give the user a 5-line pitch and wait for an OK:

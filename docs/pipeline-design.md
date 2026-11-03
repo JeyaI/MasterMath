@@ -343,7 +343,7 @@ I have not estimated durations, because the job costs and the audit result are s
 
 ## Open decisions
 
-Only the rule 4 rewording is still open. It needs your answer before Phase 2.
+Only the rule 4 rewording is still open. It needs your answer before Phase 3, when the system first uploads. Phase 2 needs none: a check mark there only accepts a script, and `ms tick` changes status only from your reactions.
 
 - [x] **Accept "render once, publish the approved file"?** Recommended. Everything after the Summary assumes it.
 - [ ] **Reword rule 4 so the system uploads?** Required for full automation. Recommended wording is in the policy table.

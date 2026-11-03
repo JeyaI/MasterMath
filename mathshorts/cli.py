@@ -24,6 +24,11 @@ Mornings
   ms reject <short> "note"            back to drafting with a note
   ms published <short> <url>          record the upload
 
+Script loop (automatic, scripts/tick.sh; you act in Discord)
+  ms tick [--draft]                   read your Discord reactions/replies, run revise jobs;
+                                      --draft also writes one new script if the queue has room
+  ms discord hello                    check the bot's token, channel and permissions
+
 Anytime
   ms status                           every Short by status
 """
@@ -101,7 +106,7 @@ def cmd_suggest(a):
     p("read one: ms show <id>    start one: /draft-short <id> in Claude Code (or ms new <id>)")
 
 
-def _new_short(record: dict | None, title: str | None):
+def _new_short(record: dict | None, title: str | None, status: str = "drafting"):
     from ruamel.yaml.comments import CommentedMap
     from ruamel.yaml.scalarstring import LiteralScalarString as L
 
@@ -115,7 +120,7 @@ def _new_short(record: dict | None, title: str | None):
     d = CommentedMap()
     d["id"] = num
     d["title"] = title
-    d["status"] = "drafting"
+    d["status"] = status
     d["catalog_id"] = record["id"] if record else None
     d["tags"] = list(ann.get("tags") or [])
     d["source"] = CommentedMap(
@@ -173,15 +178,16 @@ class Short(Scene):
 
 
 def cmd_new(a):
+    status = "scripting" if a.scripting else "drafting"
     if a.blank:
-        s = _new_short(None, a.blank)
+        s = _new_short(None, a.blank, status)
     else:
         if not a.id:
             sys.exit("ms: give a catalog id (see `ms suggest`) or --blank \"Title\"")
         if a.id in used_catalog_ids():
             sys.exit(f"ms: {a.id} is already used by a Short")
-        s = _new_short(catalog.get(a.id), None)
-    p(f"created {s.folder.relative_to(paths.root())}  (status: drafting)")
+        s = _new_short(catalog.get(a.id), None, status)
+    p(f"created {s.folder.relative_to(paths.root())}  (status: {status})")
     p(f"next: write verify.py, then scene.py, then `ms preview {s.number}`")
 
 
@@ -309,6 +315,13 @@ def cmd_inbox(a):
     p(f"\nAPPROVED, rendering tonight ({len(by['approved'])}): {', '.join(s.name for s in by['approved']) or '-'}")
     drafting = [f"{s.name} ({len(s.open_notes())} open notes)" for s in by["drafting"]]
     p(f"DRAFTING ({len(drafting)}): {', '.join(drafting) or '-'}")
+    if by["needs_attention"]:
+        p(f"\nNEEDS ATTENTION ({len(by['needs_attention'])}): a job failed twice; /draft-short <n>, or ❌ in Discord")
+        for s in by["needs_attention"]:
+            p(f"  {s.name:<32} {s.data().get('last_error')}")
+    review = [s.name for s in by["script_review"]]
+    busy = [s.name for s in by["scripting"] + by["revise"]]
+    p(f"SCRIPTS IN DISCORD ({len(review)}): {', '.join(review) or '-'}" + (f"; being written: {', '.join(busy)}" if busy else ""))
 
 
 def cmd_reject(a):
@@ -367,6 +380,31 @@ def cmd_status(a):
                 p(f"  {s.name:<32} {d.get('title', '')}")
 
 
+# --- script loop (#28) -------------------------------------------------------------------
+def cmd_tick(a):
+    from . import discord, tick
+    try:
+        settings = discord.Settings.from_env()
+    except discord.DiscordError as e:
+        sys.exit(f"ms: {e}")
+    try:
+        r = tick.Tick(discord.Client(settings), settings.user_id, echo=p).run(draft=a.draft)
+    except discord.DiscordError as e:
+        sys.exit(f"ms: Discord: {e}")
+    summary = ", ".join(f"{len(v)} {k}" for k, v in r.items() if isinstance(v, list) and v)
+    p(f"tick: {summary or 'nothing to do'}" + (f" (no new script: {r['skipped']})" if r["skipped"] else ""))
+    sys.exit(1 if r["failed"] else 0)
+
+
+def cmd_discord(a):
+    from . import discord
+    try:
+        discord.Client(discord.Settings.from_env()).hello(echo=p)
+    except discord.DiscordError as e:
+        sys.exit(f"ms: {e}")
+    p("Discord is set up.")
+
+
 # --- wiring -----------------------------------------------------------------------------
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="ms", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -389,6 +427,7 @@ def main(argv=None):
     sp = add("new", cmd_new, "create a Short from a catalog puzzle")
     sp.add_argument("id", nargs="?")
     sp.add_argument("--blank", metavar="TITLE", help="an original problem, not from the catalog")
+    sp.add_argument("--scripting", action="store_true", help="start in the script loop (used by the script job)")
     add("verify", cmd_verify, "run verify.py").add_argument("short")
     sp = add("preview", cmd_preview, "fast preview render")
     sp.add_argument("short")
@@ -418,6 +457,9 @@ def main(argv=None):
     sp.add_argument("short")
     sp.add_argument("url")
     add("status", cmd_status, "every Short by status")
+    sp = add("tick", cmd_tick, "read Discord, advance the script loop, run jobs")
+    sp.add_argument("--draft", action="store_true", help="also start one script job if the queue has room")
+    add("discord", cmd_discord, "check the Discord setup").add_argument("action", choices=["hello"])
 
     a = ap.parse_args(argv)
     a.fn(a)

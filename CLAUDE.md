@@ -12,7 +12,7 @@ An anonymous YouTube Shorts channel of animated math-puzzle solutions (Manim, 3B
 3. **Every answer is checked in code.** `verify.py` must pass before `ms approve` will run, and the scene imports its shapes and numbers from `verify.py`.
 4. **The human approves and the human uploads.** Never approve a Short or change `status` without the user explicitly saying so; status changes only go through `ms` commands.
 5. **Level 2 is solvable without a calculator**, with a single number or word as the answer (listed in `level2.accept`). The call to action promises nothing ("Comment just the number ↓"; no "answer tomorrow").
-6. **Anonymity.** Commits are by `mathshorts`. No personal names or emails in the repo, descriptions or config. Secrets only in env vars.
+6. **Anonymity.** Commits are by `mathshorts`. No personal names or emails in the repo, descriptions or config. Secrets only in env vars (`~/.config/mathshorts.env`, template `config/mathshorts.env.example`); jobs get only the Claude token.
 
 ## The format (every Short)
 9:16, 1080×1920, 30 fps, aim for 40–50 s (a target, not a cap), no narration. Beats: hook (0–3 s), problem builds, "Pause and try it" with a 5 s countdown, animated insight and solution, ✓ payoff, Level 2 card (same trick, one step further, not solved), "Comment just the number ↓" held about 12 s. Captions are 2–6 words. Music is a public-domain composition synthesized by `lib/audio.py` (we own the recording), chosen by the `music.piece` key from its `PIECES` library, plus sound effects.
@@ -24,11 +24,12 @@ An anonymous YouTube Shorts channel of animated math-puzzle solutions (Manim, 3B
 | Draft selector | `mathshorts/selector.py` (pure `rank()`) | `config/selector.yaml` | `ms suggest` |
 | Drafting | `.claude/skills/draft-short`, `mathshorts/render.py` (preview, compare), `mathshorts/check.py` + `probe.py` (`ms check`) | `shorts/NNNN-slug/{short.yaml, verify.py, scene.py, NOTES.md}` | weekly, with the user |
 | Nightly batch | `mathshorts/batch.py`, `scripts/nightly.sh` | `out/ready/<short>/`, `out/logs/` | nightly |
+| Script loop | `mathshorts/tick.py` (`ms tick`), `discord.py`, `jobs.py`, `scripts/jobs/*.md`, `scripts/tick.sh` | `config/pipeline.yaml`, `SCRIPT.md` and `events.jsonl` in the Short, `out/logs/jobs.jsonl` | every 5 min; `--draft` nightly |
 | Upload | manual for now (`upload.txt` in each kit) | `short.yaml` `youtube.*` | `ms published` |
 
 Shared: `mathshorts/shorts.py` (Short folder + status machine), `mathshorts/yamlio.py` (round-trip YAML, atomic writes), `mathshorts/paths.py` (`MS_ROOT`, `MS_OUT`, `MS_CACHE`), `lib/` (Manim layout, components, audio, brand).
 
-**Status machine** (`mathshorts/shorts.py: TRANSITIONS`): `drafting → approved → ready → published`; batch failure → `failed`; `reject` returns approved/ready/failed to `drafting`; `approve` also works from `failed`.
+**Status machine** (`mathshorts/shorts.py: TRANSITIONS`): `drafting → approved → ready → published`; batch failure → `failed`; `reject` returns approved/ready/failed/needs_attention to `drafting`; `approve` also works from `failed`. In front of it, the script loop (#28): `scripting → script_review ⇄ revise`, then the human's ✅ → `drafting`, ❌ → `abandoned`, a job failing twice → `needs_attention`. Only `ms tick` moves those, and only from the human's own Discord reactions and replies (rule 4 still holds: a reaction is the user explicitly saying so). Each Short keeps an append-only `events.jsonl`.
 
 **Catalog ids** are `<source>-<number>` (e.g. `dudeney-amusements-087`). A Short records its `catalog_id`; "used" is derived from that, never stored in the catalog.
 

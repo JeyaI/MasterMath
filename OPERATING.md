@@ -5,6 +5,9 @@ This is the playbook for running the channel: what you do, when, and with which 
 ## The system in one picture
 
 ```
+                          script job (nightly) ──▶ script in Discord ──▶ ✅
+                          (automatic)              (you react or reply)   │
+                                                                          ▼
  sources ──▶ catalog ──▶ suggest ──▶ draft (Claude Code) ──▶ approve ──▶ nightly batch ──▶ ready ──▶ you upload
  (rarely)    (puzzles)    (you pick)   (you direct)          (you)       (automatic)       (you watch)  (manual for now)
 ```
@@ -15,6 +18,11 @@ You're the editor: you pick puzzles, direct the animation, approve, watch the fi
 
 | Status | Meaning | Your move |
 |---|---|---|
+| `scripting` | The nightly script job is writing it | Nothing |
+| `script_review` | A verified script is waiting in its Discord thread | ✅ to accept, ❌ to abandon, or reply to revise |
+| `revise` | A job is revising the script from your reply | Nothing; the new version arrives in the thread |
+| `needs_attention` | A script job failed twice | `/draft-short <n>` in Claude Code, or ❌ in Discord |
+| `abandoned` | You crossed it out; its puzzle is free again | Nothing |
 | `drafting` | Being made in Claude Code | Give feedback until it's right, then say "approve" |
 | `approved` | Waiting for tonight's render | Nothing |
 | `ready` | Finished MP4, thumbnail and upload kit in `out/ready/` | Watch it on your phone, then upload or reject |
@@ -45,7 +53,13 @@ You're the editor: you pick puzzles, direct the animation, approve, watch the fi
    - Or cron inside WSL (needs systemd enabled): `0 2 * * * bash -lc ~/mathshorts/scripts/nightly.sh`
    - If the laptop was off, nothing breaks: run `ms batch` in the morning instead.
 6. **YouTube channel:** upload `brand/out/avatar.png` and `brand/out/banner.png` (generate them with `python brand/logo.py`). Check the handle is free.
-7. **Catalog:** `catalog/dudeney-amusements.jsonl` is already in the repo (430 puzzles). To add another book, see "Rarely" below.
+7. **Discord, for the script loop.** A private server with a drafts channel and a bot.
+   1. Developer Portal → New Application → Bot: turn **Public Bot off** and **Message Content Intent on** (leave the other intents off). Copy the token from **Reset Token**.
+   2. OAuth2 → URL Generator: scope `bot` only, no permissions; open the URL and add it to your server. Then on the drafts channel only (Edit Channel → Permissions → add the bot), allow: View Channel, Send Messages, Create Public Threads, Send Messages in Threads, Read Message History, Add Reactions, Attach Files, Embed Links.
+   3. Put the token, your user ID and the channel ID in `~/.config/mathshorts.env` (template: `config/mathshorts.env.example`; `chmod 600`). For the IDs, turn on Settings → Advanced → Developer Mode and use "Copy ID".
+   4. `set -a; . ~/.config/mathshorts.env; set +a; ms discord hello`. It checks each setting and permission and posts a test thread.
+   5. Schedule `scripts/tick.sh` like the nightly batch: every 5 minutes (`*/5 * * * *  ~/mathshorts/scripts/tick.sh`) and once a night with `--draft` (`0 1 * * *  ~/mathshorts/scripts/tick.sh --draft`). Its log is `out/logs/tick.log`.
+8. **Catalog:** `catalog/dudeney-amusements.jsonl` is already in the repo (430 puzzles). To add another book, see "Rarely" below.
 
 ---
 
@@ -60,12 +74,24 @@ You're the editor: you pick puzzles, direct the animation, approve, watch the fi
 
 ---
 
+## Daily: scripts in Discord (~2 min each)
+
+Each night `ms tick --draft` writes one new script if fewer than 4 are waiting on you (`config/pipeline.yaml`). A Claude job picks the puzzle, proves the answer in `verify.py`, and writes `SCRIPT.md`; tick runs `verify.py` again itself before posting. It arrives as its own thread in the drafts channel, with `SCRIPT.md` attached.
+
+- **✅ on the newest version:** accepted. The Short moves to `drafting`, and you animate it in your weekly session with `/draft-short <n>`.
+- **Reply in the thread:** a revise job rewrites the script from your words, and v2 arrives in the same thread within a few minutes. Several replies before the next tick count as one comment.
+- **❌ on any version:** abandoned, and its puzzle goes back in the pool.
+
+Only your account counts. A reply beats a ✅ left at the same time (the bot tells you), and a ✅ on an old version does nothing. Jobs never see the Discord token, and only tick changes status, from your reactions. Each job's time and estimated cost go to `out/logs/jobs.jsonl`, and every step is in the Short's `events.jsonl`.
+
+---
+
 ## Weekly: the drafting session (one 2–4 hour block, 4–5 Shorts)
 
 For each Short:
 
 1. **Pick.** `ms suggest`. Read the promising ones with `ms show <id>`. Choose one. Or skip this and let Claude Code choose with `/draft-short pick`.
-2. **Start.** In Claude Code: `/draft-short <id>` (or `pick`, whose pitch also names the puzzle, why, and a runner-up). It replies with a 5-line pitch (hook, insight, Level 2, risks, music). To hear a piece first, run `ms music <key> --open`. Push back now; it's the cheapest moment to change direction.
+2. **Start.** For a script you accepted in Discord: `/draft-short <n>`. Its `SCRIPT.md` is the agreed pitch, so it goes straight to the scene. Otherwise, in Claude Code: `/draft-short <id>` (or `pick`, whose pitch also names the puzzle, why, and a runner-up). It replies with a 5-line pitch (hook, insight, Level 2, risks, music). To hear a piece first, run `ms music <key> --open`. Push back now; it's the cheapest moment to change direction.
 3. **First preview.** It writes `verify.py` (the answers, checked in code), then the scene, renders a preview, runs `ms check` (format rules, and on-screen text against `short.yaml` and `verify.py`), and opens the preview, listing the beats with timestamps and any check warnings.
 4. **Direct.** Reply in plain language, with a timestamp first when you can:
    - "0:12 the slide is too fast"
@@ -136,6 +162,9 @@ Keep software sessions separate from drafting sessions.
 | Want to change a `ready` Short | `ms reject <n> "what to change"`, then `/draft-short <n>`. |
 | Want to change a published Short | You can't edit a YouTube video. Make an improved Short later if it's worth it. |
 | Preview won't open from WSL | Open it manually: `explorer.exe "$(wslpath -w out/preview/<short>)"`. |
+| A Short is `needs_attention` | A job failed twice; `last_error` in `short.yaml` and `out/logs/job-*.jsonl` say why. Take it over with `/draft-short <n>`, then `ms reject <n> "taking over"` moves it to `drafting`. Or ❌ it in Discord. |
+| No new script arrived | `out/logs/tick.log`: the queue may be full (`config/pipeline.yaml`), or the job failed. |
+| `ms tick` says "not set" or HTTP 401 | Check `~/.config/mathshorts.env` and run `ms discord hello`. The bot token is the one from Bot → Reset Token, not the OAuth2 client secret. |
 | Render is slow or crashes on the cloud box | Use a machine with at least 2 GB of RAM (LaTeX). See ISSUES.md for the Phase 2 plan. |
 
 ## Command reference
@@ -159,6 +188,8 @@ Keep software sessions separate from drafting sessions.
 | Mornings | `ms inbox` | What needs you |
 | | `ms reject <n> "note"` | Back to drafting |
 | | `ms published <n> <url>` | Record an upload and commit it |
+| Script loop | `ms tick [--draft]` | Read your Discord reactions and replies and run revise jobs; `--draft` also writes one new script (run by `scripts/tick.sh`) |
+| | `ms discord hello` | Check the bot's token, channel, your user ID and every permission |
 | Anytime | `ms status` | Everything by status |
 
 `<n>` is the Short number: `7`, `0007` or `0007-slug` all work.

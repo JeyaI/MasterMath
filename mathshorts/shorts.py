@@ -8,14 +8,25 @@
 
 Status flow (every change goes through `transition`, never hand-edit `status`):
 
-    drafting --approve--> approved --batch--> ready --published--> published
-        ^                     |                 |
-        |                     +--batch fails--> failed
-        +------- reject (from approved / ready / failed) ----------+
+    scripting --script_done--> script_review --comment (your reply)--> revise
+        |                       |    ^                                   |
+        |                       |    +---------------revised-------------+
+        |                       +--abandon (your cross; also from revise, needs_attention)--> abandoned
+        | job_failed (twice)    | accept_script (your check mark)
+        v                       v
+    needs_attention        drafting --approve--> approved --batch--> ready --published--> published
+                               ^                     |                 |
+                               |                     +--batch fails--> failed
+                               +-- reject (from approved / ready / failed / needs_attention) --+
+
+The script loop (scripting .. script_review) is driven by `ms tick` from your Discord reactions
+and replies (#28, docs/pipeline-design.md). From `drafting` on, you still animate interactively.
+Each Short also keeps an append-only events.jsonl.
 """
 from __future__ import annotations
 
 import datetime as dt
+import json
 import re
 import subprocess
 import sys
@@ -24,15 +35,23 @@ from pathlib import Path
 
 from . import paths, yamlio
 
-STATUSES = ["drafting", "approved", "ready", "failed", "published"]
+SCRIPT_LOOP = ["scripting", "script_review", "revise"]
+STATUSES = [*SCRIPT_LOOP, "needs_attention", "drafting", "approved", "ready", "failed", "published", "abandoned"]
 
 # action -> (allowed current statuses, new status)
 TRANSITIONS = {
     "approve": ({"drafting", "failed"}, "approved"),
     "batch_ok": ({"approved"}, "ready"),
     "batch_fail": ({"approved"}, "failed"),
-    "reject": ({"approved", "ready", "failed"}, "drafting"),
+    "reject": ({"approved", "ready", "failed", "needs_attention"}, "drafting"),
     "publish": ({"ready"}, "published"),
+    # script loop: only `ms tick` uses these, each from one of your Discord actions or a job result
+    "script_done": ({"scripting"}, "script_review"),
+    "comment": ({"script_review"}, "revise"),
+    "revised": ({"revise"}, "script_review"),
+    "accept_script": ({"script_review"}, "drafting"),
+    "abandon": ({*SCRIPT_LOOP, "needs_attention"}, "abandoned"),
+    "job_failed": ({"scripting", "revise"}, "needs_attention"),
 }
 
 
@@ -87,6 +106,23 @@ class Short:
         self.update(status=new)
         return new
 
+    # --- event log ---------------------------------------------------------------
+    @property
+    def events_path(self) -> Path:
+        return self.folder / "events.jsonl"
+
+    def log_event(self, kind: str, **data) -> dict:
+        """Append one event; never rewritten, so it is the history of what the pipeline did."""
+        row = {"at": dt.datetime.now().isoformat(timespec="seconds"), "event": kind, **data}
+        with open(self.events_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+        return row
+
+    def events(self) -> list[dict]:
+        if not self.events_path.exists():
+            return []
+        return [json.loads(l) for l in self.events_path.read_text(encoding="utf-8").splitlines() if l.strip()]
+
     # --- notes -------------------------------------------------------------------
     def add_note(self, text: str, beat: str | None = None, source: str = "review") -> str:
         today = dt.date.today().isoformat()
@@ -138,9 +174,11 @@ def slugify(title: str, max_len: int = 40) -> str:
 
 
 def used_catalog_ids() -> set[str]:
+    """Abandoned drafts give their puzzle back."""
     out = set()
     for s in all_shorts():
-        cid = s.data().get("catalog_id")
+        d = s.data()
+        cid = d.get("catalog_id") if d.get("status") != "abandoned" else None
         if cid:
             out.add(str(cid))
     return out

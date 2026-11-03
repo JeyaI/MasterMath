@@ -1,0 +1,4 @@
+# Script loop settings (`ms tick`, #28). Proposals from docs/pipeline-design.md; tune freely.
+
+max_waiting: 4      # no new script while this many Shorts are in the script loop (waiting on you)
+max_queued: 7       # ...or while this many are approved or ready
