@@ -4,7 +4,7 @@
 # Exits non-zero if a Short failed or the status changes could not be committed.
 #
 #   MS_USE_DOCKER=1  render inside the mathshorts Docker image instead of the local install
-#   MS_BIN=...       path to the ms command if it isn't on the scheduler's PATH
+#   MS_BIN=...       path to the ms command; the default is ms on PATH, then ~/.venvs/mathshorts/bin/ms
 set -uo pipefail
 root="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$root"
@@ -21,7 +21,7 @@ commit_status() {
   if [[ "${MS_USE_DOCKER:-0}" == "1" ]]; then
     docker run --rm -u "$(id -u):$(id -g)" -e HOME=/tmp -v "$root":/app mathshorts ms batch
   else
-    "${MS_BIN:-ms}" batch
+    "${MS_BIN:-$(command -v ms || echo "$HOME/.venvs/mathshorts/bin/ms")}" batch
   fi
   status=$?                         # 1 = at least one Short failed; the others still built
   # With the repo under /mnt/c, the working directory can stop resolving for a while after

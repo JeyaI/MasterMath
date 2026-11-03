@@ -11,6 +11,7 @@ import os
 import re
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
 from . import paths
@@ -18,6 +19,8 @@ from .shorts import Short
 
 PREVIEW = (540, 960, 15)
 FINAL = (1080, 1920, 30)
+# Manim's default is crf 23. YouTube re-encodes every upload, so give it a cleaner source.
+FINAL_ENCODER = ("--encoder-option", "crf=14", "--encoder-option", "preset=slow")
 THUMB_LEAD = 0.1  # seconds before the pause beat: its caption crossfade starts exactly on the beat
 
 
@@ -67,12 +70,18 @@ def has_audio(video: Path) -> bool:
     return bool(out.stdout.strip())
 
 
+def manim_bin() -> str:
+    """The manim beside this Python, so a scheduler needs no activated venv. Falls back to PATH."""
+    sibling = Path(sys.executable).with_name("manim")
+    return str(sibling) if sibling.is_file() else "manim"
+
+
 def manim(short: Short, size: tuple[int, int, int], name: str, extra: list[str] = (),
           env: dict | None = None) -> tuple[Path, str]:
     """Render scene.py:Short. Returns (mp4 path, combined log). Raises RenderError with the log."""
     w, h, fps = size
     media = paths.out() / "media"
-    cmd = ["manim", "render", "--resolution", f"{w},{h}", "--fps", str(fps), "--media_dir", str(media),
+    cmd = [manim_bin(), "render", "--resolution", f"{w},{h}", "--fps", str(fps), "--media_dir", str(media),
            "--disable_caching", "--progress_bar", "none", "-o", name, *extra,
            str(short.folder / "scene.py"), "Short"]
     # Run from the repo root, not the caller's folder: under /mnt/c on WSL that folder can stop
@@ -166,7 +175,8 @@ def render_final(short: Short, build: Path) -> tuple[Path, str]:
     build.mkdir(parents=True, exist_ok=True)
     beats_path = build / "beats.json"
     beats_path.unlink(missing_ok=True)
-    src, log = manim(short, FINAL, f"{short.name}-final", env={"MS_BEATS_PATH": str(beats_path)})
+    src, log = manim(short, FINAL, f"{short.name}-final", extra=list(FINAL_ENCODER),
+                     env={"MS_BEATS_PATH": str(beats_path)})
     raw = build / "raw.mp4"
     shutil.copy(src, raw)
     return raw, log
