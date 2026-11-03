@@ -460,3 +460,24 @@ def test_host_map_rewrites_mount_paths(monkeypatch):
 def test_video_jobs_may_preview_and_check_but_script_jobs_may_not():
     assert "Bash(ms preview:*)" in jobs.ALLOWED_VIDEO and "Bash(ms preview:*)" not in jobs.ALLOWED
     assert "Bash(git:*)" in jobs.DENIED and set(jobs.BUDGET_USD) == set(jobs.KINDS)
+
+
+def test_a_discord_failure_after_upload_does_not_upload_twice(root):
+    yt = FakeYouTube()
+    d, t = make(root, yt=yt, now=Clock())
+    t.run(draft=True)
+    s = all_shorts()[0]
+    d.tap(current_message(s), ACCEPT)
+    real_post = d.post
+
+    def flaky(thread, content, files=None, reactions=()):
+        if content.startswith("**Video"):
+            raise RuntimeError("Discord timed out")
+        return real_post(thread, content, files, reactions)
+    d.post = flaky
+    with pytest.raises(RuntimeError):
+        t.run()
+    assert s.data()["video"]["pending"]["video_id"] == "vid1"
+    d.post = real_post
+    t.run()
+    assert s.status == "video_review" and video(s)[1]["video_id"] == "vid1" and yt.n == 1

@@ -12,7 +12,7 @@ Next id: **43**
 
 ### #38 · A crash between upload and saving the video id leaves a stray upload
 status: open · P3 · bug
-`ms tick` uploads, waits for processing, then records the id. If it dies in between, the next tick uploads again and the first copy stays unlisted on the channel. The design says to find it by file hash (`video.pending.sha256`) and delete it; YouTube doesn't expose hashes, so match on title and upload time instead, or record the id before waiting for processing.
+Happened on 0006's first live run (2026-11-03): a Discord SSL timeout while adding reactions crashed the tick after the upload, and the next tick uploaded again (stray: `2OiU6RuGGpg`). Fixed the likely cases the same day: the id is saved to `video.pending` right after `videos.insert` returns, and Discord network errors are retried. Left: a crash *during* `videos.insert` can still leave a copy; matching on title and upload time on the next tick would catch it.
 
 ### #39 · Wire `filecheck.check_upload` into the video loop
 status: open · P2 · feature

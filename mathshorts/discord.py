@@ -82,6 +82,11 @@ class Client:
                     time.sleep(float(json.loads(text or "{}").get("retry_after", 1.0)) + 0.1)
                     continue
                 raise DiscordError(f"{method} {path.split('?')[0]}: HTTP {e.code} {text[:200]}") from None
+            except (urllib.error.URLError, TimeoutError, ConnectionError) as e:   # network blips: retry
+                if attempt < 2:
+                    time.sleep(2 * (attempt + 1))
+                    continue
+                raise DiscordError(f"{method} {path.split('?')[0]}: {e}") from None
         raise DiscordError(f"{method} {path}: rate limited")
 
     # --- what ms tick uses --------------------------------------------------------------

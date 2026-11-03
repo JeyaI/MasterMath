@@ -328,6 +328,7 @@ class Tick:
         v = dict(s.data().get("video") or {})
         version = int(v.get("version") or 0) + 1
         pending = dict(v.get("pending") or {})
+        v["pending"] = pending or None
         if int(pending.get("version") or 0) != version or not Path(pending.get("file", "")).exists():
             dest = review_video(s, version)
             if v.get("as_is") and kind == "animate":       # `ms animate --as-is`: your scene, no job
@@ -347,15 +348,21 @@ class Tick:
             self.commit(s, f"{s.number}: video v{version} rendered")
         thread = self.thread(s)
         yt = self.yt()
-        video_id = None
+        video_id = pending.get("video_id")       # uploaded by a tick that stopped before posting (#38)
         try:
-            video_id = yt.upload(Path(pending["file"]), youtube.metadata(s.data()), "unlisted")
+            if not video_id:
+                video_id = yt.upload(Path(pending["file"]), youtube.metadata(s.data()), "unlisted")
+                pending["video_id"] = v["pending"]["video_id"] = video_id
+                s.update(video=v)                 # saved before anything else can fail
+                self.commit(s, f"{s.number}: video v{version} uploaded")
             st = yt.wait_processed(video_id)
             if st.get("processingStatus") != "succeeded":
                 raise youtube.YouTubeError(f"processing {st.get('processingStatus') or 'timed out'}")
         except youtube.YouTubeError as e:
             if video_id:
                 self.delete_videos([{"video_id": video_id}])
+                v["pending"].pop("video_id", None)
+                s.update(video=v)
             self.warn_once(s, v, thread, f"⚠️ Video v{version} is rendered, but the upload failed: "
                                          f"{str(e)[:300]}\nI'll retry on the next tick.")
             return
