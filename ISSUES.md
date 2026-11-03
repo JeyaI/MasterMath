@@ -6,7 +6,7 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **36**
+Next id: **37**
 
 ## Open
 
@@ -17,6 +17,10 @@ It samples the screen at the end of each `play()` and `wait()`, so something tha
 ### #34 · Should `ms approve` require `ms check` to pass?
 status: open · P2 · feature
 Today `ms check` is advisory in `/draft-short`. Making errors block approval (with `--force`) would make it a real gate before the pipeline's video review. A product decision; published 0002, 0003, 0005 would all fail it.
+
+### #36 · A question in Discord shouldn't force a revision
+status: open · P3 · feature
+Every reply to a script starts a revise job. On 0006 the reply was half question ("Is that the book's solution?"), and the job answered it but also rewrote the solution. Let a reply that starts with `?` get an answer in the thread (a cheap read-only job) with no new version.
 
 ### #35 · verify.py exposes few plain numbers
 status: open · P3 · chore
@@ -39,7 +43,7 @@ File and upload match checks, plus a base class that owns the frame only, never 
 ### #28 · Phase 2: script loop
 status: doing · P2 · feature
 New statuses, `ms tick`, Discord bot, script job. Needs from the human: a Discord server and bot. The human still animates interactively. Done after one week of real scripts, with usage per job logged.
-**2026-11-02:** built and tested against a fake Discord and job runner (`mathshorts/tick.py`, `discord.py`, `jobs.py`, `scripts/jobs/`, `scripts/tick.sh`, `config/pipeline.yaml`; OPERATING.md has the setup and daily steps). Not yet run live: `DISCORD_BOT_TOKEN` is rejected (401; it looks like the client secret). Next: the right token, `ms discord hello` (also the first live test of its minimal gateway client), schedule `tick.sh`, then the first real `ms tick --draft`.
+**2026-11-02:** built and tested against a fake Discord and job runner (`mathshorts/tick.py`, `discord.py`, `jobs.py`, `scripts/jobs/`, `scripts/tick.sh`, `config/pipeline.yaml`; OPERATING.md has the setup and daily steps). **2026-11-03:** first live run worked end to end: `ms discord hello` passed; script job 0006 (126 s, 29 turns, ~$0.85 est.), a reply, revise job to v2 (108 s, ~$0.66 est.), then ✅ moved it to `drafting`. No commands denied. Left: schedule `tick.sh` in cron, then a week of real scripts.
 
 ### #29 · Phase 3: video loop
 status: open · P2 · feature
