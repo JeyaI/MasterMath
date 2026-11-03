@@ -6,7 +6,7 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **37**
+Next id: **38**
 
 ## Open
 
@@ -17,6 +17,10 @@ It samples the screen at the end of each `play()` and `wait()`, so something tha
 ### #34 · Should `ms approve` require `ms check` to pass?
 status: open · P2 · feature
 Today `ms check` is advisory in `/draft-short`. Making errors block approval (with `--force`) would make it a real gate before the pipeline's video review. A product decision; published 0002, 0003, 0005 would all fail it.
+
+### #37 · Run the script loop for a week
+status: open · P2 · chore
+#28's original bar. Schedule `scripts/tick.sh` in cron (every 5 min, plus `--draft` nightly; OPERATING.md setup step 7), then let it run for a week of real scripts. Check `out/logs/jobs.jsonl` for time and estimated cost per job, and `out/logs/tick.log` for failures. Do this before #29 builds on it.
 
 ### #36 · A question in Discord shouldn't force a revision
 status: open · P3 · feature
@@ -39,11 +43,6 @@ The app is in Testing, so its refresh tokens expire after 7 days, which would st
 status: open · P2 · feature
 File and upload match checks, plus a base class that owns the frame only, never the solution animation (YouTube's inauthentic content policy). Done when one existing Short runs on it and has been re-previewed.
 **2026-11-02:** stubbed `mathshorts/filecheck.py` (`check_kit`, `check_upload`). They raise `NotImplementedError` and nothing calls them yet. Needed before Phase 3 (#29), when the system uploads. The base class is in doubt: the frame is already in `lib/components.py`, `ms check` catches frame faults, and all five Shorts are published, so moving one onto it changes code behind a live video. Build it only if Phase 2 jobs keep getting the frame wrong, or start with 0006.
-
-### #28 · Phase 2: script loop
-status: doing · P2 · feature
-New statuses, `ms tick`, Discord bot, script job. Needs from the human: a Discord server and bot. The human still animates interactively. Done after one week of real scripts, with usage per job logged.
-**2026-11-02:** built and tested against a fake Discord and job runner (`mathshorts/tick.py`, `discord.py`, `jobs.py`, `scripts/jobs/`, `scripts/tick.sh`, `config/pipeline.yaml`; OPERATING.md has the setup and daily steps). **2026-11-03:** first live run worked end to end: `ms discord hello` passed; script job 0006 (126 s, 29 turns, ~$0.85 est.), a reply, revise job to v2 (108 s, ~$0.66 est.), then ✅ moved it to `drafting`. No commands denied. Left: schedule `tick.sh` in cron, then a week of real scripts.
 
 ### #29 · Phase 3: video loop
 status: open · P2 · feature
@@ -110,6 +109,10 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #28 · Phase 2: script loop
+status: done · 2026-11-03
+`ms tick`, the Discord bot, script and revise jobs, and the new statuses are built (`mathshorts/tick.py`, `discord.py`, `jobs.py`), and one live run worked end to end: 0006 scripted, revised from a reply, and accepted by ✅ (about $0.85 + $0.66 estimated). Closed before the week of real scripts; that moved to #37.
 
 ### #32 · Job allowlist and prompts for unattended runs
 status: done · 2026-11-02
