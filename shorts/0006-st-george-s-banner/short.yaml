@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0006'
 title: St. George's Banner
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-185
 tags:
   - geometry
@@ -38,26 +38,28 @@ level1:
   statement: "A flag is 4 feet by 3 feet: a red cross on white. How wide must the cross be for equal amounts
     of red and white?"
   answer: "1 foot."
-  insight: "Slide the four white corners in until they touch. The cross is squeezed out and the white
-    closes up into one rectangle, (4 - w) by (3 - w). It must be half the flag, 6 = 3 x 2, so each side
-    lost 1 foot: w = 1. Check: red is 4 + 3 - 1 = 6."
+  insight: "Count the red: the long bar is 4x, the upright is 3x, and the centre square is in both, so
+    red = 4x + 3x - x^2. It must be half the flag: 7x - x^2 = 6. Try x = 1: 7 - 1 = 6. Check: the four
+    white corners are each 1.5 x 1, total 6."
 level2:
   statement: "Same flag design, now 12 feet by 5 feet. How many feet wide is the cross?"
   answer: 2
   accept: [2, "2 feet", "2 ft", "2ft", "2 foot", "two", "two feet"]
-  why: "Slide the corners together: (12 - w)(5 - w) must be half of 60, so 30 = 10 x 3, and w = 2."
+  why: "Count the red: 12x + 5x - x^2 must be half of 60, so 17x - x^2 = 30, and x = 2 gives 34 - 4 =
+    30."
 captions:
   - "4 feet by 3 feet"
   - "Red and white: equal amounts"
   - "How wide is the cross?"
   - "Too thin: too much white"
   - "Pause and try it"
-  - "Slide the corners together"
-  - "The cross squeezes out"
-  - "White must be half: 6"
-  - "6 = 3 × 2"
-  - "Each side lost 1 foot"
-  - "Red: 4 + 3 − 1 = 6"
+  - "Red must be half: 6"
+  - "Long bar: 4 × x"
+  - "Upright bar: 3 × x"
+  - "Middle counted twice: − x²"
+  - "4x + 3x − x² = 6"
+  - "Try x = 1: 7 − 1 = 6"
+  - "White check: 4 × 1½ = 6"
   - "1 foot ✓"
   - "Comment just the number ↓"
 music:
@@ -79,9 +81,9 @@ youtube:
   published_at:
 review:
   thread_id: '1567164367143837827'
-  version: 1
+  version: 2
   messages:
     1: '1567164370406867057'
+    2: '1567312786965532796'
   last_seen: '1567174700415586337'
-  comment: Interesting. Is that the solution presented in the book? To me it seems more reasonable 
-    to take the red section = 3x + 4x - x^2 = 6 and solve for x =1.
+  comment:
