@@ -1,0 +1,85 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0006'
+title: St. George's Banner
+status: script_review
+catalog_id: dudeney-amusements-185
+tags:
+  - geometry
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 185
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    At a celebration of the national festival of St. George's Day I was
+    contemplating the familiar banner of the patron saint of our country. We
+    all know the red cross on a white ground, shown in our illustration.
+    This is the banner of St. George. The banner of St. Andrew (Scotland) is
+    a white "St. Andrew's Cross" on a blue ground. That of St. Patrick
+    (Ireland) is a similar cross in red on a white ground. These three are
+    united in one to form our Union Jack.
+
+    Now on looking at St. George's banner it occurred to me that the
+    following question would make a simple but pretty little puzzle.
+    Supposing the flag measures four feet by three feet, how wide must the
+    arm of the cross be if it is required that there shall be used just the
+    same quantity of red and of white bunting?
+
+    [Illustration]
+  solution: |
+    As the flag measures 4 ft. by 3 ft., the length of the diagonal (from
+    corner to corner) is 5 ft. All you need do is to deduct half the
+    length of this diagonal (2½ ft.) from a quarter of the distance all
+    round the edge of the flag (3½ ft.)--a quarter of 14 ft. The
+    difference (1 ft.) is the required width of the arm of the red cross.
+    The area of the cross will then be the same as that of the white
+    ground.
+level1:
+  statement: "A flag is 4 feet by 3 feet: a red cross on white. How wide must the cross be for equal amounts
+    of red and white?"
+  answer: "1 foot."
+  insight: "Slide the four white corners in until they touch. The cross is squeezed out and the white
+    closes up into one rectangle, (4 - w) by (3 - w). It must be half the flag, 6 = 3 x 2, so each side
+    lost 1 foot: w = 1. Check: red is 4 + 3 - 1 = 6."
+level2:
+  statement: "Same flag design, now 12 feet by 5 feet. How many feet wide is the cross?"
+  answer: 2
+  accept: [2, "2 feet", "2 ft", "2ft", "2 foot", "two", "two feet"]
+  why: "Slide the corners together: (12 - w)(5 - w) must be half of 60, so 30 = 10 x 3, and w = 2."
+captions:
+  - "4 feet by 3 feet"
+  - "Red and white: equal amounts"
+  - "How wide is the cross?"
+  - "Too thin: too much white"
+  - "Pause and try it"
+  - "Slide the corners together"
+  - "The cross squeezes out"
+  - "White must be half: 6"
+  - "6 = 3 × 2"
+  - "Each side lost 1 foot"
+  - "Red: 4 + 3 − 1 = 6"
+  - "1 foot ✓"
+  - "Comment just the number ↓"
+music:
+  piece: gymnopedie-1
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "A 4 ft by 3 ft flag, half red, half white. How wide is the cross?"
+  description: |
+    A red cross on a white flag, 4 feet by 3 feet, with equal red and white. How wide is the cross? Level 2: a 12 by 5 flag. Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 185. Music: Erik Satie, Gymnopédie No. 1.
+  tags:
+    - math puzzle
+    - geometry
+    - area
+    - puzzle
+    - brain teaser
+  video_id:
+  url:
+  published_at:
+review:
+  thread_id: '1567164367143837827'
+  version: 1
+  messages:
+    1: '1567164370406867057'
+  last_seen: '1567164370406867057'
