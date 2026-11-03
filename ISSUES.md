@@ -36,8 +36,9 @@ status: open · P2 · chore
 In the #25 trial, each job had 3 commands denied: compound shell commands and scratch scripts don't match a `Bash(prefix:*)` allowlist. Widen it, or tell jobs to run one command at a time. Jobs in a worktree also don't load auto-memory, so job prompts must carry the user's preferences (e.g. the plain-question hook). Needed for #28.
 
 ### #27 · Phase 1: file checks and scene base class
-status: open · P1 · feature
+status: open · P2 · feature
 File and upload match checks, plus a base class that owns the frame only, never the solution animation (YouTube's inauthentic content policy). Done when one existing Short runs on it and has been re-previewed.
+**2026-11-02:** stubbed `mathshorts/filecheck.py` (`check_kit`, `check_upload`). They raise `NotImplementedError` and nothing calls them yet. Needed before Phase 3 (#29), when the system uploads. The base class is in doubt: the frame is already in `lib/components.py`, `ms check` catches frame faults, and all five Shorts are published, so moving one onto it changes code behind a live video. Build it only if Phase 2 jobs keep getting the frame wrong, or start with 0006.
 
 ### #28 · Phase 2: script loop
 status: open · P2 · feature
