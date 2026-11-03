@@ -11,8 +11,13 @@ Next id: **33**
 ## Open
 
 ### #31 · Put the Google OAuth app in Production before Phase 3
-status: open · P2 · chore
+status: blocked · P2 · chore
 The app is in Testing, so its refresh tokens expire after 7 days, which would stop unattended uploads every week. Publishing it needs the consent screen's app information filled in (Google Auth Platform → Audience → Publish app). Use the channel's identity, not a personal one.
+**Blocked (2026-11-02):** console-only, needs the human signed in to the Google Cloud project. Steps:
+1. Google Auth Platform → Branding: app name "Master Math USA", support and developer contact = the channel's Google account email; no logo (a logo triggers brand verification). Leave homepage/privacy links empty unless asked.
+2. Audience → Publish app → Confirm. The `youtube` scope is sensitive, so Google offers verification; skip it. A single-user app works unverified: sign-in shows "Google hasn't verified this app" → Advanced → Go to (unsafe). The 100-user cap doesn't matter.
+3. The current `~/.config/mathshorts-youtube-token.json` was issued in Testing and still dies 7 days after issue. Delete it and sign in again as the channel, without uploading anything: `python -c "import sys; sys.path.insert(0, 'scripts'); import youtube_test; youtube_test.credentials()"`.
+4. Done when Audience shows "In production" and a new token still refreshes after 8 days.
 
 ### #32 · Job allowlist and prompts for unattended runs
 status: open · P2 · chore
