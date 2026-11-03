@@ -47,7 +47,7 @@ New statuses, `ms tick`, Discord bot, script job. Needs from the human: a Discor
 
 ### #29 · Phase 3: video loop
 status: open · P2 · feature
-Animate and revise jobs in containers, private uploads, approval by check mark. The human still releases by hand. Needs the rule 4 rewording in CLAUDE.md, which the human has not yet confirmed. Absorbs #9. Done when five Shorts are approved without a terminal.
+Animate and revise jobs in containers, private uploads, approval by check mark. The human still releases by hand. Rule 4 now allows it (reworded 2026-11-03); still needs #31 and the real #27 file checks. Absorbs #9. Done when five Shorts are approved without a terminal.
 
 ### #30 · Phase 4: auto release
 status: open · P2 · feature

@@ -10,7 +10,7 @@ An anonymous YouTube Shorts channel of animated math-puzzle solutions (Manim, 3B
 1. **Originality (YouTube "inauthentic content" policy).** Every Short gets a different puzzle and a custom solution animation. The shared template (hook, captions, countdown, Level 2 card) is fine; a new problem dropped into the same animation is not. At most 1–2 uploads a day.
 2. **Licensed sources only.** Allowed: Dudeney (*Amusements in Mathematics*, *The Canterbury Puzzles*, public domain), famous named problems retold in our own words, our own problems, GSM8K (MIT). **Not allowed:** AMC/AIME (MAA), AoPS, Brilliant, the MATH dataset, Project Euler. Log assets in `LICENSES.csv`.
 3. **Every answer is checked in code.** `verify.py` must pass before `ms approve` will run, and the scene imports its shapes and numbers from `verify.py`.
-4. **The human approves and the human uploads.** Never approve a Short or change `status` without the user explicitly saying so; status changes only go through `ms` commands.
+4. **The human approves every Short, and the system uploads only what was approved.** Never approve a Short or change `status` without the user explicitly saying so; status changes only go through `ms` commands.
 5. **Level 2 is solvable without a calculator**, with a single number or word as the answer (listed in `level2.accept`). The call to action promises nothing ("Comment just the number ↓"; no "answer tomorrow").
 6. **Anonymity.** Commits are by `mathshorts`. No personal names or emails in the repo, descriptions or config. Secrets only in env vars (`~/.config/mathshorts.env`, template `config/mathshorts.env.example`); jobs get only the Claude token.
 

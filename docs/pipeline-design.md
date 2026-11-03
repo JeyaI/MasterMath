@@ -343,10 +343,10 @@ I have not estimated durations, because the job costs and the audit result are s
 
 ## Open decisions
 
-Only the rule 4 rewording is still open. It needs your answer before Phase 3, when the system first uploads. Phase 2 needs none: a check mark there only accepts a script, and `ms tick` changes status only from your reactions.
+None are open: the rule 4 rewording was made on 2026-11-03, ahead of Phase 3.
 
 - [x] **Accept "render once, publish the approved file"?** Recommended. Everything after the Summary assumes it.
-- [ ] **Reword rule 4 so the system uploads?** Required for full automation. Recommended wording is in the policy table.
+- [x] **Reword rule 4 so the system uploads? Done (2026-11-03)**, with the wording in the policy table.
 - [x] **Discord as the channel?** Recommended, with reactions as the only way to approve.
 - [x] **Which daily release time? Decided: 5:00 PM.** It can change later, once there is audience data.
 - [x] **Mark Shorts as not made for kids?** Recommended, because the format depends on comments. Puzzles aimed at general audiences fit this, but the legal declaration is yours to make.
