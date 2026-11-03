@@ -38,6 +38,7 @@ Shared: `mathshorts/shorts.py` (Short folder + status machine), `mathshorts/yaml
 ```
 catalog/   sources.yaml · <src>.jsonl · annotations.yaml
 config/    selector.yaml
+docs/      pipeline-design.md (the overnight pipeline plan; phases are issues in ISSUES.md)
 shorts/    NNNN-slug/ short.yaml · verify.py · scene.py (class Short) · NOTES.md
 lib/       brand.py (no side effects) · layout.py (9:16 frame, safe zone) · components.py · audio.py
 mathshorts/ the `ms` CLI and modules

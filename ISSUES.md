@@ -6,9 +6,33 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **22**
+Next id: **31**
 
 ## Open
+
+### #25 · Phase 0: trial Pro jobs and the YouTube test
+status: open · P1 · feature
+See `docs/pipeline-design.md`. Needs from the human: `claude setup-token`, and a Google Cloud project on the channel's account. Run one script job and one animate job through `claude -p` without `--bare`, and record how much of the Pro limits each uses and whether the Short is any good. Upload a throwaway video as unlisted: does it stay unlisted or lock private, and can it then be set to private with `publishAt`? Done when both answers are in the design doc. Decide then whether to continue on Pro or change the plan.
+
+### #26 · Phase 1: `ms check` and on-screen match
+status: open · P1 · feature
+Format rules (duration, safe zone, overlaps, beat order, caption length, music credit), inspecting Manim objects rather than pixels, and a check that on-screen captions and numbers match `verify.py` and `short.yaml`. Done when `ms check` catches 0003's 57.5 s.
+
+### #27 · Phase 1: file checks and scene base class
+status: open · P1 · feature
+File and upload match checks, plus a base class that owns the frame only, never the solution animation (YouTube's inauthentic content policy). Done when one existing Short runs on it and has been re-previewed.
+
+### #28 · Phase 2: script loop
+status: open · P2 · feature
+New statuses, `ms tick`, Discord bot, script job. Needs from the human: a Discord server and bot. The human still animates interactively. Done after one week of real scripts, with usage per job logged.
+
+### #29 · Phase 3: video loop
+status: open · P2 · feature
+Animate and revise jobs in containers, private uploads, approval by check mark. The human still releases by hand. Needs the rule 4 rewording in CLAUDE.md, which the human has not yet confirmed. Absorbs #9. Done when five Shorts are approved without a terminal.
+
+### #30 · Phase 4: auto release
+status: open · P2 · feature
+Scheduling (5:00 PM slot), release check, stop sign. Retire the nightly batch, ready kits and `ms published`. Done after two weeks with no action needed after any approval.
 
 ### #21 · Thumbnail can catch a fade in progress
 status: open · P2 · bug
@@ -62,15 +86,27 @@ Add to `lib/components.py` as Shorts need them: dot grid, area model, number lin
 status: open · P3 · chore
 `ms preview --at` renders from the start of the beat. Consider including the last second of the previous beat for context.
 
-### #17 · Native batch can't find manim when run via `MS_BIN`
-status: open · P2 · bug
-With `MS_BIN=~/.venvs/mathshorts/bin/ms` and the venv not on PATH (as under a scheduler), `render.manim` looks `manim` up on PATH and every Short fails with `[Errno 13] Permission denied: 'manim'`. Run the `manim` next to `sys.executable`, and fix the scheduler lines in OPERATING.md if needed: `bash -lc` doesn't activate the venv either.
-
 ### #18 · Final mix measures -16 LUFS, not the -14 target
 status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #24 · Move the repo off /mnt/c
+status: done · 2026-11-02
+The working copy is now `~/mathshorts`, on WSL's own filesystem, as OPERATING.md always asked. The venv's editable install points there too.
+
+### #23 · Raise the final video bitrate
+status: done · 2026-11-02
+Final renders now use `crf=14`, `preset=slow` instead of Manim's crf 23. On 0005 the raw video went from 0.90 to 1.55 Mbps, with no meaningful change in render time. Previews are unchanged.
+
+### #22 · `ms published` doesn't commit
+status: done · 2026-11-02
+It now commits that Short's folder and nothing else, as `<number>: published`, so a later batch can't sweep it up. If git fails, it prints the command to run.
+
+### #17 · Native batch can't find manim when run via `MS_BIN`
+status: done · 2026-11-02
+`render.manim` runs the `manim` beside `sys.executable`, then falls back to PATH. `nightly.sh` falls back to `~/.venvs/mathshorts/bin/ms`, so the scheduler lines work without activating the venv. All tests pass with the venv off PATH.
 
 ### #16 · Visual scores are bunched at the top
 status: done · 2026-11-01
