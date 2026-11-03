@@ -177,6 +177,37 @@ def test_reject_and_published(root, capsys):
     assert s.status == "published" and s.data()["youtube"]["video_id"] == "AbC_dEf-123"
 
 
+def test_published_commits_only_its_own_short(root, capsys):
+    def git(*args):
+        return subprocess.run(["git", "-c", "user.name=t", "-c", "user.email=t@t", *args], cwd=root,
+                              check=True, capture_output=True, text=True).stdout
+    git("init", "-q")
+    make_short(root, "0001", "ready")
+    other = make_short(root, "0002", "ready")
+    git("add", "shorts")
+    git("commit", "-q", "-m", "start")
+    git("config", "user.name", "t")
+    git("config", "user.email", "t@t")
+    other.update(title="Edited by hand")
+    cli.main(["published", "1", "https://youtube.com/shorts/AbC_dEf-123"])
+    assert git("log", "-1", "--format=%s").strip() == "0001: published"
+    assert git("status", "--porcelain", "shorts").strip() == f"M shorts/{other.name}/short.yaml"
+
+
+def test_published_outside_git_still_records_and_says_so(root, capsys):
+    s = make_short(root, "0001", "ready")
+    cli.main(["published", "1", "https://youtube.com/shorts/AbC_dEf-123"])
+    assert s.status == "published" and "not committed" in capsys.readouterr().out
+
+
+def test_manim_runs_from_beside_python_without_the_venv_on_path(root, monkeypatch):
+    monkeypatch.setenv("PATH", "/usr/bin:/bin")
+    short = make_short(root, "0001", "approved")
+    with pytest.raises(render.RenderError) as e:
+        render.manim(short, (90, 160, 5), "path-test")
+    assert "broken scene" in e.value.output      # manim was found and reached the scene
+
+
 def test_render_survives_a_working_directory_that_no_longer_resolves(root, tmp_path, monkeypatch):
     # Under /mnt/c on WSL a shell's working directory can stop resolving; manim dies on getcwd().
     gone = tmp_path / "gone"

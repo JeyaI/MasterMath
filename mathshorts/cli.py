@@ -329,6 +329,20 @@ def cmd_published(a):
         sys.exit(f"ms: {e}")
     s.update(**{"youtube.video_id": m.group(1), "youtube.url": a.url, "youtube.published_at": dt.date.today().isoformat()})
     p(f"{s.name}: published ({m.group(1)}). You can delete its folder in out/ready/ whenever.")
+    commit_short(s, f"{s.number}: published")
+
+
+def commit_short(s, message: str) -> None:
+    """Commit one Short's folder and nothing else. The status change has already happened,
+    so a git failure is reported, not fatal."""
+    import subprocess
+    rel = s.folder.relative_to(paths.root()).as_posix()
+    add = subprocess.run(["git", "add", "--", rel], cwd=paths.root(), capture_output=True, text=True)
+    done = add.returncode == 0 and subprocess.run(
+        ["git", "commit", "-q", "-m", message, "--", rel], cwd=paths.root(), capture_output=True, text=True,
+    ).returncode == 0
+    if not done:
+        p(f"ms: not committed; run: git add {rel} && git commit -m '{message}'")
 
 
 def cmd_status(a):

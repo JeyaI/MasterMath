@@ -157,7 +157,7 @@ Keep software sessions separate from drafting sessions.
 | Nightly | `ms batch [<n>]` | Render and mix approved Shorts |
 | Mornings | `ms inbox` | What needs you |
 | | `ms reject <n> "note"` | Back to drafting |
-| | `ms published <n> <url>` | Record an upload |
+| | `ms published <n> <url>` | Record an upload and commit it |
 | Anytime | `ms status` | Everything by status |
 
 `<n>` is the Short number: `7`, `0007` or `0007-slug` all work.
