@@ -124,7 +124,16 @@ Split `/draft-short` into three separate jobs, each starting fresh from the Shor
 
 **Job limits.** Jobs never hold YouTube or Discord credentials, and they cannot change status. Only the orchestrator does those things, which keeps rule 4 enforced by design and not by prompt wording.
 
-**Pro usage is the main unknown.** Jobs run on your Pro plan and share its limits with your interactive Claude use. I have no data on how much of a limit one Short takes. Phase 0 runs one script job and one animate job to measure it. If Pro is too tight, the fallback is a pay-per-use API key.
+**Pro usage, measured in Phase 0 (2026-11-02).** Jobs run on your Pro plan and share its limits with your interactive Claude use. One script job and one animate job ran through `scripts/trial_job.sh` on the setup token, in a worktree, on Opus 5.5 (the default):
+
+| Job | Session (5-hour) limit | Time | Turns | `total_cost_usd` estimate |
+| --- | --- | --- | --- | --- |
+| Script | about 5% | 3 min | 21 | $0.90 |
+| Animate | about 9% | 6 min | 52 | $1.45 |
+
+Readings came from `/usage` in an interactive session, which also counted that session's own turns, so the jobs used slightly less. One Short is about 14% of a session limit, before revisions. Two a night fit comfortably in a session you are asleep for. The weekly limit was not measured; log `/usage` across the first week of Phase 2. If Pro is too tight, the fallback is a pay-per-use API key.
+
+**What the trial showed about the jobs.** The script job produced a sound, verified script (0006 The Six Frogs) with no help. The animate job produced a 48.5 s preview that followed the format and had correct math, but its layout was sparse, about where an interactive first preview starts. You watched it and judged it good. **Decided: continue on Pro.** Three commands per job were denied: compound shell commands and scratch scripts do not match a prefix allowlist, so widen it or tell the job to run commands one at a time. A job in a worktree also does not load your auto-memory, because memory is keyed by project path, so job prompts must carry those preferences (the hook rule, for example).
 
 **Pro is allowed for this, within limits.** Anthropic's Consumer Terms bar scripted access unless Anthropic explicitly permits it. Its docs do describe setup tokens for scripts, and its help center says claude -p uses subscription limits. Its legal page adds that plan limits assume ordinary, individual use, so keep volume modest.
 
@@ -186,20 +195,16 @@ Upload each version as a private video, then schedule that same video on approva
 
 Older guides quote about 1,600 units per upload. Google [cut it in December 2025 and moved uploads to their own bucket in June 2026](https://developers.google.com/youtube/v3/revision_history).
 
-**The audit question must be tested first.** `#9` says uploads stay locked private until a compliance audit, and Google's sources now disagree:
+**The audit question: tested, not locked (2026-11-02).** `#9` said uploads stay locked private until a compliance audit, and Google's own pages disagreed. `scripts/youtube_test.py` settled it from a new, unverified API project (OAuth app in Testing status), uploading two blank cards:
 
-- The [`videos.insert` reference](https://developers.google.com/youtube/v3/docs/videos/insert) says: "Videos uploaded from unverified API projects are not restricted to private viewing mode."
-- The [revision history](https://developers.google.com/youtube/v3/revision_history) still carries the July 2020 restriction, and I found no entry removing it.
-- Third-party guides still describe the lock, though they may simply be out of date.
+| Upload as | After processing | Set to private with `publishAt` a week out |
+| --- | --- | --- |
+| Unlisted | Stayed unlisted | Accepted |
+| Private | Stayed private | Accepted |
 
-A 30-minute test settles it: upload one throwaway video from a new API project as unlisted, then check whether it stays unlisted or gets locked private. Then try to set that video to private with a publishAt time. Private previews work either way, so only the last step depends on the result.
+Both cards were deleted before their release times, so nothing went public. **Approval can be fully automatic, as designed**, and the hand-upload fallback is not needed. Limits of the test: no video has yet actually gone public by `publishAt` (the first real release in Phase 4 proves that); each card existed only a few minutes, so a later lock is not ruled out; and the app was in Testing, not Production. After `videos.update`, `publishAt` took up to about 30 seconds to appear in `videos.list`, so code that confirms a schedule must re-read rather than check once.
 
-| Test result | What happens on approval |
-| --- | --- |
-| Not locked | Fully automatic, as designed |
-| Locked | You upload the same approved MP4 by hand, about 3 minutes, and apply for the [audit](https://developers.google.com/youtube/v3/guides/quota_and_compliance_audits). Google publishes no timeline, and its page does not say what the form asks about identity |
-
-**Why private, not unlisted.** The API allows unlisted uploads, and they are easier to watch because any signed-in phone can open the link. But publishAt only works on a private video that has never been published. If an unlisted video does not qualify, the release would need the laptop awake at 5:00 PM to make it public. Stay private unless the test shows an unlisted video can still be scheduled.
+**Private or unlisted previews.** The API allows unlisted uploads, and they are easier to watch because any signed-in phone can open the link. The test showed an unlisted video can still be scheduled, so unlisted previews are an option. Private remains the default until you choose; decide before Phase 3.
 
 **Two easy mistakes**
 
@@ -346,7 +351,7 @@ Only the rule 4 rewording is still open. It needs your answer before Phase 2.
 - [x] **Which daily release time? Decided: 5:00 PM.** It can change later, once there is audience data.
 - [x] **Mark Shorts as not made for kids?** Recommended, because the format depends on comments. Puzzles aimed at general audiences fit this, but the legal declaration is yours to make.
 
-Two items are measured, not decided: the audit result and Pro usage per Short, both from Phase 0.
+Phase 0 measured the two unknowns: uploads are not locked private, and one Short takes about 14% of a Pro session limit (see YouTube and Unattended drafting). Still open: the weekly Pro limit, and private or unlisted previews.
 
 ## Sources
 

@@ -6,13 +6,17 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **31**
+Next id: **33**
 
 ## Open
 
-### #25 · Phase 0: trial Pro jobs and the YouTube test
-status: open · P1 · feature
-See `docs/pipeline-design.md`. Needs from the human: `claude setup-token`, and a Google Cloud project on the channel's account. Run one script job and one animate job through `claude -p` without `--bare`, and record how much of the Pro limits each uses and whether the Short is any good. Upload a throwaway video as unlisted: does it stay unlisted or lock private, and can it then be set to private with `publishAt`? Done when both answers are in the design doc. Decide then whether to continue on Pro or change the plan.
+### #31 · Put the Google OAuth app in Production before Phase 3
+status: open · P2 · chore
+The app is in Testing, so its refresh tokens expire after 7 days, which would stop unattended uploads every week. Publishing it needs the consent screen's app information filled in (Google Auth Platform → Audience → Publish app). Use the channel's identity, not a personal one.
+
+### #32 · Job allowlist and prompts for unattended runs
+status: open · P2 · chore
+In the #25 trial, each job had 3 commands denied: compound shell commands and scratch scripts don't match a `Bash(prefix:*)` allowlist. Widen it, or tell jobs to run one command at a time. Jobs in a worktree also don't load auto-memory, so job prompts must carry the user's preferences (e.g. the plain-question hook). Needed for #28.
 
 ### #26 · Phase 1: `ms check` and on-screen match
 status: open · P1 · feature
@@ -60,7 +64,7 @@ status: open · P3 · feature
 
 ### #9 · Automate uploads
 status: open · P3 · feature
-YouTube Data API `videos.insert` with a scheduled publish time, after `ms batch`. API projects created after July 2020 upload locked-private until they pass Google's audit, so apply for the audit first. Until then, upload manually.
+YouTube Data API `videos.insert` with a scheduled publish time, after `ms batch`. Tested in #25: uploads from our unverified project are not locked private, and `publishAt` scheduling works, so no audit is needed. Absorbed into Phases 3–4 of `docs/pipeline-design.md`.
 
 ### #10 · `ms answers`: find the first correct comment
 status: open · P3 · feature
@@ -91,6 +95,10 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #25 · Phase 0: trial Pro jobs and the YouTube test
+status: done · 2026-11-02
+Uploads aren't locked private and `publishAt` works (`scripts/youtube_test.py`); one Short takes about 14% of a Pro session limit (`scripts/trial_job.sh`) and the trial Short was good, so we continue on Pro. Results in `docs/pipeline-design.md`.
 
 ### #24 · Move the repo off /mnt/c
 status: done · 2026-11-02
