@@ -33,7 +33,7 @@ import argparse
 import re
 import sys
 
-from . import batch, catalog, paths, render, selector, yamlio
+from . import batch, catalog, check, paths, render, selector, yamlio
 from .shorts import STATUSES, Short, StatusError, all_shorts, find, next_number, slugify, used_catalog_ids
 
 
@@ -209,6 +209,18 @@ def cmd_preview(a):
         render.open_file(r["path"])
 
 
+def cmd_check(a):
+    s = find(a.short)
+    findings = check.run(s)
+    for f in findings:
+        p(f.line())
+    errors = sum(f.level == "error" for f in findings)
+    warnings = len(findings) - errors
+    p(f"{s.name}: {errors} error(s), {warnings} warning(s)" if findings else f"{s.name}: all checks pass")
+    if errors:
+        sys.exit(1)
+
+
 def cmd_compare(a):
     s = find(a.short)
     dst = render.compare(s)
@@ -259,12 +271,8 @@ def cmd_approve(a):
     for f in ("scene.py", "verify.py"):
         if not (s.folder / f).exists():
             sys.exit(f"ms: {s.name} has no {f}")
-    try:
-        credit = f"Music: {render.music_piece(s).credit}"
-    except ValueError as e:
-        sys.exit(f"ms: {s.name}: {e}")
-    if credit not in ((s.data().get("youtube") or {}).get("description") or ""):
-        sys.exit(f"ms: {s.name}'s YouTube description must credit its music: \"{credit}\"")
+    if problem := check.music_credit_problem(s):
+        sys.exit(f"ms: {s.name}: {problem}")
     ok, out = s.verify()
     if not ok:
         sys.exit(f"ms: verify.py fails, not approving.\n{out}")
@@ -386,6 +394,7 @@ def main(argv=None):
     sp.add_argument("short")
     sp.add_argument("--at", metavar="M:SS", help="only the beat containing this time")
     sp.add_argument("--open", action="store_true", help="open the video when done")
+    add("check", cmd_check, "format rules and on-screen match").add_argument("short")
     sp = add("compare", cmd_compare, "newest preview vs previous")
     sp.add_argument("short")
     sp.add_argument("--open", action="store_true", help="open the video when done")

@@ -15,14 +15,14 @@ An anonymous YouTube Shorts channel of animated math-puzzle solutions (Manim, 3B
 6. **Anonymity.** Commits are by `mathshorts`. No personal names or emails in the repo, descriptions or config. Secrets only in env vars.
 
 ## The format (every Short)
-9:16, 1080×1920, 30 fps, 40–50 s, no narration. Beats: hook (0–3 s), problem builds, "Pause and try it" with a 5 s countdown, animated insight and solution, ✓ payoff, Level 2 card (same trick, one step further, not solved), "Comment just the number ↓" held about 12 s. Captions are 2–6 words. Music is a public-domain composition synthesized by `lib/audio.py` (we own the recording), chosen by the `music.piece` key from its `PIECES` library, plus sound effects.
+9:16, 1080×1920, 30 fps, aim for 40–50 s (a target, not a cap), no narration. Beats: hook (0–3 s), problem builds, "Pause and try it" with a 5 s countdown, animated insight and solution, ✓ payoff, Level 2 card (same trick, one step further, not solved), "Comment just the number ↓" held about 12 s. Captions are 2–6 words. Music is a public-domain composition synthesized by `lib/audio.py` (we own the recording), chosen by the `music.piece` key from its `PIECES` library, plus sound effects.
 
 ## Architecture: five modules, connected only through files
 | Module | Code | Data | Run |
 |---|---|---|---|
 | Sources → catalog | `mathshorts/catalog.py`, `mathshorts/sources/` | `catalog/sources.yaml`, `catalog/<src>.jsonl` (regenerated), `catalog/annotations.yaml` (judgements; never overwritten) | rarely |
 | Draft selector | `mathshorts/selector.py` (pure `rank()`) | `config/selector.yaml` | `ms suggest` |
-| Drafting | `.claude/skills/draft-short`, `mathshorts/render.py` (preview, compare) | `shorts/NNNN-slug/{short.yaml, verify.py, scene.py, NOTES.md}` | weekly, with the user |
+| Drafting | `.claude/skills/draft-short`, `mathshorts/render.py` (preview, compare), `mathshorts/check.py` + `probe.py` (`ms check`) | `shorts/NNNN-slug/{short.yaml, verify.py, scene.py, NOTES.md}` | weekly, with the user |
 | Nightly batch | `mathshorts/batch.py`, `scripts/nightly.sh` | `out/ready/<short>/`, `out/logs/` | nightly |
 | Upload | manual for now (`upload.txt` in each kit) | `short.yaml` `youtube.*` | `ms published` |
 

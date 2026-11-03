@@ -6,6 +6,6 @@ The Short is the only `drafting` one in `ms status`. Read its `SCRIPT.md`, `shor
 
 1. Write `scene.py`, importing its shapes and numbers from `verify.py`. The solution animation must be custom to this puzzle.
 2. Run `ms preview <n>`, pull 6–10 frames and look at them. Fix what you find, and render again.
-3. Keep the Short to 40–50 s with a full preview as the last step. `ms verify <n>` must still pass.
+3. Run `ms check <n>` and fix every error. Aim for 40–50 s, with a full preview as the last step. `ms verify <n>` must still pass.
 
 Do not use `--open`. Do not run `git`, and do not approve, reject or publish anything.

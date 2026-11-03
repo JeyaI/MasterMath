@@ -35,6 +35,7 @@ Write `verify.py`: check every claim the video makes, in code (geometry with sha
 `scene.py`, class `Short`, built from `lib/components.py`: `hook`, `Captions` (every `show` marks a beat), `countdown`, `badge`, `footer`, plus `beat(self, "name")` for beats without a caption. The format, in order: hook, problem builds, "Pause and try it" with a 5-second countdown, animated insight and solution, ✓ payoff, Level 2 card, "Comment just the number ↓" held about 12 seconds. Aim for 40–50 seconds. Keep everything inside the safe zone in `lib/layout.py`.
 
 ## 6. Preview, check it yourself, then show it
+- `ms check <n>` and fix every error (safe zone, text overlaps, beat order, captions and numbers that differ from `short.yaml` or `verify.py`). Warnings are targets: mention them to the user rather than forcing a fix. It checks the end of each animation only, so frames still matter.
 - `ms preview <n>`. Before showing the user, pull 6–10 frames (`ffmpeg -ss T -i … -frames:v 1 …png`) and look at them yourself: overlaps, text off-screen, leftover objects, unreadable sizes. Fix what you find first.
 - Then `ms preview <n> --open` and give the user a short beat list with timestamps (from beats.json).
 

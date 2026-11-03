@@ -6,9 +6,21 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **33**
+Next id: **36**
 
 ## Open
+
+### #33 · `ms check` misses mid-animation faults
+status: open · P3 · feature
+It samples the screen at the end of each `play()` and `wait()`, so something that slides off-screen and back, or overlaps only mid-move, isn't caught. Sampling a few points inside each animation (Manim's `interpolate`) would close it.
+
+### #34 · Should `ms approve` require `ms check` to pass?
+status: open · P2 · feature
+Today `ms check` is advisory in `/draft-short`. Making errors block approval (with `--force`) would make it a real gate before the pipeline's video review. A product decision; published 0002, 0003, 0005 would all fail it.
+
+### #35 · verify.py exposes few plain numbers
+status: open · P3 · chore
+`ms check`'s number match reads verify.py's module-level values, but most Shorts keep their numbers inside functions, so the check leans on short.yaml. A convention such as an `ANSWERS` dict in each verify.py would make it stronger.
 
 ### #31 · Put the Google OAuth app in Production before Phase 3
 status: blocked · P2 · chore
@@ -22,10 +34,6 @@ The app is in Testing, so its refresh tokens expire after 7 days, which would st
 ### #32 · Job allowlist and prompts for unattended runs
 status: open · P2 · chore
 In the #25 trial, each job had 3 commands denied: compound shell commands and scratch scripts don't match a `Bash(prefix:*)` allowlist. Widen it, or tell jobs to run one command at a time. Jobs in a worktree also don't load auto-memory, so job prompts must carry the user's preferences (e.g. the plain-question hook). Needed for #28.
-
-### #26 · Phase 1: `ms check` and on-screen match
-status: open · P1 · feature
-Format rules (duration, safe zone, overlaps, beat order, caption length, music credit), inspecting Manim objects rather than pixels, and a check that on-screen captions and numbers match `verify.py` and `short.yaml`. Done when `ms check` catches 0003's 57.5 s.
 
 ### #27 · Phase 1: file checks and scene base class
 status: open · P1 · feature
@@ -100,6 +108,10 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #26 · Phase 1: `ms check` and on-screen match
+status: done · 2026-11-02
+`ms check <n>` dry-runs the scene in seconds (`mathshorts/probe.py`, no lib change) and checks safe zone, text overlaps, beat order, comment hold, captions and numbers against short.yaml and verify.py, and the music credit. Duration and caption length are warnings, since 40–50 s is a target; it flags 0003's 57.8 s.
 
 ### #25 · Phase 0: trial Pro jobs and the YouTube test
 status: done · 2026-11-02

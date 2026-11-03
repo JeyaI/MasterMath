@@ -66,7 +66,7 @@ For each Short:
 
 1. **Pick.** `ms suggest`. Read the promising ones with `ms show <id>`. Choose one. Or skip this and let Claude Code choose with `/draft-short pick`.
 2. **Start.** In Claude Code: `/draft-short <id>` (or `pick`, whose pitch also names the puzzle, why, and a runner-up). It replies with a 5-line pitch (hook, insight, Level 2, risks, music). To hear a piece first, run `ms music <key> --open`. Push back now; it's the cheapest moment to change direction.
-3. **First preview.** It writes `verify.py` (the answers, checked in code), then the scene, renders a preview and opens it, listing the beats with timestamps.
+3. **First preview.** It writes `verify.py` (the answers, checked in code), then the scene, renders a preview, runs `ms check` (format rules, and on-screen text against `short.yaml` and `verify.py`), and opens the preview, listing the beats with timestamps and any check warnings.
 4. **Direct.** Reply in plain language, with a timestamp first when you can:
    - "0:12 the slide is too fast"
    - "0:31 the Level 2 question wraps badly"
@@ -151,6 +151,7 @@ Keep software sessions separate from drafting sessions.
 | | `ms verify <n>` | Run the answer checks |
 | | `ms preview <n> [--at 0:12] [--open]` | Full preview, or one beat |
 | | `ms compare <n> [--open]` | Before/after side by side |
+| | `ms check <n>` | Format rules and on-screen match, in seconds, without rendering. Errors exit non-zero; warnings (duration outside 40–50 s, caption length) are targets |
 | | `ms note <n> "0:12 text"` | Log a review note |
 | | `ms music [<key>] [--open]` | List the music library, least recently used first; a key writes a 46 s WAV to `out/music/` |
 | | `ms approve <n>` | Your sign-off; refuses if the description doesn't credit the Short's piece |
