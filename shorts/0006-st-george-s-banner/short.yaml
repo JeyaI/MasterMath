@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0006'
 title: St. George's Banner
-status: drafting
+status: animating
 catalog_id: dudeney-amusements-185
 tags:
   - geometry
@@ -87,3 +87,5 @@ review:
     2: '1567312786965532796'
   last_seen: '1567174700415586337'
   comment:
+video:
+  as_is: false
