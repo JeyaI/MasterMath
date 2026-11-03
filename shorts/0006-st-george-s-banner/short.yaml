@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0006'
 title: St. George's Banner
-status: animating
+status: video_review
 catalog_id: dudeney-amusements-185
 tags:
   - geometry
@@ -88,26 +88,13 @@ review:
   last_seen: '1567174700415586337'
   comment:
 video:
-  as_is: false
+  as_is:
   pending:
-    version: 1
-    file: /home/jeya/mathshorts/out/review/0006-st-george-s-banner/v1.mp4
-    sha256: 06835263a43225ffad363e0f6626d9bab9562ebf445874d58ef9083f3d275d58
-    summary: "Wrote scene.py for the banner Short. The cross is counted as 4x + 3x − x² = 6 (x² is the
-      doubly counted middle square), then x = 1, then a white-corner check, then a Level 2 card (12×5).
-      Everything is imported from verify.py. `ms verify` and `ms check` pass with no warnings. The final
-      `ms preview` (v2) is 48.9 s, with the 12 s Level 2 hold included.\nI viewed 13 frames across the
-      two previews (8 from v1, 5 from v2) and fixed the safe-zone, overlap and `3 × x` label issues they
-      showed. The Level 2 flag is drawn with a placeholder 1 ft arm and `x = ?`, so it isn't to scale
-      with the answer (2). The `7x − x²` → `7 − 1 = 6 ✓` step is a cross-fade morph, so a frame mid-transition
-      looks smudged. I left `short.yaml` unchanged, since the captions already match the scene."
-    usage:
-      job: animate
-      short: 0006-st-george-s-banner
-      exit: 0
-      seconds: 229
-      subtype: success
-      is_error: false
-      num_turns: 67
-      total_cost_usd: 0.6469788999999999
-      log: job-animate-20261103-184002.jsonl
+  version: 1
+  versions:
+    1:
+      message: '1567325105598631946'
+      video_id: sd96FHzG_I0
+      sha256: 06835263a43225ffad363e0f6626d9bab9562ebf445874d58ef9083f3d275d58
+  comment:
+  warned:

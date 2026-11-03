@@ -3,3 +3,4 @@
 {"at": "2026-11-03T18:01:29", "event": "revised", "status": "script_review", "version": 2, "usage": {"job": "revise", "short": "0006-st-george-s-banner", "exit": 0, "seconds": 108, "subtype": "success", "is_error": false, "num_turns": 25, "total_cost_usd": 0.6560074, "log": "job-revise-20261103-175938.jsonl"}}
 {"at": "2026-11-03T18:02:55", "event": "accept_script", "status": "drafting", "version": 2}
 {"at": "2026-11-03T18:38:19", "event": "animate", "status": "animating", "as_is": false}
+{"at": "2026-11-03T18:50:25", "event": "animated", "status": "video_review", "version": 1, "video_id": "sd96FHzG_I0", "sha256": "06835263a43225ffad363e0f6626d9bab9562ebf445874d58ef9083f3d275d58", "usage": {"job": "animate", "short": "0006-st-george-s-banner", "exit": 0, "seconds": 229, "subtype": "success", "is_error": false, "num_turns": 67, "total_cost_usd": 0.6469788999999999, "log": "job-animate-20261103-184002.jsonl"}}
