@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -95,7 +95,7 @@ review:
   messages:
     1: '1567418545674133565'
     2: '1567634824766955541'
-  last_seen: '1567648244283220041'
+  last_seen: '1567657033862221945'
   comment:
 video:
   pending:
@@ -109,6 +109,7 @@ video:
       message: '1567649511340515391'
       video_id: wlHu3vupV-A
       sha256: 3641b21a1eea47f62a5dc6718652e4d1cee51fc29a3c7039f1d9ee5f0a880655
-  comment:
+  comment: Still dont look of the frogs. Lets try a top down view where they are jumping on 
+    lilypads. Make the shape of the cartoon frogs nice and distinctly frogish.
   warned:
   as_is:
