@@ -2,6 +2,8 @@
 
 Revised after the reviewer's comment (v1 → v2): the angle is now "can you do it in N moves?", with no proof on screen. Level 1 starts at 4 frogs (10 moves); Level 2 is the 6-frog original (21 moves). The "count the pairs" insight beat is gone; the payoff is watching the optimal solution play.
 
+Video revision (v1 → v2): the pieces are now side-view cartoon frogs on lily pads (blink, hop, jump for joy), the top bar reads "Reverse the frogs!" / "Can you do it in 10 moves?", and the rules ("Frogs can move 1 or 2 squares to the empty square") stay on screen from the demo through the "Pause and try it" countdown (the likely thumbnail). Demo captions: "Slide: move 1 square", "Leap: over 1 frog".
+
 ## Puzzle
 `dudeney-amusements-214`, The Six Frogs (Dudeney, *Amusements in Mathematics*, public domain). Dudeney himself says to start easy and add frogs, so 4 frogs first and the full 6 as Level 2 follows his own text.
 Why: the catalog's first counters puzzle for us, with a count the code checks by brute-force search. The top of `ms suggest` is all dissections, which we have just done in 0001, 0002 and 0006.

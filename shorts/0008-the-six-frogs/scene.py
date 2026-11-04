@@ -17,7 +17,7 @@ REPO = HERE.parents[1]
 sys.path[:0] = [str(REPO), str(HERE)]
 
 from manim import (  # noqa: E402
-    DOWN, PI, UP, ArcBetweenPoints, Circle, FadeIn, FadeOut, GrowFromCenter, Indicate, LaggedStart,
+    DOWN, PI, UP, ArcBetweenPoints, Circle, Ellipse, FadeIn, FadeOut, GrowFromCenter, Indicate, LaggedStart,
     ManimColor, MoveAlongPath, RoundedRectangle, Scene, Text, VGroup, there_and_back, Transform, Arrow,
 )
 import numpy as np  # noqa: E402
@@ -32,7 +32,7 @@ from verify import (  # noqa: E402
 
 SFX = {k: str(v) for k, v in write_sfx(REPO / "assets" / "sfx").items()}
 SQ = 1.3                      # square pitch, level 1
-ROW_Y = 1.7
+ROW_Y = 1.4
 EVEN, ODD = PIECES[0], PIECES[1]
 SQUARE_FILL = ManimColor("#1B2735")
 assert (N, MOVES, len(RECIPE), len(BOARDS), sum(LEAPS)) == (4, 10, 10, 11, 6)
@@ -42,34 +42,62 @@ def frog_color(k: int):
     return EVEN if k % 2 == 0 else ODD
 
 
+PAD_FILL, PAD_EDGE = ManimColor("#2E6B4F"), ManimColor("#4FA37A")
+
+
 def sq_pos(i: int, y: float, pitch: float = SQ, n: int = N) -> np.ndarray:
+    """Centre of a frog sitting on pad i."""
     return np.array([CENTRE_X + (i - n / 2) * pitch, y, 0.0])
 
 
-def squares(n: int, y: float, pitch: float, fill=SQUARE_FILL, stroke=MUTED) -> VGroup:
-    return VGroup(*[RoundedRectangle(corner_radius=0.12, width=pitch * 0.92, height=pitch * 0.92,
-                                     fill_color=fill, fill_opacity=1, stroke_color=stroke, stroke_width=4)
-                    .move_to(sq_pos(i, y, pitch, n)) for i in range(n + 1)])
+def squares(n: int, y: float, pitch: float, r: float = 0.5, fill=PAD_FILL, stroke=PAD_EDGE) -> VGroup:
+    """Side view: a row of lily pads. `y` is the frog-centre height; the pad sits under the frog's feet."""
+    return VGroup(*[RoundedRectangle(corner_radius=0.11, width=pitch * 0.92, height=0.22,
+                                     fill_color=fill, fill_opacity=1, stroke_color=stroke, stroke_width=3)
+                    .move_to(sq_pos(i, y - 0.8 * r - 0.1, pitch, n)) for i in range(n + 1)])
 
 
 def frog(k: int, r: float, opacity: float = 1.0) -> VGroup:
-    body = Circle(radius=r, fill_color=frog_color(k), fill_opacity=opacity, stroke_color=BG, stroke_width=3)
-    num = Text(str(k), font=FONT, weight=BOLD, font_size=int(r * 110), color=BG)
-    num.move_to(body)
+    """A side-on cartoon frog: squat body, bulging eyes, back legs, its number on the belly."""
+    col = frog_color(k)
+    dark = ManimColor(col).interpolate(ManimColor("#000000"), 0.3)
+    body = Ellipse(width=2 * r, height=1.6 * r, fill_color=col, fill_opacity=opacity,
+                   stroke_color=BG, stroke_width=3)
+    legs = VGroup(*[Ellipse(width=0.8 * r, height=0.42 * r, fill_color=dark, fill_opacity=opacity,
+                            stroke_color=BG, stroke_width=2).move_to([sx * 0.62 * r, -0.72 * r, 0])
+                    for sx in (-1, 1)])
+    eyes = VGroup(*[Circle(radius=0.27 * r, fill_color=ManimColor("#FFFFFF"), fill_opacity=opacity,
+                           stroke_color=BG, stroke_width=2).move_to([sx * 0.45 * r, 0.82 * r, 0])
+                    for sx in (-1, 1)])
+    pupils = VGroup(*[Circle(radius=0.12 * r, fill_color=BG, fill_opacity=opacity, stroke_width=0)
+                      .move_to(e.get_center() + [0, -0.03 * r, 0]) for e in eyes])
+    num = Text(str(k), font=FONT, weight=BOLD, font_size=int(r * 100), color=BG)
+    num.move_to([0, -0.12 * r, 0])
     if opacity < 1:
         num.set_opacity(opacity + 0.15)
-    return VGroup(body, num).set_z_index(5)
+    g = VGroup(legs, body, eyes, pupils, num).set_z_index(5)
+    g.pupils = pupils
+    return g
 
 
 def place(board, y: float, r: float, pitch: float, n: int, opacity: float = 1.0) -> dict:
     return {k: frog(k, r, opacity).move_to(sq_pos(i, y, pitch, n)) for i, k in enumerate(board) if k}
 
 
-def hop(f: VGroup, dest: np.ndarray, leap: bool, height: float = 2.6):
-    if not leap:
-        return f.animate.move_to(dest)
+def hop(f: VGroup, dest: np.ndarray, leap: bool):
+    """Slides are small hops; leaps are high arcs over the neighbour."""
     sign = 1 if dest[0] > f.get_center()[0] else -1
-    return MoveAlongPath(f, ArcBetweenPoints(f.get_center(), dest, angle=-sign * height))
+    return MoveAlongPath(f, ArcBetweenPoints(f.get_center(), dest, angle=-sign * (2.2 if leap else 1.0)))
+
+
+def blink(frogs):
+    return LaggedStart(*[f.pupils.animate(rate_func=there_and_back).stretch(0.1, 1) for f in frogs],
+                       lag_ratio=0.1)
+
+
+def jump_for_joy(frogs):
+    return LaggedStart(*[f.animate(rate_func=there_and_back).shift(0.4 * UP)
+                         for f in sorted(frogs, key=lambda f: f.get_center()[0])], lag_ratio=0.2)
 
 
 class Short(Scene):
@@ -96,40 +124,41 @@ class Short(Scene):
         self.play(LaggedStart(*[GrowFromCenter(f) for f in group], lag_ratio=0.15), run_time=0.7)
         self.remove(*group)
         self.add(group)
-        title = hook("Reverse these frogs", "Can you do it in 10 moves?")
+        title = hook("Reverse the frogs!", "Can you do it in 10 moves?")
         credit = footer("After H. E. Dudeney, Amusements in Mathematics")
         self.play(FadeIn(title, shift=0.3 * DOWN), FadeIn(credit), run_time=0.45)
-        cap.show("4 frogs, 1 empty square")
-        self.wait(1.4)
+        cap.show("4 frogs, 1 empty pad")
+        self.play(jump_for_joy(group), run_time=1.0)
+        self.play(blink(group), run_time=0.5)
 
         # --- the goal -------------------------------------------------------------------------
-        gy = -0.35
-        gboard = squares(N, gy, 0.95, fill=BG, stroke=MUTED)
+        gy = -1.3
+        gboard = squares(N, gy, 0.95, 0.36, fill=BG, stroke=MUTED)
         gfrogs = VGroup(*place(goal(N), gy, 0.36, 0.95, N, 0.55).values())
-        glabel = label("Goal: reverse the order", 44, MUTED).move_to([CENTRE_X, gy + 1.0, 0])
+        glabel = label("Goal: reverse the order", 44, MUTED).move_to([CENTRE_X, gy + 0.95, 0])
         cap.show("Reverse them in 10 moves?", extra=[FadeIn(gboard), FadeIn(gfrogs), FadeIn(glabel)])
         self.wait(2.0)
 
         # --- the rules: one slide, one leap ----------------------------------------------------
-        cap.show("Slide or leap one frog")
-        tag = label("Slide: next square", 54, GOOD).move_to([CENTRE_X, 3.3, 0])
-        self.play(FadeIn(tag), run_time=0.25)
+        # the rules stay up through the demo and the countdown (that frame is the thumbnail)
+        rules = VGroup(label("Frogs can move 1 or 2 squares", 46, INK),
+                       label("to the empty square", 46, ACCENT)).arrange(DOWN, buff=0.2)
+        rules.move_to([CENTRE_X, 3.6, 0])
+        cap.show("Slide: move 1 square", GOOD, extra=[FadeIn(rules, shift=0.2 * DOWN)])
         self.add_sound(SFX["tick"])
         self.play(hop(frogs[1], sq_pos(0, ROW_Y), False), run_time=0.6)
         self.wait(0.4)
         self.play(hop(frogs[1], sq_pos(1, ROW_Y), False), run_time=0.5)
-        tag2 = label("Leap: over one frog", 54, ACCENT).move_to([CENTRE_X, 3.3, 0])
-        self.play(Transform(tag, tag2), run_time=0.3)
+        cap.show("Leap: over 1 frog", ACCENT)
         self.add_sound(SFX["pop"])
         self.play(hop(frogs[2], sq_pos(0, ROW_Y), True), run_time=0.8)
         self.wait(0.4)
         self.play(hop(frogs[2], sq_pos(2, ROW_Y), True), run_time=0.8)
-        self.play(FadeOut(tag), run_time=0.25)
-        self.wait(0.3)
+        self.play(blink(group), run_time=0.5)
 
         # --- pause and try ------------------------------------------------------------------------
         cap.show("Pause and try it", ACCENT, extra=[FadeOut(gboard), FadeOut(gfrogs), FadeOut(glabel)])
-        countdown(self, 5, center=[CENTRE_X, -0.2, 0], radius=0.95, tick_sound=SFX["tick"])
+        countdown(self, 5, center=[CENTRE_X, -0.75, 0], radius=0.95, tick_sound=SFX["tick"])
 
         # --- the solution ---------------------------------------------------------------------------
         chips = VGroup(*[
@@ -142,7 +171,7 @@ class Short(Scene):
         chips.arrange(buff=0.12).move_to([CENTRE_X, -1.5, 0])
         chips_lab = label("Order of moves", 40, MUTED).move_to([CENTRE_X, -0.7, 0])
 
-        cap.show("Here is one way", extra=[FadeOut(title), FadeIn(chips), FadeIn(chips_lab)])
+        cap.show("Here is one way", extra=[FadeOut(title), FadeOut(rules), FadeIn(chips), FadeIn(chips_lab)])
         self.counter("Move 0 of 10", MUTED)
         self.wait(0.8)
 
@@ -168,7 +197,8 @@ class Short(Scene):
         self.add_sound(SFX["chime"])
         self.counter("10 moves ✓", GOOD)
         cap.show("10 moves. Fewest possible ✓", GOOD)
-        self.play(*[Indicate(f, color=GOOD, scale_factor=1.25) for f in frogs.values()], run_time=1.0)
+        self.play(jump_for_joy(frogs.values()), run_time=1.2)
+        self.play(blink(frogs.values()), run_time=0.5)
         self.wait(1.6)
 
         # --- Level 2: six frogs ---------------------------------------------------------------------------
@@ -182,9 +212,9 @@ class Short(Scene):
                                            "are leaps?")])
         q.arrange(DOWN, buff=0.18).move_to([CENTRE_X, 4.9, 0])
         p2 = 0.92
-        b6 = squares(L2_N, 2.4, p2)
+        b6 = squares(L2_N, 2.4, p2, 0.37)
         f6 = VGroup(*place(start(L2_N), 2.4, 0.37, p2, L2_N).values())
-        g6 = squares(L2_N, -0.4, p2, fill=BG)
+        g6 = squares(L2_N, -0.4, p2, 0.37, fill=BG, stroke=MUTED)
         gf6 = VGroup(*place(goal(L2_N), -0.4, 0.37, p2, L2_N, 0.8).values())
         arrow = Arrow([CENTRE_X, 1.4, 0], [CENTRE_X, 0.6, 0], color=ACCENT, buff=0, stroke_width=10)
         alab = label(f"{L2_MOVES} moves", 44, ACCENT).move_to([CENTRE_X + 1.9, 1.0, 0])
