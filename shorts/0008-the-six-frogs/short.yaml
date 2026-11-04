@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -95,7 +95,7 @@ review:
   messages:
     1: '1567418545674133565'
     2: '1567634824766955541'
-  last_seen: '1567657033862221945'
+  last_seen: '1567658502590038119'
   comment:
 video:
   pending:
@@ -113,6 +113,8 @@ video:
       message: '1567658059579392090'
       video_id: QC5bYRTiH30
       sha256: da2bec3ccca728c3135d40db9604d38689fb817b36232186dc3702b2f593a662
-  comment:
+  comment: That is not really what frogs look like, even in cartoon form. Those look more like 
+    crickets. Let's make sure the frogs actually rotate to turn in the direction they are going to 
+    leap or hop. Let's make the frogs real cute.
   warned:
   as_is:
