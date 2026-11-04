@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -95,7 +95,7 @@ review:
   messages:
     1: '1567418545674133565'
     2: '1567634824766955541'
-  last_seen: '1567672018524962967'
+  last_seen: '1567674506456211537'
   comment:
 video:
   pending:
@@ -129,6 +129,6 @@ video:
       message: '1567673030837141625'
       video_id: 5kgB5Bt4xCM
       sha256: 5992cf7c4471cb7617bd3e59704c00f47a3091f7b79fea59833c549c0733f189
-  comment:
+  comment: Probably last comment. Make the inner eye a little bigger, closer to the outer eye layer.
   warned:
   as_is:
