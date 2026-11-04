@@ -6,22 +6,17 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **45**
+Next id: **46**
 
 ## Open
 
-### #44 · Release about an hour after approval instead of at a fixed slot
-status: open · P3 · feature
-Idea (2026-11-03): a ✅ on a video makes it public about 1 hour later, rounded to the hour (say ✅ at 7:23 PM → public at 9:00 PM, the first full hour at least 60 minutes out), instead of the next 5:00 PM slot. Discussed:
-- **Build:** a `release.mode: asap | slot` switch; in `asap`, `next_slot` returns the rounded time. Keep using `publishAt` rather than setting the video public directly, so 🛑 still works for the hour. About an hour of work with tests.
-- **Rule 1 (1–2 a day):** unchanged if a ✅ past the day's cap falls back to the next day (at the same rounded time, or at `release.time`). Decide which, or whether to refuse instead.
-- **Trade-offs:** release times follow when you review, so there's no steady slot for viewers, and it muddies #43's measurement; no buffer, so nothing goes out on days you don't review unless the fallback queues it.
-- **Unknown:** whether unlisted → public gets the full new-upload treatment (subscriber notifications, the Shorts feed). 0006's release on 2026-11-04 is the first data point; the same path is used either way.
-- Docs: the design doc's "accidental approval" row and the OPERATING.md approval text change from "the 5 PM slot" to "about an hour".
+### #45 · Check that unlisted → public gets the full new-upload treatment
+status: open · P3 · bug
+Every release (slot or asap, #44) flips a review upload from unlisted to public via `publishAt`. Check on 0006 (public 2026-11-04) and the first asap release whether subscribers got a notification and it reached the Shorts feed (first-hour views in YouTube Studio). If not, upload a fresh copy at approval instead.
 
 ### #43 · Find the best time to release
 status: open · P3 · feature
-Releases go out at a fixed 5:00 PM New York, up to 2 a day at the same time, never the same day as the ✅ (`release:` in `config/pipeline.yaml`). Find out whether another time, or two different slots on a 2-Short day, does better: start from the YouTube Analytics API (when viewers are on, views in the first hours per Short, ties in with #12), or a simple A/B over a few weeks. Then change `release.time`, or give `release.py` a list of times.
+Releases used to go out at a fixed 5:00 PM New York (`release:` in `config/pipeline.yaml`). Since #44, they follow the ✅ (about an hour later), so release times vary by themselves; record each Short's release hour when comparing. Find out whether another time, or two different slots on a 2-Short day, does better: start from the YouTube Analytics API (when viewers are on, views in the first hours per Short, ties in with #12), or a simple A/B over a few weeks. Then change `release.time`, or give `release.py` a list of times.
 
 ### #38 · A crash between upload and saving the video id leaves a stray upload
 status: open · P3 · bug
@@ -145,6 +140,10 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #44 · Release about an hour after approval instead of at a fixed slot
+status: done · 2026-11-03
+`release.mode: asap` (now live in `config/pipeline.yaml`): a ✅ goes public on the first full hour at least `asap_minutes` (60) later, still through `publishAt` so 🛑 works; past the 2-a-day cap it takes the next day's 5:00 PM. `mode: slot` keeps the old rule. Follow-up: #45.
 
 ### #28 · Phase 2: script loop
 status: done · 2026-11-03

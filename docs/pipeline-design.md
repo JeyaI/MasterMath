@@ -223,7 +223,7 @@ A Short can go public without another look because every check runs before you s
 | On-screen match | Before upload | Captions or numbers that differ from `verify.py` and `short.yaml` | Job fixes it, then flags you |
 | File and upload match | After upload | A wrong or corrupted file, wrong metadata | Stop and flag you |
 | Version match | At approval | Approval of an old version, or of one with changed files | Refuse and say why |
-| Schedule rules | At approval | A slot over the daily cap | Pick the next valid slot |
+| Schedule rules | At approval | A release over the daily cap | Next day's slot |
 | Release check | After release time | A video that did not go public | Flag you |
 
 **Approval freezes the Short.** The orchestrator commits the approved state and tags it, then records the video's hash and YouTube ID. Later changes to `lib/` cannot affect a scheduled Short, because it never renders again.
@@ -235,6 +235,8 @@ A Short can go public without another look because every check runs before you s
 ## Publish scheduling
 
 Assign each approved Short the next open daily slot, and set its release time immediately. A simple rule is enough until analytics can show a better one.
+
+**Now (#44): `release.mode: asap`.** An approved Short goes public on the first full hour at least 60 minutes after the ✅ (7:23 PM → 9:00 PM), still through `publishAt` so the stop sign works until then. Past the daily cap it takes the next day's 5:00 PM slot. `mode: slot` restores the rules below.
 
 **Hard rules**
 
@@ -314,7 +316,7 @@ Every failure either retries safely or stops and tells you. None can make a Shor
 | YouTube token stops working | Uploads pause | Alert you and pause video jobs; script jobs continue |
 | Discord is unavailable | Messages wait | Hold outgoing messages and retry; nothing changes state |
 | Two runs overlap | Possible double action | Lock file, plus the record of processed messages |
-| Accidental approval | Short is scheduled | Stop sign removes the release time, up until release |
+| Accidental approval | Short is scheduled | Stop sign removes the release time, up until release (about an hour in `asap` mode) |
 | Comment is misread | Wrong revision | You see a new version before anything can publish |
 | Laptop off at release time | Release still happens | YouTube publishes; the release check runs later |
 | You stop replying | Drafts wait | Reminder after 3 days; queue limits pause new drafts |

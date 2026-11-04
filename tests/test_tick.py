@@ -312,7 +312,7 @@ def test_check_mark_schedules_that_exact_upload_at_the_next_slot(root):
     t.run()
     assert s.status == "scheduled"
     when = dt.datetime.fromisoformat(s.data()["youtube"]["publish_at"])
-    assert when.isoformat() == "2026-11-05T17:00:00-05:00"          # tomorrow 5 PM New York (days_ahead: 1)
+    assert when.isoformat() == "2026-11-04T13:00:00-05:00"          # asap: the first full hour 60+ min out
     assert yt.videos[vid] == {**yt.videos[vid], "privacyStatus": "private", "publishAt": when}
     assert s.data()["youtube"]["video_id"] == vid
     assert d.reactors(thread, d.threads[thread][-1]["id"], STOP) == {BOT}
@@ -355,7 +355,7 @@ def test_release_check_records_it_as_published(root):
     clock.t = NOON + dt.timedelta(days=1, hours=6)
     yt.release_due()
     t.run()
-    assert s.status == "published" and s.data()["youtube"]["published_at"] == "2026-11-05"
+    assert s.status == "published" and s.data()["youtube"]["published_at"] == "2026-11-04"
     assert d.bot_said(thread)[-1].startswith("🎉 Live")
 
 
@@ -443,6 +443,28 @@ def test_two_a_day_at_most():
     day = [dt.date(2026, 11, 4)]
     assert release.next_slot(now, day, {**NY, "per_day": 2}).date() == dt.date(2026, 11, 4)
     assert release.next_slot(now, day * 2, {**NY, "per_day": 2}).date() == dt.date(2026, 11, 5)
+
+
+ASAP = {**NY, "mode": "asap", "asap_minutes": 60, "per_day": 2, "days_ahead": 1}
+
+
+@pytest.mark.parametrize("now, taken, expected", [
+    ("2026-11-04T19:23:00-05:00", [], "2026-11-04T21:00:00-05:00"),                 # 7:23 PM -> 9 PM
+    ("2026-11-04T19:00:00-05:00", [], "2026-11-04T20:00:00-05:00"),                 # exactly an hour
+    ("2026-11-04T23:30:00-05:00", [], "2026-11-05T01:00:00-05:00"),                 # past midnight
+    ("2026-11-04T19:23:00-05:00", ["2026-11-04"], "2026-11-04T21:00:00-05:00"),     # one left today
+    ("2026-11-04T19:23:00-05:00", ["2026-11-04"] * 2, "2026-11-05T17:00:00-05:00"),  # full: next day's slot
+    ("2026-11-04T19:23:00-05:00", ["2026-11-04"] * 2 + ["2026-11-05"] * 2, "2026-11-06T17:00:00-05:00"),
+    ("2026-11-01T00:30:00-04:00", [], "2026-11-01T01:00:00-05:00"),                 # DST ends: 1:30 EDT -> 1:00 EST
+])
+def test_asap(now, taken, expected):
+    got = release.next_slot(dt.datetime.fromisoformat(now), [dt.date.fromisoformat(d) for d in taken], ASAP)
+    assert got.isoformat() == expected
+
+
+def test_real_config_is_asap(root):
+    cfg = release.settings()
+    assert cfg["mode"] == "asap" and "60 minutes" in release.describe(cfg)
 
 
 # --- the sandbox ---------------------------------------------------------------------------------

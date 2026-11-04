@@ -4,10 +4,12 @@ max_waiting: 4      # no new script while this many Shorts are in the script loo
 max_queued: 7       # ...or while this many are approved or ready
 sandbox: docker     # where jobs and their code run (mathshorts/sandbox.py); `host` only for trying things
 
-# Video loop (#29): an approved video goes public at the next open slot. Rule 1 caps per_day at 2.
+# Video loop (#29): when an approved video goes public. Rule 1 caps per_day at 2.
 release:
+  mode: asap        # asap: the first full hour at least asap_minutes after your check mark (#44); slot: the next `time`
+  asap_minutes: 60  # leaves time for 🛑; a check mark on a full day goes out at the next day's `time`
   time: "17:00"
   timezone: America/New_York
-  per_day: 2        # both go out at the same time; best release time is #43
-  lead_hours: 2     # at least this long between your check mark and release, to leave time for 🛑
-  days_ahead: 1     # 1 = never the same day as your check mark: tomorrow at the soonest
+  per_day: 2        # in slot mode both go out at the same time; best release time is #43
+  lead_hours: 2     # slot mode: at least this long between your check mark and release, to leave time for 🛑
+  days_ahead: 1     # slot mode: 1 = never the same day as your check mark: tomorrow at the soonest

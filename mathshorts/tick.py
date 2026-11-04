@@ -462,8 +462,8 @@ class Tick:
     def post_video(self, thread: str, s: Short, version: int, video_id: str, summary: str) -> str:
         cfg = release.settings()
         head = (f"**Video v{version}** · {s.data().get('title') or s.name}\n{youtube.url(video_id)}\n"
-                f"{summary.strip()}\n\nReact {ACCEPT} to approve: this exact upload goes public at the next "
-                f"open {cfg['time']} slot. {CROSS} abandons; a reply revises.")
+                f"{summary.strip()}\n\nReact {ACCEPT} to approve: this exact upload goes public "
+                f"{release.describe(cfg)}. {CROSS} abandons; a reply revises.")
         return self.d.post(thread, head, reactions=(ACCEPT, CROSS))
 
     def delete_videos(self, versions) -> list[str]:
