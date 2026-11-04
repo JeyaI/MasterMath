@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -99,25 +99,7 @@ review:
   comment:
 video:
   pending:
-    version: 10
-    file: /home/jeya/mathshorts/out/review/0008-the-six-frogs/v10.mp4
-    sha256: e8beaedbc01cf864a74281e8d822cc3ecc1e4bd260d4206fcfeeff07fc21255c
-    summary: Moved each frog's number to the frog's centre (the rotation point) in scene.py, so it 
-      stays inside the body when the frog turns to hop. No numbers or claims changed, so verify.py 
-      is untouched. A full preview (v1) rendered and `ms check` passes. I looked at one frame near 
-      0:25 and the numbers sit centred on the frogs. I did not look at a frame mid-rotation.
-    usage:
-      job: revise_video
-      short: 0008-the-six-frogs
-      exit: 0
-      seconds: 55
-      subtype: success
-      is_error: false
-      num_turns: 10
-      total_cost_usd: 0.08325600000000001
-      log: job-revise_video-20261104-183009.jsonl
-    video_id: oLZcZ2mBurQ
-  version: 9
+  version: 10
   versions:
     1:
       message: '1567638338071167066'
@@ -155,7 +137,10 @@ video:
       message: '1567678048449597511'
       video_id: 7b1Un4MfcZc
       sha256: 36a04fff9cd6ec487841c0844415f40bdb60c7b0e3178c96b66ed798cbb34e45
-  comment: Numbers should be centered, so that when the frogs rotate, the numbers dont move outside 
-    of the frogs body and are still visible
+    10:
+      message: '1567683083015290962'
+      video_id: oLZcZ2mBurQ
+      sha256: e8beaedbc01cf864a74281e8d822cc3ecc1e4bd260d4206fcfeeff07fc21255c
+  comment:
   warned:
   as_is:
