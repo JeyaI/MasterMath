@@ -120,6 +120,7 @@ video:
       num_turns: 48
       total_cost_usd: 0.42709450000000004
       log: job-revise_video-20261104-161504.jsonl
+    video_id: wlHu3vupV-A
   version: 1
   versions:
     1:
