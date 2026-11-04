@@ -96,7 +96,7 @@ def frog(k: int, r: float, opacity: float = 1.0) -> VGroup:
     nose = VGroup(*[dot(0.03, sx * 0.07, 0.72, BG) for sx in (-1, 1)])
     shape = VGroup(legs, body, belly, bumps, eyes, pupils, cheeks, nose)
     num = Text(str(k), font=FONT, weight=BOLD, font_size=int(r * 70), color=BG)
-    num.move_to([0, -0.4 * u, 0])
+    num.move_to([0, 0, 0])  # on the rotation centre, so it stays inside the body whichever way the frog faces
     if opacity < 1:
         num.set_opacity(opacity + 0.15)
     anchor = Dot([0, 0, 0], radius=0.001).set_opacity(0)
