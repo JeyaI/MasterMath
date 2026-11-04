@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: script_review
+status: animating
 catalog_id: dudeney-amusements-214
 tags:
   - counters
