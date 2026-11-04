@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -99,25 +99,7 @@ review:
   comment:
 video:
   pending:
-    version: 6
-    file: /home/jeya/mathshorts/out/review/0008-the-six-frogs/v6.mp4
-    sha256: 7fa35bd7ed2c99b55b27a8e4263dc85baeb2483081f4b6ea8f520022b6ad285e
-    summary: "I moved the frog eyes inward in `scene.py`. They now sit close together near the top of
-      the head and are smaller, instead of out at the sides. I added a v5→v6 note to `SCRIPT.md`. Moves,
-      captions and numbers are unchanged, so I didn't touch `verify.py` and didn't re-run `ms verify`.\n\
-      A full `ms preview 8` rendered, and a frame at 8 s shows the new eyes. `ms check 8` passes."
-    usage:
-      job: revise_video
-      short: 0008-the-six-frogs
-      exit: 0
-      seconds: 59
-      subtype: success
-      is_error: false
-      num_turns: 11
-      total_cost_usd: 0.09753629999999999
-      log: job-revise_video-20261104-174009.jsonl
-    video_id: xC6cT3pPoY8
-  version: 5
+  version: 6
   versions:
     1:
       message: '1567638338071167066'
@@ -139,7 +121,10 @@ video:
       message: '1567668016949235805'
       video_id: 8-aklY_sHuA
       sha256: 9d6a6e9d36a60e08bd098bb78cc1c8fb3ce762b59668a29d1b3771305f839fdf
-  comment: Eyes need to move inwards. Frog eyes are not on the outside of the skull like that 
-    (buglike). Think about where the eyes on a vertabrate would be placed. Think anatomy.
+    6:
+      message: '1567670508751814696'
+      video_id: xC6cT3pPoY8
+      sha256: 7fa35bd7ed2c99b55b27a8e4263dc85baeb2483081f4b6ea8f520022b6ad285e
+  comment:
   warned:
   as_is:
