@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -99,25 +99,7 @@ review:
   comment:
 video:
   pending:
-    version: 8
-    file: /home/jeya/mathshorts/out/review/0008-the-six-frogs/v8.mp4
-    sha256: 45454ddf637ba07376f8da64a08d2997c1061250e899b048fd5b60fb87297140
-    summary: Enlarged the frogs' dark inner eye (pupil radius 0.08 to 0.108, highlight to match) so 
-      it sits closer to the white outer eye, in scene.py. SCRIPT.md has a revision note. Full 
-      preview rendered and a frame checked; ms check passes. I didn't run ms verify because no 
-      numbers or claims changed.
-    usage:
-      job: revise_video
-      short: 0008-the-six-frogs
-      exit: 0
-      seconds: 55
-      subtype: success
-      is_error: false
-      num_turns: 12
-      total_cost_usd: 0.0991472
-      log: job-revise_video-20261104-180013.jsonl
-    video_id: A8vea_R7Zt8
-  version: 7
+  version: 8
   versions:
     1:
       message: '1567638338071167066'
@@ -147,6 +129,10 @@ video:
       message: '1567673030837141625'
       video_id: 5kgB5Bt4xCM
       sha256: 5992cf7c4471cb7617bd3e59704c00f47a3091f7b79fea59833c549c0733f189
-  comment: Probably last comment. Make the inner eye a little bigger, closer to the outer eye layer.
+    8:
+      message: '1567675590054781158'
+      video_id: A8vea_R7Zt8
+      sha256: 45454ddf637ba07376f8da64a08d2997c1061250e899b048fd5b60fb87297140
+  comment:
   warned:
   as_is:
