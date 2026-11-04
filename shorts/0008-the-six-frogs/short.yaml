@@ -116,6 +116,7 @@ video:
       num_turns: 12
       total_cost_usd: 0.0991472
       log: job-revise_video-20261104-180013.jsonl
+    video_id: A8vea_R7Zt8
   version: 7
   versions:
     1:
