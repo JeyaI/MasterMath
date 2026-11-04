@@ -93,7 +93,7 @@ def frog(k: int, r: float, opacity: float = 1.0) -> VGroup:
                       for sx in (-1, 1)])
     cheeks = VGroup(*[ell(0.3, 0.18, sx * 0.62, 0.32, ManimColor("#FF8FA3")) .set_stroke(width=0)
                       for sx in (-1, 1)])
-    nose = VGroup(*[dot(0.03, sx * 0.07, 0.64, BG) for sx in (-1, 1)])
+    nose = VGroup(*[dot(0.03, sx * 0.07, 0.72, BG) for sx in (-1, 1)])
     shape = VGroup(legs, body, belly, bumps, eyes, pupils, cheeks, nose)
     num = Text(str(k), font=FONT, weight=BOLD, font_size=int(r * 70), color=BG)
     num.move_to([0, -0.4 * u, 0])
