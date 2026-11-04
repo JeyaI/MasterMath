@@ -64,7 +64,7 @@ You're the editor: you accept scripts, watch each video on your phone and approv
    2. OAuth2 → URL Generator: scope `bot` only, no permissions; open the URL and add it to your server. Then on the drafts channel only (Edit Channel → Permissions → add the bot), allow: View Channel, Send Messages, Create Public Threads, Send Messages in Threads, Read Message History, Add Reactions, Attach Files, Embed Links.
    3. Put the token, your user ID and the channel ID in `~/.config/mathshorts.env` (template: `config/mathshorts.env.example`; `chmod 600`). For the IDs, turn on Settings → Advanced → Developer Mode and use "Copy ID".
    4. `set -a; . ~/.config/mathshorts.env; set +a; ms discord hello`. It checks each setting and permission and posts a test thread.
-   5. Schedule `scripts/tick.sh` like the nightly batch: every 5 minutes (`*/5 * * * *  ~/mathshorts/scripts/tick.sh`) and once a night with `--draft` (`0 1 * * *  ~/mathshorts/scripts/tick.sh --draft`). Its log is `out/logs/tick.log`.
+   5. Schedule `scripts/tick.sh` like the nightly batch: every 5 minutes (`*/5 * * * *  ~/mathshorts/scripts/tick.sh`) and twice a day with `--draft` (`0 1 * * *  ~/mathshorts/scripts/tick.sh --draft` and `0 20 * * *  ~/mathshorts/scripts/tick.sh --draft`). Each `--draft` run writes at most one script, only if the queue has room, and waits up to 45 minutes for a busy tick rather than skipping. Its log is `out/logs/tick.log`.
 8. **YouTube and the job sandbox, for the video loop.**
    1. Sign in as the channel: `ms youtube login`, open the link it prints, and choose the channel's account. `ms youtube hello` checks it. While the Google app is in Testing (#31), the sign-in lasts 7 days; when it lapses, the bot says so in the thread and video jobs wait until you sign in again.
    2. Build the sandbox image that jobs run in: `docker build -t mathshorts . && docker build -t mathshorts-job -f Dockerfile.job .` Jobs, and every check of the code they write, run in it with no access to `~/.config`. Rebuild it when you update Claude Code (`CLAUDE_CODE_VERSION` in `Dockerfile.job`).
@@ -86,7 +86,7 @@ You're the editor: you accept scripts, watch each video on your phone and approv
 
 ## Daily: scripts and videos in Discord (~2 min a script, ~3 min a video)
 
-Each night `ms tick --draft` writes one new script if fewer than 4 are waiting on you (`config/pipeline.yaml`). A Claude job picks the puzzle, proves the answer in `verify.py`, and writes `SCRIPT.md`; tick runs `verify.py` again itself before posting. It arrives as its own thread in the drafts channel, with `SCRIPT.md` attached.
+At 8 PM and 1 AM, `ms tick --draft` writes one new script if fewer than 4 drafts are in the loops (`config/pipeline.yaml`). A Claude job picks the puzzle, proves the answer in `verify.py`, and writes `SCRIPT.md`; tick runs `verify.py` again itself before posting. It arrives as its own thread in the drafts channel, with `SCRIPT.md` attached.
 
 - **✅ on the newest version:** accepted. The animate job starts on the next tick.
 - **Reply in the thread:** a revise job rewrites the script from your words, and v2 arrives in the same thread within a few minutes. Several replies before the next tick count as one comment.

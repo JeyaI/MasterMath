@@ -28,6 +28,7 @@ import fcntl
 import hashlib
 import shutil
 import subprocess
+import time
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Callable
@@ -45,17 +46,26 @@ def limits() -> dict:
     return {"max_waiting": 4, "max_queued": 7, **(cfg or {})}
 
 
+DRAFT_WAIT = 45 * 60                  # a --draft tick waits this long for a busy tick (a video job)
+
+
 @contextmanager
-def lock():
+def lock(wait: float = 0):
+    """Yields False if another tick holds it after `wait` seconds."""
     p = paths.out() / ".tick.lock"
     p.parent.mkdir(parents=True, exist_ok=True)
     f = open(p, "w")
-    try:
-        fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    except BlockingIOError:
-        f.close()
-        yield False
-        return
+    deadline = time.monotonic() + wait
+    while True:
+        try:
+            fcntl.flock(f, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            break
+        except BlockingIOError:
+            if time.monotonic() >= deadline:
+                f.close()
+                yield False
+                return
+            time.sleep(min(15, max(deadline - time.monotonic(), 0.1)))
     try:
         yield True
     finally:
@@ -96,7 +106,7 @@ class Tick:
     def run(self, draft: bool = False) -> dict:
         done = {"accepted": [], "abandoned": [], "revised": [], "scripted": [], "videos": [], "approved": [],
                 "stopped": [], "released": [], "failed": [], "skipped": None, "paused": None}
-        with lock() as got:
+        with lock(wait=DRAFT_WAIT if draft else 0) as got:     # the nightly script must not be lost
             if not got:
                 done["skipped"] = "another tick is running"
                 return done

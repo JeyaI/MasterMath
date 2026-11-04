@@ -481,3 +481,19 @@ def test_a_discord_failure_after_upload_does_not_upload_twice(root):
     d.post = real_post
     t.run()
     assert s.status == "video_review" and video(s)[1]["video_id"] == "vid1" and yt.n == 1
+
+
+def test_draft_waits_for_a_busy_tick_but_a_plain_tick_skips(root, monkeypatch):
+    import threading
+    import time as _time
+    with tick.lock() as got:
+        assert got
+        d, t = make(root)
+        assert t.run()["skipped"] == "another tick is running"
+        monkeypatch.setattr(tick, "DRAFT_WAIT", 5)
+        out = {}
+        th = threading.Thread(target=lambda: out.update(r=t.run(draft=True)))
+        th.start()
+        _time.sleep(0.3)
+    th.join()
+    assert out["r"]["scripted"] and len(all_shorts()) == 1

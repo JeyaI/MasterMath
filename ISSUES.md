@@ -28,7 +28,7 @@ The manual path makes `thumbnail.png`; the video loop sets none. Shorts mostly i
 
 ### #42 · Tick runs long while a video job works
 status: open · P3 · chore
-An animate job plus render and upload takes 10–20 minutes, and the tick lock makes the 5-minute ticks skip meanwhile, so replies on other threads wait. Fine at today's volume; if it bites, read threads in a separate quick tick and run jobs in another.
+An animate job plus render and upload takes 10–20 minutes, and the tick lock makes the 5-minute ticks skip meanwhile, so replies on other threads wait. Fine at today's volume; if it bites, read threads in a separate quick tick and run jobs in another. **2026-11-03:** a `--draft` tick now waits up to 45 minutes for the lock instead of skipping, so a busy tick no longer costs the night's script.
 
 ### #33 · `ms check` misses mid-animation faults
 status: open · P3 · feature
