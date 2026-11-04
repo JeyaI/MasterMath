@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0007'
 title: The Seven Pigs
-status: video_review
+status: scheduled
 catalog_id: dudeney-amusements-165
 tags:
   - counting
@@ -99,9 +99,10 @@ youtube:
     - geometry
     - puzzle
     - brain teaser
-  video_id:
-  url:
+  video_id: 0UmPUN3c-Zs
+  url: https://youtube.com/shorts/0UmPUN3c-Zs
   published_at:
+  publish_at: '2026-11-05T17:00:00-05:00'
 review:
   thread_id: '1567343191584280647'
   version: 2
@@ -125,3 +126,8 @@ video:
   comment:
   warned:
   as_is:
+  approved:
+    version: 2
+    video_id: 0UmPUN3c-Zs
+    sha256: e3c11c2b3b637ea4242ebc6606eb30fdbaaaf38a0222ed8bda0bdb293fe2b433
+    message: '1567351494364241961'
