@@ -17,7 +17,7 @@ REPO = HERE.parents[1]
 sys.path[:0] = [str(REPO), str(HERE)]
 
 from manim import (  # noqa: E402
-    DOWN, PI, UP, ArcBetweenPoints, Circle, Ellipse, FadeIn, FadeOut, GrowFromCenter, Indicate, LaggedStart,
+    DOWN, PI, UP, Sector, TAU, ArcBetweenPoints, Circle, Ellipse, FadeIn, FadeOut, GrowFromCenter, Indicate, LaggedStart,
     ManimColor, MoveAlongPath, RoundedRectangle, Scene, Text, VGroup, there_and_back, Transform, Arrow,
 )
 import numpy as np  # noqa: E402
@@ -51,31 +51,48 @@ def sq_pos(i: int, y: float, pitch: float = SQ, n: int = N) -> np.ndarray:
 
 
 def squares(n: int, y: float, pitch: float, r: float = 0.5, fill=PAD_FILL, stroke=PAD_EDGE) -> VGroup:
-    """Side view: a row of lily pads. `y` is the frog-centre height; the pad sits under the frog's feet."""
-    return VGroup(*[RoundedRectangle(corner_radius=0.11, width=pitch * 0.92, height=0.22,
-                                     fill_color=fill, fill_opacity=1, stroke_color=stroke, stroke_width=3)
-                    .move_to(sq_pos(i, y - 0.8 * r - 0.1, pitch, n)) for i in range(n + 1)])
+    """Top-down view: a row of round lily pads, each with a notch. `y` is the frog-centre height."""
+    pads = []
+    for i in range(n + 1):
+        c = sq_pos(i, y, pitch, n)
+        pads.append(Sector(radius=1.2 * r, angle=TAU - 0.5, start_angle=0.9, arc_center=c,
+                           fill_color=fill, fill_opacity=1, stroke_color=stroke, stroke_width=3))
+    return VGroup(*pads)
 
 
 def frog(k: int, r: float, opacity: float = 1.0) -> VGroup:
-    """A side-on cartoon frog: squat body, bulging eyes, back legs, its number on the belly."""
+    """A top-down cartoon frog (head up): head with bulging eyes, folded front and back legs with
+    feet, its number on the back."""
     col = frog_color(k)
     dark = ManimColor(col).interpolate(ManimColor("#000000"), 0.3)
-    body = Ellipse(width=2 * r, height=1.6 * r, fill_color=col, fill_opacity=opacity,
-                   stroke_color=BG, stroke_width=3)
-    legs = VGroup(*[Ellipse(width=0.8 * r, height=0.42 * r, fill_color=dark, fill_opacity=opacity,
-                            stroke_color=BG, stroke_width=2).move_to([sx * 0.62 * r, -0.72 * r, 0])
+    u = 0.86 * r
+
+    def ell(w, h, x, y, c, rot=0.0, sw=2):
+        e = Ellipse(width=w * u, height=h * u, fill_color=c, fill_opacity=opacity,
+                    stroke_color=BG, stroke_width=sw)
+        return e.rotate(rot).move_to([x * u, y * u, 0])
+
+    parts = []
+    for sx in (-1, 1):
+        # back legs: big folded thigh and a splayed foot
+        parts.append(ell(0.9, 0.5, sx * 0.85, -0.7, dark, sx * 0.9))
+        parts.append(ell(0.75, 0.3, sx * 0.9, -1.1, dark, -sx * 0.5))
+        # front legs: short arm and a small hand
+        parts.append(ell(0.6, 0.28, sx * 0.78, 0.3, dark, -sx * 0.5))
+        parts.append(ell(0.4, 0.22, sx * 1.05, 0.45, dark, sx * 0.3))
+    legs = VGroup(*parts)
+    body = ell(1.3, 1.6, 0, -0.1, col, 0, 3)
+    head = ell(1.2, 0.85, 0, 0.72, col, 0, 3)
+    eyes = VGroup(*[Circle(radius=0.22 * u, fill_color=ManimColor("#FFFFFF"), fill_opacity=opacity,
+                           stroke_color=BG, stroke_width=2).move_to([sx * 0.48 * u, 0.98 * u, 0])
                     for sx in (-1, 1)])
-    eyes = VGroup(*[Circle(radius=0.27 * r, fill_color=ManimColor("#FFFFFF"), fill_opacity=opacity,
-                           stroke_color=BG, stroke_width=2).move_to([sx * 0.45 * r, 0.82 * r, 0])
-                    for sx in (-1, 1)])
-    pupils = VGroup(*[Circle(radius=0.12 * r, fill_color=BG, fill_opacity=opacity, stroke_width=0)
-                      .move_to(e.get_center() + [0, -0.03 * r, 0]) for e in eyes])
-    num = Text(str(k), font=FONT, weight=BOLD, font_size=int(r * 100), color=BG)
-    num.move_to([0, -0.12 * r, 0])
+    pupils = VGroup(*[Circle(radius=0.11 * u, fill_color=BG, fill_opacity=opacity, stroke_width=0)
+                      .move_to(e.get_center() + [0, 0.03 * u, 0]) for e in eyes])
+    num = Text(str(k), font=FONT, weight=BOLD, font_size=int(r * 90), color=BG)
+    num.move_to([0, -0.2 * u, 0])
     if opacity < 1:
         num.set_opacity(opacity + 0.15)
-    g = VGroup(legs, body, eyes, pupils, num).set_z_index(5)
+    g = VGroup(legs, body, head, eyes, pupils, num).set_z_index(5)
     g.pupils = pupils
     return g
 

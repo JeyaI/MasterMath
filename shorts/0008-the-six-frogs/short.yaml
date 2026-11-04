@@ -99,6 +99,25 @@ review:
   comment:
 video:
   pending:
+    version: 3
+    file: /home/jeya/mathshorts/out/review/0008-the-six-frogs/v3.mp4
+    sha256: da2bec3ccca728c3135d40db9604d38689fb817b36232186dc3702b2f593a662
+    summary: "Redrew the Short in a top-down view. The board is now a row of round lily pads, each with
+      a notch. The frogs are drawn from above, with a head, bulging eyes, folded front and back legs with
+      feet, and the number on the back. The same drawing is used in the goal row, in the Level 2 card
+      and for the hops and leaps.\nMoves, numbers and captions are unchanged, so `verify.py` needed no
+      edit; I did not run `ms verify`. A full `ms preview` ran, I looked at frames from the hook, the
+      move sequence and the Level 2 card, and `ms check` passes. I added a v2→v3 note to `SCRIPT.md`."
+    usage:
+      job: revise_video
+      short: 0008-the-six-frogs
+      exit: 0
+      seconds: 93
+      subtype: success
+      is_error: false
+      num_turns: 18
+      total_cost_usd: 0.19809109999999994
+      log: job-revise_video-20261104-165005.jsonl
   version: 2
   versions:
     1:
