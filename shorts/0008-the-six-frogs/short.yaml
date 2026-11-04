@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: animating
+status: video_review
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -98,23 +98,12 @@ review:
   comment:
 video:
   pending:
-    version: 1
-    file: /home/jeya/mathshorts/out/review/0008-the-six-frogs/v1.mp4
-    sha256: b7e1191c8574c07952e2132e08267ef26bf25d833a2768e8fe00dc233369404f
-    summary: "Wrote scene.py: 4 frogs on 5 squares with a goal row, a slide and a leap demo, a 5 s pause,
-      then Dudeney's 10 moves play with a move counter and an order-of-moves chip strip. Level 2 card
-      is 6 frogs, 21 moves, \"how many are leaps?\" (15). `ms check` and `ms verify` pass with no warnings,
-      and the final `ms preview` runs 45.2 s (v2). I looked at 9 frames and they were clean. The tag swap
-      in the demo (slide → leap) is a brief garbled morph, which I judged fine. short.yaml captions already
-      matched, so I left it unchanged."
-    usage:
-      job: animate
-      short: 0008-the-six-frogs
-      exit: 0
-      seconds: 178
-      subtype: success
-      is_error: false
-      num_turns: 45
-      total_cost_usd: 0.4079156999999999
-      log: job-animate-20261104-153037.jsonl
-    video_id: 7hk9TtpZIB8
+  version: 1
+  versions:
+    1:
+      message: '1567638338071167066'
+      video_id: 7hk9TtpZIB8
+      sha256: b7e1191c8574c07952e2132e08267ef26bf25d833a2768e8fe00dc233369404f
+  comment:
+  warned:
+  as_is:
