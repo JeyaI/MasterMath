@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -99,25 +99,7 @@ review:
   comment:
 video:
   pending:
-    version: 9
-    file: /home/jeya/mathshorts/out/review/0008-the-six-frogs/v9.mp4
-    sha256: 36a04fff9cd6ec487841c0844415f40bdb60c7b0e3178c96b66ed798cbb34e45
-    summary: Raised the frog nostrils in scene.py from y=0.64 to 0.72 (frog-local units; eyes sit at
-      0.55). Full preview rendered and `ms check` passes. I did not run `ms verify`, because no 
-      numbers or claims changed. I only looked at one low-resolution frame, in which the frogs are 
-      small, so I haven't confirmed how the higher nose looks on a frog facing up.
-    usage:
-      job: revise_video
-      short: 0008-the-six-frogs
-      exit: 0
-      seconds: 53
-      subtype: success
-      is_error: false
-      num_turns: 10
-      total_cost_usd: 0.07802040000000002
-      log: job-revise_video-20261104-181011.jsonl
-    video_id: 7b1Un4MfcZc
-  version: 8
+  version: 9
   versions:
     1:
       message: '1567638338071167066'
@@ -151,6 +133,10 @@ video:
       message: '1567675590054781158'
       video_id: A8vea_R7Zt8
       sha256: 45454ddf637ba07376f8da64a08d2997c1061250e899b048fd5b60fb87297140
-  comment: Nose needs to go a little bit higher.
+    9:
+      message: '1567678048449597511'
+      video_id: 7b1Un4MfcZc
+      sha256: 36a04fff9cd6ec487841c0844415f40bdb60c7b0e3178c96b66ed798cbb34e45
+  comment:
   warned:
   as_is:
