@@ -6,9 +6,18 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **44**
+Next id: **45**
 
 ## Open
+
+### #44 · Release about an hour after approval instead of at a fixed slot
+status: open · P3 · feature
+Idea (2026-11-03): a ✅ on a video makes it public about 1 hour later, rounded to the hour (say ✅ at 7:23 PM → public at 9:00 PM, the first full hour at least 60 minutes out), instead of the next 5:00 PM slot. Discussed:
+- **Build:** a `release.mode: asap | slot` switch; in `asap`, `next_slot` returns the rounded time. Keep using `publishAt` rather than setting the video public directly, so 🛑 still works for the hour. About an hour of work with tests.
+- **Rule 1 (1–2 a day):** unchanged if a ✅ past the day's cap falls back to the next day (at the same rounded time, or at `release.time`). Decide which, or whether to refuse instead.
+- **Trade-offs:** release times follow when you review, so there's no steady slot for viewers, and it muddies #43's measurement; no buffer, so nothing goes out on days you don't review unless the fallback queues it.
+- **Unknown:** whether unlisted → public gets the full new-upload treatment (subscriber notifications, the Shorts feed). 0006's release on 2026-11-04 is the first data point; the same path is used either way.
+- Docs: the design doc's "accidental approval" row and the OPERATING.md approval text change from "the 5 PM slot" to "about an hour".
 
 ### #43 · Find the best time to release
 status: open · P3 · feature
