@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -95,7 +95,7 @@ review:
   messages:
     1: '1567418545674133565'
     2: '1567634824766955541'
-  last_seen: '1567667043556266035'
+  last_seen: '1567669580850139177'
   comment:
 video:
   pending:
@@ -121,6 +121,7 @@ video:
       message: '1567668016949235805'
       video_id: 8-aklY_sHuA
       sha256: 9d6a6e9d36a60e08bd098bb78cc1c8fb3ce762b59668a29d1b3771305f839fdf
-  comment:
+  comment: Eyes need to move inwards. Frog eyes are not on the outside of the skull like that 
+    (buglike). Think about where the eyes on a vertabrate would be placed. Think anatomy.
   warned:
   as_is:
