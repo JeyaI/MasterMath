@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: video_review
+status: scheduled
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -86,9 +86,10 @@ youtube:
   tags:
     - math puzzle
     - puzzle
-  video_id:
-  url:
+  video_id: oLZcZ2mBurQ
+  url: https://youtube.com/shorts/oLZcZ2mBurQ
   published_at:
+  publish_at: '2026-11-04T20:00:00-05:00'
 review:
   thread_id: '1567418543245500477'
   version: 2
@@ -144,3 +145,8 @@ video:
   comment:
   warned:
   as_is:
+  approved:
+    version: 10
+    video_id: oLZcZ2mBurQ
+    sha256: e8beaedbc01cf864a74281e8d822cc3ecc1e4bd260d4206fcfeeff07fc21255c
+    message: '1567686238356639745'
