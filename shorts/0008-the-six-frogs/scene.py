@@ -88,8 +88,8 @@ def frog(k: int, r: float, opacity: float = 1.0) -> VGroup:
     belly = ell(0.95, 0.8, 0, -0.45, light, 0, 0)
     bumps = VGroup(*[dot(0.19, sx * 0.3, 0.53, col, 3) for sx in (-1, 1)])
     eyes = VGroup(*[dot(0.135, sx * 0.3, 0.55, ManimColor("#FFFFFF"), 2) for sx in (-1, 1)])
-    pupils = VGroup(*[VGroup(dot(0.08, sx * 0.3, 0.55, BG),
-                             dot(0.03, sx * 0.3 + 0.03, 0.58, ManimColor("#FFFFFF")))
+    pupils = VGroup(*[VGroup(dot(0.108, sx * 0.3, 0.55, BG),
+                             dot(0.04, sx * 0.3 + 0.035, 0.585,ManimColor("#FFFFFF")))
                       for sx in (-1, 1)])
     cheeks = VGroup(*[ell(0.3, 0.18, sx * 0.62, 0.32, ManimColor("#FF8FA3")) .set_stroke(width=0)
                       for sx in (-1, 1)])

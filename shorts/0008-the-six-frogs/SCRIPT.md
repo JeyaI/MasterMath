@@ -8,6 +8,8 @@ Video revision (v2 → v3): the view is now top-down. Round lily pads (each with
 
 Video revision (v5 → v6): frog eyes moved inward, close together on top of the head and smaller, like a vertebrate's, not bug-like on the sides. Moves and captions unchanged.
 
+Video revision (v7 → v8): the dark inner eye (pupil) is a little bigger, closer to the white outer eye. Moves and captions unchanged.
+
 Video revision (v3 → v4): the frogs are redrawn to look like real, cute frogs (round body, big shiny eyes, smile, blush, stubby legs), and each frog turns to face the direction it is about to slide or leap before it moves. Moves and captions are unchanged.
 
 ## Puzzle

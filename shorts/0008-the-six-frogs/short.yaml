@@ -99,6 +99,23 @@ review:
   comment:
 video:
   pending:
+    version: 8
+    file: /home/jeya/mathshorts/out/review/0008-the-six-frogs/v8.mp4
+    sha256: 45454ddf637ba07376f8da64a08d2997c1061250e899b048fd5b60fb87297140
+    summary: Enlarged the frogs' dark inner eye (pupil radius 0.08 to 0.108, highlight to match) so 
+      it sits closer to the white outer eye, in scene.py. SCRIPT.md has a revision note. Full 
+      preview rendered and a frame checked; ms check passes. I didn't run ms verify because no 
+      numbers or claims changed.
+    usage:
+      job: revise_video
+      short: 0008-the-six-frogs
+      exit: 0
+      seconds: 55
+      subtype: success
+      is_error: false
+      num_turns: 12
+      total_cost_usd: 0.0991472
+      log: job-revise_video-20261104-180013.jsonl
   version: 7
   versions:
     1:
