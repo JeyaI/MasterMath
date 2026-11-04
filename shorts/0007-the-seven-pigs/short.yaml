@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0007'
 title: The Seven Pigs
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-165
 tags:
   - counting
@@ -108,7 +108,7 @@ review:
   messages:
     1: '1567343194461708313'
     2: '1567346492220375190'
-  last_seen: '1567346094776524921'
+  last_seen: '1567349752473981079'
   comment:
 video:
   pending:
@@ -118,6 +118,7 @@ video:
       message: '1567348700731277343'
       video_id: PZBuCKbJyKw
       sha256: 37d26afcd2f530b534d9ce90fe6dc39f3414bfc670b2e42141601f078c5f43ff
-  comment:
+  comment: Sort  the pigs doesnt mean much to me. Maybe "check the pigs"? Because there's no actual 
+    sorting being done.
   warned:
   as_is:
