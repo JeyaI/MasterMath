@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -95,7 +95,7 @@ review:
   messages:
     1: '1567418545674133565'
     2: '1567634824766955541'
-  last_seen: '1567658502590038119'
+  last_seen: '1567667043556266035'
   comment:
 video:
   pending:
@@ -117,6 +117,7 @@ video:
       message: '1567660772870332476'
       video_id: L2Zt_nXm8wQ
       sha256: 003ea0a34e6d3ad7376fd55ee585abc165798345dddd0814b8afd18e32abb7b5
-  comment:
+  comment: Eyes are still a little bug like. They can be smaller. Need to make sure mouth doesnt 
+    show like that. A frog wont have a mouth showing on the top in a top down view.
   warned:
   as_is:
