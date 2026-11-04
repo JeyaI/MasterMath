@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -51,37 +51,36 @@ puzzle:
 
     This complete general solution is published here for the first time.
 level1:
-  statement: "Six frogs, numbered 1 to 6, sit on a row of seven squares with one empty square on the left.
-    A frog may slide into the next square or leap over one frog. Reverse them to 6 5 4 3 2 1 in the fewest
-    moves."
-  answer: 21
-  insight: "Every pair of frogs must swap order, and only a leap swaps a pair (a slide never does). 6
-    frogs make 15 pairs, so at least 15 leaps. The other 6 moves are one slide per frog: 15 + 6 = 21."
+  statement: "Four frogs, numbered 1 to 4, sit on a row of five squares with one empty square on the left.
+    A frog may slide into the next square or leap over one frog. Can you reverse them to 4 3 2 1 in 10
+    moves?"
+  answer: 10
+  insight: "Watch the optimal solution play: the evens go up the row, the odds come back (2 4 3 1, twice,
+    then 2 4). 10 moves is the fewest possible, checked by exhaustive search."
 level2:
-  statement: "Same puzzle with 8 frogs on 9 squares. What is the fewest number of moves?"
-  answer: 36
-  accept: [36, "thirty-six", "36 moves"]
-  why: "8 frogs make 8 x 7 / 2 = 28 pairs, so 28 leaps, plus 8 slides, one per frog: 28 + 8 = 36."
+  statement: "Six frogs on seven squares can be reversed in 21 moves, the fewest possible. How many of
+    those 21 moves are leaps?"
+  answer: 15
+  accept: [15, "fifteen", "15 leaps"]
+  why: "Only a leap changes which of two frogs is ahead, and every pair must trade places: 6 x 5 / 2 =
+    15 pairs, so 15 leaps. The other 6 moves are slides."
 captions:
-  - "6 frogs, 1 empty square"
+  - "4 frogs, 1 empty square"
+  - "Reverse them in 10 moves?"
   - "Slide or leap one frog"
-  - "Reverse the order"
-  - "Fewest moves?"
   - "Pause and try it"
-  - "Every pair must swap"
-  - "Only a leap swaps a pair"
-  - "6 frogs: 15 pairs"
-  - "So 15 leaps"
-  - "Plus 6 slides"
-  - "15 + 6 = 21 moves ✓"
+  - "Here is one way"
+  - "Evens go up, odds come back"
+  - "Last two: 2, then 4"
+  - "10 moves. Fewest possible ✓"
   - "Comment just the number ↓"
 music:
   piece: bwv846
   license: public-domain composition; recording synthesised by lib/audio.py
 youtube:
-  title: "Six frogs, one empty square: fewest moves to reverse them?"
+  title: "Can you reverse these frogs in 10 moves?"
   description: |
-    Six frogs on seven squares must reverse their order by sliding or leaping. What is the fewest number of moves? Level 2: 8 frogs. Comment just the number.
+    Four frogs on five squares must reverse their order by sliding or leaping. Can you do it in 10 moves? Level 2: 6 frogs, 21 moves. How many are leaps? Comment just the number.
     After H. E. Dudeney, Amusements in Mathematics (1917), no. 214. Music: J. S. Bach, Prelude in C, BWV 846.
   tags:
     - math puzzle
@@ -91,12 +90,9 @@ youtube:
   published_at:
 review:
   thread_id: '1567418543245500477'
-  version: 1
+  version: 2
   messages:
     1: '1567418545674133565'
+    2: '1567634824766955541'
   last_seen: '1567633576512462920'
-  comment: Theres not really a true insight moment here. Additionally, the audience isn't asked to 
-    find the way to solve in the fewest moves. I propose "can you solve this in 21 moves" angle for 
-    this. Removes the burden of having to show a proof. Then we can just show the animation and 
-    mention that this is an optimal solution. I think we could even start at 4 frogs and have level 
-    2 be 6 frogs! It took me a while to work out the solution myself.
+  comment:

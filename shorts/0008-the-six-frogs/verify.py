@@ -1,16 +1,15 @@
 """Verify Short 0008: The Six Frogs (Dudeney, Amusements in Mathematics, no. 214).
 
 Checks, in code, every claim the video makes:
-  * layout: squares 0..6, the blank on the left (square 0), frog k on square k. This is the layout
+  * layout: squares 0..n, the blank on the left (square 0), frog k on square k. This is the layout
     in which Dudeney's own opening move (frog 2 leaps frog 1) is legal
   * a move is a slide into the next square or a leap over one frog; frogs go either way
-  * the goal is 6 5 4 3 2 1 with the blank still on the left
-  * breadth-first search: the fewest moves is 21 (and no 20-move solution exists)
-  * Dudeney's recipe (2 4 6 5 3 1, three times over, then 2 4 6) is a legal 21-move solution
-  * the insight: a slide never changes the order of two frogs, a leap changes exactly one pair,
-    and the goal flips all C(6,2)=15 pairs, so at least 15 leaps; the solution has 15 leaps + 6 slides
-  * the general count: n even gives n(n+1)/2 moves, checked by search for n = 2, 4, 6, 8
-  * Level 2: 8 frogs need 28 leaps + 8 slides = 36 moves
+  * the goal is n .. 3 2 1 with the blank still on the left
+  * Level 1 is 4 frogs: breadth-first search says 10 moves is the fewest, and Dudeney's recipe
+    (2 4 3 1 twice, then 2 4) is a legal 10-move solution (6 leaps + 4 slides)
+  * Level 2 is 6 frogs: the fewest is 21 (search), the recipe (2 4 6 5 3 1 three times, then 2 4 6)
+    plays it, and 15 of the 21 moves are leaps (the answer asked for)
+  * the general count: n even gives n(n+1)/2 moves, checked by search for n = 2, 4, 6
 
 The scene imports everything below.
 """
@@ -20,10 +19,12 @@ from collections import deque
 from itertools import combinations
 from math import comb
 
-N = 6
-RECIPE = [2, 4, 6, 5, 3, 1] * 3 + [2, 4, 6]
-L2_N = 8
-L2_MOVES, L2_LEAPS, L2_SLIDES = 36, 28, 8
+N = 4
+RECIPE = [2, 4, 3, 1] * 2 + [2, 4]
+MOVES = 10
+L2_N = 6
+L2_RECIPE = [2, 4, 6, 5, 3, 1] * 3 + [2, 4, 6]
+L2_MOVES, L2_LEAPS, L2_SLIDES = 21, 15, 6      # Level 2 asks: how many of the 21 moves are leaps? 15
 
 Board = tuple[int, ...]            # board[i] = frog on square i, 0 for the blank
 
@@ -90,34 +91,32 @@ N_LEAPS, N_SLIDES = sum(LEAPS), len(LEAPS) - sum(LEAPS)
 
 
 def main() -> None:
-    assert start(N) == (0, 1, 2, 3, 4, 5, 6) and goal(N) == (0, 6, 5, 4, 3, 2, 1)
+    assert start(N) == (0, 1, 2, 3, 4) and goal(N) == (0, 4, 3, 2, 1)
 
-    # shortest by search
-    assert shortest(N) == 21
-    # Dudeney's recipe is legal and lands on the goal in 21 moves
-    assert len(RECIPE) == 21 and BOARDS[-1] == goal(N)
+    # "Can you do it in 10 moves?" is also the true minimum, so we may say 10 is optimal
+    assert shortest(N) == MOVES == 10
+    assert shortest(N - 1) != MOVES            # sanity: the search is not a constant
+    # Dudeney's recipe (2 4 3 1 twice, then 2 4) is legal and lands on the goal in 10 moves
+    assert len(RECIPE) == MOVES and BOARDS[-1] == goal(N)
+    assert N_LEAPS == comb(N, 2) == 6 and N_SLIDES == 4
 
-    # the pair-crossing argument
-    for k, (_, nb, lp) in enumerate(TRACE):
-        d = inversions(nb) - inversions(BOARDS[k])
-        assert d == (1 if lp else 0), "a leap must flip exactly one pair, a slide none"
-    assert inversions(goal(N)) == comb(N, 2) == 15
-    assert N_LEAPS == 15 and N_SLIDES == 6 and N_LEAPS + N_SLIDES == 21
-
-    # general rule for even n (and the 7-frog extension the puzzle asks for)
-    for n in (2, 4, 6, 8):
-        assert shortest(n) == n * (n + 1) // 2, n
-    assert shortest(7) == (49 + 21) // 2 - 4
-
-    # Level 2: 8 frogs
-    order8 = ([2, 4, 6, 8, 7, 5, 3, 1]) * 4 + [2, 4, 6, 8]
-    t8 = play(order8, L2_N)
-    assert t8[-1][1] == goal(L2_N) and len(t8) == L2_MOVES == shortest(L2_N)
-    assert sum(lp for _, _, lp in t8) == L2_LEAPS == comb(L2_N, 2)
+    # Level 2: 6 frogs, 21 moves, optimal; 15 of them are leaps
+    assert shortest(L2_N) == L2_MOVES == 21
+    t6 = play(L2_RECIPE, L2_N)
+    assert t6[-1][1] == goal(L2_N) and len(t6) == L2_MOVES
+    assert sum(lp for _, _, lp in t6) == L2_LEAPS == comb(L2_N, 2) == 15
     assert L2_MOVES - L2_LEAPS == L2_SLIDES == L2_N
+    # in the recipe a leap flips exactly one pair and a slide none, so its 15 leaps are the 15 pairs
+    for k, (_, nb, lp) in enumerate(t6):
+        prev = start(L2_N) if k == 0 else t6[k - 1][1]
+        assert inversions(nb) - inversions(prev) == (1 if lp else 0)
 
-    print(f"OK  6 frogs: {len(RECIPE)} moves = {N_LEAPS} leaps + {N_SLIDES} slides (BFS agrees); "
-          f"level2 8 frogs: {L2_MOVES} moves")
+    # general rule for even n, for the "it always works" line
+    for n in (2, 4, 6):
+        assert shortest(n) == n * (n + 1) // 2, n
+
+    print(f"OK  4 frogs: {MOVES} moves = {N_LEAPS} leaps + {N_SLIDES} slides (BFS agrees, optimal); "
+          f"level2 6 frogs: {L2_MOVES} moves, {L2_LEAPS} leaps")
 
 
 if __name__ == "__main__":
