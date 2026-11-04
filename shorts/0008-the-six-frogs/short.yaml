@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: script_review
+status: revise
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -94,4 +94,9 @@ review:
   version: 1
   messages:
     1: '1567418545674133565'
-  last_seen: '1567418545674133565'
+  last_seen: '1567633576512462920'
+  comment: Theres not really a true insight moment here. Additionally, the audience isn't asked to 
+    find the way to solve in the fewest moves. I propose "can you solve this in 21 moves" angle for 
+    this. Removes the burden of having to show a proof. Then we can just show the animation and 
+    mention that this is an optimal solution. I think we could even start at 4 frogs and have level 
+    2 be 6 frogs! It took me a while to work out the solution myself.
