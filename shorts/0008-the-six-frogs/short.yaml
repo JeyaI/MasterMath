@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -95,7 +95,7 @@ review:
   messages:
     1: '1567418545674133565'
     2: '1567634824766955541'
-  last_seen: '1567676506753204369'
+  last_seen: '1567682016802250753'
   comment:
 video:
   pending:
@@ -137,6 +137,7 @@ video:
       message: '1567678048449597511'
       video_id: 7b1Un4MfcZc
       sha256: 36a04fff9cd6ec487841c0844415f40bdb60c7b0e3178c96b66ed798cbb34e45
-  comment:
+  comment: Numbers should be centered, so that when the frogs rotate, the numbers dont move outside 
+    of the frogs body and are still visible
   warned:
   as_is:
