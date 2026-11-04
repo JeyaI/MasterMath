@@ -1,8 +1,9 @@
 """When an approved Short goes public (#29): the next open daily slot. Pure, so it's easy to test.
 
 Rules (docs/pipeline-design.md, Publish scheduling): at most `per_day` releases a day (rule 1
-caps it at 2), and at least `lead_hours` between approval and release, to leave time for the
-stop sign. Settings: `release:` in config/pipeline.yaml.
+caps it at 2), at least `lead_hours` between approval and release, to leave time for the stop
+sign, and no earlier than `days_ahead` days after the approval (1 = tomorrow at the soonest).
+Settings: `release:` in config/pipeline.yaml.
 """
 from __future__ import annotations
 
@@ -12,7 +13,7 @@ from zoneinfo import ZoneInfo
 
 from . import paths, yamlio
 
-DEFAULTS = {"time": "17:00", "timezone": "America/New_York", "per_day": 1, "lead_hours": 2}
+DEFAULTS = {"time": "17:00", "timezone": "America/New_York", "per_day": 1, "lead_hours": 2, "days_ahead": 0}
 
 
 def settings() -> dict:
@@ -33,7 +34,7 @@ def next_slot(now: dt.datetime, taken: list[dt.date], cfg: dict | None = None) -
     hh, mm = (int(x) for x in str(cfg["time"]).split(":"))
     used = Counter(taken)
     local_now = now.astimezone(tz)
-    day = local_now.date()
+    day = local_now.date() + dt.timedelta(days=int(cfg["days_ahead"]))
     while True:
         slot = dt.datetime.combine(day, dt.time(hh, mm), tzinfo=tz)
         if slot >= local_now + dt.timedelta(hours=cfg["lead_hours"]) and used[day] < cfg["per_day"]:

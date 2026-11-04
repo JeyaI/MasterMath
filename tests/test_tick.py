@@ -312,7 +312,7 @@ def test_check_mark_schedules_that_exact_upload_at_the_next_slot(root):
     t.run()
     assert s.status == "scheduled"
     when = dt.datetime.fromisoformat(s.data()["youtube"]["publish_at"])
-    assert when.isoformat() == "2026-11-04T17:00:00-05:00"          # today, 5 PM New York; 5 h away
+    assert when.isoformat() == "2026-11-05T17:00:00-05:00"          # tomorrow 5 PM New York (days_ahead: 1)
     assert yt.videos[vid] == {**yt.videos[vid], "privacyStatus": "private", "publishAt": when}
     assert s.data()["youtube"]["video_id"] == vid
     assert d.reactors(thread, d.threads[thread][-1]["id"], STOP) == {BOT}
@@ -352,10 +352,10 @@ def test_release_check_records_it_as_published(root):
     t.run()
     t.run()
     assert s.status == "scheduled"                      # not due yet
-    clock.t = NOON + dt.timedelta(hours=6)
+    clock.t = NOON + dt.timedelta(days=1, hours=6)
     yt.release_due()
     t.run()
-    assert s.status == "published" and s.data()["youtube"]["published_at"] == "2026-11-04"
+    assert s.status == "published" and s.data()["youtube"]["published_at"] == "2026-11-05"
     assert d.bot_said(thread)[-1].startswith("🎉 Live")
 
 
@@ -364,7 +364,7 @@ def test_a_late_release_is_flagged_once(root):
     d, t, yt, s, thread = in_review(root, clock=clock)
     d.tap(video(s)[1]["message"], ACCEPT)
     t.run()
-    clock.t = NOON + dt.timedelta(hours=8)               # YouTube never released it
+    clock.t = NOON + dt.timedelta(days=1, hours=8)       # YouTube never released it
     t.run()
     t.run()
     assert s.status == "scheduled"
@@ -431,6 +431,11 @@ NY = {"time": "17:00", "timezone": "America/New_York", "per_day": 1, "lead_hours
 def test_next_slot(now, taken, expected):
     got = release.next_slot(dt.datetime.fromisoformat(now), [dt.date.fromisoformat(d) for d in taken], NY)
     assert got.isoformat() == expected
+
+
+def test_days_ahead_skips_today():
+    now = dt.datetime.fromisoformat("2026-11-04T09:00:00-05:00")
+    assert release.next_slot(now, [], {**NY, "days_ahead": 1}).isoformat() == "2026-11-05T17:00:00-05:00"
 
 
 def test_two_a_day_at_most():

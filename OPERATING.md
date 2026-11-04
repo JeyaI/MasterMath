@@ -68,7 +68,7 @@ You're the editor: you accept scripts, watch each video on your phone and approv
 8. **YouTube and the job sandbox, for the video loop.**
    1. Sign in as the channel: `ms youtube login`, open the link it prints, and choose the channel's account. `ms youtube hello` checks it. While the Google app is in Testing (#31), the sign-in lasts 7 days; when it lapses, the bot says so in the thread and video jobs wait until you sign in again.
    2. Build the sandbox image that jobs run in: `docker build -t mathshorts . && docker build -t mathshorts-job -f Dockerfile.job .` Jobs, and every check of the code they write, run in it with no access to `~/.config`. Rebuild it when you update Claude Code (`CLAUDE_CODE_VERSION` in `Dockerfile.job`).
-   3. Release time and the daily cap are in `config/pipeline.yaml` (`release:`; 5:00 PM New York, 1 a day).
+   3. Release time and the daily cap are in `config/pipeline.yaml` (`release:`; 5:00 PM New York, 2 a day, tomorrow at the soonest).
 9. **Catalog:** `catalog/dudeney-amusements.jsonl` is already in the repo (430 puzzles). To add another book, see "Rarely" below.
 
 ---
@@ -94,7 +94,7 @@ At 8 PM and 1 AM, `ms tick --draft` writes one new script if fewer than 4 drafts
 
 About 10–15 minutes later the video arrives in the same thread as an unlisted YouTube link. Before it's posted, tick has run `verify.py` and `ms check` itself and rendered the final 1080×1920 video; that file is what was uploaded. Watch it on your phone.
 
-- **✅ on the newest video:** approved. That exact upload is set to go public at the next open 5:00 PM slot (at least 2 hours away, 1 a day), and the bot posts the time. YouTube releases it, and the next tick after that records it as `published` and posts the link.
+- **✅ on the newest video:** approved. That exact upload is set to go public at the next open 5:00 PM slot (tomorrow at the soonest, 2 a day), and the bot posts the time. YouTube releases it, and the next tick after that records it as `published` and posts the link.
 - **🛑 on the "approved" message:** stops the release. The video goes back to unlisted and is posted again for a fresh ✅ or a reply.
 - **Reply in the thread:** a video revise job changes it, and v2 arrives as a new upload; v1's upload is deleted. Start with a timestamp when you can ("0:12 slow down the slide"). A reply can change the script too.
 - **❌ on any version:** abandoned; its uploads are deleted.

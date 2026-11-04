@@ -8,5 +8,6 @@ sandbox: docker     # where jobs and their code run (mathshorts/sandbox.py); `ho
 release:
   time: "17:00"
   timezone: America/New_York
-  per_day: 1
+  per_day: 2        # both go out at the same time; best release time is #43
   lead_hours: 2     # at least this long between your check mark and release, to leave time for 🛑
+  days_ahead: 1     # 1 = never the same day as your check mark: tomorrow at the soonest

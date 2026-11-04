@@ -6,9 +6,13 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **43**
+Next id: **44**
 
 ## Open
+
+### #43 · Find the best time to release
+status: open · P3 · feature
+Releases go out at a fixed 5:00 PM New York, up to 2 a day at the same time, never the same day as the ✅ (`release:` in `config/pipeline.yaml`). Find out whether another time, or two different slots on a 2-Short day, does better: start from the YouTube Analytics API (when viewers are on, views in the first hours per Short, ties in with #12), or a simple A/B over a few weeks. Then change `release.time`, or give `release.py` a list of times.
 
 ### #38 · A crash between upload and saving the video id leaves a stray upload
 status: open · P3 · bug
