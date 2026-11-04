@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0007'
 title: The Seven Pigs
-status: animating
+status: video_review
 catalog_id: dudeney-amusements-165
 tags:
   - counting
@@ -112,26 +112,12 @@ review:
   comment:
 video:
   pending:
-    version: 1
-    file: /home/jeya/mathshorts/out/review/0007-the-seven-pigs/v1.mp4
-    sha256: 37d26afcd2f530b534d9ce90fe6dc39f3414bfc670b2e42141601f078c5f43ff
-    summary: "Wrote scene.py for 0007 (46.1 s full preview v3). `ms check` and `ms verify` pass with no
-      warnings. The pigs never move. The failed parallel try (4 sties, crowded sties pulse red) comes
-      before the countdown, then the crossing fences go in with a 2 / 4 / 7 counter and a tinted-sties
-      payoff. The Level 2 card shows 4 fences with the crossing points marked and is not solved.\nI changed
-      two captions in short.yaml: dropped \"Seven pigs, one pen\" (the hook title already says it) and
-      renamed the payoff caption to \"Every pig has a sty ✓\", because `ms check` rejected numbers in
-      the payoff caption that aren't in the level 1 answer.\nThe pen is fairly small and the pigs are
-      small dots, since they have to stay inside the 0.25 fence margin from verify.py. I checked 8 frames
-      and the layout looks fine."
-    usage:
-      job: animate
-      short: 0007-the-seven-pigs
-      exit: 0
-      seconds: 165
-      subtype: success
-      is_error: false
-      num_turns: 43
-      total_cost_usd: 0.5042343
-      log: job-animate-20261103-202004.jsonl
-    video_id: PZBuCKbJyKw
+  version: 1
+  versions:
+    1:
+      message: '1567348700731277343'
+      video_id: PZBuCKbJyKw
+      sha256: 37d26afcd2f530b534d9ce90fe6dc39f3414bfc670b2e42141601f078c5f43ff
+  comment:
+  warned:
+  as_is:
