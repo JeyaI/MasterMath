@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -99,26 +99,7 @@ review:
   comment:
 video:
   pending:
-    version: 4
-    file: /home/jeya/mathshorts/out/review/0008-the-six-frogs/v4.mp4
-    sha256: 003ea0a34e6d3ad7376fd55ee585abc165798345dddd0814b8afd18e32abb7b5
-    summary: 'Redrew the frogs in scene.py as cute cartoon frogs: round body, big shiny eyes, smile, blush,
-      stubby legs. Each frog now turns to face the way it is about to slide or leap, then moves. They
-      turn back to face up for the payoff. Moves, numbers and captions are unchanged, and SCRIPT.md has
-      a v3→v4 note. `ms verify 8` and `ms check 8` pass, and the sampled preview frames (hook and mid-solution)
-      show the cuter frogs and the turning.'
-    usage:
-      job: revise_video
-      short: 0008-the-six-frogs
-      exit: 0
-      seconds: 118
-      subtype: success
-      is_error: false
-      num_turns: 13
-      total_cost_usd: 0.22094119999999998
-      log: job-revise_video-20261104-170037.jsonl
-    video_id: L2Zt_nXm8wQ
-  version: 3
+  version: 4
   versions:
     1:
       message: '1567638338071167066'
@@ -132,8 +113,10 @@ video:
       message: '1567658059579392090'
       video_id: QC5bYRTiH30
       sha256: da2bec3ccca728c3135d40db9604d38689fb817b36232186dc3702b2f593a662
-  comment: That is not really what frogs look like, even in cartoon form. Those look more like 
-    crickets. Let's make sure the frogs actually rotate to turn in the direction they are going to 
-    leap or hop. Let's make the frogs real cute.
+    4:
+      message: '1567660772870332476'
+      video_id: L2Zt_nXm8wQ
+      sha256: 003ea0a34e6d3ad7376fd55ee585abc165798345dddd0814b8afd18e32abb7b5
+  comment:
   warned:
   as_is:
