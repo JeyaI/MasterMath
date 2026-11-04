@@ -86,17 +86,15 @@ def frog(k: int, r: float, opacity: float = 1.0) -> VGroup:
     legs = VGroup(*parts)
     body = ell(1.55, 1.8, 0, -0.05, col, 0, 3)
     belly = ell(0.95, 0.8, 0, -0.45, light, 0, 0)
-    bumps = VGroup(*[dot(0.36, sx * 0.46, 0.82, col, 3) for sx in (-1, 1)])
-    eyes = VGroup(*[dot(0.27, sx * 0.46, 0.84, ManimColor("#FFFFFF"), 2) for sx in (-1, 1)])
-    pupils = VGroup(*[VGroup(dot(0.16, sx * 0.46, 0.84, BG),
-                             dot(0.06, sx * 0.46 + 0.06, 0.91, ManimColor("#FFFFFF")))
+    bumps = VGroup(*[dot(0.24, sx * 0.5, 0.78, col, 3) for sx in (-1, 1)])
+    eyes = VGroup(*[dot(0.17, sx * 0.5, 0.8, ManimColor("#FFFFFF"), 2) for sx in (-1, 1)])
+    pupils = VGroup(*[VGroup(dot(0.1, sx * 0.5, 0.8, BG),
+                             dot(0.035, sx * 0.5 + 0.04, 0.84, ManimColor("#FFFFFF")))
                       for sx in (-1, 1)])
     cheeks = VGroup(*[ell(0.3, 0.18, sx * 0.62, 0.32, ManimColor("#FF8FA3")) .set_stroke(width=0)
                       for sx in (-1, 1)])
-    smile = ArcBetweenPoints(np.array([-0.2 * u, 0.4 * u, 0]), np.array([0.2 * u, 0.4 * u, 0]), angle=1.6,
-                             stroke_color=BG, stroke_width=3 if r > 0.4 else 2).set_stroke(opacity=opacity)
     nose = VGroup(*[dot(0.03, sx * 0.07, 0.55, BG) for sx in (-1, 1)])
-    shape = VGroup(legs, body, belly, bumps, eyes, pupils, cheeks, smile, nose)
+    shape = VGroup(legs, body, belly, bumps, eyes, pupils, cheeks, nose)
     num = Text(str(k), font=FONT, weight=BOLD, font_size=int(r * 70), color=BG)
     num.move_to([0, -0.4 * u, 0])
     if opacity < 1:

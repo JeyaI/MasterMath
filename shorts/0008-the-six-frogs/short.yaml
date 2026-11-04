@@ -99,6 +99,23 @@ review:
   comment:
 video:
   pending:
+    version: 5
+    file: /home/jeya/mathshorts/out/review/0008-the-six-frogs/v5.mp4
+    sha256: 9d6a6e9d36a60e08bd098bb78cc1c8fb3ce762b59668a29d1b3771305f839fdf
+    summary: Frog eyes and eye bumps are now about 35% smaller. The smile is removed, so no mouth 
+      shows on the top-down head. The cheeks and nostril dots are unchanged. Only scene.py changed, 
+      and `ms preview 8` and `ms check 8` both pass. I looked at one frame near 8 s, where the frogs
+      are small. I did not run `ms verify`, since no numbers or claims changed.
+    usage:
+      job: revise_video
+      short: 0008-the-six-frogs
+      exit: 0
+      seconds: 68
+      subtype: success
+      is_error: false
+      num_turns: 11
+      total_cost_usd: 0.09563169999999999
+      log: job-revise_video-20261104-173004.jsonl
   version: 4
   versions:
     1:
