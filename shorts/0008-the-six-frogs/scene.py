@@ -18,7 +18,7 @@ sys.path[:0] = [str(REPO), str(HERE)]
 
 from manim import (  # noqa: E402
     DOWN, PI, UP, Sector, TAU, ArcBetweenPoints, Circle, Ellipse, FadeIn, FadeOut, GrowFromCenter, Indicate, LaggedStart,
-    ManimColor, MoveAlongPath, RoundedRectangle, Scene, Text, VGroup, there_and_back, Transform, Arrow,
+    ManimColor, MoveAlongPath, Dot, Rotate, Succession, RoundedRectangle, Scene, Text, VGroup, there_and_back, Transform, Arrow,
 )
 import numpy as np  # noqa: E402
 
@@ -61,10 +61,11 @@ def squares(n: int, y: float, pitch: float, r: float = 0.5, fill=PAD_FILL, strok
 
 
 def frog(k: int, r: float, opacity: float = 1.0) -> VGroup:
-    """A top-down cartoon frog (head up): head with bulging eyes, folded front and back legs with
-    feet, its number on the back."""
+    """A cute top-down cartoon frog (head up): round body, big shiny eyes, smile, blush, stubby legs.
+    Only `shape` turns to face the way it hops; the number stays upright. `anchor` marks its centre."""
     col = frog_color(k)
-    dark = ManimColor(col).interpolate(ManimColor("#000000"), 0.3)
+    dark = ManimColor(col).interpolate(ManimColor("#000000"), 0.25)
+    light = ManimColor(col).interpolate(ManimColor("#FFFFFF"), 0.35)
     u = 0.86 * r
 
     def ell(w, h, x, y, c, rot=0.0, sw=2):
@@ -72,49 +73,74 @@ def frog(k: int, r: float, opacity: float = 1.0) -> VGroup:
                     stroke_color=BG, stroke_width=sw)
         return e.rotate(rot).move_to([x * u, y * u, 0])
 
+    def dot(rad, x, y, c, sw=0):
+        return Circle(radius=rad * u, fill_color=c, fill_opacity=opacity, stroke_color=BG,
+                      stroke_width=sw).move_to([x * u, y * u, 0])
+
     parts = []
     for sx in (-1, 1):
-        # back legs: big folded thigh and a splayed foot
-        parts.append(ell(0.9, 0.5, sx * 0.85, -0.7, dark, sx * 0.9))
-        parts.append(ell(0.75, 0.3, sx * 0.9, -1.1, dark, -sx * 0.5))
-        # front legs: short arm and a small hand
-        parts.append(ell(0.6, 0.28, sx * 0.78, 0.3, dark, -sx * 0.5))
-        parts.append(ell(0.4, 0.22, sx * 1.05, 0.45, dark, sx * 0.3))
+        parts.append(ell(0.8, 0.55, sx * 0.85, -0.65, dark, sx * 0.7))    # back thigh
+        parts.append(ell(0.7, 0.34, sx * 0.88, -1.05, dark, -sx * 0.4))   # back foot
+        parts.append(ell(0.5, 0.32, sx * 0.85, 0.1, dark, -sx * 0.6))     # front arm
+        parts.append(dot(0.2, sx * 1.0, 0.3, dark, 2))                    # hand
     legs = VGroup(*parts)
-    body = ell(1.3, 1.6, 0, -0.1, col, 0, 3)
-    head = ell(1.2, 0.85, 0, 0.72, col, 0, 3)
-    eyes = VGroup(*[Circle(radius=0.22 * u, fill_color=ManimColor("#FFFFFF"), fill_opacity=opacity,
-                           stroke_color=BG, stroke_width=2).move_to([sx * 0.48 * u, 0.98 * u, 0])
-                    for sx in (-1, 1)])
-    pupils = VGroup(*[Circle(radius=0.11 * u, fill_color=BG, fill_opacity=opacity, stroke_width=0)
-                      .move_to(e.get_center() + [0, 0.03 * u, 0]) for e in eyes])
-    num = Text(str(k), font=FONT, weight=BOLD, font_size=int(r * 90), color=BG)
-    num.move_to([0, -0.2 * u, 0])
+    body = ell(1.55, 1.8, 0, -0.05, col, 0, 3)
+    belly = ell(0.95, 0.8, 0, -0.45, light, 0, 0)
+    bumps = VGroup(*[dot(0.36, sx * 0.46, 0.82, col, 3) for sx in (-1, 1)])
+    eyes = VGroup(*[dot(0.27, sx * 0.46, 0.84, ManimColor("#FFFFFF"), 2) for sx in (-1, 1)])
+    pupils = VGroup(*[VGroup(dot(0.16, sx * 0.46, 0.84, BG),
+                             dot(0.06, sx * 0.46 + 0.06, 0.91, ManimColor("#FFFFFF")))
+                      for sx in (-1, 1)])
+    cheeks = VGroup(*[ell(0.3, 0.18, sx * 0.62, 0.32, ManimColor("#FF8FA3")) .set_stroke(width=0)
+                      for sx in (-1, 1)])
+    smile = ArcBetweenPoints(np.array([-0.2 * u, 0.4 * u, 0]), np.array([0.2 * u, 0.4 * u, 0]), angle=1.6,
+                             stroke_color=BG, stroke_width=3 if r > 0.4 else 2).set_stroke(opacity=opacity)
+    nose = VGroup(*[dot(0.03, sx * 0.07, 0.55, BG) for sx in (-1, 1)])
+    shape = VGroup(legs, body, belly, bumps, eyes, pupils, cheeks, smile, nose)
+    num = Text(str(k), font=FONT, weight=BOLD, font_size=int(r * 70), color=BG)
+    num.move_to([0, -0.4 * u, 0])
     if opacity < 1:
         num.set_opacity(opacity + 0.15)
-    g = VGroup(legs, body, head, eyes, pupils, num).set_z_index(5)
-    g.pupils = pupils
+    anchor = Dot([0, 0, 0], radius=0.001).set_opacity(0)
+    g = VGroup(shape, num, anchor).set_z_index(5)
+    g.shape, g.pupils, g.anchor, g.facing = shape, pupils, anchor, 0.0
     return g
 
 
 def place(board, y: float, r: float, pitch: float, n: int, opacity: float = 1.0) -> dict:
-    return {k: frog(k, r, opacity).move_to(sq_pos(i, y, pitch, n)) for i, k in enumerate(board) if k}
+    return {k: frog(k, r, opacity).shift(sq_pos(i, y, pitch, n)) for i, k in enumerate(board) if k}
+
+
+def turn(f: VGroup, target: float):
+    """Turn the frog's body (not its number) to face `target` (0 = up, -PI/2 = right, PI/2 = left)."""
+    delta = (target - f.facing + PI) % TAU - PI
+    f.facing = target
+    return Rotate(f.shape, delta, about_point=f.anchor.get_center())
 
 
 def hop(f: VGroup, dest: np.ndarray, leap: bool):
-    """Slides are small hops; leaps are high arcs over the neighbour."""
-    sign = 1 if dest[0] > f.get_center()[0] else -1
-    return MoveAlongPath(f, ArcBetweenPoints(f.get_center(), dest, angle=-sign * (2.2 if leap else 1.0)))
+    """Turn to face the way it is going, then slide as a small hop or leap in a high arc."""
+    start = f.anchor.get_center()
+    sign = 1 if dest[0] > start[0] else -1
+    t = turn(f, -sign * PI / 2)
+    t.run_time = 0.25
+    m = MoveAlongPath(f, ArcBetweenPoints(start, dest, angle=-sign * (2.2 if leap else 1.0)))
+    m.run_time = 1.0
+    return Succession(t, m)
+
+
+def face_up(frogs):
+    return [turn(f, 0.0) for f in frogs]
 
 
 def blink(frogs):
-    return LaggedStart(*[f.pupils.animate(rate_func=there_and_back).stretch(0.1, 1) for f in frogs],
-                       lag_ratio=0.1)
+    return LaggedStart(*[p.animate(rate_func=there_and_back).stretch(0.1, 1)
+                         for f in frogs for p in f.pupils], lag_ratio=0.05)
 
 
 def jump_for_joy(frogs):
     return LaggedStart(*[f.animate(rate_func=there_and_back).shift(0.4 * UP)
-                         for f in sorted(frogs, key=lambda f: f.get_center()[0])], lag_ratio=0.2)
+                         for f in sorted(frogs, key=lambda f: f.anchor.get_center()[0])], lag_ratio=0.2)
 
 
 class Short(Scene):
@@ -212,6 +238,7 @@ class Short(Scene):
         # --- payoff -------------------------------------------------------------------------------------
         beat(self, "payoff")
         self.add_sound(SFX["chime"])
+        self.play(*face_up(frogs.values()), run_time=0.3)
         self.counter("10 moves ✓", GOOD)
         cap.show("10 moves. Fewest possible ✓", GOOD)
         self.play(jump_for_joy(frogs.values()), run_time=1.2)
