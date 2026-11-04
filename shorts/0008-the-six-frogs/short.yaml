@@ -99,6 +99,23 @@ review:
   comment:
 video:
   pending:
+    version: 7
+    file: /home/jeya/mathshorts/out/review/0008-the-six-frogs/v7.mp4
+    sha256: 5992cf7c4471cb7617bd3e59704c00f47a3091f7b79fea59833c549c0733f189
+    summary: In scene.py's frog(), I lowered the eyes, pupils and eye bumps (y 0.76→0.55, bumps 
+      0.74→0.53) so they sit inside the head when a frog faces up. I raised the nostrils (y 
+      0.55→0.64). The preview frame shows the eyes inside the head, and `ms check` passes. I didn't 
+      run `ms verify`, because no numbers or claims changed.
+    usage:
+      job: revise_video
+      short: 0008-the-six-frogs
+      exit: 0
+      seconds: 60
+      subtype: success
+      is_error: false
+      num_turns: 10
+      total_cost_usd: 0.09828540000000001
+      log: job-revise_video-20261104-175010.jsonl
   version: 6
   versions:
     1:
