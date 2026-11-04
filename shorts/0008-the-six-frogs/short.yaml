@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0008'
 title: The Six Frogs
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-214
 tags:
   - counters
@@ -95,7 +95,7 @@ review:
   messages:
     1: '1567418545674133565'
     2: '1567634824766955541'
-  last_seen: '1567674506456211537'
+  last_seen: '1567676506753204369'
   comment:
 video:
   pending:
@@ -133,6 +133,6 @@ video:
       message: '1567675590054781158'
       video_id: A8vea_R7Zt8
       sha256: 45454ddf637ba07376f8da64a08d2997c1061250e899b048fd5b60fb87297140
-  comment:
+  comment: Nose needs to go a little bit higher.
   warned:
   as_is:
