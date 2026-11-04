@@ -6,6 +6,8 @@ Video revision (v1 → v2): the pieces are now side-view cartoon frogs on lily p
 
 Video revision (v2 → v3): the view is now top-down. Round lily pads (each with a notch) sit in a row and the frogs are drawn from above (head with bulging eyes, folded front and back legs with feet, number on the back). Moves and captions are unchanged.
 
+Video revision (v5 → v6): frog eyes moved inward, close together on top of the head and smaller, like a vertebrate's, not bug-like on the sides. Moves and captions unchanged.
+
 Video revision (v3 → v4): the frogs are redrawn to look like real, cute frogs (round body, big shiny eyes, smile, blush, stubby legs), and each frog turns to face the direction it is about to slide or leap before it moves. Moves and captions are unchanged.
 
 ## Puzzle
