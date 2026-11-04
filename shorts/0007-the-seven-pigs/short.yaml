@@ -83,7 +83,7 @@ captions:
   - "Second crosses it: 4"
   - "Third crosses both: 7"
   - "A triangle in the middle"
-  - "Sort the pigs"
+  - "Check the pigs"
   - "Every pig has a sty ✓"
   - "Comment just the number ↓"
 music:
@@ -112,6 +112,22 @@ review:
   comment:
 video:
   pending:
+    version: 2
+    file: /home/jeya/mathshorts/out/review/0007-the-seven-pigs/v2.mp4
+    sha256: e3c11c2b3b637ea4242ebc6606eb30fdbaaaf38a0222ed8bda0bdb293fe2b433
+    summary: "Changed the caption \"Sort the pigs\" to \"Check the pigs\" in scene.py, short.yaml and
+      SCRIPT.md. Nothing else changed.\n`ms verify 7` passes. A full `ms preview 7` rendered v1 (46.1
+      s, 16 beats) and `ms check 7` reports no errors. I didn't pull frames to look at the new caption."
+    usage:
+      job: revise_video
+      short: 0007-the-seven-pigs
+      exit: 0
+      seconds: 36
+      subtype: success
+      is_error: false
+      num_turns: 9
+      total_cost_usd: 0.0705449
+      log: job-revise_video-20261103-203004.jsonl
   version: 1
   versions:
     1:

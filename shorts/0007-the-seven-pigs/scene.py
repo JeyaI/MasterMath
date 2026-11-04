@@ -165,7 +165,7 @@ class Short(Scene):
         # --- sort the pigs: every sty its colour -------------------------------------------------------
         final = [region(s, STY_COLORS[i], 0.55) for i, s in enumerate(STIES)]
         self.add_sound(SFX["chime"], gain=-6)
-        cap.show("Sort the pigs", extra=[LaggedStart(*[FadeIn(r) for r in final], lag_ratio=0.12, run_time=1.2)])
+        cap.show("Check the pigs", extra=[LaggedStart(*[FadeIn(r) for r in final], lag_ratio=0.12, run_time=1.2)])
         self.wait(0.4)
         marks = []
         for i, s in enumerate(STIES):

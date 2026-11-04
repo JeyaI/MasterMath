@@ -29,7 +29,7 @@ Differs from recent Shorts. I checked the docstrings of 0004 (bishop loops, mult
 9. "Second crosses it: 4" (3 s)
 10. "Third crosses both: 7": counter ticks to 7 (4 s)
 11. "A triangle in the middle": highlight the triangle and its neighbours (3 s)
-12. "Sort the pigs": the pigs get their sties, colours in (3 s)
+12. "Check the pigs": the pigs get their sties, colours in (3 s)
 13. "7 sties, 7 pigs ✓": payoff (3 s)
 14. Level 2 card then "Comment just the number ↓" (about 12 s for the hold)
 
