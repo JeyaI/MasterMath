@@ -13,7 +13,7 @@ A square pen holds seven pigs, scattered so no row or pattern helps. You have th
 ## Insight
 The tempting plan is three parallel fences: they make only 4 sties, so the pigs crowd. The idea is to make the fences cross. Each new fence crosses all the earlier ones inside the pen, so it cuts through more sties: the 1st fence gives 2 sties, the 2nd adds 2 (4), the 3rd adds 3 (7). Three lines can never make more than 7, so 7 pigs fit only if the sties are exactly those 7. Three crossing fences leave a small triangle in the middle, three sties beside its sides and three in the corners, so one pig goes in the triangle and the rest get sorted around it.
 
-Animation: the pen and pigs sit still (pigs wobble slightly). First the 3 parallel fences slide in, the sties are tinted and the crowded ones pulse red. The fences retract. Then the crossing fences sweep in one at a time; after each, the newly split sties flash and a counter 2 / 4 / 7 ticks up. At the end each sty is tinted in a different colour, and each pig gets a colour pop and a tick. Fence positions, sties and pigs come from `verify.py`.
+Animation: the pen and pigs sit perfectly still, as in Dudeney (the pigs never move; only the fences do). Before the countdown, a failed example: 3 parallel fences slide in, the sties are tinted and the crowded ones pulse red, so viewers see what a fail looks like. The fences retract, then the countdown. After it, the crossing fences sweep in one at a time; after each, the newly split sties flash and a counter 2 / 4 / 7 ticks up. At the end each sty is tinted in a different colour, and each pig gets a colour pop and a tick. Fence positions, sties and pigs come from `verify.py`.
 
 Differs from recent Shorts. I checked the docstrings of 0004 (bishop loops, multiplying choices), 0005 (the potato: grid vs every-cut-crosses-every-cut, counter 2, 4, 7, 11, 16, 22) and 0006 (flag cross area, algebra). 0005 is the nearest: it also counts regions from crossing cuts, and the 2, 4, 7 steps overlap with it. What is new here is the opposite direction: the regions are given by where the pigs are, so the picture is a placement and sorting problem (which side of each fence is each pig) in a square pen with a given point set, not a count on a blank disc. I kept the region-count caption to a single beat so that it does not retell the potato.
 
@@ -21,10 +21,10 @@ Differs from recent Shorts. I checked the docstrings of 0004 (bishop loops, mult
 1. "Seven pigs, one pen": pen and pigs pop in (3 s)
 2. "3 straight fences": the three fence lines pass over the pen once (4 s)
 3. "One pig per sty": the rule; touching a pig is out (4 s)
-4. "Pause and try it": countdown 5 (6 s)
-5. "Parallel fences: 4 sties": the parallel try (5 s)
-6. "Pigs still share": crowded sties pulse red (3 s)
-7. "So make fences cross": reset (3 s)
+4. "Parallel fences: 4 sties": a failed try, shown before the countdown; fences slide in, pigs stay put (5 s)
+5. "Pigs still share": crowded sties pulse red, then the fences slide out (3 s)
+6. "Pause and try it": countdown 5 (6 s)
+7. "So make fences cross": the fences slide in from the walls to the right places (3 s)
 8. "First fence: 2 sties" (2 s)
 9. "Second crosses it: 4" (3 s)
 10. "Third crosses both: 7": counter ticks to 7 (4 s)

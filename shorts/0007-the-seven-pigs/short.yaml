@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0007'
 title: The Seven Pigs
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-165
 tags:
   - counting
@@ -76,9 +76,9 @@ captions:
   - "Seven pigs, one pen"
   - "3 straight fences"
   - "One pig per sty"
-  - "Pause and try it"
   - "Parallel fences: 4 sties"
   - "Pigs still share"
+  - "Pause and try it"
   - "So make fences cross"
   - "First fence: 2 sties"
   - "Second crosses it: 4"
@@ -105,10 +105,9 @@ youtube:
   published_at:
 review:
   thread_id: '1567343191584280647'
-  version: 1
+  version: 2
   messages:
     1: '1567343194461708313'
+    2: '1567346492220375190'
   last_seen: '1567346094776524921'
-  comment: Show an example (can do failed parallel attempt) before asking the people to try. Shows 
-    them what a fail looks like. Remember that the pigs are static in Dudeneys puzzle. We must move 
-    the fences to the right position and not move the pigs.
+  comment:
