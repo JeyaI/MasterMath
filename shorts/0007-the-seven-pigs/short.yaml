@@ -1,0 +1,111 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0007'
+title: The Seven Pigs
+status: script_review
+catalog_id: dudeney-amusements-165
+tags:
+  - counting
+  - geometry
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 165
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    [Illustration]
+
+        +------------------------------+
+        |                              |
+        |                        P     |
+        |                              |
+        |          P                   |
+        |       P                      |
+        |           P                  |
+        |              P               |
+        |           P                  |
+        |     P                        |
+        |                              |
+        +------------------------------+
+
+    Here is a little puzzle that was put to one of the sons of Erin the
+    other day and perplexed him unduly, for it is really quite easy. It will
+    be seen from the illustration that he was shown a sketch of a square pen
+    containing seven pigs. He was asked how he would intersect the pen with
+    three straight fences so as to enclose every pig in a separate sty. In
+    other words, all you have to do is to take your pencil and, with three
+    straight strokes across the square, enclose each pig separately. Nothing
+    could be simpler.
+
+    [Illustration]
+
+    The Irishman complained that the pigs would not keep still while he was
+    putting up the fences. He said that they would all flock together, or
+    one obstinate beast would go into a corner and flock all by himself. It
+    was pointed out to him that for the purposes of the puzzle the pigs were
+    stationary. He answered that Irish pigs are not stationery--they are
+    pork. Being persuaded to make the attempt, he drew three lines, one of
+    which cut through a pig. When it was explained that this is not allowed,
+    he protested that a pig was no use until you cut its throat. "Begorra,
+    if it's bacon ye want without cutting your pig, it will be all gammon."
+    We will not do the Irishman the injustice of suggesting that the
+    miserable pun was intentional. However, he failed to solve the puzzle.
+    Can you do it?
+  solution: |
+    The illustration shows the direction for placing the three fences so as
+    to enclose every pig in a separate sty. The greatest number of spaces
+    that can be enclosed with three straight lines in a square is seven, as
+    shown in the last puzzle. Bearing this fact in mind, the puzzle must be
+    solved by trial.
+
+    [Illustration: THE SEVEN PIGS.]
+level1:
+  statement: "Seven pigs stand in a square pen. Put up 3 straight fences, wall to wall, so every pig has
+    a sty of its own. No fence may touch a pig."
+  answer: "Three fences that cross each other inside the pen, making a small triangle round one pig."
+  insight: "Parallel fences make only 4 sties. Fences that cross each other make more: three fences, each
+    pair crossing inside the pen, cut it into 1 + 3 + 3 = 7 sties, the most 3 lines can make. So put one
+    pig in the middle triangle, three in the sties beside its sides and three in the corner sties."
+level2:
+  statement: "Now 4 straight fences, every pair crossing inside the pen, no three meeting at one point.
+    How many sties are shut in completely, touching no wall?"
+  answer: 3
+  accept: [3, "three", "3 sties"]
+  why: "With 3 fences only the middle triangle is shut in. The 4th fence crosses all 3 and closes 2 more
+    sties in the middle: 1 + 2 = 3 (4 fences make 11 sties in all)."
+captions:
+  - "Seven pigs, one pen"
+  - "3 straight fences"
+  - "One pig per sty"
+  - "Pause and try it"
+  - "Parallel fences: 4 sties"
+  - "Pigs still share"
+  - "So make fences cross"
+  - "First fence: 2 sties"
+  - "Second crosses it: 4"
+  - "Third crosses both: 7"
+  - "A triangle in the middle"
+  - "Sort the pigs"
+  - "7 sties, 7 pigs ✓"
+  - "Comment just the number ↓"
+music:
+  piece: k545
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "Can 3 straight fences give 7 pigs a sty each?"
+  description: |
+    Seven pigs in a square pen, 3 straight fences, one pig per sty. Can you place them? Level 2: 4 fences. Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 165. Music: W. A. Mozart, Piano Sonata in C, K. 545.
+  tags:
+    - math puzzle
+    - geometry
+    - puzzle
+    - brain teaser
+  video_id:
+  url:
+  published_at:
+review:
+  thread_id: '1567343191584280647'
+  version: 1
+  messages:
+    1: '1567343194461708313'
+  last_seen: '1567343194461708313'
