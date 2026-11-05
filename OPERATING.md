@@ -6,8 +6,8 @@ This is the playbook for running the channel: what you do, when, and with which 
 
 ```
  script job ──▶ script in Discord ──▶ ✅ ──▶ animate job ──▶ video in Discord ──▶ ✅ ──▶ scheduled ──▶ public ~1 h later
- (nightly)      (react or reply)            (automatic)      (unlisted link;      (that exact upload;    (YouTube releases it;
-                                                              react or reply)       🛑 pulls it)           tick records it)
+ (nightly)      (react or reply)            (automatic)      (the MP4 itself;     (that exact file is    (YouTube releases it;
+                                                              react or reply)       uploaded; 🛑 pulls it)  tick records it)
 
  The manual path still works: draft (Claude Code) ──▶ approve ──▶ nightly batch ──▶ ready ──▶ you upload
 ```
@@ -21,10 +21,10 @@ You're the editor: you accept scripts, watch each video on your phone and approv
 | `scripting` | The nightly script job is writing it | Nothing |
 | `script_review` | A verified script is waiting in its Discord thread | ✅ to accept, ❌ to abandon, or reply to revise |
 | `revise` | A job is revising the script from your reply | Nothing; the new version arrives in the thread |
-| `animating` | The animate job is writing the scene; tick then checks, renders and uploads it | Nothing |
-| `video_review` | An unlisted video is waiting in its Discord thread | Watch it; ✅ to approve, ❌ to abandon, or reply to revise |
+| `animating` | The animate job is writing the scene; tick then checks, renders and posts it | Nothing |
+| `video_review` | The video is attached in its Discord thread; nothing is on YouTube yet | Watch it; ✅ to approve, ❌ to abandon, or reply to revise |
 | `revise_video` | A job is revising the video from your reply | Nothing; the new version arrives in the thread |
-| `scheduled` | Approved; YouTube makes it public at the time the bot posted | Nothing, or 🛑 to stop it |
+| `scheduled` | Approved and uploaded; YouTube makes it public at the time the bot posted | Nothing, or 🛑 to stop it |
 | `needs_attention` | A job failed twice | `/draft-short <n>` in Claude Code, or ❌ in Discord |
 | `abandoned` | You crossed it out; its puzzle is free again | Nothing |
 | `drafting` | Being made in Claude Code | Give feedback until it's right, then say "approve" |
@@ -86,22 +86,22 @@ You're the editor: you accept scripts, watch each video on your phone and approv
 
 ## Daily: scripts and videos in Discord (~2 min a script, ~3 min a video)
 
-At 8 PM and 1 AM, `ms tick --draft` writes one new script if fewer than 4 drafts are in the loops (`config/pipeline.yaml`). A Claude job picks the puzzle, proves the answer in `verify.py`, and writes `SCRIPT.md`; tick runs `verify.py` again itself before posting. It arrives as its own thread in the drafts channel. The first post is the puzzle alone, so you can try it first; everything about the solution (the summary, the attached `SCRIPT.md`, Level 2, the video links, errors) is behind Discord spoilers: tap to reveal. If the title would name the answer, the thread is called "a new puzzle" instead.
+At 8 PM and 1 AM, `ms tick --draft` writes one new script if fewer than 4 drafts are in the loops (`config/pipeline.yaml`). A Claude job picks the puzzle, proves the answer in `verify.py`, and writes `SCRIPT.md`; tick runs `verify.py` again itself before posting. It arrives as its own thread in the drafts channel. The first post is the puzzle alone, so you can try it first; everything about the solution (the summary, the attached `SCRIPT.md`, Level 2, the videos, errors) is behind Discord spoilers: tap to reveal. If the title would name the answer, the thread is called "a new puzzle" instead.
 
 - **✅ on the newest version:** accepted. The animate job starts on the next tick.
 - **Reply in the thread:** a revise job rewrites the script from your words, and v2 arrives in the same thread within a few minutes. Several replies before the next tick count as one comment.
 - **❌ on any version:** abandoned, and its puzzle goes back in the pool.
 
-About 10–15 minutes later the video arrives in the same thread as an unlisted YouTube link. Before it's posted, tick has run `verify.py` and `ms check` itself and rendered the final 1080×1920 video; that file is what was uploaded. Watch it on your phone.
+About 10–15 minutes later the video arrives in the same thread as an attached MP4, behind a spoiler: tap it and watch it on your phone. Before it's posted, tick has run `verify.py` and `ms check` itself and rendered the final 1080×1920 video. Nothing goes to YouTube during review (#48). If the render is over Discord's 10 MB limit, the attachment is a compressed copy (`review.max_mb` in `config/pipeline.yaml`; the post says so), but your ✅ always uploads the full-quality file.
 
-- **✅ on the newest video:** approved. That exact upload is set to go public on the hour about an hour later (a ✅ at 7:23 PM → 9:00 PM; if 2 already go out that day, the next day's 5:00 PM), and the bot posts the time. You have until then to 🛑. YouTube releases it, and the next tick after that records it as `published` and posts the link.
-- **🛑 on the "approved" message:** stops the release. The video goes back to unlisted and is posted again for a fresh ✅ or a reply.
-- **Reply in the thread:** a video revise job changes it, and v2 arrives as a new upload; v1's upload is deleted. Start with a timestamp when you can ("0:12 slow down the slide"). A reply can change the script too.
-- **❌ on any version:** abandoned; its uploads are deleted.
+- **✅ on the newest video:** approved. Tick uploads that exact file (it checks the sha256) as private and sets it to go public on the hour about an hour later (a ✅ at 7:23 PM → 9:00 PM; if 2 already go out that day, the next day's 5:00 PM), and the bot posts the time. You have until then to 🛑. YouTube releases it, and the next tick after that records it as `published` and posts the link. If the upload fails or YouTube's daily limit is hit, the bot says so once and retries each tick, and the release time is worked out again when it does go up.
+- **🛑 on the "approved" message:** stops the release. The upload goes back to private with no release time, and the video is posted again for a fresh ✅ (which reuses that upload) or a reply.
+- **Reply in the thread:** a video revise job changes it, and v2 arrives in the thread. Start with a timestamp when you can ("0:12 slow down the slide"). A reply can change the script too.
+- **❌ on any version:** abandoned; any upload is deleted.
 
 Only your account counts. A reply beats a ✅ left at the same time (the bot tells you), and a ✅ on an old version does nothing. Jobs never see the Discord or YouTube tokens, and only tick changes status, from your reactions. Each job's time and estimated cost go to `out/logs/jobs.jsonl`, and every step is in the Short's `events.jsonl`.
 
-**Sending your own scene for review.** A Short you animated in Claude Code can skip `ms approve` and the batch: `ms animate <n> --as-is` renders it, uploads it and posts it in Discord like any other video. `ms animate <n>` without the flag hands a `drafting` Short with a `SCRIPT.md` to the animate job instead.
+**Sending your own scene for review.** A Short you animated in Claude Code can skip `ms approve` and the batch: `ms animate <n> --as-is` renders it and posts it in Discord like any other video. `ms animate <n>` without the flag hands a `drafting` Short with a `SCRIPT.md` to the animate job instead.
 
 ---
 
@@ -182,7 +182,7 @@ Keep software sessions separate from drafting sessions.
 | Want to change a published Short | You can't edit a YouTube video. Make an improved Short later if it's worth it. |
 | Preview won't open from WSL | Open it manually: `explorer.exe "$(wslpath -w out/preview/<short>)"`. |
 | A Short is `needs_attention` | A job failed twice; `last_error` in `short.yaml` and `out/logs/job-*.jsonl` say why. Take it over with `/draft-short <n>`, then `ms reject <n> "taking over"` moves it to `drafting`; when it's right, `ms animate <n> --as-is` sends it back to Discord. Or ❌ it in Discord. |
-| The bot says an upload failed, or `tick.log` says video jobs are paused | `ms youtube hello`. If the token lapsed, `ms youtube login`. The rendered video waits, and the next tick uploads it without redoing the job. |
+| The bot says it couldn't upload or schedule an approved video | `ms youtube hello`. If the token lapsed, `ms youtube login`. Your ✅ stands, and the next tick uploads and schedules it. |
 | The bot says ⏸️ YouTube's daily upload limit was hit | Nothing to do. The channel hit YouTube's own daily upload cap, so uploads stop for 8 hours (the time is in the notice) and then carry on by themselves. To resume sooner, delete `out/youtube-upload-pause.json`. |
 | A job fails at once with a Docker error | Is Docker running, and does `docker images` list `mathshorts-job`? Build it (setup step 8). |
 | No new script arrived | `out/logs/tick.log`: the queue may be full (`config/pipeline.yaml`), or the job failed. |

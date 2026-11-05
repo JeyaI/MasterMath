@@ -7,15 +7,16 @@ Run every few minutes (scripts/tick.sh). Each tick, under a lock:
    - a reply                             -> a revise job, with your words as its brief
      (a reply wins over a check mark left at the same time; the bot says so)
    - a check mark on the newest script   -> animating
-   - a check mark on the newest video    -> scheduled: that exact upload is set to go public at the
-     next open slot (config/pipeline.yaml `release:`), and YouTube releases it
-   - a stop sign on the scheduled notice -> back to video_review, unlisted again
+   - a check mark on the newest video    -> scheduled: that exact file (by sha256) is uploaded private
+     with `publishAt` at the next open slot (config/pipeline.yaml `release:`), and YouTube releases
+     it. If the upload fails or is paused, it's retried each tick and the slot is worked out again.
+   - a stop sign on the scheduled notice -> back to video_review; the upload is private, unscheduled
    - a check mark on an older version    -> nothing; the bot says which version is current
 2. For scheduled Shorts past their release time, checks YouTube and records them as published.
-3. Runs revise jobs, then animate and video revise jobs. A video version is rendered, uploaded
-   unlisted and posted. If YouTube is down, the render waits and the upload is retried next tick.
-   If YouTube says the channel's daily upload limit is hit, uploads stop for 8 hours (a pause file
-   in out/) with one notice in the thread; renders still go ahead.
+3. Runs revise jobs, then animate and video revise jobs. A video version is rendered and posted in
+   the thread as an attachment (#48), re-encoded to `review.max_mb` if it's over Discord's limit;
+   nothing goes to YouTube until your check mark. If YouTube says the channel's daily upload limit
+   is hit, uploads stop for 8 hours (a pause file in out/) with one notice in the thread.
 4. With --draft, starts one script job if the queue has room, and posts the script.
 
 A job's own claims are not trusted: tick runs verify.py, `ms check` and the final render itself,
@@ -24,7 +25,7 @@ reactions are read as data. Every change is committed, one Short per commit, and
 Short's events.jsonl.
 
 No spoilers (#46): a thread opens with the puzzle alone, and everything about the solution (job
-summaries, errors, SCRIPT.md, video links) goes inside Discord spoiler tags, so you can try it first.
+summaries, errors, SCRIPT.md, videos) goes inside Discord spoiler tags, so you can try it first.
 """
 from __future__ import annotations
 
@@ -32,16 +33,18 @@ import datetime as dt
 import fcntl
 import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
+import tempfile
 import time
 from contextlib import contextmanager
 from pathlib import Path
 from typing import Callable
 
 from . import jobs, paths, release, sandbox, youtube, yamlio
-from .discord import ACCEPT, CROSS, STOP
+from .discord import ACCEPT, CROSS, FILE_LIMIT, STOP
 from .shorts import SCRIPT_LOOP, VIDEO_LOOP, Short, all_shorts
 
 ATTEMPTS = 2
@@ -135,6 +138,42 @@ def review_video(s: Short, version: int) -> Path:
     return paths.out() / "review" / s.name / f"v{version}.mp4"
 
 
+def review_cap() -> int:
+    """Bytes a review attachment may have (`review.max_mb`); under Discord's 10 MiB with room for the form."""
+    cfg = yamlio.load(paths.config() / "pipeline.yaml") if (paths.config() / "pipeline.yaml").exists() else {}
+    mb = float(((cfg or {}).get("review") or {}).get("max_mb", 9.5))
+    return min(int(mb * 1_000_000), FILE_LIMIT - 200_000)
+
+
+def review_copy(master: Path, cap: int | None = None) -> Path:
+    """What goes in the Discord thread: the master itself if it fits, else a two-pass re-encode to the cap.
+
+    The master is never changed: it is what gets uploaded on your check mark, and its sha256 is what
+    you approved. The copy sits next to it as vN-discord.mp4 and is reused if it already fits.
+    """
+    cap = cap or review_cap()
+    if master.stat().st_size <= cap:
+        return master
+    copy = master.with_name(f"{master.stem}-discord.mp4")
+    if copy.exists() and copy.stat().st_size <= cap and copy.stat().st_mtime >= master.stat().st_mtime:
+        return copy
+    seconds = float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of",
+                                    "csv=p=0", str(master)], capture_output=True, text=True, check=True).stdout)
+    audio = 96_000
+    for squeeze in (0.92, 0.8, 0.65):                    # two-pass lands close to the target, but not exactly
+        video = max(int(cap * 8 * squeeze / seconds) - audio, 100_000)
+        with tempfile.TemporaryDirectory() as tmp:
+            log = str(Path(tmp) / "pass")
+            common = ["ffmpeg", "-y", "-v", "error", "-i", str(master), "-c:v", "libx264", "-preset", "medium",
+                      "-b:v", str(video), "-pix_fmt", "yuv420p", "-passlogfile", log]
+            subprocess.run([*common, "-pass", "1", "-an", "-f", "mp4", os.devnull], check=True)
+            subprocess.run([*common, "-pass", "2", "-c:a", "aac", "-b:a", str(audio), "-movflags", "+faststart",
+                            str(copy)], check=True)
+        if copy.stat().st_size <= cap:
+            return copy
+    raise RuntimeError(f"couldn't fit {master.name} under {cap} bytes")
+
+
 class Tick:
     def __init__(self, discord, user_id: str, runner: Callable = jobs.run, echo=print, commit: bool = True,
                  youtube_client=None, checks=None, now: Callable[[], dt.datetime] | None = None):
@@ -169,13 +208,8 @@ class Tick:
                     self.watch_scheduled(s, done)
             for s in [s for s in all_shorts() if s.status == "revise"]:
                 self.revise(s, done)
-            video = [s for s in all_shorts() if s.status in ("animating", "revise_video")]
-            if video and not self.yt():
-                done["paused"] = f"video jobs paused, YouTube unavailable: {self.yt_error}"
-                self.echo(f"  {done['paused']}")
-            else:
-                for s in video:
-                    self.make_video(s, done)
+            for s in [s for s in all_shorts() if s.status in ("animating", "revise_video")]:
+                self.make_video(s, done)            # review videos go to Discord: no YouTube needed (#48)
             if draft:
                 why = self.no_room()
                 if why:
@@ -261,7 +295,7 @@ class Tick:
         if any(self.mine(thread, str(x["message"]), CROSS) for x in versions.values()):
             gone = self.delete_videos(versions.values())
             self.change(s, "abandon", f"{s.number}: abandoned", event={"version": current, "deleted": gone})
-            self.d.post(thread, "❌ Abandoned. Its review videos are deleted, and its puzzle goes back in the pool.")
+            self.d.post(thread, "❌ Abandoned. Any upload is deleted, and its puzzle goes back in the pool.")
             done["abandoned"].append(s.name)
             return
 
@@ -289,19 +323,47 @@ class Tick:
             self.commit(s, f"{s.number}: review read")
 
     def approve(self, s: Short, v: dict, ver: dict, n: int, thread: str, done: dict) -> None:
-        """Your check mark on video v{n}: schedule exactly that upload. Retried next tick if YouTube fails."""
+        """Your check mark on video v{n}: upload exactly that file (private) and schedule it (#48).
+
+        Your check mark stays on the message, so anything that fails here is simply retried next tick,
+        and the slot is worked out afresh each time: a delayed upload goes out later, never in the past.
+        The video id is saved the moment the upload returns, so a crash after it can't upload twice (#38).
+        Versions from before #48 were already uploaded unlisted for review; those are scheduled as they are.
+        """
         yt = self.yt()
-        cfg = release.settings()
-        taken = [d for x in all_shorts() if x.status in ("scheduled", "published")
-                 if (d := release.local_date((x.data().get("youtube") or {}).get("publish_at")
-                                             or (x.data().get("youtube") or {}).get("published_at"), cfg))]
-        slot = release.next_slot(self.now(), taken, cfg)
+        video_id = ver.get("video_id")
         try:
             if not yt:
                 raise youtube.YouTubeError(self.yt_error or "no client")
-            yt.schedule(ver["video_id"], slot)
+            if not video_id:
+                master = Path(ver.get("file") or review_video(s, n))
+                if not master.exists() or sha256(master) != ver.get("sha256"):
+                    self.warn_once(s, v, thread, f"⚠️ v{n}'s file is missing or changed since it was posted, so "
+                                                 f"I won't upload it. Reply to have it rendered again, or ❌.")
+                    return
+                if until := uploads_paused_until(self.now()):
+                    self.warn_once(s, v, thread, self.limit_notice(n, until))
+                    return
+                try:
+                    video_id = yt.upload(master, youtube.metadata(s.data()), "private")
+                except youtube.UploadLimitError as e:
+                    self.warn_once(s, v, thread, self.limit_notice(n, pause_uploads(self.now(), str(e))))
+                    return
+                ver["video_id"] = video_id
+                v["versions"] = {**{int(k): dict(x) for k, x in (v.get("versions") or {}).items()}, n: ver}
+                s.update(video=v)                 # saved before anything else can fail
+                self.commit(s, f"{s.number}: video v{n} uploaded")
+                st = yt.wait_processed(video_id)
+                if st.get("processingStatus") != "succeeded":
+                    self.delete_videos([ver])
+                    ver.pop("video_id")
+                    s.update(video=v)
+                    raise youtube.YouTubeError(f"processing {st.get('processingStatus') or 'timed out'}")
+            slot = self.slot()
+            yt.schedule(video_id, slot)
         except youtube.YouTubeError as e:
-            self.warn_once(s, v, thread, f"⚠️ Couldn't schedule v{n}: {str(e)[:300]}\nI'll retry on the next tick.")
+            self.warn_once(s, v, thread, f"⚠️ Couldn't upload or schedule v{n}: {spoiler(str(e)[:300])}\n"
+                                         f"I'll retry on the next tick.")
             return
         when = slot.strftime("%a %d %b, %I:%M %p %Z").replace(" 0", " ")
         mid = self.d.post(thread, f"✅ v{n} approved. It goes public **{when}**. React {STOP} here to stop it "
@@ -313,6 +375,14 @@ class Tick:
         self.change(s, "approve_video", f"{s.number}: video v{n} approved, release {slot.isoformat()}",
                     event={"version": n, "video_id": ver["video_id"], "publish_at": slot.isoformat()})
         done["approved"].append(s.name)
+
+    def slot(self) -> dt.datetime:
+        """When a Short approved now goes public, given the days already taken."""
+        cfg = release.settings()
+        taken = [d for x in all_shorts() if x.status in ("scheduled", "published")
+                 if (d := release.local_date((x.data().get("youtube") or {}).get("publish_at")
+                                             or (x.data().get("youtube") or {}).get("published_at"), cfg))]
+        return release.next_slot(self.now(), taken, cfg)
 
     # --- 2. scheduled: the stop sign and the release check -----------------------------------
     def watch_scheduled(self, s: Short, done: dict) -> None:
@@ -353,7 +423,7 @@ class Tick:
         try:
             if not yt:
                 raise youtube.YouTubeError(self.yt_error or "no client")
-            yt.unschedule(ap["video_id"])
+            yt.unschedule(ap["video_id"])             # private, publishAt cleared; a new ✅ reuses it
         except youtube.YouTubeError as e:
             self.warn_once(s, v, thread, f"⚠️ Couldn't stop it: {str(e)[:300]}\nRetrying next tick. If the "
                                          f"release is close, set it to private in YouTube Studio.")
@@ -361,7 +431,8 @@ class Tick:
         n = int(ap["version"])
         # The old check mark stays on the old message, so post this version afresh for a new decision.
         versions = {int(k): dict(x) for k, x in (v.get("versions") or {}).items()}
-        versions[n]["message"] = self.post_video(thread, s, n, ap["video_id"], f"Stopped and unlisted again.")
+        versions[n]["message"] = self.post_video(thread, s, n, versions[n],
+                                                 "Stopped: the upload is private again, and a new ✅ schedules it.")
         v.update(versions=versions, approved=None, warned=None)
         s.update(review=rv, video=v, **{"youtube.publish_at": None, "youtube.video_id": None, "youtube.url": None})
         self.change(s, "stop", f"{s.number}: release stopped", event={"version": n})
@@ -383,7 +454,7 @@ class Tick:
         done["revised"].append(s.name)
 
     def make_video(self, s: Short, done: dict) -> None:
-        """Animate (or revise), render and check in the sandbox, then upload unlisted and post."""
+        """Animate (or revise), render and check in the sandbox, then post the file in the thread (#48)."""
         kind = "animate" if s.status == "animating" else "revise_video"
         v = dict(s.data().get("video") or {})
         version = int(v.get("version") or 0) + 1
@@ -407,42 +478,18 @@ class Tick:
             s.update(video=v)
             self.commit(s, f"{s.number}: video v{version} rendered")
         thread = self.thread(s)
-        yt = self.yt()
-        video_id = pending.get("video_id")       # uploaded by a tick that stopped before posting (#38)
-        if not video_id and (until := uploads_paused_until(self.now())):
-            self.warn_once(s, v, thread, self.limit_notice(version, until))
-            return
-        try:
-            if not video_id:
-                try:
-                    video_id = yt.upload(Path(pending["file"]), youtube.metadata(s.data()), "unlisted")
-                except youtube.UploadLimitError as e:
-                    until = pause_uploads(self.now(), str(e))
-                    self.warn_once(s, v, thread, self.limit_notice(version, until))
-                    return
-                pending["video_id"] = v["pending"]["video_id"] = video_id
-                s.update(video=v)                 # saved before anything else can fail
-                self.commit(s, f"{s.number}: video v{version} uploaded")
-            st = yt.wait_processed(video_id)
-            if st.get("processingStatus") != "succeeded":
-                raise youtube.YouTubeError(f"processing {st.get('processingStatus') or 'timed out'}")
-        except youtube.YouTubeError as e:
-            if video_id:
-                self.delete_videos([{"video_id": video_id}])
-                v["pending"].pop("video_id", None)
-                s.update(video=v)
-            self.warn_once(s, v, thread, f"⚠️ Video v{version} is rendered, but the upload failed: "
-                                         f"{spoiler(str(e)[:300])}\nI'll retry on the next tick.")
-            return
-        mid = self.post_video(thread, s, version, video_id, pending.get("summary", ""))
+        ver = {"file": pending["file"], "sha256": pending["sha256"]}
+        if pending.get("video_id"):               # uploaded for review by a tick from before #48
+            ver["video_id"] = pending["video_id"]
+        ver["message"] = self.post_video(thread, s, version, ver, pending.get("summary", ""))
         versions = {int(k): dict(x) for k, x in (v.get("versions") or {}).items()}
-        self.delete_videos(versions.values())                  # superseded drafts don't pile up
-        versions[version] = {"message": mid, "video_id": video_id, "sha256": pending["sha256"]}
+        self.delete_videos(versions.values())                  # old review uploads (before #48) don't pile up
+        versions = {k: {**x, "video_id": None} for k, x in versions.items()}
+        versions[version] = ver
         v.update(version=version, versions=versions, pending=None, comment=None, warned=None, as_is=None)
         s.update(video=v)
         self.change(s, "animated" if kind == "animate" else "revised_video", f"{s.number}: video v{version}",
-                    event={"version": version, "video_id": video_id, "sha256": pending["sha256"],
-                           "usage": pending.get("usage")})
+                    event={"version": version, "sha256": pending["sha256"], "usage": pending.get("usage")})
         done["videos"].append(s.name)
 
     def script(self, done: dict) -> None:
@@ -531,20 +578,31 @@ class Tick:
                            files={f"SPOILER_{s.number}-script-v{version}.md": s.folder / "SCRIPT.md"},
                            reactions=(ACCEPT, CROSS))
 
-    def post_video(self, thread: str, s: Short, version: int, video_id: str, summary: str) -> str:
-        cfg = release.settings()
-        head = (f"**Video v{version}** · {title(s)}\n{spoiler(youtube.url(video_id))}\n"
-                f"{spoiler(summary)}\n\nReact {ACCEPT} to approve: this exact upload goes public "
-                f"{release.describe(cfg)}. {CROSS} abandons; a reply revises.")
-        return self.d.post(thread, head, reactions=(ACCEPT, CROSS))
+    def post_video(self, thread: str, s: Short, version: int, ver: dict, summary: str) -> str:
+        """The video itself as a spoilered attachment (a compressed copy if the master is over the cap)."""
+        master, files, extra = Path(ver.get("file") or review_video(s, version)), {}, ""
+        try:
+            copy = review_copy(master)
+            files = {f"SPOILER_{s.number}-video-v{version}.mp4": copy}
+            if copy != master:
+                extra = "\n(Compressed to fit Discord. Your ✅ uploads the full-quality file.)"
+        except (OSError, subprocess.CalledProcessError, RuntimeError, ValueError) as e:
+            if ver.get("video_id"):
+                extra = f"\n{spoiler(youtube.url(ver['video_id']))}"
+            else:
+                extra = f"\n⚠️ Couldn't attach the video: {spoiler(str(e)[:200])}"
+        head = (f"**Video v{version}** · {title(s)}\n{spoiler(summary)}{extra}\n\nReact {ACCEPT} to approve: "
+                f"this exact file is uploaded and goes public {release.describe(release.settings())}. "
+                f"{CROSS} abandons; a reply revises.")
+        return self.d.post(thread, head, files=files, reactions=(ACCEPT, CROSS))
 
     def delete_videos(self, versions) -> list[str]:
-        """Delete review uploads; best effort, since a leftover unlisted draft is harmless."""
-        yt, gone = self.yt(), []
-        for x in versions:
-            vid = x.get("video_id")
-            if not vid or not yt:
-                continue
+        """Delete uploads that won't be released; best effort, since a leftover private draft is harmless."""
+        ids, gone = [x.get("video_id") for x in versions if x.get("video_id")], []
+        yt = self.yt() if ids else None             # no client (or network) when there's nothing to delete
+        for vid in ids:
+            if not yt:
+                break
             try:
                 yt.delete(vid)
                 gone.append(vid)
@@ -556,8 +614,8 @@ class Tick:
     def limit_notice(version: int, until: dt.datetime) -> str:
         tz = release.ZoneInfo(release.settings()["timezone"])
         when = until.astimezone(tz).strftime("%a %d %b, %I:%M %p %Z").replace(" 0", " ")
-        return (f"⏸️ Video v{version} is rendered, but YouTube's daily upload limit was hit. "
-                f"Uploads resume after {when}; I'll upload it then.")
+        return (f"⏸️ v{version} is approved, but YouTube's daily upload limit was hit. "
+                f"Uploads resume after {when}; I'll upload and schedule it then.")
 
     def warn_once(self, s: Short, v: dict, thread: str, text: str) -> None:
         """Post a warning unless the same one is already up; it's cleared when things move on."""

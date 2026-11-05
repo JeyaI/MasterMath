@@ -1,6 +1,8 @@
 """The script and video loops: `ms tick` against a fake Discord, YouTube, job runner and sandbox."""
 import datetime as dt
 import re
+import shutil
+import subprocess
 
 import pytest
 
@@ -81,9 +83,9 @@ class FakeRunner:
 
 
 class FakeYouTube:
-    def __init__(self, fail_uploads=0, limit_uploads=0):
+    def __init__(self, fail_uploads=0, limit_uploads=0, fail_schedule=0):
         self.videos, self.deleted, self.n, self.fail_uploads = {}, [], 0, fail_uploads
-        self.limit_uploads, self.attempts = limit_uploads, 0
+        self.limit_uploads, self.attempts, self.fail_schedule = limit_uploads, 0, fail_schedule
 
     def upload(self, path, meta, privacy):
         self.attempts += 1
@@ -93,7 +95,7 @@ class FakeYouTube:
         if self.fail_uploads:
             self.fail_uploads -= 1
             raise YouTubeError("HTTP 503")
-        assert privacy == "unlisted"
+        assert privacy == "private"                       # #48: only the approved file is uploaded
         self.n += 1
         vid = f"vid{self.n}"
         self.videos[vid] = {"privacyStatus": privacy, "title": meta["title"], "bytes": path.read_bytes()}
@@ -103,10 +105,13 @@ class FakeYouTube:
         return {"processingStatus": "succeeded"}
 
     def schedule(self, vid, when):
+        if self.fail_schedule:
+            self.fail_schedule -= 1
+            raise YouTubeError("HTTP 500")
         self.videos[vid].update(privacyStatus="private", publishAt=when)
 
     def unschedule(self, vid):
-        self.videos[vid].update(privacyStatus="unlisted", publishAt=None)
+        self.videos[vid].update(privacyStatus="private", publishAt=None)
 
     def status(self, vid):
         return dict(self.videos.get(vid, {}))
@@ -295,41 +300,78 @@ def in_review(root, yt=None, checks=None, clock=None, runner=None):
     return d, t, yt, s, thread
 
 
-def test_accepted_script_is_animated_uploaded_unlisted_and_posted(root):
+def master(root, s, n=1):
+    return root / "out" / "review" / s.name / f"v{n}.mp4"
+
+
+def approve(d, t, s):
+    d.tap(video(s)[1]["message"], ACCEPT)
+    t.run()
+
+
+def test_accepted_script_is_animated_and_posted_as_a_file_not_uploaded(root):
     d, t, yt, s, thread = in_review(root)
     assert s.status == "video_review"
     v, ver = video(s)
-    assert v["version"] == 1 and yt.videos[ver["video_id"]]["privacyStatus"] == "unlisted"
-    assert yt.videos[ver["video_id"]]["bytes"] == (root / "out" / "review" / s.name / "v1.mp4").read_bytes()
+    assert v["version"] == 1 and yt.attempts == 0 and not ver.get("video_id")       # #48: no YouTube yet
     post = d.threads[thread][-1]
-    assert "Video v1" in post["content"] and f"youtube.com/shorts/{ver['video_id']}" in post["content"]
+    assert "Video v1" in post["content"] and "youtube.com" not in post["content"]
+    assert post["files"] == {f"SPOILER_{s.number}-video-v1.mp4": master(root, s)}
     assert post["id"] == ver["message"] and d.reactors(thread, post["id"], ACCEPT) == {BOT}
-    assert ver["sha256"] == tick.sha256(root / "out" / "review" / s.name / "v1.mp4")
+    assert ver["sha256"] == tick.sha256(master(root, s))
 
 
-def test_reply_on_a_video_revises_it_and_deletes_the_old_upload(root):
+def test_reply_on_a_video_revises_it(root):
     runner = FakeRunner()
     d, t, yt, s, thread = in_review(root, runner=runner)
-    old = video(s)[1]["video_id"]
     d.say(thread, ME, "0:12 slow down the slide")
     t.run()
     assert runner.calls[-1] == ("revise_video", s.name, "0:12 slow down the slide")
     v, ver = video(s)
-    assert s.status == "video_review" and v["version"] == 2 and ver["video_id"] != old
-    assert yt.deleted == [old]
+    assert s.status == "video_review" and v["version"] == 2 and yt.attempts == 0
+    assert d.threads[thread][-1]["files"] == {f"SPOILER_{s.number}-video-v2.mp4": master(root, s, 2)}
 
 
-def test_check_mark_schedules_that_exact_upload_at_the_next_slot(root):
+def test_check_mark_uploads_that_exact_file_and_schedules_it(root):
     d, t, yt, s, thread = in_review(root)
-    vid = video(s)[1]["video_id"]
-    d.tap(video(s)[1]["message"], ACCEPT)
-    t.run()
-    assert s.status == "scheduled"
+    approve(d, t, s)
+    assert s.status == "scheduled" and yt.n == 1
     when = dt.datetime.fromisoformat(s.data()["youtube"]["publish_at"])
     assert when.isoformat() == "2026-11-04T13:00:00-05:00"          # asap: the first full hour 60+ min out
+    vid = s.data()["youtube"]["video_id"]
     assert yt.videos[vid] == {**yt.videos[vid], "privacyStatus": "private", "publishAt": when}
-    assert s.data()["youtube"]["video_id"] == vid
+    assert yt.videos[vid]["bytes"] == master(root, s).read_bytes()
+    assert s.data()["video"]["approved"]["video_id"] == vid == video(s)[1]["video_id"]
     assert d.reactors(thread, d.threads[thread][-1]["id"], STOP) == {BOT}
+
+
+def test_check_mark_wont_upload_a_file_that_changed(root):
+    d, t, yt, s, thread = in_review(root)
+    master(root, s).write_bytes(b"something else")
+    approve(d, t, s)
+    t.run()
+    assert s.status == "video_review" and yt.attempts == 0
+    assert sum("missing or changed" in c for c in d.bot_said(thread)) == 1
+
+
+def test_a_review_upload_from_before_48_is_scheduled_as_it_is(root):
+    d, t, yt, s, thread = in_review(root)
+    v = s.data()["video"]
+    v["versions"][1]["video_id"] = "old1"
+    s.update(video=dict(v))
+    yt.videos["old1"] = {"privacyStatus": "unlisted"}
+    approve(d, t, s)
+    assert s.status == "scheduled" and s.data()["youtube"]["video_id"] == "old1" and yt.attempts == 0
+    assert yt.videos["old1"]["privacyStatus"] == "private" and yt.videos["old1"]["publishAt"]
+
+
+def test_a_reply_after_a_failed_schedule_deletes_that_upload(root):
+    d, t, yt, s, thread = in_review(root, yt=FakeYouTube(fail_schedule=1))
+    approve(d, t, s)
+    assert s.status == "video_review" and video(s)[1]["video_id"] == "vid1"
+    d.say(thread, ME, "bigger numbers")
+    t.run()
+    assert s.status == "video_review" and yt.deleted == ["vid1"] and yt.videos == {}
 
 
 def test_a_check_mark_on_an_old_video_does_nothing(root):
@@ -345,18 +387,18 @@ def test_a_check_mark_on_an_old_video_does_nothing(root):
 
 def test_stop_sign_pulls_it_and_needs_a_fresh_check_mark(root):
     d, t, yt, s, thread = in_review(root)
-    vid = video(s)[1]["video_id"]
-    d.tap(video(s)[1]["message"], ACCEPT)
-    t.run()
+    approve(d, t, s)
+    vid = s.data()["youtube"]["video_id"]
     d.tap(s.data()["video"]["approved"]["message"], STOP)
     t.run()
-    assert s.status == "video_review" and yt.videos[vid]["privacyStatus"] == "unlisted"
-    assert not s.data()["youtube"]["publish_at"]
+    assert s.status == "video_review" and yt.videos[vid]["privacyStatus"] == "private"
+    assert not yt.videos[vid]["publishAt"] and not s.data()["youtube"]["publish_at"]
+    assert d.threads[thread][-1]["files"]                     # posted again, with the file
     t.run()                                    # the old check mark is on the old message: no re-approval
     assert s.status == "video_review"
     d.tap(video(s)[1]["message"], ACCEPT)
     t.run()
-    assert s.status == "scheduled"
+    assert s.status == "scheduled" and yt.n == 1             # the same upload, rescheduled
 
 
 def test_release_check_records_it_as_published(root):
@@ -433,44 +475,71 @@ def test_a_late_release_is_flagged_once(root):
     assert sum("was due to go public" in c for c in d.bot_said(thread)) == 1
 
 
-def test_failed_upload_keeps_the_render_and_retries_without_a_new_job(root):
-    runner = FakeRunner()
-    d, t, yt, s, thread = in_review(root, yt=FakeYouTube(fail_uploads=2), runner=runner)
-    assert s.status == "animating" and s.data()["video"]["pending"]["version"] == 1
+def test_failed_upload_warns_once_and_retries_with_a_fresh_slot(root):
+    clock = Clock()
+    d, t, yt, s, thread = in_review(root, yt=FakeYouTube(fail_uploads=2), clock=clock)
+    approve(d, t, s)
     t.run()
-    assert sum("upload failed" in c for c in d.bot_said(thread)) == 1
-    jobs_before = len(runner.calls)
+    assert s.status == "video_review" and yt.attempts == 2
+    assert sum("Couldn't upload or schedule v1" in c for c in d.bot_said(thread)) == 1
+    clock.t = NOON + dt.timedelta(hours=3)                # 3 PM in New York
     t.run()
-    assert s.status == "video_review" and len(runner.calls) == jobs_before
+    assert s.status == "scheduled" and s.data()["youtube"]["publish_at"] == "2026-11-04T16:00:00-05:00"
 
 
 def test_upload_limit_pauses_uploads_for_8_hours(root):
-    clock, runner = Clock(), FakeRunner()
-    yt = FakeYouTube(limit_uploads=1)
-    d, t, yt, s, thread = in_review(root, yt=yt, clock=clock, runner=runner)
-    assert s.status == "animating" and yt.attempts == 1
+    clock = Clock()
+    d, t, yt, s, thread = in_review(root, yt=FakeYouTube(limit_uploads=1), clock=clock)
+    approve(d, t, s)
+    assert s.status == "video_review" and yt.attempts == 1
     assert tick.uploads_paused_until(clock()) == NOON + dt.timedelta(hours=8)
-    jobs_before = len(runner.calls)
     for hours in (1, 4, 7.9):                             # paused: no attempts, no repeat notices
         clock.t = NOON + dt.timedelta(hours=hours)
         t.run()
-    assert yt.attempts == 1 and s.status == "animating" and len(runner.calls) == jobs_before
+    assert yt.attempts == 1 and s.status == "video_review"
     notices = [c for c in d.bot_said(thread) if "daily upload limit" in c]
     assert len(notices) == 1 and "Uploads resume after Wed 4 Nov, 8:00 PM EST" in notices[0]
     clock.t = NOON + dt.timedelta(hours=8, minutes=5)
     t.run()
-    assert yt.attempts == 2 and s.status == "video_review" and len(runner.calls) == jobs_before
+    assert yt.attempts == 2 and s.status == "scheduled"
+    assert s.data()["youtube"]["publish_at"] == "2026-11-04T22:00:00-05:00"   # slot from when it went up
 
 
-def test_no_youtube_pauses_video_jobs_only(root):
+def test_video_jobs_need_no_youtube_only_approval_does(root):
     d, t = make(root, yt=False)
-    t._yt, t.yt_error = None, None
     t.yt = lambda: None                                   # noqa: E731 - as if the token expired
+    t.yt_error = "token expired"
     t.run(draft=True)
     s = all_shorts()[0]
+    thread = s.data()["review"]["thread_id"]
     d.tap(current_message(s), ACCEPT)
-    r = t.run()
-    assert s.status == "animating" and r["paused"]
+    t.run()
+    assert s.status == "video_review"
+    approve(d, t, s)
+    assert s.status == "video_review" and any("token expired" in c for c in d.bot_said(thread))
+
+
+def test_post_says_when_the_attachment_is_a_compressed_copy(root, monkeypatch):
+    monkeypatch.setattr(tick, "review_copy", lambda m: m.with_name("v1-discord.mp4"))
+    d, t, yt, s, thread = in_review(root)
+    post = d.threads[thread][-1]
+    assert post["files"] == {f"SPOILER_{s.number}-video-v1.mp4": master(root, s).with_name("v1-discord.mp4")}
+    assert "Compressed to fit Discord" in post["content"]
+
+
+@pytest.mark.skipif(not shutil.which("ffmpeg"), reason="needs ffmpeg")
+def test_review_copy_fits_the_cap_and_leaves_the_master_alone(tmp_path):
+    src = tmp_path / "v1.mp4"
+    subprocess.run(["ffmpeg", "-v", "error", "-f", "lavfi", "-i", "testsrc2=size=540x960:rate=30:duration=4",
+                    "-f", "lavfi", "-i", "sine=frequency=440:duration=4", "-c:v", "libx264", "-b:v", "6M",
+                    "-c:a", "aac", "-shortest", str(src)], check=True)
+    before, size = tick.sha256(src), src.stat().st_size
+    assert tick.review_copy(src, cap=size + 1) == src
+    copy = tick.review_copy(src, cap=size // 3)
+    assert copy == tmp_path / "v1-discord.mp4" and copy.stat().st_size <= size // 3
+    assert tick.sha256(src) == before
+    mtime = copy.stat().st_mtime_ns
+    assert tick.review_copy(src, cap=size // 3) == copy and copy.stat().st_mtime_ns == mtime   # reused
 
 
 def test_failing_ms_check_twice_needs_attention(root):
@@ -480,7 +549,9 @@ def test_failing_ms_check_twice_needs_attention(root):
 
 
 def test_cross_on_a_video_abandons_and_deletes_uploads(root):
-    d, t, yt, s, thread = in_review(root)
+    d, t, yt, s, thread = in_review(root, yt=FakeYouTube(fail_schedule=1))
+    approve(d, t, s)                                       # uploaded, but not scheduled
+    assert yt.videos
     d.tap(video(s)[1]["message"], CROSS)
     t.run()
     assert s.status == "abandoned" and yt.videos == {}
@@ -570,24 +641,21 @@ def test_video_jobs_may_preview_and_check_but_script_jobs_may_not():
 
 
 def test_a_discord_failure_after_upload_does_not_upload_twice(root):
-    yt = FakeYouTube()
-    d, t = make(root, yt=yt, now=Clock())
-    t.run(draft=True)
-    s = all_shorts()[0]
-    d.tap(current_message(s), ACCEPT)
+    d, t, yt, s, thread = in_review(root)
+    d.tap(video(s)[1]["message"], ACCEPT)
     real_post = d.post
 
     def flaky(thread, content, files=None, reactions=()):
-        if content.startswith("**Video"):
+        if content.startswith("✅ v"):
             raise RuntimeError("Discord timed out")
         return real_post(thread, content, files, reactions)
     d.post = flaky
     with pytest.raises(RuntimeError):
         t.run()
-    assert s.data()["video"]["pending"]["video_id"] == "vid1"
+    assert video(s)[1]["video_id"] == "vid1"
     d.post = real_post
     t.run()
-    assert s.status == "video_review" and video(s)[1]["video_id"] == "vid1" and yt.n == 1
+    assert s.status == "scheduled" and s.data()["youtube"]["video_id"] == "vid1" and yt.n == 1
 
 
 def test_draft_waits_for_a_busy_tick_but_a_plain_tick_skips(root, monkeypatch):

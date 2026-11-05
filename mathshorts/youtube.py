@@ -1,7 +1,8 @@
-"""YouTube for the video loop (#29): upload review versions, schedule the approved one, check release.
+"""YouTube for the video loop (#29, #48): upload the approved version, schedule it, check release.
 
-Only `ms tick` and `ms youtube` use it; jobs never see the token. It never makes a video public
-itself: uploads are unlisted or private, and approval sets `publishAt`, so YouTube releases it.
+Only `ms tick` and `ms youtube` use it; jobs never see the token. Review copies go to Discord (#48),
+so the only upload is the one you approved, made private with a `publishAt`. It never makes a video
+public itself: YouTube releases it at that time.
 
     ~/.config/mathshorts-youtube-client.json   the OAuth client (Google Cloud, Desktop app)
     ~/.config/mathshorts-youtube-token.json    the channel's token; `ms youtube login` writes it
@@ -139,9 +140,9 @@ class Client:
         raise YouTubeError(f"{video_id}: publishAt {at} didn't show up after a minute")
 
     def unschedule(self, video_id: str) -> None:
-        """Back to unlisted, which clears publishAt."""
+        """Back to private with no publishAt: nobody can see it, and a new check mark reschedules it."""
         self._do(self.api.videos().update(part="status", body={"id": video_id, "status": {
-            "privacyStatus": "unlisted", "selfDeclaredMadeForKids": False}}))
+            "privacyStatus": "private", "selfDeclaredMadeForKids": False}}))
 
     def delete(self, video_id: str) -> None:
         self._do(self.api.videos().delete(id=video_id))

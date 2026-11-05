@@ -4,7 +4,11 @@ max_waiting: 4      # no new script while this many Shorts are in the script loo
 max_queued: 7       # ...or while this many are approved or ready
 sandbox: docker     # where jobs and their code run (mathshorts/sandbox.py); `host` only for trying things
 
-# Video loop (#29): when an approved video goes public. Rule 1 caps per_day at 2.
+# Video loop (#29): review videos are attached in Discord (#48); a bigger file is re-encoded to fit.
+review:
+  max_mb: 9.5       # Discord's limit without server boosts is 10 MiB
+
+# When an approved video goes public. Rule 1 caps per_day at 2.
 release:
   mode: asap        # asap: the first full hour at least asap_minutes after your check mark (#44); slot: the next `time`
   asap_minutes: 60  # leaves time for 🛑; a check mark on a full day goes out at the next day's `time`

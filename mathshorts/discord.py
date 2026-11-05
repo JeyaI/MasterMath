@@ -29,6 +29,8 @@ API = "https://discord.com/api/v10"
 GATEWAY = "gateway.discord.gg"
 ACCEPT, CROSS, STOP = "✅", "❌", "🛑"
 LIMIT = 2000                          # characters per message
+FILE_LIMIT = 10 * 1024 * 1024         # bytes per upload on a server without boosts
+TYPES = {".md": "text/markdown", ".mp4": "video/mp4", ".png": "image/png", ".txt": "text/plain"}
 
 
 class DiscordError(RuntimeError):
@@ -63,7 +65,8 @@ class Client:
             boundary = uuid.uuid4().hex
             parts = [_part(boundary, 'name="payload_json"', "application/json", json.dumps(body or {}).encode())]
             for i, (name, path_) in enumerate(files.items()):
-                parts.append(_part(boundary, f'name="files[{i}]"; filename="{name}"', "text/markdown",
+                ctype = TYPES.get(Path(name).suffix.lower(), "application/octet-stream")
+                parts.append(_part(boundary, f'name="files[{i}]"; filename="{name}"', ctype,
                                    Path(path_).read_bytes()))
             data = b"".join(parts) + f"--{boundary}--\r\n".encode()
             headers["Content-Type"] = f"multipart/form-data; boundary={boundary}"
@@ -73,7 +76,7 @@ class Client:
         for attempt in range(3):
             req = urllib.request.Request(API + path, data=data, method=method, headers=headers)
             try:
-                with urllib.request.urlopen(req, timeout=30) as r:
+                with urllib.request.urlopen(req, timeout=180 if files else 30) as r:   # a video takes a while
                     raw = r.read()
                     return json.loads(raw) if raw else None
             except urllib.error.HTTPError as e:

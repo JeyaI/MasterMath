@@ -6,17 +6,13 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **49**
+Next id: **50**
 
 ## Open
 
-### #48 · Consider posting review videos to Discord instead of uploading them to YouTube
-status: open · P2 · feature
-Every review version is uploaded to YouTube as unlisted, which spends the channel's daily upload cap (#47), costs API quota, and leaves stray uploads when a tick crashes (#38). Review renders are small: 5.7–9.7 MB so far (`out/review/`, 0006–0008). Attaching the MP4 to the thread (`discord.post(files=…)`, `SPOILER_` name) would make the review loop YouTube-free, and only the ✅ version would be uploaded, at approval, as a fresh upload that is scheduled straight away (which also settles #45). To check: Discord's attachment limit is 10 MB without a server boost, and 0008 v10 was 9.65 MB, so longer Shorts may go over. Either re-encode review copies to a cap (for example a two-pass bitrate) or keep YouTube as a fallback above the limit. Also check that the phone app plays the attachment well enough to judge it. Approval would have to tie the ✅ to the attachment's sha256 (we already record it) instead of a video id. Moving the upload to approval also means an upload failure or #47 pause can delay a release, so `next_slot` must allow for that.
-
-### #45 · Check that unlisted → public gets the full new-upload treatment
-status: open · P3 · bug
-Every release (slot or asap, #44) flips a review upload from unlisted to public via `publishAt`. Check on 0006 (public 2026-11-04) and the first asap release whether subscribers got a notification and it reached the Shorts feed (first-hour views in YouTube Studio). If not, upload a fresh copy at approval instead.
+### #49 · Check that Discord video attachments are good enough to judge a Short on the phone
+status: open · P2 · chore
+Since #48, review videos arrive as MP4 attachments in the thread. On the first one (0009 v1, 5.4 MB, sent as it is), check on the phone app that it plays inline at full height, that the sound works, and that you can scrub to a timestamp. Also check a compressed copy (`vN-discord.mp4`, sent when a render is over 9.5 MB) for blur in text and thin lines. If attachments don't work, raise `review.max_mb` (needs a server boost) or bring back an unlisted YouTube link for review only.
 
 ### #43 · Find the best time to release
 status: open · P3 · feature
@@ -28,7 +24,7 @@ Happened on 0006's first live run (2026-11-03): a Discord SSL timeout while addi
 
 ### #39 · Wire `filecheck.check_upload` into the video loop
 status: open · P2 · feature
-Once #27's checks exist, run `check_upload` after each review upload (title, description, tags, duration against the file) and before scheduling on ✅. `video.versions[n].sha256` already records the file.
+Once #27's checks exist, run `check_upload` on the upload made at ✅ (title, description, tags, duration against the file; since #48 that is the only upload) before scheduling it. `video.versions[n].sha256` already records the file.
 
 ### #40 · ❌ is only read once a video is up for review
 status: open · P3 · bug
@@ -144,6 +140,16 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #48 · Post review videos to Discord instead of uploading them to YouTube
+status: done · 2026-11-05 · P2 · feature
+Every review version is uploaded to YouTube as unlisted, which spends the channel's daily upload cap (#47), costs API quota, and leaves stray uploads when a tick crashes (#38). Review renders are small: 5.7–9.7 MB so far (`out/review/`, 0006–0008). Attaching the MP4 to the thread (`discord.post(files=…)`, `SPOILER_` name) would make the review loop YouTube-free, and only the ✅ version would be uploaded, at approval, as a fresh upload that is scheduled straight away (which also settles #45). To check: Discord's attachment limit is 10 MB without a server boost, and 0008 v10 was 9.65 MB, so longer Shorts may go over. Either re-encode review copies to a cap (for example a two-pass bitrate) or keep YouTube as a fallback above the limit. Also check that the phone app plays the attachment well enough to judge it. Approval would have to tie the ✅ to the attachment's sha256 (we already record it) instead of a video id. Moving the upload to approval also means an upload failure or #47 pause can delay a release, so `next_slot` must allow for that.
+- **Resolution:** review versions are attached to the thread as `SPOILER_NNNN-video-vN.mp4` (a two-pass re-encode to `review.max_mb`, 9.5 MB, when the master is bigger; 0008 v4's 10.2 MB became 9.2 MB in 13 s), with no YouTube call. On ✅ tick checks the master's sha256, uploads it private, saves the id, and schedules it at a slot worked out then, retrying each tick on failure or a #47 pause. 🛑 sets it private and unscheduled, and a new ✅ reuses it. Pre-#48 versions with an unlisted upload are scheduled as before. Phone playback still to be confirmed on the first real post (#49).
+
+### #45 · Check that unlisted → public gets the full new-upload treatment
+status: done · 2026-11-05 · P3 · bug
+Every release (slot or asap, #44) flips a review upload from unlisted to public via `publishAt`. Check on 0006 (public 2026-11-04) and the first asap release whether subscribers got a notification and it reached the Shorts feed (first-hour views in YouTube Studio). If not, upload a fresh copy at approval instead.
+- **Resolution:** settled by #48. Releases are now fresh private uploads scheduled with `publishAt`, YouTube's normal scheduled-release path, not unlisted review copies made public. 0007 (scheduled before #48) is the last unlisted → public one.
 
 ### #47 · Stop uploads for 8 hours on `uploadLimitExceeded`
 status: done · 2026-11-04 · P2 · bug
