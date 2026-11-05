@@ -90,7 +90,7 @@ captions:
   - "Use two fingers"
   - "Two lines, one swipe"
   - "Three swipes ✓"
-  - "One finger: how many swipes?"
+  - "How many swipes, minus the trick?"
   - "Comment just the number ↓"
 music:
   piece: pachelbel-canon
@@ -116,6 +116,24 @@ review:
   comment:
 video:
   pending:
+    version: 3
+    file: /home/jeya/mathshorts/out/review/0010-a-juvenile-puzzle/v3.mp4
+    sha256: 226a0b33c081d7cdeb6eead3ccbe50f1db28e2805a64798b3f48db8c31c9bb88
+    summary: The Level 2 card now pokes fun at the trick. The caption reads "How many swipes, minus 
+      the trick?" and the on-screen label reads "one finger. No tricks!". I nudged the "? swipes" 
+      text and the label up slightly so the longer caption doesn't overlap. `SCRIPT.md` and the 
+      `short.yaml` captions are updated; the maths is untouched. `ms verify` passes and `ms check` 
+      has no errors, only the 50.4 s duration warning.
+    usage:
+      job: revise_video
+      short: 0010-a-juvenile-puzzle
+      exit: 0
+      seconds: 152
+      subtype: success
+      is_error: false
+      num_turns: 35
+      total_cost_usd: 0.2079338
+      log: job-revise_video-20261105-140507.jsonl
   version: 2
   versions:
     1:

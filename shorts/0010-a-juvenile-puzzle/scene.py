@@ -205,10 +205,10 @@ class Short(Scene):
         self.add_sound(SFX["chime"], gain=-8)
         self.play(GrowFromCenter(tag), FadeIn(sub), Create(glines, lag_ratio=0.02), run_time=1.1)
         fing = finger(g0, ACCENT)
-        one_f = label("one finger only", 44, ACCENT).move_to(SCREEN_C + np.array([0, -2.65, 0]))
+        one_f = label("one finger. No tricks!", 44, ACCENT).move_to(SCREEN_C + np.array([0, -2.45, 0]))
         self.play(GrowFromCenter(fing), FadeIn(one_f), run_time=0.4)
-        cap.show("One finger: how many swipes?")
-        ask = label("? swipes", 72, ACCENT).move_to([CENTRE_X, -2.4, 0])
+        cap.show("How many swipes, minus the trick?")
+        ask = label("? swipes", 72, ACCENT).move_to([CENTRE_X, -2.15, 0])
         self.play(FadeIn(ask), run_time=0.3)
         self.wait(1.2)
 

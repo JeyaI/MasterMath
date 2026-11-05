@@ -27,7 +27,7 @@ Checked against the recent Shorts: I read the `scene.py` docstring of 0003 (Insp
 6. Two ordinary swipes in two colours wipe everything except the two uprights. "Two swipes clear most of it" (4 s)
 7. The trick, last: two fingertips land on the two uprights. "Use two fingers" (3 s)
 8. Both slide down together and both lines vanish in the third swipe, the screen clear, a tick. "Two lines, one swipe", "Three swipes ✓" (5 s)
-9. Level 2 card: a 3 by 5 grid, one finger only. "One finger: how many swipes?" (4 s)
+9. Level 2 card: a 3 by 5 grid, one finger only. Label "one finger. No tricks!"; caption "How many swipes, minus the trick?" (a light poke at the two-finger loophole) (4 s)
 10. "Comment just the number ↓" held (12 s)
 
 Total about 51 s including the 12 s end card.
