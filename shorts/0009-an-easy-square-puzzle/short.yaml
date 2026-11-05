@@ -113,5 +113,5 @@ video:
       num_turns: 62
       total_cost_usd: 0.6272341000000001
       log: job-animate-20261104-204006.jsonl
-  warned: '⚠️ Video v1 is rendered, but the upload failed: ||upload: <HttpError 400 when requesting None
-    returned "The user has exc'
+  warned: ⏸️ Video v1 is rendered, but YouTube's daily upload limit was hit. Uploads resume after 
+    Thu 5 Nov, 5:15 AM EST; I'll upl
