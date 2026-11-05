@@ -147,10 +147,27 @@ class Short(Scene):
         cap.show("Eight odd points: four swipes", extra=[*recolor, *self.top("8 ends ÷ 2 = 4 swipes", ACCENT, 56)])
         self.wait(1.2)
 
-        # --- two fingers --------------------------------------------------------------------
+        # --- two ordinary swipes first ------------------------------------------------------
         (c, d), (e, f2) = FOLD_PAIR
         self.play(FadeOut(VGroup(*dots.values(), *halos.values())), fig.animate.set_color(INK),
                   *self.top("Swipes: 0 of 3"), run_time=0.4)
+        cap.show("Two swipes clear most of it")
+        one = finger(P(STROKES[0][0]), PIECES[0])
+        self.play(GrowFromCenter(one), run_time=0.3)
+        beat(self, "swipe one")
+        self.play(*self.top("Swipes: 1 of 3", GOOD), run_time=0.4)
+        for i, (path, col) in enumerate(zip(STROKES, (PIECES[0], PIECES[2]))):
+            if i:
+                one.move_to(P(path[0]))
+                beat(self, "swipe two")
+                self.play(GrowFromCenter(one), *self.top("Swipes: 2 of 3", GOOD), run_time=0.3)
+            self.wipe([one], [path], lines, 0.3 if len(path) > 6 else 0.35, [col])
+            self.play(FadeOut(one), run_time=0.25)
+            self.wait(0.1)
+        self.wait(0.4)
+
+        # --- the trick, last: two fingers ----------------------------------------------------
+        beat(self, "swipe three: two fingers")
         for ln in (lines[key(FOLD_PAIR[0])], lines[key(FOLD_PAIR[1])]):
             ln.set_color(PIECES[1])
         fa, fb = finger(P(c), PIECES[1]), finger(P(e), PIECES[1])
@@ -160,27 +177,11 @@ class Short(Scene):
                                            Flash(P(c), color=PIECES[1], flash_radius=0.6),
                                            Flash(P(e), color=PIECES[1], flash_radius=0.6)])
         self.wait(1.0)
-
-        # --- both slide down in one swipe ----------------------------------------------------
-        cap.show("Two lines, one swipe", extra=self.top("Swipes: 1 of 3", GOOD), run_time=0.4)
+        cap.show("Two lines, one swipe", extra=self.top("Swipes: 3 of 3", GOOD), run_time=0.4)
         self.wipe([fa, fb], [[c, d], [e, f2]], lines, 1.2, [PIECES[1], PIECES[1]])
         self.add_sound(SFX["snip"])
         self.play(FadeOut(fa), FadeOut(fb), FadeOut(same), run_time=0.4)
         self.wait(0.4)
-
-        # --- the other two swipes -----------------------------------------------------------
-        one = finger(P(STROKES[0][0]), PIECES[0])
-        self.play(GrowFromCenter(one), run_time=0.3)
-        beat(self, "swipe two")
-        self.play(*self.top("Swipes: 2 of 3", GOOD), run_time=0.4)
-        for i, (path, col) in enumerate(zip(STROKES, (PIECES[0], PIECES[2]))):
-            if i:
-                one.move_to(P(path[0]))
-                beat(self, "swipe three")
-                self.play(GrowFromCenter(one), *self.top("Swipes: 3 of 3", GOOD), run_time=0.3)
-            self.wipe([one], [path], lines, 0.3 if len(path) > 6 else 0.35, [col])
-            self.play(FadeOut(one), run_time=0.25)
-            self.wait(0.1)
 
         beat(self, "payoff")
         self.add_sound(SFX["chime"])

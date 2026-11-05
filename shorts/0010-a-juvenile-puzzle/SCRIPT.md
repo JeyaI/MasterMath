@@ -24,9 +24,9 @@ Checked against the recent Shorts: I read the `scene.py` docstring of 0003 (Insp
 3. "Pause and try it" with a 5 s countdown (5 s)
 4. The 8 odd points glow, one by one, with a count. "Odd points are swipe ends" (5 s)
 5. Pairs joined: 8 points, 2 ends per swipe. "Eight odd points: four swipes" (4 s)
-6. Two fingertips land on the two uprights. "Use two fingers" (5 s)
-7. Both slide down together and both lines vanish in one swipe. "Two lines, one swipe" (5 s)
-8. Two more swipes in two colours, the screen clear, a tick. "Three swipes ✓" (5 s)
+6. Two ordinary swipes in two colours wipe everything except the two uprights. "Two swipes clear most of it" (4 s)
+7. The trick, last: two fingertips land on the two uprights. "Use two fingers" (3 s)
+8. Both slide down together and both lines vanish in the third swipe, the screen clear, a tick. "Two lines, one swipe", "Three swipes ✓" (5 s)
 9. Level 2 card: a 3 by 5 grid, one finger only. "One finger: how many swipes?" (4 s)
 10. "Comment just the number ↓" held (12 s)
 

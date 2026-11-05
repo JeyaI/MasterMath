@@ -86,6 +86,7 @@ captions:
   - "Pause and try it"
   - "Odd points are swipe ends"
   - "Eight odd points: four swipes"
+  - "Two swipes clear most of it"
   - "Use two fingers"
   - "Two lines, one swipe"
   - "Three swipes ✓"
@@ -115,6 +116,25 @@ review:
   comment:
 video:
   pending:
+    version: 2
+    file: /home/jeya/mathshorts/out/review/0010-a-juvenile-puzzle/v2.mp4
+    sha256: eca114139bb0bbccaef33ce371104779b008ce1d8ac3b1debb335bd21e93a27d
+    summary: The two-finger trick is now the third and last swipe. The two ordinary swipes come 
+      first and leave only the two uprights. Then the two fingers land and wipe both lines in one 
+      swipe, which clears the screen. The counter reads 1, 2, 3 of 3 in that order, and there is a 
+      new caption, "Two swipes clear most of it". `scene.py`, `SCRIPT.md` and the caption list in 
+      `short.yaml` are updated. `ms verify` passes and `ms check` has no errors. Its only warning is
+      that the video runs 50.4 s against the 40–50 s target.
+    usage:
+      job: revise_video
+      short: 0010-a-juvenile-puzzle
+      exit: 0
+      seconds: 93
+      subtype: success
+      is_error: false
+      num_turns: 23
+      total_cost_usd: 0.219982
+      log: job-revise_video-20261105-135537.jsonl
   version: 1
   versions:
     1:
