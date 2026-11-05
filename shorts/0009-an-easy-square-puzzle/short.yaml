@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0009'
 title: An Easy Square Puzzle
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-147
 tags:
   - dissection
@@ -60,12 +60,13 @@ level2:
   accept: [45, "45 square units", "area 45"]
   why: "Each triangle has area 3 x 6 / 2 = 9, and five of them make 45."
 captions:
-  - "Make a square from all 5?"
-  - "Cut only one in two"
+  - "Make a square from 5 triangles?"
+  - "You may cut one, once"
   - "Pause and try it"
+  - "Slanted edges form the outside"
   - "Four around a hole"
   - "The hole is 1 by 1"
-  - "Cut the fifth once"
+  - "Cut the fifth triangle"
   - "It fits exactly ✓"
   - "Short side 3, long side 6"
   - "Comment just the number ↓"
@@ -73,7 +74,7 @@ music:
   piece: fur-elise
   license: public-domain composition; recording synthesised by lib/audio.py
 youtube:
-  title: "Make a square from 5 triangles. Cut only one."
+  title: "Can you make a square from 5 triangles?"
   description: |
     Five identical right triangles, each half of a 2 by 1 rectangle. Make a perfect square from all five, cutting only one of them in two. Level 2: triangles with sides 3 and 6. What is the square's area? Comment just the number.
     After H. E. Dudeney, Amusements in Mathematics (1917), no. 147. Music: L. van Beethoven, Für Elise, WoO 59.
@@ -85,11 +86,9 @@ youtube:
   published_at:
 review:
   thread_id: '1567705520213594203'
-  version: 1
+  version: 2
   messages:
     1: '1567705522486902946'
+    2: '1567712678867111987'
   last_seen: '1567711608057241605'
-  comment: "\"Can you form a square from 5 triangles?\" \"You are allowed to cut one of the triangles,
-    once.\"\nBeat 2 makes no sense. Show a  sample cut on the 5th triangle and wiggle the cut pieces to
-    show they can be separated.\nWrite out the english in actual english, this seems a little ESL.\nBeats
-    5 - 10 are pretty good."
+  comment:
