@@ -6,3 +6,4 @@
 {"at": "2026-11-03T20:30:03", "event": "comment_video", "status": "revise_video", "version": 1, "comment": "Sort  the pigs doesnt mean much to me. Maybe \"check the pigs\"? Because there's no actual sorting being done."}
 {"at": "2026-11-03T20:31:54", "event": "revised_video", "status": "video_review", "version": 2, "video_id": "0UmPUN3c-Zs", "sha256": "e3c11c2b3b637ea4242ebc6606eb30fdbaaaf38a0222ed8bda0bdb293fe2b433", "usage": {"job": "revise_video", "short": "0007-the-seven-pigs", "exit": 0, "seconds": 36, "subtype": "success", "is_error": false, "num_turns": 9, "total_cost_usd": 0.0705449, "log": "job-revise_video-20261103-203004.jsonl"}}
 {"at": "2026-11-03T20:35:16", "event": "approve_video", "status": "scheduled", "version": 2, "video_id": "0UmPUN3c-Zs", "publish_at": "2026-11-05T17:00:00-05:00"}
+{"at": "2026-11-05T17:00:02", "event": "released", "status": "published", "video_id": "0UmPUN3c-Zs"}
