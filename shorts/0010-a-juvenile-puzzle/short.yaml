@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0010'
 title: A Juvenile Puzzle
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-239
 tags:
   - routes
@@ -112,7 +112,7 @@ review:
   messages:
     1: '1567781228449497108'
     2: '1567970677858766880'
-  last_seen: '1567974657150291980'
+  last_seen: '1567977370349076582'
   comment:
 video:
   pending:
@@ -127,6 +127,7 @@ video:
       file: /home/jeya/mathshorts/out/review/0010-a-juvenile-puzzle/v2.mp4
       sha256: eca114139bb0bbccaef33ce371104779b008ce1d8ac3b1debb335bd21e93a27d
       message: '1567976329679347873'
-  comment:
+  comment: On level two poke a little fun, like "how many swipes (without the trick we did before)" 
+    or something like that. I hope you understand my intent
   warned:
   as_is:
