@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0009'
 title: An Easy Square Puzzle
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-147
 tags:
   - dissection
@@ -91,7 +91,7 @@ review:
     1: '1567705522486902946'
     2: '1567712678867111987'
     3: '1567713934817890304'
-  last_seen: '1567713780488601621'
+  last_seen: '1567893739735613521'
   comment:
 video:
   pending:
@@ -102,5 +102,6 @@ video:
       file: /home/jeya/mathshorts/out/review/0009-an-easy-square-puzzle/v1.mp4
       sha256: 1cc3259e4940dd87669ecf360357c35df4d77acba726cc3a7b2fdd7c2693af8f
       message: '1567888733573877882'
-  comment:
+  comment: For the lengths of the triangle in level 2, make the text a little smaller & white. Make 
+    sure the lengths are shown on the outside of the triangle as is standard notation
   as_is:
