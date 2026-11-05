@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0009'
 title: An Easy Square Puzzle
-status: script_review
+status: revise
 catalog_id: dudeney-amusements-147
 tags:
   - dissection
@@ -88,4 +88,8 @@ review:
   version: 1
   messages:
     1: '1567705522486902946'
-  last_seen: '1567705522486902946'
+  last_seen: '1567711608057241605'
+  comment: "\"Can you form a square from 5 triangles?\" \"You are allowed to cut one of the triangles,
+    once.\"\nBeat 2 makes no sense. Show a  sample cut on the 5th triangle and wiggle the cut pieces to
+    show they can be separated.\nWrite out the english in actual english, this seems a little ESL.\nBeats
+    5 - 10 are pretty good."
