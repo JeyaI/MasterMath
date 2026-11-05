@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0009'
 title: An Easy Square Puzzle
-status: script_review
+status: revise
 catalog_id: dudeney-amusements-147
 tags:
   - dissection
@@ -90,5 +90,5 @@ review:
   messages:
     1: '1567705522486902946'
     2: '1567712678867111987'
-  last_seen: '1567711608057241605'
-  comment:
+  last_seen: '1567713780488601621'
+  comment: '"Can you make a square from 5 triangles?"'
