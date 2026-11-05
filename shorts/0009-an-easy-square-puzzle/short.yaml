@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0009'
 title: An Easy Square Puzzle
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-147
 tags:
   - dissection
@@ -91,7 +91,7 @@ review:
     1: '1567705522486902946'
     2: '1567712678867111987'
     3: '1567713934817890304'
-  last_seen: '1567893739735613521'
+  last_seen: '1567895646344577115'
   comment:
 video:
   pending:
@@ -107,5 +107,6 @@ video:
       file: /home/jeya/mathshorts/out/review/0009-an-easy-square-puzzle/v2.mp4
       sha256: 27b0c6d9a493ee940433c7337c20fa308dfeeb7d7d583f042d32f853e490fea3
       message: '1567894825645252730'
-  comment:
+  comment: Level 2 graphic looks better now. Need to do the same thing in the beginning now. (When 1
+    and 2 are the height/width)
   as_is:
