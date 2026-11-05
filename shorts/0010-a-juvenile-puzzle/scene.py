@@ -192,6 +192,7 @@ class Short(Scene):
         # --- Level 2 -------------------------------------------------------------------------
         beat(self, "Level 2")
         cap.clear()
+        cap.y = -4.0                           # Level 2: captions sit lower, leaving room for "? swipes" under the board
         self.play(FadeOut(ok), FadeOut(self._top), FadeOut(credit), run_time=0.3)
         self._top = None
         tag = badge("LEVEL 2").move_to([CENTRE_X, 6.5, 0])
@@ -208,7 +209,7 @@ class Short(Scene):
         one_f = label("one finger. No tricks!", 44, ACCENT).move_to(SCREEN_C + np.array([0, -2.45, 0]))
         self.play(GrowFromCenter(fing), FadeIn(one_f), run_time=0.4)
         cap.show("How many swipes, minus the trick?")
-        ask = label("? swipes", 72, ACCENT).move_to([CENTRE_X, -2.15, 0])
+        ask = label("? swipes", 72, ACCENT).move_to([CENTRE_X, -2.8, 0])
         self.play(FadeIn(ask), run_time=0.3)
         self.wait(1.2)
 

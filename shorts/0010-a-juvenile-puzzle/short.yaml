@@ -116,6 +116,24 @@ review:
   comment:
 video:
   pending:
+    version: 4
+    file: /home/jeya/mathshorts/out/review/0010-a-juvenile-puzzle/v4.mp4
+    sha256: 9bba2fc0d2f1cfd3ca5ee414585d4d3a4756d38dabbb6002dab2459ec3457b6b
+    summary: On the Level 2 card, "? swipes" now sits below the board instead of overlapping its 
+      bottom edge. Level 2 captions also moved down to y=-4.0 to make room. A full preview passes 
+      `ms check` with 0 errors. The only warning is the existing 50.4 s duration, which is just over
+      the 40–50 s target. I didn't change any numbers or claims, so `verify.py` and `short.yaml` are
+      untouched, and I didn't re-run `ms verify`.
+    usage:
+      job: revise_video
+      short: 0010-a-juvenile-puzzle
+      exit: 0
+      seconds: 162
+      subtype: success
+      is_error: false
+      num_turns: 27
+      total_cost_usd: 0.20346799999999998
+      log: job-revise_video-20261105-142006.jsonl
   version: 3
   versions:
     1:
