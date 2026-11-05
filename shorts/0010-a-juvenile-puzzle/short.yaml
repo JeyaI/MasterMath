@@ -113,3 +113,24 @@ review:
     2: '1567970677858766880'
   last_seen: '1567969371676999721'
   comment:
+video:
+  pending:
+    version: 1
+    file: /home/jeya/mathshorts/out/review/0010-a-juvenile-puzzle/v1.mp4
+    sha256: bf6abec1b374138d841b7d4381995f3bae00d1c5c25ceee1dbfee3764adccbca
+    summary: The scene is rewritten for the touchscreen version and runs 49.5 s. `ms check` passes 
+      with no warnings, `ms verify` passes, and the final full preview is v5. I looked at about 8 
+      frames across the hook, rules, odd points, pairs, wipes, payoff and Level 2 card, and fixed 
+      the overlaps and safe-zone errors I found. The Level 2 card has a tight gap between the "? 
+      swipes" line and the caption. `short.yaml` is unchanged because its captions already match the
+      scene.
+    usage:
+      job: animate
+      short: 0010-a-juvenile-puzzle
+      exit: 0
+      seconds: 274
+      subtype: success
+      is_error: false
+      num_turns: 89
+      total_cost_usd: 0.7014566
+      log: job-animate-20261105-134009.jsonl
