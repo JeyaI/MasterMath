@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0010'
 title: A Juvenile Puzzle
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-239
 tags:
   - routes
@@ -116,25 +116,7 @@ review:
   comment:
 video:
   pending:
-    version: 4
-    file: /home/jeya/mathshorts/out/review/0010-a-juvenile-puzzle/v4.mp4
-    sha256: 9bba2fc0d2f1cfd3ca5ee414585d4d3a4756d38dabbb6002dab2459ec3457b6b
-    summary: On the Level 2 card, "? swipes" now sits below the board instead of overlapping its 
-      bottom edge. Level 2 captions also moved down to y=-4.0 to make room. A full preview passes 
-      `ms check` with 0 errors. The only warning is the existing 50.4 s duration, which is just over
-      the 40–50 s target. I didn't change any numbers or claims, so `verify.py` and `short.yaml` are
-      untouched, and I didn't re-run `ms verify`.
-    usage:
-      job: revise_video
-      short: 0010-a-juvenile-puzzle
-      exit: 0
-      seconds: 162
-      subtype: success
-      is_error: false
-      num_turns: 27
-      total_cost_usd: 0.20346799999999998
-      log: job-revise_video-20261105-142006.jsonl
-  version: 3
+  version: 4
   versions:
     1:
       file: /home/jeya/mathshorts/out/review/0010-a-juvenile-puzzle/v1.mp4
@@ -150,7 +132,11 @@ video:
       file: /home/jeya/mathshorts/out/review/0010-a-juvenile-puzzle/v3.mp4
       sha256: 226a0b33c081d7cdeb6eead3ccbe50f1db28e2805a64798b3f48db8c31c9bb88
       message: '1567978973890224169'
-  comment: The "? Swipes" caption is clipping into the board for level 2. Need to drop it down a 
-    bit. Theres a lot of free space below.
+      video_id:
+    4:
+      file: /home/jeya/mathshorts/out/review/0010-a-juvenile-puzzle/v4.mp4
+      sha256: 9bba2fc0d2f1cfd3ca5ee414585d4d3a4756d38dabbb6002dab2459ec3457b6b
+      message: '1567982780841852949'
+  comment:
   warned:
   as_is:
