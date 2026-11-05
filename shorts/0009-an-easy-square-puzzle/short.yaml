@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0009'
 title: An Easy Square Puzzle
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-147
 tags:
   - dissection
@@ -60,7 +60,7 @@ level2:
   accept: [45, "45 square units", "area 45"]
   why: "Each triangle has area 3 x 6 / 2 = 9, and five of them make 45."
 captions:
-  - "Make a square from 5 triangles?"
+  - "Can you make a square?"
   - "You may cut one, once"
   - "Pause and try it"
   - "Slanted edges form the outside"
@@ -86,9 +86,10 @@ youtube:
   published_at:
 review:
   thread_id: '1567705520213594203'
-  version: 2
+  version: 3
   messages:
     1: '1567705522486902946'
     2: '1567712678867111987'
+    3: '1567713934817890304'
   last_seen: '1567713780488601621'
-  comment: '"Can you make a square from 5 triangles?"'
+  comment:

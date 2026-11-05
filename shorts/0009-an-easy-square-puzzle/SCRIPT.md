@@ -4,7 +4,7 @@
 `dudeney-amusements-147`, "An Easy Square Puzzle". Chosen because it has one clean idea (a square with a hole, and a hole the size of one piece), a short statement, an exact answer checked in code, and a natural Level 2. Runner-up: `dudeney-amusements-150`, "Dissecting A Mitre" (five pieces, but the cut points need a compass construction, so it is harder to retell in 45 seconds).
 
 ## Hook
-Five identical right triangles pop in, in a row, the first labelled "short side 1, long side 2". Then the question in plain words: "Make a square from 5 triangles?" (Captions in `short.yaml` are kept in step.)
+Five identical right triangles pop in, in a row, the first labelled "short side 1, long side 2". Then the question in plain words: "Can you make a square?" with the five triangles on screen (the full "Can you make a square from 5 triangles?" is the YouTube title; the on-screen caption is trimmed to the 2-6 word rule). (Captions in `short.yaml` are kept in step.)
 
 Revision note (reviewer comment): beat 2 now shows a sample cut on the fifth triangle, with the two cut pieces wiggling apart to prove they can be separated; the old rectangle-cut beat is gone (the 1 and 2 labels in beat 1 carry the "twice as long as broad" shape). Captions are rewritten in natural English.
 
@@ -21,7 +21,7 @@ Animation: the four triangles fly in one by one and rotate into a pinwheel, the 
 Compared with the recent Shorts: I read the `scene.py` docstrings of 0001 to 0008. 0001 (Greek cross) also ends on a sqrt(5) square, but it slides four cross pieces cut along slopes; this one builds a pinwheel of whole triangles round a hole and fills it with a trapezoid and triangle, a different picture and motion. 0005 and 0007 are cut and fence counts; 0006 colours bars in place; 0002 is circles; 0003, 0004, 0008 are routes, boards and counters.
 
 ## Beats
-1. Five triangles pop in, the first labelled 1 and 2. "Make a square from 5 triangles?" (3 s)
+1. Five triangles pop in, the first labelled 1 and 2. "Can you make a square?" (3 s)
 2. The rule, shown on the fifth triangle: a sample cut line draws across it (not the solution cut), the two pieces wiggle apart to show they separate, then slide back together; the other four stay whole. "You may cut one, once" (4 s)
 3. "Pause and try it" with a 5 s countdown (5 s)
 4. Area 5, so the side is the slanted edge. "Slanted edges form the outside" (3 s)
