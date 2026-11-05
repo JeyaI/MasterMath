@@ -1,0 +1,91 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0009'
+title: An Easy Square Puzzle
+status: script_review
+catalog_id: dudeney-amusements-147
+tags:
+  - dissection
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 147
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    If you take a rectangular piece of cardboard, twice as long as it is
+    broad, and cut it in half diagonally, you will get two of the pieces
+    shown in the illustration. The puzzle is with five such pieces of equal
+    size to form a square. One of the pieces may be cut in two, but the
+    others must be used intact.
+  solution: |
+    [Illustration
+
+        +-----------------------------------------+
+        |  .                                     /|
+        |      .                                / |
+        |          .                           /  |
+        |                /                    /   |
+        |               /    .               /    |
+        |              /         .          /     |
+        |             /              .     /      |
+        |            /                   ./       |
+        |           +--------------------+        |
+        |          /                    /         |
+        |         /                    /          |
+        |        /                    /           |
+        |       / .                  /            |
+        |      /      .             /             |
+        |     /           .        /              |
+        |    /                .   /               |
+        |   /                     .               |
+        |  /                          .           |
+        | /                               .       |
+        |/                                    .   |
+        +-----------------------------------------+
+
+    ]
+
+    The diagram explains itself, one of the five pieces having been cut in
+    two to form a square.
+level1:
+  statement: "Five identical right triangles, each half of a 2 by 1 rectangle cut along its diagonal.
+    Can you make a perfect square from all five, cutting only one of them in two?"
+  answer: "Four whole triangles around a 1 by 1 hole; the fifth, cut once, fills the hole"
+  insight: "Four triangles turn into a tilted square with a unit hole in the middle. The fifth triangle
+    has area 1, the same as the hole: one vertical cut makes a trapezoid and a small triangle that slide
+    and turn into it exactly."
+level2:
+  statement: "Now the triangles are twice as long as broad, with short side 3 and long side 6. Five of
+    them make a square the same way. What is the area of that square?"
+  answer: 45
+  accept: [45, "45 square units", "area 45"]
+  why: "Each triangle has area 3 x 6 / 2 = 9, and five of them make 45."
+captions:
+  - "Make a square from all 5?"
+  - "Cut only one in two"
+  - "Pause and try it"
+  - "Four around a hole"
+  - "The hole is 1 by 1"
+  - "Cut the fifth once"
+  - "It fits exactly ✓"
+  - "Short side 3, long side 6"
+  - "Comment just the number ↓"
+music:
+  piece: fur-elise
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "Make a square from 5 triangles. Cut only one."
+  description: |
+    Five identical right triangles, each half of a 2 by 1 rectangle. Make a perfect square from all five, cutting only one of them in two. Level 2: triangles with sides 3 and 6. What is the square's area? Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 147. Music: L. van Beethoven, Für Elise, WoO 59.
+  tags:
+    - math puzzle
+    - puzzle
+  video_id:
+  url:
+  published_at:
+review:
+  thread_id: '1567705520213594203'
+  version: 1
+  messages:
+    1: '1567705522486902946'
+  last_seen: '1567705522486902946'
