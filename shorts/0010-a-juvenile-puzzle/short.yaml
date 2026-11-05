@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0010'
 title: A Juvenile Puzzle
-status: script_review
+status: animating
 catalog_id: dudeney-amusements-239
 tags:
   - routes
