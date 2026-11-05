@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0010'
 title: A Juvenile Puzzle
-status: script_review
+status: revise
 catalog_id: dudeney-amusements-239
 tags:
   - routes
@@ -110,4 +110,6 @@ review:
   version: 1
   messages:
     1: '1567781228449497108'
-  last_seen: '1567781228449497108'
+  last_seen: '1567969371676999721'
+  comment: Not sure the format makes sense. The original puzzle is on paper, sure. But the audience 
+    of this video is watching a video on a screen.
