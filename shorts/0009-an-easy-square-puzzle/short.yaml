@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0009'
 title: An Easy Square Puzzle
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-147
 tags:
   - dissection
@@ -95,30 +95,17 @@ review:
   comment:
 video:
   pending:
-    version: 2
-    file: /home/jeya/mathshorts/out/review/0009-an-easy-square-puzzle/v2.mp4
-    sha256: 27b0c6d9a493ee940433c7337c20fa308dfeeb7d7d583f042d32f853e490fea3
-    summary: "On the Level 2 triangle, the side labels are now white and smaller (52 → 40). Each one sits
-      outside the triangle: the short side to the left of the vertical edge, the long side below the base.
-      No numbers or shapes changed, so I left verify.py alone. I didn't re-run `ms verify`. Full preview
-      rendered, the Level 2 frame looks right, and `ms check` passes."
-    usage:
-      job: revise_video
-      short: 0009-an-easy-square-puzzle
-      exit: 0
-      seconds: 141
-      subtype: success
-      is_error: false
-      num_turns: 17
-      total_cost_usd: 0.1823293
-      log: job-revise_video-20261105-083005.jsonl
   warned:
-  version: 1
+  version: 2
   versions:
     1:
       file: /home/jeya/mathshorts/out/review/0009-an-easy-square-puzzle/v1.mp4
       sha256: 1cc3259e4940dd87669ecf360357c35df4d77acba726cc3a7b2fdd7c2693af8f
       message: '1567888733573877882'
-  comment: For the lengths of the triangle in level 2, make the text a little smaller & white. Make 
-    sure the lengths are shown on the outside of the triangle as is standard notation
+      video_id:
+    2:
+      file: /home/jeya/mathshorts/out/review/0009-an-easy-square-puzzle/v2.mp4
+      sha256: 27b0c6d9a493ee940433c7337c20fa308dfeeb7d7d583f042d32f853e490fea3
+      message: '1567894825645252730'
+  comment:
   as_is:
