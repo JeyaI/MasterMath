@@ -6,9 +6,18 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **46**
+Next id: **47**
 
 ## Open
+
+### #46 · Don't spoil the puzzle in Discord
+status: open · P2 · feature
+I want to try each puzzle before I see its answer. Right now the first script message (`post_version` in `mathshorts/tick.py`) shows the title and the job's `summary`, which can give away the trick or the answer. `SCRIPT.md` is attached openly, and the video post shows its summary too.
+- **First message of a thread:** state the problem in full (the puzzle as the Short poses it, from `short.yaml`), with nothing about the solution, so I can work it out first.
+- **Spoiler tags on everything about the solution:** wrap the summary, the answer, the insight and the Level 2 answer in Discord `||…||`. Name attachments `SPOILER_<name>` so Discord blurs them (the script file, any frames). This covers script versions, revisions, video posts, and job summaries/errors that quote the answer.
+- Titles and video links can give it away too: check the title, and put the YouTube link (whose thumbnail shows the solution) inside a spoiler.
+- Tell the jobs (`scripts/jobs/*.md`) to keep `summary` free of the answer, or to mark what is a spoiler, so tick can wrap it reliably.
+- Test: a fake Discord in `tests/test_tick.py` asserts that the answer from `verify.py`/`level2.accept` never appears outside `||…||` in any bot post.
 
 ### #45 · Check that unlisted → public gets the full new-upload treatment
 status: open · P3 · bug
