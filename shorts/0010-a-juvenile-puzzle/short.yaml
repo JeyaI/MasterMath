@@ -138,5 +138,6 @@ video:
       sha256: 9bba2fc0d2f1cfd3ca5ee414585d4d3a4756d38dabbb6002dab2459ec3457b6b
       message: '1567982780841852949'
   comment:
-  warned:
+  warned: ⏸️ v4 is approved, but YouTube's daily upload limit was hit. Uploads resume after Thu 5 
+    Nov, 9:15 PM EST; I'll upload an
   as_is:
