@@ -6,9 +6,13 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **47**
+Next id: **48**
 
 ## Open
+
+### #47 · Stop uploads for 8 hours on `uploadLimitExceeded`
+status: open · P2 · bug
+YouTube can refuse `videos.insert` with `uploadLimitExceeded` (the channel's daily upload cap, separate from API quota). Right now `make_video` treats it like any upload error and retries every tick, which keeps hitting the limit. Detect that reason in `mathshorts/youtube.py`, record a pause-until time (8 hours out) that persists across ticks, skip uploads until then (renders can still go ahead), and post one notice in the thread saying when uploads resume. Test with a fake YouTube that raises it once: no upload attempts for 8 hours, then a normal upload.
 
 ### #45 · Check that unlisted → public gets the full new-upload treatment
 status: open · P3 · bug
