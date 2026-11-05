@@ -10,10 +10,6 @@ Next id: **48**
 
 ## Open
 
-### #47 · Stop uploads for 8 hours on `uploadLimitExceeded`
-status: open · P2 · bug
-YouTube can refuse `videos.insert` with `uploadLimitExceeded` (the channel's daily upload cap, separate from API quota). Right now `make_video` treats it like any upload error and retries every tick, which keeps hitting the limit. Detect that reason in `mathshorts/youtube.py`, record a pause-until time (8 hours out) that persists across ticks, skip uploads until then (renders can still go ahead), and post one notice in the thread saying when uploads resume. Test with a fake YouTube that raises it once: no upload attempts for 8 hours, then a normal upload.
-
 ### #45 · Check that unlisted → public gets the full new-upload treatment
 status: open · P3 · bug
 Every release (slot or asap, #44) flips a review upload from unlisted to public via `publishAt`. Check on 0006 (public 2026-11-04) and the first asap release whether subscribers got a notification and it reached the Shorts feed (first-hour views in YouTube Studio). If not, upload a fresh copy at approval instead.
@@ -144,6 +140,11 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #47 · Stop uploads for 8 hours on `uploadLimitExceeded`
+status: done · 2026-11-04 · P2 · bug
+YouTube can refuse `videos.insert` with `uploadLimitExceeded` (the channel's daily upload cap, separate from API quota). Right now `make_video` treats it like any upload error and retries every tick, which keeps hitting the limit. Detect that reason in `mathshorts/youtube.py`, record a pause-until time (8 hours out) that persists across ticks, skip uploads until then (renders can still go ahead), and post one notice in the thread saying when uploads resume. Test with a fake YouTube that raises it once: no upload attempts for 8 hours, then a normal upload.
+- **Resolution:** `youtube.upload` raises `UploadLimitError` on `uploadLimitExceeded`; tick writes `out/youtube-upload-pause.json` (8 h), skips uploads until then with one ⏸️ notice giving the resume time, and renders still go ahead. Tested with a fake YouTube.
 
 ### #46 · Don't spoil the puzzle in Discord
 status: done · 2026-11-04 · P2 · feature

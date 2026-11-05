@@ -28,6 +28,10 @@ class YouTubeError(RuntimeError):
     pass
 
 
+class UploadLimitError(YouTubeError):
+    """The channel's daily upload cap (`uploadLimitExceeded`), separate from API quota (#47)."""
+
+
 def credentials(interactive: bool = False):
     """The channel's credentials, refreshed. Only `ms youtube login` may open a sign-in."""
     from google.auth.exceptions import RefreshError
@@ -100,6 +104,9 @@ class Client:
             while response is None:
                 _, response = request.next_chunk()
         except HttpError as e:
+            body = e.content.decode("utf-8", "replace") if isinstance(e.content, bytes) else str(e.content or "")
+            if "uploadLimitExceeded" in f"{e} {body}":
+                raise UploadLimitError(f"upload: {e}") from None
             raise YouTubeError(f"upload: {e}") from None
         return response["id"]
 

@@ -14,6 +14,8 @@ Run every few minutes (scripts/tick.sh). Each tick, under a lock:
 2. For scheduled Shorts past their release time, checks YouTube and records them as published.
 3. Runs revise jobs, then animate and video revise jobs. A video version is rendered, uploaded
    unlisted and posted. If YouTube is down, the render waits and the upload is retried next tick.
+   If YouTube says the channel's daily upload limit is hit, uploads stop for 8 hours (a pause file
+   in out/) with one notice in the thread; renders still go ahead.
 4. With --draft, starts one script job if the queue has room, and posts the script.
 
 A job's own claims are not trusted: tick runs verify.py, `ms check` and the final render itself,
@@ -29,6 +31,7 @@ from __future__ import annotations
 import datetime as dt
 import fcntl
 import hashlib
+import json
 import re
 import shutil
 import subprocess
@@ -43,6 +46,7 @@ from .shorts import SCRIPT_LOOP, VIDEO_LOOP, Short, all_shorts
 
 ATTEMPTS = 2
 LATE = dt.timedelta(hours=1)          # a release this late gets flagged
+UPLOAD_PAUSE = dt.timedelta(hours=8)  # after YouTube's uploadLimitExceeded (#47)
 
 
 def spoiler(text: str) -> str:
@@ -105,6 +109,26 @@ def sha256(path: Path) -> str:
         for chunk in iter(lambda: f.read(1 << 20), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def pause_file() -> Path:
+    return paths.out() / "youtube-upload-pause.json"
+
+
+def uploads_paused_until(now: dt.datetime) -> dt.datetime | None:
+    """When uploads may resume after YouTube's daily upload limit, or None if they may go ahead."""
+    try:
+        until = dt.datetime.fromisoformat(json.loads(pause_file().read_text())["until"])
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+    return until if until > now else None
+
+
+def pause_uploads(now: dt.datetime, reason: str) -> dt.datetime:
+    until = now + UPLOAD_PAUSE
+    pause_file().parent.mkdir(parents=True, exist_ok=True)
+    pause_file().write_text(json.dumps({"until": until.isoformat(), "reason": reason[:300]}) + "\n")
+    return until
 
 
 def review_video(s: Short, version: int) -> Path:
@@ -385,9 +409,17 @@ class Tick:
         thread = self.thread(s)
         yt = self.yt()
         video_id = pending.get("video_id")       # uploaded by a tick that stopped before posting (#38)
+        if not video_id and (until := uploads_paused_until(self.now())):
+            self.warn_once(s, v, thread, self.limit_notice(version, until))
+            return
         try:
             if not video_id:
-                video_id = yt.upload(Path(pending["file"]), youtube.metadata(s.data()), "unlisted")
+                try:
+                    video_id = yt.upload(Path(pending["file"]), youtube.metadata(s.data()), "unlisted")
+                except youtube.UploadLimitError as e:
+                    until = pause_uploads(self.now(), str(e))
+                    self.warn_once(s, v, thread, self.limit_notice(version, until))
+                    return
                 pending["video_id"] = v["pending"]["video_id"] = video_id
                 s.update(video=v)                 # saved before anything else can fail
                 self.commit(s, f"{s.number}: video v{version} uploaded")
@@ -519,6 +551,13 @@ class Tick:
             except youtube.YouTubeError as e:
                 self.echo(f"  couldn't delete {vid}: {e}")
         return gone
+
+    @staticmethod
+    def limit_notice(version: int, until: dt.datetime) -> str:
+        tz = release.ZoneInfo(release.settings()["timezone"])
+        when = until.astimezone(tz).strftime("%a %d %b, %I:%M %p %Z").replace(" 0", " ")
+        return (f"⏸️ Video v{version} is rendered, but YouTube's daily upload limit was hit. "
+                f"Uploads resume after {when}; I'll upload it then.")
 
     def warn_once(self, s: Short, v: dict, thread: str, text: str) -> None:
         """Post a warning unless the same one is already up; it's cleared when things move on."""

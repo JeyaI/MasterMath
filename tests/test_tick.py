@@ -7,7 +7,7 @@ import pytest
 from mathshorts import cli, jobs, release, sandbox, tick
 from mathshorts.discord import ACCEPT, CROSS, STOP
 from mathshorts.jobs import JobResult, _env
-from mathshorts.youtube import YouTubeError
+from mathshorts.youtube import UploadLimitError, YouTubeError
 from mathshorts.shorts import all_shorts, find, used_catalog_ids
 
 ME, OTHER, BOT = "100", "200", "999"
@@ -81,10 +81,15 @@ class FakeRunner:
 
 
 class FakeYouTube:
-    def __init__(self, fail_uploads=0):
+    def __init__(self, fail_uploads=0, limit_uploads=0):
         self.videos, self.deleted, self.n, self.fail_uploads = {}, [], 0, fail_uploads
+        self.limit_uploads, self.attempts = limit_uploads, 0
 
     def upload(self, path, meta, privacy):
+        self.attempts += 1
+        if self.limit_uploads:
+            self.limit_uploads -= 1
+            raise UploadLimitError("upload: uploadLimitExceeded")
         if self.fail_uploads:
             self.fail_uploads -= 1
             raise YouTubeError("HTTP 503")
@@ -437,6 +442,24 @@ def test_failed_upload_keeps_the_render_and_retries_without_a_new_job(root):
     jobs_before = len(runner.calls)
     t.run()
     assert s.status == "video_review" and len(runner.calls) == jobs_before
+
+
+def test_upload_limit_pauses_uploads_for_8_hours(root):
+    clock, runner = Clock(), FakeRunner()
+    yt = FakeYouTube(limit_uploads=1)
+    d, t, yt, s, thread = in_review(root, yt=yt, clock=clock, runner=runner)
+    assert s.status == "animating" and yt.attempts == 1
+    assert tick.uploads_paused_until(clock()) == NOON + dt.timedelta(hours=8)
+    jobs_before = len(runner.calls)
+    for hours in (1, 4, 7.9):                             # paused: no attempts, no repeat notices
+        clock.t = NOON + dt.timedelta(hours=hours)
+        t.run()
+    assert yt.attempts == 1 and s.status == "animating" and len(runner.calls) == jobs_before
+    notices = [c for c in d.bot_said(thread) if "daily upload limit" in c]
+    assert len(notices) == 1 and "Uploads resume after Wed 4 Nov, 8:00 PM EST" in notices[0]
+    clock.t = NOON + dt.timedelta(hours=8, minutes=5)
+    t.run()
+    assert yt.attempts == 2 and s.status == "video_review" and len(runner.calls) == jobs_before
 
 
 def test_no_youtube_pauses_video_jobs_only(root):

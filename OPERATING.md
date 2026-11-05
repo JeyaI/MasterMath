@@ -183,6 +183,7 @@ Keep software sessions separate from drafting sessions.
 | Preview won't open from WSL | Open it manually: `explorer.exe "$(wslpath -w out/preview/<short>)"`. |
 | A Short is `needs_attention` | A job failed twice; `last_error` in `short.yaml` and `out/logs/job-*.jsonl` say why. Take it over with `/draft-short <n>`, then `ms reject <n> "taking over"` moves it to `drafting`; when it's right, `ms animate <n> --as-is` sends it back to Discord. Or ❌ it in Discord. |
 | The bot says an upload failed, or `tick.log` says video jobs are paused | `ms youtube hello`. If the token lapsed, `ms youtube login`. The rendered video waits, and the next tick uploads it without redoing the job. |
+| The bot says ⏸️ YouTube's daily upload limit was hit | Nothing to do. The channel hit YouTube's own daily upload cap, so uploads stop for 8 hours (the time is in the notice) and then carry on by themselves. To resume sooner, delete `out/youtube-upload-pause.json`. |
 | A job fails at once with a Docker error | Is Docker running, and does `docker images` list `mathshorts-job`? Build it (setup step 8). |
 | No new script arrived | `out/logs/tick.log`: the queue may be full (`config/pipeline.yaml`), or the job failed. |
 | `ms tick` says "not set" or HTTP 401 | Check `~/.config/mathshorts.env` and run `ms discord hello`. The bot token is the one from Bot → Reset Token, not the OAuth2 client secret. |
