@@ -95,6 +95,23 @@ review:
   comment:
 video:
   pending:
+    version: 2
+    file: /home/jeya/mathshorts/out/review/0009-an-easy-square-puzzle/v2.mp4
+    sha256: 27b0c6d9a493ee940433c7337c20fa308dfeeb7d7d583f042d32f853e490fea3
+    summary: "On the Level 2 triangle, the side labels are now white and smaller (52 → 40). Each one sits
+      outside the triangle: the short side to the left of the vertical edge, the long side below the base.
+      No numbers or shapes changed, so I left verify.py alone. I didn't re-run `ms verify`. Full preview
+      rendered, the Level 2 frame looks right, and `ms check` passes."
+    usage:
+      job: revise_video
+      short: 0009-an-easy-square-puzzle
+      exit: 0
+      seconds: 141
+      subtype: success
+      is_error: false
+      num_turns: 17
+      total_cost_usd: 0.1823293
+      log: job-revise_video-20261105-083005.jsonl
   warned:
   version: 1
   versions:

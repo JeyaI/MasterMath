@@ -22,7 +22,7 @@ sys.path[:0] = [str(REPO), str(HERE)]
 import numpy as np  # noqa: E402
 from manim import (  # noqa: E402
     BOLD, DOWN, PI, UP, Create, DashedLine, FadeIn, FadeOut, GrowFromCenter, Indicate, LaggedStart, Polygon, Restore,
-    Scene, UpdateFromAlphaFunc, VGroup, there_and_back, smooth,
+    Scene, UpdateFromAlphaFunc, VGroup, WHITE, there_and_back, smooth,
 )
 
 from lib.layout import ACCENT, BG, GOOD, INK, MUTED, PIECES  # noqa: E402
@@ -212,8 +212,9 @@ class Short(Scene):
         base = np.array([CENTRE_X - b * k3 / 2, 1.6, 0.0])
         big_tri = Polygon(*at([(0, 0), (b, 0), (0, a)], base, k3), fill_color=BLUE, fill_opacity=0.92,
                           stroke_color=INK, stroke_width=4)
-        l_short = label(str(a), 52, BG, BOLD).move_to(base + k3 * np.array([0.45, 1.2, 0]))
-        l_long = label(str(b), 52, BG, BOLD).move_to(base + k3 * np.array([3.0, 0.5, 0]))
+        # side lengths sit outside the triangle (standard notation), smaller and white
+        l_short = label(str(a), 40, WHITE, BOLD).move_to(base + np.array([-0.45, k3 * a / 2, 0]))
+        l_long = label(str(b), 40, WHITE, BOLD).move_to(base + np.array([k3 * b / 2, -0.45, 0]))
         # a small copy of the solved square, to show the same shape in the same arrangement
         k4 = 0.85
         C4 = np.array([CENTRE_X, -0.4, 0.0])
