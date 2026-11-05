@@ -43,7 +43,7 @@ T5 = (0.5, -1.25)              # where the fifth piece waits, below the square, 
 
 # opening layout: right-angle corner of each piece (bottom-left of the triangle)
 SLOTS = [
-    np.array([CENTRE_X - 1.7 - 1.5, 3.2, 0.0]), np.array([CENTRE_X + 1.7 - 1.5, 3.2, 0.0]),
+    np.array([CENTRE_X - 1.7 - 1.5, 3.5, 0.0]), np.array([CENTRE_X + 1.7 - 1.5, 3.5, 0.0]),
     np.array([CENTRE_X - 1.7 - 1.5, 1.35, 0.0]), np.array([CENTRE_X + 1.7 - 1.5, 1.35, 0.0]),
     np.array([CENTRE_X - 1.5, -0.5, 0.0]),
 ]
@@ -100,8 +100,9 @@ class Short(Scene):
         self.play(LaggedStart(*[GrowFromCenter(p) for p in pieces], lag_ratio=0.15), run_time=1.0)
         self.remove(*pieces)
         self.add(*pieces)
-        one = label("1", 40, BG, weight=BOLD).move_to(SLOTS[0] + S1 * np.array([0.2, 0.5, 0]))
-        two = label("2", 40, BG, weight=BOLD).move_to(SLOTS[0] + S1 * np.array([1.0, 0.18, 0]))
+        # side lengths sit outside the triangle (standard notation), smaller and white
+        one = label("1", 40, WHITE, weight=BOLD).move_to(SLOTS[0] + np.array([-0.3, S1 * 0.5, 0]))
+        two = label("2", 40, WHITE, weight=BOLD).move_to(SLOTS[0] + np.array([S1 * 1.0, -0.24, 0]))
         title = hook("An Easy Square Puzzle")
         credit = footer("After H. E. Dudeney, Amusements in Mathematics")
         self.play(FadeIn(title, shift=0.3 * DOWN), FadeIn(credit), FadeIn(one), FadeIn(two), run_time=0.45)

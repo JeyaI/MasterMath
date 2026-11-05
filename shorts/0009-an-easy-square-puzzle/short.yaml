@@ -95,6 +95,25 @@ review:
   comment:
 video:
   pending:
+    version: 3
+    file: /home/jeya/mathshorts/out/review/0009-an-easy-square-puzzle/v3.mp4
+    sha256: 4a4f1c864747a944300815549fa5413c68423a0884fdfe3c7e01c6c9044935f3
+    summary: "In the opening, the \"1\" and \"2\" labels moved outside the first triangle, as with the
+      Level 2 labels: the \"1\" sits left of the short side and the \"2\" sits below the long side. They
+      are white and bold. I raised the top row of triangles slightly so the \"2\" doesn't crowd the row
+      below. The full preview and `ms check` pass, and I looked at the frame at 2.5 s. I didn't change
+      any numbers or shapes, so `verify.py`, `SCRIPT.md` and `short.yaml` are untouched, and I did not
+      re-run `ms verify`."
+    usage:
+      job: revise_video
+      short: 0009-an-easy-square-puzzle
+      exit: 0
+      seconds: 146
+      subtype: success
+      is_error: false
+      num_turns: 16
+      total_cost_usd: 0.1613097
+      log: job-revise_video-20261105-084004.jsonl
   warned:
   version: 2
   versions:
