@@ -7,7 +7,8 @@ above the bar (C-D, E-F) and one below it (G-H).
 Checks, in code, every claim the video makes:
   * the figure is connected and has exactly 8 odd points, so (parity) it needs at least 4 strokes
   * exhaustive search: 4 strokes work and 3 do not (without folding)
-  * with the fold, the pen draws C-D and E-F in one stroke; the rest needs 2 more strokes: 3 in all
+  * with two fingers, one swipe wipes C-D and E-F together (parallel, equal); the rest needs
+    2 more swipes: 3 in all
   * the explicit strokes below cover every line exactly once, each a legal pencil path
   * Level 2: a 3 x 5 grid of squares has 12 odd points, so it needs 6 strokes (and 6 are found)
 

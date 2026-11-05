@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0010'
 title: A Juvenile Puzzle
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-239
 tags:
   - routes
@@ -63,41 +63,41 @@ puzzle:
     once! That is the old trick.
 level1:
   statement: >-
-    Draw this figure in three strokes of a pencil: a rectangle with a bar across
-    the middle, two upright lines above the bar and one below it. Within a stroke
-    the pencil must not leave the paper and no line may be drawn twice.
+    This figure is on a touchscreen: a rectangle with a bar across the middle, two
+    upright lines above the bar and one below it. Wipe it clean in three swipes.
+    A swipe must not lift off the screen and must not cross a line already wiped.
     Can it be done?
-  answer: Yes, by folding the paper so the two upright lines above the bar lie on top of each other 
-    and are drawn in one stroke; two more strokes finish the rest.
-  insight: Each stroke has two ends, and every point where an odd number of lines meet must be an 
-    end. This figure has 8 such points, so ordinary strokes need 4. Folding the paper lets one 
-    stroke draw two lines at once.
+  answer: Yes, by wiping the two upright lines above the bar at once with two fingers (one swipe); 
+    two more swipes finish the rest.
+  insight: Each swipe has two ends, and every point where an odd number of lines meet must be an 
+    end. This figure has 8 such points, so ordinary swipes need 4. Two fingers let one swipe wipe 
+    two parallel lines at once.
 level2:
   statement: >-
-    A grid of 3 by 5 squares is drawn with no folding allowed. What is the fewest
-    number of pencil strokes that can draw it? (A stroke cannot lift or repeat a line.)
+    A grid of 3 by 5 squares is on the screen and you may use one finger only. What is
+    the fewest number of swipes that can wipe it clean? (A swipe cannot lift or repeat a line.)
   answer: 6
   accept: [6, "6 strokes", "six", "Six"]
-  why: "The 12 non-corner points on the edge each have 3 lines, and each stroke has only 2 ends, so 12
-    / 2 = 6 strokes."
+  why: "The 12 non-corner points on the edge each have 3 lines, and each swipe has only 2 ends, so 12
+    / 2 = 6 swipes."
 captions:
-  - "Draw it in three strokes"
-  - "Pen stays down. No repeats"
+  - "Wipe it off in three swipes"
+  - "Finger stays down. No repeats"
   - "Pause and try it"
-  - "Odd points are stroke ends"
-  - "Eight odd points: four strokes"
-  - "Fold the paper"
-  - "Two lines, one stroke"
-  - "Three strokes ✓"
-  - "No folding: how many strokes?"
+  - "Odd points are swipe ends"
+  - "Eight odd points: four swipes"
+  - "Use two fingers"
+  - "Two lines, one swipe"
+  - "Three swipes ✓"
+  - "One finger: how many swipes?"
   - "Comment just the number ↓"
 music:
   piece: pachelbel-canon
   license: public-domain composition; recording synthesised by lib/audio.py
 youtube:
-  title: "Can you draw this in just three strokes?"
+  title: "Can you wipe this off in just three swipes?"
   description: |
-    Draw the figure in three strokes of a pencil, never lifting the pencil within a stroke and never going over a line twice. Level 2: a grid of 3 by 5 squares, no folding. What is the fewest number of strokes? Comment just the number.
+    Wipe the figure off the screen in three swipes, never lifting your finger within a swipe and never going over a line twice. Level 2: a grid of 3 by 5 squares, one finger only. What is the fewest number of swipes? Comment just the number.
     After H. E. Dudeney, Amusements in Mathematics (1917), no. 239. Music: Johann Pachelbel, Canon in D.
   tags:
     - math puzzle
@@ -107,9 +107,9 @@ youtube:
   published_at:
 review:
   thread_id: '1567781225211625472'
-  version: 1
+  version: 2
   messages:
     1: '1567781228449497108'
+    2: '1567970677858766880'
   last_seen: '1567969371676999721'
-  comment: Not sure the format makes sense. The original puzzle is on paper, sure. But the audience 
-    of this video is watching a video on a screen.
+  comment:
