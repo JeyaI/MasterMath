@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0010'
 title: A Juvenile Puzzle
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-239
 tags:
   - routes
@@ -112,7 +112,7 @@ review:
   messages:
     1: '1567781228449497108'
     2: '1567970677858766880'
-  last_seen: '1567977370349076582'
+  last_seen: '1567981807029461025'
   comment:
 video:
   pending:
@@ -132,6 +132,7 @@ video:
       file: /home/jeya/mathshorts/out/review/0010-a-juvenile-puzzle/v3.mp4
       sha256: 226a0b33c081d7cdeb6eead3ccbe50f1db28e2805a64798b3f48db8c31c9bb88
       message: '1567978973890224169'
-  comment:
+  comment: The "? Swipes" caption is clipping into the board for level 2. Need to drop it down a 
+    bit. Theres a lot of free space below.
   warned:
   as_is:
