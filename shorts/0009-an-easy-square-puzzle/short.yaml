@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0009'
 title: An Easy Square Puzzle
-status: script_review
+status: animating
 catalog_id: dudeney-amusements-147
 tags:
   - dissection
