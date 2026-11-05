@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0010'
 title: A Juvenile Puzzle
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-239
 tags:
   - routes
@@ -116,25 +116,7 @@ review:
   comment:
 video:
   pending:
-    version: 3
-    file: /home/jeya/mathshorts/out/review/0010-a-juvenile-puzzle/v3.mp4
-    sha256: 226a0b33c081d7cdeb6eead3ccbe50f1db28e2805a64798b3f48db8c31c9bb88
-    summary: The Level 2 card now pokes fun at the trick. The caption reads "How many swipes, minus 
-      the trick?" and the on-screen label reads "one finger. No tricks!". I nudged the "? swipes" 
-      text and the label up slightly so the longer caption doesn't overlap. `SCRIPT.md` and the 
-      `short.yaml` captions are updated; the maths is untouched. `ms verify` passes and `ms check` 
-      has no errors, only the 50.4 s duration warning.
-    usage:
-      job: revise_video
-      short: 0010-a-juvenile-puzzle
-      exit: 0
-      seconds: 152
-      subtype: success
-      is_error: false
-      num_turns: 35
-      total_cost_usd: 0.2079338
-      log: job-revise_video-20261105-140507.jsonl
-  version: 2
+  version: 3
   versions:
     1:
       file: /home/jeya/mathshorts/out/review/0010-a-juvenile-puzzle/v1.mp4
@@ -145,7 +127,11 @@ video:
       file: /home/jeya/mathshorts/out/review/0010-a-juvenile-puzzle/v2.mp4
       sha256: eca114139bb0bbccaef33ce371104779b008ce1d8ac3b1debb335bd21e93a27d
       message: '1567976329679347873'
-  comment: On level two poke a little fun, like "how many swipes (without the trick we did before)" 
-    or something like that. I hope you understand my intent
+      video_id:
+    3:
+      file: /home/jeya/mathshorts/out/review/0010-a-juvenile-puzzle/v3.mp4
+      sha256: 226a0b33c081d7cdeb6eead3ccbe50f1db28e2805a64798b3f48db8c31c9bb88
+      message: '1567978973890224169'
+  comment:
   warned:
   as_is:
