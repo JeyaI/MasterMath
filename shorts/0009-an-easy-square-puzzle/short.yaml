@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0009'
 title: An Easy Square Puzzle
-status: animating
+status: video_review
 catalog_id: dudeney-amusements-147
 tags:
   - dissection
@@ -95,23 +95,12 @@ review:
   comment:
 video:
   pending:
-    version: 1
-    file: /home/jeya/mathshorts/out/review/0009-an-easy-square-puzzle/v1.mp4
-    sha256: 1cc3259e4940dd87669ecf360357c35df4d77acba726cc3a7b2fdd7c2693af8f
-    summary: The scene is written and the final full preview, v2, runs 48.5 s. `ms verify` and `ms 
-      check` both pass with no warnings. I looked at 12 frames across the two renders (8 from v1, 4 
-      from v2) and fixed the sparse layout and a Level 2 text crowding. The captions in `short.yaml`
-      already matched the scene, so I left them alone. I did not look at the sample-cut wiggle and 
-      the cut-and-fill animation frame by frame, only a few frames of each.
-    usage:
-      job: animate
-      short: 0009-an-easy-square-puzzle
-      exit: 0
-      seconds: 374
-      subtype: success
-      is_error: false
-      num_turns: 62
-      total_cost_usd: 0.6272341000000001
-      log: job-animate-20261104-204006.jsonl
-  warned: ⏸️ Video v1 is rendered, but YouTube's daily upload limit was hit. Uploads resume after 
-    Thu 5 Nov, 1:15 PM EST; I'll upl
+  warned:
+  version: 1
+  versions:
+    1:
+      file: /home/jeya/mathshorts/out/review/0009-an-easy-square-puzzle/v1.mp4
+      sha256: 1cc3259e4940dd87669ecf360357c35df4d77acba726cc3a7b2fdd7c2693af8f
+      message: '1567888733573877882'
+  comment:
+  as_is:
