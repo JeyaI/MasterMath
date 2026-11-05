@@ -20,12 +20,16 @@ A job's own claims are not trusted: tick runs verify.py, `ms check` and the fina
 in the sandbox (mathshorts/sandbox.py), before anything is posted. No model decides an approval:
 reactions are read as data. Every change is committed, one Short per commit, and logged to the
 Short's events.jsonl.
+
+No spoilers (#46): a thread opens with the puzzle alone, and everything about the solution (job
+summaries, errors, SCRIPT.md, video links) goes inside Discord spoiler tags, so you can try it first.
 """
 from __future__ import annotations
 
 import datetime as dt
 import fcntl
 import hashlib
+import re
 import shutil
 import subprocess
 import time
@@ -39,6 +43,28 @@ from .shorts import SCRIPT_LOOP, VIDEO_LOOP, Short, all_shorts
 
 ATTEMPTS = 2
 LATE = dt.timedelta(hours=1)          # a release this late gets flagged
+
+
+def spoiler(text: str) -> str:
+    """Hide text behind Discord spoiler tags. A `||` or code fence inside would end the spoiler early."""
+    text = (text or "").strip().replace("||", "| |").replace("```", "'''")
+    return f"||{text}||" if text else ""
+
+
+def answers(d: dict) -> list[str]:
+    """What would give the puzzle away: both levels' answers and Level 2's accepted forms."""
+    l1, l2 = d.get("level1") or {}, d.get("level2") or {}
+    out = [l1.get("answer"), l2.get("answer"), *(l2.get("accept") or [])]
+    return [str(a).strip() for a in out if a is not None and str(a).strip() and str(a).strip() != "TODO"]
+
+
+def title(s: Short) -> str:
+    """The thread and post title, unless it names an answer (a thread title can't hold a spoiler)."""
+    d = s.data()
+    name = str(d.get("title") or s.name)
+    if any(re.search(rf"(?<!\w){re.escape(a)}(?!\w)", name, re.I) for a in answers(d)):
+        return f"{s.number} · a new puzzle"
+    return f"{s.number} · {name}"
 
 
 def limits() -> dict:
@@ -291,7 +317,7 @@ class Tick:
         if st.get("privacyStatus") == "public":
             s.update(video=v, **{"youtube.published_at": release.local_date(yt_["publish_at"]).isoformat()})
             self.change(s, "released", f"{s.number}: published", event={"video_id": ap["video_id"]})
-            self.d.post(thread, f"🎉 Live: {youtube.url(ap['video_id'])}")
+            self.d.post(thread, f"🎉 Live: {spoiler(youtube.url(ap['video_id']))}")
             done["released"].append(s.name)
         elif self.now() > publish_at + LATE:
             self.warn_once(s, v, thread, f"⚠️ It was due to go public at {publish_at.isoformat()}, but YouTube "
@@ -374,7 +400,7 @@ class Tick:
                 v["pending"].pop("video_id", None)
                 s.update(video=v)
             self.warn_once(s, v, thread, f"⚠️ Video v{version} is rendered, but the upload failed: "
-                                         f"{str(e)[:300]}\nI'll retry on the next tick.")
+                                         f"{spoiler(str(e)[:300])}\nI'll retry on the next tick.")
             return
         mid = self.post_video(thread, s, version, video_id, pending.get("summary", ""))
         versions = {int(k): dict(x) for k, x in (v.get("versions") or {}).items()}
@@ -401,8 +427,8 @@ class Tick:
         if s.status != "scripting":
             self.fail(s, f"the job left {s.name} in {s.status!r}, not 'scripting'", done)
             return
-        title = f"{s.number} · {s.data().get('title') or s.name}"
-        thread = self.d.open_thread(title)
+        thread = self.d.open_thread(title(s))
+        self.post_problem(thread, s)
         mid = self.post_version(thread, s, 1, result.summary)
         s.update(review={"thread_id": thread, "version": 1, "messages": {1: mid}, "last_seen": mid})
         self.change(s, "script_done", f"{s.number}: script v1", event={"version": 1, "usage": result.usage})
@@ -449,20 +475,34 @@ class Tick:
         """The Short's thread; a Short handed over with `ms animate` may not have one yet."""
         rv = dict(s.data().get("review") or {})
         if not rv.get("thread_id"):
-            rv["thread_id"] = self.d.open_thread(f"{s.number} · {s.data().get('title') or s.name}")
+            rv["thread_id"] = self.d.open_thread(title(s))
+            self.post_problem(rv["thread_id"], s)
             s.update(review=rv)
         return rv["thread_id"]
 
+    def post_problem(self, thread: str, s: Short) -> str:
+        """The thread's first post: the puzzle as the Short poses it, and nothing about the solution."""
+        d = s.data()
+        text = str((d.get("level1") or {}).get("statement") or "").strip()
+        if not text or text.startswith("TODO"):
+            text = str((d.get("puzzle") or {}).get("text") or "").strip()
+        head = f"**The puzzle.** Try it before you open anything hidden below.\n\n{text}"
+        l2 = str((d.get("level2") or {}).get("statement") or "").strip()
+        if l2 and not l2.startswith("TODO"):
+            head += f"\n\n**Level 2** (it may hint at the trick): {spoiler(l2)}"
+        return self.d.post(thread, head)
+
     def post_version(self, thread: str, s: Short, version: int, summary: str) -> str:
-        head = (f"**Script v{version}** · {s.data().get('title') or s.name}\n{summary.strip()}\n\n"
+        head = (f"**Script v{version}** · {title(s)}\n{spoiler(summary)}\n\n"
                 f"React {ACCEPT} to accept, {CROSS} to abandon, or reply to revise.")
-        return self.d.post(thread, head, files={f"{s.number}-script-v{version}.md": s.folder / "SCRIPT.md"},
+        return self.d.post(thread, head,
+                           files={f"SPOILER_{s.number}-script-v{version}.md": s.folder / "SCRIPT.md"},
                            reactions=(ACCEPT, CROSS))
 
     def post_video(self, thread: str, s: Short, version: int, video_id: str, summary: str) -> str:
         cfg = release.settings()
-        head = (f"**Video v{version}** · {s.data().get('title') or s.name}\n{youtube.url(video_id)}\n"
-                f"{summary.strip()}\n\nReact {ACCEPT} to approve: this exact upload goes public "
+        head = (f"**Video v{version}** · {title(s)}\n{spoiler(youtube.url(video_id))}\n"
+                f"{spoiler(summary)}\n\nReact {ACCEPT} to approve: this exact upload goes public "
                 f"{release.describe(cfg)}. {CROSS} abandons; a reply revises.")
         return self.d.post(thread, head, reactions=(ACCEPT, CROSS))
 
@@ -493,7 +533,7 @@ class Tick:
         s.update(last_error=error[:200])
         self.change(s, "job_failed", f"{s.number}: needs attention", event={"error": error})
         if thread:
-            self.d.post(thread, f"⚠️ The job failed twice: {error[:300]}\nIt needs you in Claude Code: "
+            self.d.post(thread, f"⚠️ The job failed twice: {spoiler(error[:300])}\nIt needs you in Claude Code: "
                                 f"`/draft-short {s.number}`, or ❌ to abandon.")
         done["failed"].append(s.name)
 

@@ -17,4 +17,4 @@ Follow CLAUDE.md, and steps 5 and 6 of `.claude/skills/draft-short/SKILL.md`, wi
 ## How to run commands
 Run one command per Bash call: no `&&`, `;`, pipes or `cd`. Do not write scratch scripts to run. Anything not on the allowlist is denied, not asked about. Do not use `--open`.
 
-Do not run `git`, and do not approve, reject or publish anything. Finish with the structured result: `short` is the folder name, and `summary` is two or three lines for the reviewer (length, and anything you were unsure about).
+Do not run `git`, and do not approve, reject or publish anything. Finish with the structured result: `short` is the folder name, and `summary` is two or three lines for the reviewer (length, and anything you were unsure about). The reviewer tries each puzzle before seeing its solution: tick shows the summary behind a Discord spoiler, but keep the answer and the trick out of it anyway.

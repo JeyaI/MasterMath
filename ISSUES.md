@@ -10,15 +10,6 @@ Next id: **47**
 
 ## Open
 
-### #46 · Don't spoil the puzzle in Discord
-status: open · P2 · feature
-I want to try each puzzle before I see its answer. Right now the first script message (`post_version` in `mathshorts/tick.py`) shows the title and the job's `summary`, which can give away the trick or the answer. `SCRIPT.md` is attached openly, and the video post shows its summary too.
-- **First message of a thread:** state the problem in full (the puzzle as the Short poses it, from `short.yaml`), with nothing about the solution, so I can work it out first.
-- **Spoiler tags on everything about the solution:** wrap the summary, the answer, the insight and the Level 2 answer in Discord `||…||`. Name attachments `SPOILER_<name>` so Discord blurs them (the script file, any frames). This covers script versions, revisions, video posts, and job summaries/errors that quote the answer.
-- Titles and video links can give it away too: check the title, and put the YouTube link (whose thumbnail shows the solution) inside a spoiler.
-- Tell the jobs (`scripts/jobs/*.md`) to keep `summary` free of the answer, or to mark what is a spoiler, so tick can wrap it reliably.
-- Test: a fake Discord in `tests/test_tick.py` asserts that the answer from `verify.py`/`level2.accept` never appears outside `||…||` in any bot post.
-
 ### #45 · Check that unlisted → public gets the full new-upload treatment
 status: open · P3 · bug
 Every release (slot or asap, #44) flips a review upload from unlisted to public via `publishAt`. Check on 0006 (public 2026-11-04) and the first asap release whether subscribers got a notification and it reached the Shorts feed (first-hour views in YouTube Studio). If not, upload a fresh copy at approval instead.
@@ -149,6 +140,16 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #46 · Don't spoil the puzzle in Discord
+status: done · 2026-11-04 · P2 · feature
+I want to try each puzzle before I see its answer. Right now the first script message (`post_version` in `mathshorts/tick.py`) shows the title and the job's `summary`, which can give away the trick or the answer. `SCRIPT.md` is attached openly, and the video post shows its summary too.
+- **First message of a thread:** state the problem in full (the puzzle as the Short poses it, from `short.yaml`), with nothing about the solution, so I can work it out first.
+- **Spoiler tags on everything about the solution:** wrap the summary, the answer, the insight and the Level 2 answer in Discord `||…||`. Name attachments `SPOILER_<name>` so Discord blurs them (the script file, any frames). This covers script versions, revisions, video posts, and job summaries/errors that quote the answer.
+- Titles and video links can give it away too: check the title, and put the YouTube link (whose thumbnail shows the solution) inside a spoiler.
+- Tell the jobs (`scripts/jobs/*.md`) to keep `summary` free of the answer, or to mark what is a spoiler, so tick can wrap it reliably.
+- Test: a fake Discord in `tests/test_tick.py` asserts that the answer from `verify.py`/`level2.accept` never appears outside `||…||` in any bot post.
+Resolved: threads open with `level1.statement` alone; summaries, errors, Level 2, `SCRIPT.md` (`SPOILER_`) and YouTube links go in spoilers; a title naming an answer becomes "a new puzzle"; jobs told to keep summaries and statements clean; tested in `test_tick.py`.
 
 ### #44 · Release about an hour after approval instead of at a fixed slot
 status: done · 2026-11-03

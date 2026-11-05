@@ -6,7 +6,7 @@ Follow CLAUDE.md, and steps 1, 3 and 4 of `.claude/skills/draft-short/SKILL.md`,
 
 1. Choose the puzzle yourself, as in the skill's `pick` path. Then run `ms new <id> --scripting` (the flag matters: it puts the Short in the script loop). Run it once only.
 2. Write `verify.py` and get `ms verify <n>` passing before anything else in the Short.
-3. Fill `short.yaml`. Never edit `status`.
+3. Fill `short.yaml`. Never edit `status`. The Discord thread opens with `title` and `level1.statement` in plain view, so neither may give away the answer or the trick; `level1.statement` is the full puzzle as the Short poses it.
 4. Write `SCRIPT.md` in the Short's folder, under 1,800 words, with these sections:
    - **Puzzle**: catalog id, one line on why you chose it, and the runner-up.
    - **Hook**: the first 3 seconds of on-screen text.
@@ -23,4 +23,4 @@ Follow CLAUDE.md, and steps 1, 3 and 4 of `.claude/skills/draft-short/SKILL.md`,
 ## How to run commands
 Run one command per Bash call: no `&&`, `;`, pipes or `cd`. Do not write scratch scripts to run; put checks in `verify.py`. Anything not on the allowlist is denied, not asked about.
 
-Do not run `git`, and do not approve, reject or publish anything. Finish with the structured result: `short` is the folder name (e.g. `0006-the-six-frogs`), and `summary` is two or three lines for the reviewer.
+Do not run `git`, and do not approve, reject or publish anything. Finish with the structured result: `short` is the folder name (e.g. `0006-the-six-frogs`), and `summary` is two or three lines for the reviewer. The reviewer tries each puzzle before seeing its solution: tick shows the summary behind a Discord spoiler, but keep the answer and the trick out of it anyway.

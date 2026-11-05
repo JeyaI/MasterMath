@@ -1,5 +1,6 @@
 """The script and video loops: `ms tick` against a fake Discord, YouTube, job runner and sandbox."""
 import datetime as dt
+import re
 
 import pytest
 
@@ -60,16 +61,23 @@ class FakeRunner:
         self.calls.append((kind, short, comment))
         if self.fail_first and len(self.calls) == 1:
             return JobResult(False, error="exit 1, error_max_budget_usd")
+        if kind == getattr(self, "fail_kind", None):
+            return JobResult(False, short, error="verify.py fails: expected 24")
         if kind == "script":
             cli.main(["new", "--blank", "Six Frogs", "--scripting"])
             short = all_shorts()[-1].name
+            find(short.split("-")[0]).update(**{
+                "level1.statement": "Six frogs sit in a row. Can they swap sides?",
+                "level1.answer": "Fifteen jumps",
+                "level2.statement": "Now eight frogs. How many jumps?", "level2.answer": 24,
+                "level2.accept": [24, "twenty-four"]})
         folder = find(short.split("-")[0]).folder
         (folder / "verify.py").write_text("print('ok')\n" if self.verify_ok else "raise SystemExit('wrong')\n")
         if kind in ("animate", "revise_video"):
             (folder / "scene.py").write_text(f"# scene\n# {comment or 'first cut'}\n")
         else:
             (folder / "SCRIPT.md").write_text(f"# Script\n{comment or 'first draft'}\n")
-        return JobResult(True, short, summary="Frogs swap places.", usage={"total_cost_usd": 1.5})
+        return JobResult(True, short, summary="Frogs swap places. Answer: fifteen jumps; Level 2 is 24.", usage={"total_cost_usd": 1.5})
 
 
 class FakeYouTube:
@@ -149,9 +157,10 @@ def current_message(s):
 def test_draft_posts_a_verified_script_for_review(root):
     d, t, s, thread = scripted(root)
     assert s.status == "script_review"
-    first = d.threads[thread][0]
-    assert "Script v1" in first["content"] and "Frogs swap places." in first["content"]
-    assert list(first["files"]) == [f"{s.number}-script-v1.md"]
+    problem, first = d.threads[thread][:2]
+    assert problem["content"].startswith("**The puzzle.**") and "Six frogs sit in a row" in problem["content"]
+    assert "Script v1" in first["content"] and "||Frogs swap places." in first["content"]
+    assert list(first["files"]) == [f"SPOILER_{s.number}-script-v1.md"]
     assert d.reactors(thread, first["id"], ACCEPT) == {BOT}         # pre-added for you to tap
     assert [e["event"] for e in s.events()] == ["script_done"]
     assert s.events()[0]["usage"] == {"total_cost_usd": 1.5}
@@ -357,6 +366,54 @@ def test_release_check_records_it_as_published(root):
     t.run()
     assert s.status == "published" and s.data()["youtube"]["published_at"] == "2026-11-04"
     assert d.bot_said(thread)[-1].startswith("🎉 Live")
+
+
+def outside_spoilers(text):
+    return re.sub(r"\|\|.*?\|\|", "", text, flags=re.S)
+
+
+def test_no_bot_post_gives_the_answer_away(root):
+    """#46: the answer and Level 2's accepted forms only ever appear inside ||spoiler|| tags."""
+    clock = Clock()
+    runner = FakeRunner()
+    d, t, yt, s, thread = in_review(root, runner=runner, clock=clock)
+    d.say(thread, ME, "0:12 slow down the slide")
+    t.run()
+    d.tap(video(s)[1]["message"], ACCEPT)
+    t.run()
+    d.tap(s.data()["video"]["approved"]["message"], STOP)
+    t.run()
+    d.tap(video(s)[1]["message"], ACCEPT)
+    t.run()
+    clock.t = NOON + dt.timedelta(days=1, hours=6)
+    yt.release_due()
+    t.run()
+    assert s.status == "published"
+    runner.fail_kind = "revise"                 # a second Short whose revise job fails, quoting the answer
+    t.run(draft=True)
+    s2 = all_shorts()[-1]
+    d.say(s2.data()["review"]["thread_id"], ME, "shorter hook")
+    t.run()
+    assert s2.status == "needs_attention"
+
+    words = tick.answers(s.data())
+    assert {"Fifteen jumps", "24", "twenty-four"} <= set(words)
+    posts = [m for ms in d.threads.values() for m in ms if m["bot"]]
+    assert len(posts) > 8
+    for m in posts:
+        visible = outside_spoilers(m["content"])
+        assert not any(re.search(rf"\b{re.escape(w)}\b", visible, re.I) for w in words), m["content"]
+        assert "youtube.com" not in visible, m["content"]
+        assert all(name.startswith("SPOILER_") for name in m["files"])
+
+
+def test_spoiler_tags_cant_be_closed_early_and_titles_hide_answers(root):
+    assert tick.spoiler("a || b ```x```") == "||a | | b '''x'''||"
+    assert tick.spoiler("  ") == ""
+    d, t, s, thread = scripted(root)
+    assert tick.title(s) == f"{s.number} · Six Frogs"
+    s.update(title="Twenty-four frogs")
+    assert tick.title(s) == f"{s.number} · a new puzzle"
 
 
 def test_a_late_release_is_flagged_once(root):
