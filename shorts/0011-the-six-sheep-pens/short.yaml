@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0011'
 title: The Six Sheep-Pens
-status: script_review
+status: animating
 catalog_id: dudeney-amusements-205
 tags:
   - geometry
