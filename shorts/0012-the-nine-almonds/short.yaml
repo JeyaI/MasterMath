@@ -1,0 +1,89 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0012'
+title: The Nine Almonds
+status: script_review
+catalog_id: dudeney-amusements-229
+tags:
+  - counters
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 229
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    "Here is a little puzzle," said a Parson, "that I have found peculiarly
+    fascinating. It is so simple, and yet it keeps you interested
+    indefinitely."
+
+    The reverend gentleman took a sheet of paper and divided it off into
+    twenty-five squares, like a square portion of a chessboard. Then he
+    placed nine almonds on the central squares, as shown in the
+    illustration, where we have represented numbered counters for
+    convenience in giving the solution.
+
+    "Now, the puzzle is," continued the Parson, "to remove eight of the
+    almonds and leave the ninth in the central square. You make the removals
+    by jumping one almond over another to the vacant square beyond and
+    taking off the one jumped over--just as in draughts, only here you can
+    jump in any direction, and not diagonally only. The point is to do the
+    thing in the fewest possible moves."
+
+    The following specimen attempt will make everything clear. Jump 4 over
+    1, 5 over 9, 3 over 6, 5 over 3, 7 over 5 and 2, 4 over 7, 8 over 4. But
+    8 is not left in the central square, as it should be. Remember to remove
+    those you jump over. Any number of jumps in succession with the same
+    almond count as one move.
+
+    [Illustration]
+  solution: |
+    This puzzle may be solved in as few as four moves, in the following
+    manner: Move 5 over 8, 9, 3, 1. Move 7 over 4. Move 6 over 2 and 7. Move
+    5 over 6, and all the counters are removed except 5, which is left in
+    the central square that it originally occupied.
+level1:
+  statement: "Nine almonds sit in the middle of a 5 by 5 board. An almond may jump over a neighbour (any
+    direction, diagonals too) into the empty square beyond and take it off. Several jumps in a row by
+    the same almond count as one move. Can you remove eight almonds, leaving the centre one, in 4 moves?"
+  answer: 4
+  insight: "Chain jumps: one almond sweeps up four others in a single move. Eight almonds must go and
+    each jump removes exactly one, so 4 moves means two jumps per move on average. Checked by exhaustive
+    search: 4 is the fewest."
+level2:
+  statement: "Same board, but now each move may be only ONE jump (no chains). What is the fewest moves
+    to leave just one almond?"
+  answer: 8
+  accept: [8, "eight", "8 moves"]
+  why: "Every jump removes exactly one almond, and eight must go, so at least 8 jumps. With one jump per
+    move that is 8 moves, and the search confirms 8 can be done."
+captions:
+  - "9 almonds, 5x5 board"
+  - "Jump over one, take it off"
+  - "Leave just the centre"
+  - "Remove 8 almonds in 4 moves?"
+  - "Pause and try it"
+  - "Move 1: one almond, four jumps"
+  - "Move 2: 7 over 4"
+  - "Move 3: 6 over 2 and 7"
+  - "Move 4: 5 over 6"
+  - "4 moves. Fewest possible ✓"
+  - "Comment just the number ↓"
+music:
+  piece: gymnopedie-1
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "Can you clear 8 almonds in 4 moves?"
+  description: |
+    Nine almonds on a 5 by 5 board. Jump one over another to remove it. Can you leave only the centre almond in 4 moves? Level 2: no chained jumps, how few moves? Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 229. Music: Erik Satie, Gymnopédie No. 1.
+  tags:
+    - math puzzle
+    - puzzle
+  video_id:
+  url:
+  published_at:
+review:
+  thread_id: '1568143380641480736'
+  version: 1
+  messages:
+    1: '1568143384919547936'
+  last_seen: '1568143384919547936'
