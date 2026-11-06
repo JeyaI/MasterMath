@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0011'
 title: The Six Sheep-Pens
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-205
 tags:
   - geometry
@@ -75,7 +75,7 @@ review:
   messages:
     1: '1568067840597168188'
     2: '1568088121911021621'
-  last_seen: '1568080152498274407'
+  last_seen: '1568099959176306720'
   comment:
 video:
   pending:
@@ -85,6 +85,9 @@ video:
       file: /home/jeya/mathshorts/out/review/0011-the-six-sheep-pens/v1.mp4
       sha256: ddf182e1804278bd9508a9cbf7703fab885e38e8f283f7c7370e434b08279618
       message: '1568097650623123556'
-  comment:
+  comment: "Don't think the sheep are necessary. We dont introduce them in the short, so they kinda stick
+    out.\n\nWe can also make the matches at the beginning a little bit less overlapping so that it is
+    clear that there are 12. Maybe lay them out 2 tall by 6 wide (pointing upwards) with some level of
+    random angle (not too much)."
   warned:
   as_is:
