@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0011'
 title: The Six Sheep-Pens
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-205
 tags:
   - geometry
@@ -79,25 +79,7 @@ review:
   comment:
 video:
   pending:
-    version: 3
-    file: /home/jeya/mathshorts/out/review/0011-the-six-sheep-pens/v3.mp4
-    sha256: ec93c82b34af71d04798696390672386c0c4a65f20df7dafdcac11e3f501ad8a
-    summary: During "Pause and try it" and the 5 s countdown, the opening question ("Can you make 6 
-      equally sized pens with 12 matches?") now stays on screen above the caption. It is removed 
-      when the countdown ends. A preview frame looks right, and `ms check` reports 0 errors, only 
-      the usual word-count warnings. I didn't touch `verify.py`, since no numbers or shapes changed.
-      I noted the change in the `SCRIPT.md` beats.
-    usage:
-      job: revise_video
-      short: 0011-the-six-sheep-pens
-      exit: 0
-      seconds: 46
-      subtype: success
-      is_error: false
-      num_turns: 12
-      total_cost_usd: 0.1325191
-      log: job-revise_video-20261105-222004.jsonl
-  version: 2
+  version: 3
   versions:
     1:
       file: /home/jeya/mathshorts/out/review/0011-the-six-sheep-pens/v1.mp4
@@ -108,7 +90,11 @@ video:
       file: /home/jeya/mathshorts/out/review/0011-the-six-sheep-pens/v2.mp4
       sha256: c9d23c28725b8ba5a9c0070fd431438b4de21f76a26fb91e1363d1f417a23998
       message: '1568100600229400587'
-  comment: When "pause and try it" is on the screen, put the first caption back up with it so people
-    know what to be doing when they pause.
+      video_id:
+    3:
+      file: /home/jeya/mathshorts/out/review/0011-the-six-sheep-pens/v3.mp4
+      sha256: ec93c82b34af71d04798696390672386c0c4a65f20df7dafdcac11e3f501ad8a
+      message: '1568103085241278585'
+  comment:
   warned:
   as_is:
