@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0011'
 title: The Six Sheep-Pens
-status: animating
+status: video_review
 catalog_id: dudeney-amusements-205
 tags:
   - geometry
@@ -79,23 +79,12 @@ review:
   comment:
 video:
   pending:
-    version: 1
-    file: /home/jeya/mathshorts/out/review/0011-the-six-sheep-pens/v1.mp4
-    sha256: ddf182e1804278bd9508a9cbf7703fab885e38e8f283f7c7370e434b08279618
-    summary: "The scene is built and the final full preview (v3) is 51.8 s. `ms check` reports 0 errors,
-      and `ms verify` passes. I looked at frames from the first preview and the re-render. I didn't pull
-      frames from v3, which only changed the top counter size from 60 to 52.\nThe remaining warnings are
-      the 51.8 s length (1.8 s over the target) and the long captions, which follow the reviewer's request.
-      The Level 2 caption is 3 lines and about 18 words.\nI changed `level1.answer` in `short.yaml` to
-      include the digits 6 and 12, because the check requires the payoff numbers to appear there. The
-      meaning is the same."
-    usage:
-      job: animate
-      short: 0011-the-six-sheep-pens
-      exit: 0
-      seconds: 250
-      subtype: success
-      is_error: false
-      num_turns: 72
-      total_cost_usd: 0.6578148
-      log: job-animate-20261105-215504.jsonl
+  version: 1
+  versions:
+    1:
+      file: /home/jeya/mathshorts/out/review/0011-the-six-sheep-pens/v1.mp4
+      sha256: ddf182e1804278bd9508a9cbf7703fab885e38e8f283f7c7370e434b08279618
+      message: '1568097650623123556'
+  comment:
+  warned:
+  as_is:
