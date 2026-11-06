@@ -109,8 +109,11 @@ class Short(Scene):
 
         # ---- pause and try ---------------------------------------------------------------------
         self.play(FadeOut(title), run_time=0.3)
-        self.cap("Pause and try it", ACCENT)
+        ask1 = label(wrap("Can you make 6 equally sized pens with 12 matches?", 30), 52, INK).move_to(
+            [CENTRE_X, -1.5, 0])
+        self.cap("Pause and try it", ACCENT, extra=[FadeIn(ask1)])
         countdown(self, 5, center=[CENTRE_X, 5.6, 0], radius=0.8, tick_sound=SFX["tick"])
+        self.remove(ask1)
 
         # ---- first try: a 2 x 3 block of squares needs 17 -------------------------------------
         self.cap("A 2 by 3 block of squares needs 17 matches: too many")

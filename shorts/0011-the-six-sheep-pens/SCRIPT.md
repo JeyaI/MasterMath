@@ -27,7 +27,7 @@ Visual ideas checked: `SCRIPT.md` for 0006, 0008, 0009, 0010 (0007's insight I c
 ## Beats
 1. Hook: twelve matches pop in, "Can you make 6 equally sized pens with 12 matches?" (4 s)
 2. "Use every match: no overlaps, no loose ends" (3 s)
-3. "Pause and try it", 5 s countdown (6 s)
+3. "Pause and try it", 5 s countdown (6 s); the opening question "Can you make 6 equally sized pens with 12 matches?" stays up with it
 4. "A 2 by 3 block of squares needs 17 matches: too many" (4 s)
 5. "Triangles share more walls, so try those" (3 s)
 6. "Six matches make a hexagon" (3 s)
