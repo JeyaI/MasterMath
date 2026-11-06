@@ -28,8 +28,8 @@ level1:
     A farmer has 12 matching hurdles, all the same length. Lay them flat, end to end,
     to fence six sheep-pens of exactly the same size. Every hurdle must be used,
     none may overlap another, and no end may be left loose. How?
-  answer: Lay them as a hexagon with six spokes from the centre to the corners; the pens are six 
-    equal triangles.
+  answer: Lay 6 matches as a hexagon and 6 spokes from the centre to the corners (12 matches); the 
+    pens are 6 equal triangles.
   insight: Pens need not be squares. Six equal triangles share their walls, so the six spokes do 
     double duty, and 6 rim + 6 spokes is exactly 12.
 level2:
@@ -77,3 +77,25 @@ review:
     2: '1568088121911021621'
   last_seen: '1568080152498274407'
   comment:
+video:
+  pending:
+    version: 1
+    file: /home/jeya/mathshorts/out/review/0011-the-six-sheep-pens/v1.mp4
+    sha256: ddf182e1804278bd9508a9cbf7703fab885e38e8f283f7c7370e434b08279618
+    summary: "The scene is built and the final full preview (v3) is 51.8 s. `ms check` reports 0 errors,
+      and `ms verify` passes. I looked at frames from the first preview and the re-render. I didn't pull
+      frames from v3, which only changed the top counter size from 60 to 52.\nThe remaining warnings are
+      the 51.8 s length (1.8 s over the target) and the long captions, which follow the reviewer's request.
+      The Level 2 caption is 3 lines and about 18 words.\nI changed `level1.answer` in `short.yaml` to
+      include the digits 6 and 12, because the check requires the payoff numbers to appear there. The
+      meaning is the same."
+    usage:
+      job: animate
+      short: 0011-the-six-sheep-pens
+      exit: 0
+      seconds: 250
+      subtype: success
+      is_error: false
+      num_turns: 72
+      total_cost_usd: 0.6578148
+      log: job-animate-20261105-215504.jsonl
