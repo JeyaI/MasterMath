@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0011'
 title: The Six Sheep-Pens
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-205
 tags:
   - geometry
@@ -42,17 +42,18 @@ level2:
   why: "Matches run in three directions, and each direction has 3 + 2 + 1 = 6 of them, so 3 x 6 = 18 (and
     there are 9 pens)."
 captions:
-  - "Six equal pens"
-  - "Only twelve matches"
-  - "No overlaps. No loose ends"
+  - "Can you make 6 equally sized pens with 12 matches?"
+  - "Use every match: no overlaps, no loose ends"
   - "Pause and try it"
-  - "Squares need too many"
-  - "Try triangles"
-  - "A hexagon: six matches"
-  - "Spokes share the walls"
-  - "Six pens, twelve matches ✓"
-  - "Big triangle, side three"
-  - "How many matches?"
+  - "A 2 by 3 block of squares needs 17 matches: too many"
+  - "Triangles share more walls, so try those"
+  - "Six matches make a hexagon"
+  - "Six spokes to the centre: each is a wall for two pens"
+  - "6 equal pens, 12 matches ✓"
+  - "Another way: two squares sharing a corner"
+  - "Two matches inside each square make 3 pens each"
+  - "Level 2: a triangle with 3 matches on each side, cut into small triangles of 1 match per side"
+  - "How many matches in all?"
   - "Comment just the number ↓"
 music:
   piece: minuet-g
@@ -70,13 +71,9 @@ youtube:
   published_at:
 review:
   thread_id: '1568067835803078757'
-  version: 1
+  version: 2
   messages:
     1: '1568067840597168188'
+    2: '1568088121911021621'
   last_seen: '1568080152498274407'
-  comment: "Show an alternate solution too in addition to the one you have... Two squares with a shared
-    vertex, with 2 internal matches, forming 3 pens each! \nLet's also make sure the captions are understandable.
-    They are too short. I edited the claude.md to say \"Captions should be the appropriate length, balancing
-    ease of understanding with conciseness\". We don't need super short captions in the hook. \"Can you
-    make 6 equally sized pens with 12 matches?\" etc.\nWhat does \"Big triangle, side three\" even mean
-    for example? Viewers need some information to even answer."
+  comment:

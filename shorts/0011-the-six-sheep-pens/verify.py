@@ -26,6 +26,18 @@ RIM = [(CORNERS[k], CORNERS[(k + 1) % N]) for k in range(N)]
 SPOKES = [(CENTRE, c) for c in CORNERS]
 MATCHES = RIM + SPOKES                       # the twelve matches
 
+# Alternate solution: two unit squares touching at one corner, each cut by 2 internal matches
+# (parallel to a side, a third of the way across) into three equal pens: 2 * (4 + 2) = 12 matches
+def _square(x0, y0, flip=False):
+    c = [(x0, y0), (x0 + 1, y0), (x0 + 1, y0 + 1), (x0, y0 + 1)]
+    sides = [(c[k], c[(k + 1) % 4]) for k in range(4)]
+    cuts = [((x0, y0 + t), (x0 + 1, y0 + t)) for t in (1 / 3, 2 / 3)]
+    return sides + cuts
+
+
+ALT_MATCHES = _square(0.0, 0.0) + _square(1.0, 1.0)     # share the vertex (1, 1)
+ALT_PENS = 6
+
 # Level 2: big triangle of side 3 (matches of length 1)
 L2_SIDE = 3
 L2_MATCHES = 18
@@ -72,6 +84,26 @@ def main() -> None:
     area = sqrt(3) / 4
     assert all(isclose(p.area, area) for p in ps)
     assert isclose(unary_union(ps).area, 6 * area)
+
+    # Alternate: two squares sharing a vertex, 2 internal matches each
+    assert len(ALT_MATCHES) == 12
+    assert all(isclose(length(m), 1.0) for m in ALT_MATCHES)
+    alt_ids = {frozenset((key(a), key(b))) for a, b in ALT_MATCHES}
+    assert len(alt_ids) == 12
+    alt_ends = Counter(key(p) for m in ALT_MATCHES for p in m)
+    assert alt_ends[(1.0, 1.0)] == 4                      # the shared vertex
+    for i, (a, b) in enumerate(ALT_MATCHES):
+        for c, d in ALT_MATCHES[i + 1:]:
+            inter = LineString([a, b]).intersection(LineString([c, d]))
+            assert inter.is_empty or inter.geom_type == "Point"   # touch, never overlap
+    # no loose end: each match end touches another match
+    for m in ALT_MATCHES:
+        for p in m:
+            others = [LineString(o) for o in ALT_MATCHES if o is not m]
+            assert any(o.distance(__import__("shapely").geometry.Point(p)) < 1e-9 for o in others), p
+    alt = pens(ALT_MATCHES)
+    assert len(alt) == ALT_PENS == 6
+    assert all(isclose(p.area, 1 / 3) for p in alt)
 
     # Level 2: triangle of side 3 with its lines parallel to the sides
     n = L2_SIDE
