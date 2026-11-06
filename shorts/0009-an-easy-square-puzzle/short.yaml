@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0009'
 title: An Easy Square Puzzle
-status: video_review
+status: scheduled
 catalog_id: dudeney-amusements-147
 tags:
   - dissection
@@ -81,9 +81,10 @@ youtube:
   tags:
     - math puzzle
     - puzzle
-  video_id:
-  url:
+  video_id: vEFIgi9S7JA
+  url: https://youtube.com/shorts/vEFIgi9S7JA
   published_at:
+  publish_at: '2026-11-05T23:00:00-05:00'
 review:
   thread_id: '1567705520213594203'
   version: 3
@@ -95,8 +96,7 @@ review:
   comment:
 video:
   pending:
-  warned: ⏸️ v3 is approved, but YouTube's daily upload limit was hit. Uploads resume after Thu 5 
-    Nov, 9:15 PM EST; I'll upload an
+  warned:
   version: 3
   versions:
     1:
@@ -116,3 +116,8 @@ video:
       video_id: vEFIgi9S7JA
   comment:
   as_is:
+  approved:
+    version: 3
+    video_id: vEFIgi9S7JA
+    sha256: 4a4f1c864747a944300815549fa5413c68423a0884fdfe3c7e01c6c9044935f3
+    message: '1568087744607944816'
