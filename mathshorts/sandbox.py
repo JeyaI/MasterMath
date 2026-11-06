@@ -101,7 +101,8 @@ class Checks:
         return self.run(short, "check")
 
     def render(self, short, dest: Path) -> tuple[bool, str]:
-        """The final video (1080x1920, mixed) for review; it is the file that later goes public."""
+        """The final video (1080x1920, mixed) for review; it is the file that later goes public.
+        Its thumbnail (the frame where the problem is posed, #41) lands beside it as vN.png."""
         tmp = self._scratch(short, "render")
         try:
             ok, log = self.ms("render", short.number, "--out", "/out/kit" if self.how == "docker" else str(tmp / "kit"),
@@ -110,6 +111,9 @@ class Checks:
             if ok and src.exists():
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 shutil.move(str(src), dest)
+                thumb = tmp / "kit" / "thumbnail.png"
+                if thumb.exists():
+                    shutil.move(str(thumb), dest.with_suffix(".png"))
                 return True, log
             return False, log or "no video"
         finally:

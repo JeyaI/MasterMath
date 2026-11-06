@@ -365,9 +365,10 @@ class Tick:
             self.warn_once(s, v, thread, f"⚠️ Couldn't upload or schedule v{n}: {spoiler(str(e)[:300])}\n"
                                          f"I'll retry on the next tick.")
             return
+        thumb = self.thumbnail(yt, video_id, s, n, ver)
         when = slot.strftime("%a %d %b, %I:%M %p %Z").replace(" 0", " ")
         mid = self.d.post(thread, f"✅ v{n} approved. It goes public **{when}**. React {STOP} here to stop it "
-                                  f"before then.", reactions=(STOP,))
+                                  f"before then.{thumb}", reactions=(STOP,))
         v.update(approved={"version": n, "video_id": ver["video_id"], "sha256": ver.get("sha256"), "message": mid},
                  warned=None)
         s.update(video=v, **{"youtube.video_id": ver["video_id"], "youtube.url": youtube.url(ver["video_id"]),
@@ -375,6 +376,20 @@ class Tick:
         self.change(s, "approve_video", f"{s.number}: video v{n} approved, release {slot.isoformat()}",
                     event={"version": n, "video_id": ver["video_id"], "publish_at": slot.isoformat()})
         done["approved"].append(s.name)
+
+    def thumbnail(self, yt, video_id: str, s: Short, n: int, ver: dict) -> str:
+        """Set the posed-problem frame as the thumbnail (#41), so YouTube can't pick a frame that gives the
+        answer away. Best effort: a refusal (an unverified channel, say) never holds up the release.
+        Returns a note for the approval message ("" when it worked)."""
+        path = Path(ver.get("file") or review_video(s, n)).with_suffix(".png")
+        if not path.exists():
+            return "\n⚠️ No thumbnail for this version, so YouTube picks a frame. Check it in YouTube Studio."
+        try:
+            yt.set_thumbnail(video_id, path)
+        except (youtube.YouTubeError, OSError) as e:
+            return (f"\n⚠️ The thumbnail wasn't set, so YouTube picks a frame: {spoiler(str(e)[:200])}\n"
+                    f"Set it in YouTube Studio from `{path}`.")
+        return ""
 
     def slot(self) -> dt.datetime:
         """When a Short approved now goes public, given the days already taken."""
@@ -581,9 +596,12 @@ class Tick:
     def post_video(self, thread: str, s: Short, version: int, ver: dict, summary: str) -> str:
         """The video itself as a spoilered attachment (a compressed copy if the master is over the cap)."""
         master, files, extra = Path(ver.get("file") or review_video(s, version)), {}, ""
+        thumb = master.with_suffix(".png")                     # what YouTube will show (#41)
         try:
-            copy = review_copy(master)
+            copy = review_copy(master, review_cap() - (thumb.stat().st_size if thumb.exists() else 0))
             files = {f"SPOILER_{s.number}-video-v{version}.mp4": copy}
+            if thumb.exists():
+                files[f"SPOILER_{s.number}-thumbnail-v{version}.png"] = thumb
             if copy != master:
                 extra = "\n(Compressed to fit Discord. Your ✅ uploads the full-quality file.)"
         except (OSError, subprocess.CalledProcessError, RuntimeError, ValueError) as e:

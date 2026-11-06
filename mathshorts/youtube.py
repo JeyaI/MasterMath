@@ -21,6 +21,7 @@ CONFIG = Path.home() / ".config"
 CLIENT = CONFIG / "mathshorts-youtube-client.json"
 TOKEN = CONFIG / "mathshorts-youtube-token.json"
 SCOPES = ["https://www.googleapis.com/auth/youtube"]
+THUMB_MAX = 2 * 1024 * 1024                  # thumbnails.set's limit
 REVIEW_PRIVACY = ("unlisted", "private")     # never "public": the API's default is public
 HASHTAGS = "#shorts #math #puzzle"
 
@@ -143,6 +144,14 @@ class Client:
         """Back to private with no publishAt: nobody can see it, and a new check mark reschedules it."""
         self._do(self.api.videos().update(part="status", body={"id": video_id, "status": {
             "privacyStatus": "private", "selfDeclaredMadeForKids": False}}))
+
+    def set_thumbnail(self, video_id: str, path: Path) -> None:
+        """A custom thumbnail (#41). Needs a phone-verified channel; at most 2 MB."""
+        from googleapiclient.http import MediaFileUpload
+        if path.stat().st_size > THUMB_MAX:
+            raise YouTubeError(f"thumbnail is {path.stat().st_size} bytes; YouTube takes at most {THUMB_MAX}")
+        mime = "image/png" if path.suffix.lower() == ".png" else "image/jpeg"
+        self._do(self.api.thumbnails().set(videoId=video_id, media_body=MediaFileUpload(str(path), mimetype=mime)))
 
     def delete(self, video_id: str) -> None:
         self._do(self.api.videos().delete(id=video_id))

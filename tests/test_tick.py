@@ -83,8 +83,9 @@ class FakeRunner:
 
 
 class FakeYouTube:
-    def __init__(self, fail_uploads=0, limit_uploads=0, fail_schedule=0):
+    def __init__(self, fail_uploads=0, limit_uploads=0, fail_schedule=0, refuse_thumbnails=False):
         self.videos, self.deleted, self.n, self.fail_uploads = {}, [], 0, fail_uploads
+        self.refuse_thumbnails, self.thumbnails = refuse_thumbnails, {}
         self.limit_uploads, self.attempts, self.fail_schedule = limit_uploads, 0, fail_schedule
 
     def upload(self, path, meta, privacy):
@@ -116,6 +117,11 @@ class FakeYouTube:
     def status(self, vid):
         return dict(self.videos.get(vid, {}))
 
+    def set_thumbnail(self, vid, path):
+        if self.refuse_thumbnails:
+            raise YouTubeError("HTTP 403 forbidden: the channel isn't verified")
+        self.thumbnails[vid] = path.read_bytes()
+
     def delete(self, vid):
         self.videos.pop(vid)
         self.deleted.append(vid)
@@ -141,6 +147,7 @@ class FakeChecks:
     def render(self, s, dest):
         dest.parent.mkdir(parents=True, exist_ok=True)
         dest.write_bytes(f"video of {s.name} {len(self.renders)}".encode())
+        dest.with_suffix(".png").write_bytes(b"posed problem")      # the kit's thumbnail.png, as sandbox moves it
         self.renders.append(dest)
         return True, ""
 
@@ -316,7 +323,8 @@ def test_accepted_script_is_animated_and_posted_as_a_file_not_uploaded(root):
     assert v["version"] == 1 and yt.attempts == 0 and not ver.get("video_id")       # #48: no YouTube yet
     post = d.threads[thread][-1]
     assert "Video v1" in post["content"] and "youtube.com" not in post["content"]
-    assert post["files"] == {f"SPOILER_{s.number}-video-v1.mp4": master(root, s)}
+    assert post["files"] == {f"SPOILER_{s.number}-video-v1.mp4": master(root, s),
+                             f"SPOILER_{s.number}-thumbnail-v1.png": master(root, s).with_suffix(".png")}
     assert post["id"] == ver["message"] and d.reactors(thread, post["id"], ACCEPT) == {BOT}
     assert ver["sha256"] == tick.sha256(master(root, s))
 
@@ -329,7 +337,7 @@ def test_reply_on_a_video_revises_it(root):
     assert runner.calls[-1] == ("revise_video", s.name, "0:12 slow down the slide")
     v, ver = video(s)
     assert s.status == "video_review" and v["version"] == 2 and yt.attempts == 0
-    assert d.threads[thread][-1]["files"] == {f"SPOILER_{s.number}-video-v2.mp4": master(root, s, 2)}
+    assert d.threads[thread][-1]["files"][f"SPOILER_{s.number}-video-v2.mp4"] == master(root, s, 2)
 
 
 def test_check_mark_uploads_that_exact_file_and_schedules_it(root):
@@ -343,6 +351,22 @@ def test_check_mark_uploads_that_exact_file_and_schedules_it(root):
     assert yt.videos[vid]["bytes"] == master(root, s).read_bytes()
     assert s.data()["video"]["approved"]["video_id"] == vid == video(s)[1]["video_id"]
     assert d.reactors(thread, d.threads[thread][-1]["id"], STOP) == {BOT}
+    assert yt.thumbnails[vid] == b"posed problem" and "thumbnail" not in d.bot_said(thread)[-1]   # #41
+
+
+def test_a_refused_thumbnail_never_holds_up_the_release(root):
+    d, t, yt, s, thread = in_review(root, yt=FakeYouTube(refuse_thumbnails=True))
+    approve(d, t, s)
+    assert s.status == "scheduled" and yt.thumbnails == {}
+    said = d.bot_said(thread)[-1]
+    assert "thumbnail wasn't set" in said and "isn't verified" in said and str(master(root, s).with_suffix(".png")) in said
+
+
+def test_a_version_without_a_thumbnail_still_goes_out(root):
+    d, t, yt, s, thread = in_review(root)
+    master(root, s).with_suffix(".png").unlink()           # rendered before #41
+    approve(d, t, s)
+    assert s.status == "scheduled" and yt.thumbnails == {} and "No thumbnail" in d.bot_said(thread)[-1]
 
 
 def test_check_mark_wont_upload_a_file_that_changed(root):
@@ -520,10 +544,10 @@ def test_video_jobs_need_no_youtube_only_approval_does(root):
 
 
 def test_post_says_when_the_attachment_is_a_compressed_copy(root, monkeypatch):
-    monkeypatch.setattr(tick, "review_copy", lambda m: m.with_name("v1-discord.mp4"))
+    monkeypatch.setattr(tick, "review_copy", lambda m, cap=None: m.with_name("v1-discord.mp4"))
     d, t, yt, s, thread = in_review(root)
     post = d.threads[thread][-1]
-    assert post["files"] == {f"SPOILER_{s.number}-video-v1.mp4": master(root, s).with_name("v1-discord.mp4")}
+    assert post["files"][f"SPOILER_{s.number}-video-v1.mp4"] == master(root, s).with_name("v1-discord.mp4")
     assert "Compressed to fit Discord" in post["content"]
 
 

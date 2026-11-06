@@ -6,9 +6,13 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **50**
+Next id: **51**
 
 ## Open
+
+### #50 · Check the first custom thumbnail on a released Short
+status: open · P3 · chore
+After #41, the first ✅ upload (0009 or 0010 tonight) calls `thumbnails.set`. Check the approval message for a "thumbnail wasn't set" note. If YouTube refused it because the channel isn't verified, verify the channel (YouTube Studio → Settings → Channel → Feature eligibility). Once it's live, see where the thumbnail actually shows for a Short: channel Shorts tab, search, subscriptions. If YouTube ignores it everywhere, there's no harm in keeping the call.
 
 ### #49 · Check that Discord video attachments are good enough to judge a Short on the phone
 status: open · P2 · chore
@@ -29,10 +33,6 @@ Once #27's checks exist, run `check_upload` on the upload made at ✅ (title, de
 ### #40 · ❌ is only read once a video is up for review
 status: open · P3 · bug
 A cross on the script message while the Short is `animating` or `revise_video` is ignored, and the job runs anyway (its video then arrives and can be crossed). Read crosses in every loop state before starting a job.
-
-### #41 · Thumbnails for scheduled Shorts
-status: open · P3 · feature
-The manual path makes `thumbnail.png`; the video loop sets none. Shorts mostly ignore custom thumbnails, and `thumbnails.set` needs a verified channel. Decide whether it matters.
 
 ### #42 · Tick runs long while a video job works
 status: open · P3 · chore
@@ -140,6 +140,11 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #41 · Thumbnails for scheduled Shorts
+status: done · 2026-11-05 · P3 · feature
+The manual path makes `thumbnail.png`; the video loop sets none. Shorts mostly ignore custom thumbnails, and `thumbnails.set` needs a verified channel. Decide whether it matters.
+- **Resolution:** it matters: without one YouTube picks its own frame, which can come from the solution. The sandbox render now keeps the kit's `thumbnail.png` (the frame just before "Pause and try it") as `out/review/<short>/vN.png`. It's attached in the thread with the video, and set with `thumbnails.set` right after the ✅ upload. That's best effort: a refusal (for example an unverified channel) is noted in the approval message and the release goes ahead. Backfilled by hand for 0009 v3 and 0010 v4, which were rendered before this. Follow-up: #50.
 
 ### #48 · Post review videos to Discord instead of uploading them to YouTube
 status: done · 2026-11-05 · P2 · feature
