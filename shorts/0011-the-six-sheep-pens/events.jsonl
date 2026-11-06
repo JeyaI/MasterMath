@@ -8,3 +8,4 @@
 {"at": "2026-11-05T22:20:03", "event": "comment_video", "status": "revise_video", "version": 2, "comment": "When \"pause and try it\" is on the screen, put the first caption back up with it so people know what to be doing when they pause."}
 {"at": "2026-11-05T22:21:50", "event": "revised_video", "status": "video_review", "version": 3, "sha256": "ec93c82b34af71d04798696390672386c0c4a65f20df7dafdcac11e3f501ad8a", "usage": {"job": "revise_video", "short": "0011-the-six-sheep-pens", "exit": 0, "seconds": 46, "subtype": "success", "is_error": false, "num_turns": 12, "total_cost_usd": 0.1325191, "log": "job-revise_video-20261105-222004.jsonl"}}
 {"at": "2026-11-06T07:40:40", "event": "approve_video", "status": "scheduled", "version": 3, "video_id": "F_sncTcBqFI", "publish_at": "2026-11-06T09:00:00-05:00"}
+{"at": "2026-11-06T09:05:02", "event": "released", "status": "published", "video_id": "F_sncTcBqFI"}
