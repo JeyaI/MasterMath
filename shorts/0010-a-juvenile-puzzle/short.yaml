@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0010'
 title: A Juvenile Puzzle
-status: video_review
+status: scheduled
 catalog_id: dudeney-amusements-239
 tags:
   - routes
@@ -103,9 +103,10 @@ youtube:
   tags:
     - math puzzle
     - puzzle
-  video_id:
-  url:
+  video_id: yYtQrAX8dKg
+  url: https://youtube.com/shorts/yYtQrAX8dKg
   published_at:
+  publish_at: '2026-11-06T17:00:00-05:00'
 review:
   thread_id: '1567781225211625472'
   version: 2
@@ -139,6 +140,10 @@ video:
       message: '1567982780841852949'
       video_id: yYtQrAX8dKg
   comment:
-  warned: ⏸️ v4 is approved, but YouTube's daily upload limit was hit. Uploads resume after Thu 5 
-    Nov, 9:15 PM EST; I'll upload an
+  warned:
   as_is:
+  approved:
+    version: 4
+    video_id: yYtQrAX8dKg
+    sha256: 9bba2fc0d2f1cfd3ca5ee414585d4d3a4756d38dabbb6002dab2459ec3457b6b
+    message: '1568087962321952810'
