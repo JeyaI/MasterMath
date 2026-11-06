@@ -10,3 +10,4 @@
 {"at": "2026-11-05T14:20:05", "event": "comment_video", "status": "revise_video", "version": 3, "comment": "The \"? Swipes\" caption is clipping into the board for level 2. Need to drop it down a bit. Theres a lot of free space below."}
 {"at": "2026-11-05T14:23:49", "event": "revised_video", "status": "video_review", "version": 4, "sha256": "9bba2fc0d2f1cfd3ca5ee414585d4d3a4756d38dabbb6002dab2459ec3457b6b", "usage": {"job": "revise_video", "short": "0010-a-juvenile-puzzle", "exit": 0, "seconds": 162, "subtype": "success", "is_error": false, "num_turns": 27, "total_cost_usd": 0.20346799999999998, "log": "job-revise_video-20261105-142006.jsonl"}}
 {"at": "2026-11-05T21:21:44", "event": "approve_video", "status": "scheduled", "version": 4, "video_id": "yYtQrAX8dKg", "publish_at": "2026-11-06T17:00:00-05:00"}
+{"at": "2026-11-06T17:05:02", "event": "released", "status": "published", "video_id": "yYtQrAX8dKg"}

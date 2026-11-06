@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0010'
 title: A Juvenile Puzzle
-status: scheduled
+status: published
 catalog_id: dudeney-amusements-239
 tags:
   - routes
@@ -105,7 +105,7 @@ youtube:
     - puzzle
   video_id: yYtQrAX8dKg
   url: https://youtube.com/shorts/yYtQrAX8dKg
-  published_at:
+  published_at: '2026-11-06'
   publish_at: '2026-11-06T17:00:00-05:00'
 review:
   thread_id: '1567781225211625472'
