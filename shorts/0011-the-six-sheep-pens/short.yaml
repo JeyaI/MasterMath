@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0011'
 title: The Six Sheep-Pens
-status: script_review
+status: revise
 catalog_id: dudeney-amusements-205
 tags:
   - geometry
@@ -73,4 +73,10 @@ review:
   version: 1
   messages:
     1: '1568067840597168188'
-  last_seen: '1568067840597168188'
+  last_seen: '1568080152498274407'
+  comment: "Show an alternate solution too in addition to the one you have... Two squares with a shared
+    vertex, with 2 internal matches, forming 3 pens each! \nLet's also make sure the captions are understandable.
+    They are too short. I edited the claude.md to say \"Captions should be the appropriate length, balancing
+    ease of understanding with conciseness\". We don't need super short captions in the hook. \"Can you
+    make 6 equally sized pens with 12 matches?\" etc.\nWhat does \"Big triangle, side three\" even mean
+    for example? Viewers need some information to even answer."
