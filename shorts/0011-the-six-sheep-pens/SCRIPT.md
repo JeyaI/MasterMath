@@ -6,6 +6,9 @@
 ## Revision (v2)
 Reviewer asked for: (1) a second solution, two squares sharing a corner, each with 2 internal matches making 3 pens; (2) longer, self-explanatory captions (hook included); (3) a Level 2 caption that actually tells viewers the setup. Done below; `verify.py` now checks the two-square layout too (12 matches, no overlaps, no loose ends, 6 equal pens of area 1/3).
 
+## Revision (v3)
+Reviewer asked for: no sheep (never introduced in the video), and the opening matches laid out 2 tall by 6 wide, pointing up with a small random tilt so all 12 can be counted. Done: sheep removed from the pens; pile is a tidy 2 x 6 grid.
+
 ## Hook
 "12 matches" pops in as a pile of twelve matchsticks, then the caption asks the question plainly: "Can you make 6 equally sized pens with 12 matches?"
 

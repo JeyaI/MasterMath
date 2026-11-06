@@ -79,6 +79,23 @@ review:
   comment:
 video:
   pending:
+    version: 2
+    file: /home/jeya/mathshorts/out/review/0011-the-six-sheep-pens/v2.mp4
+    sha256: c9d23c28725b8ba5a9c0070fd431438b4de21f76a26fb91e1363d1f417a23998
+    summary: Removed the sheep from both pen layouts and deleted the unused helper. The opening 
+      matches now sit in a 2×6 grid, pointing up with a small random tilt (±12°), so all 12 can be 
+      counted. SCRIPT.md has a v3 note. `ms verify` passes. `ms check` shows 0 errors, with only the
+      existing caption-length and duration warnings.
+    usage:
+      job: revise_video
+      short: 0011-the-six-sheep-pens
+      exit: 0
+      seconds: 55
+      subtype: success
+      is_error: false
+      num_turns: 21
+      total_cost_usd: 0.17520170000000004
+      log: job-revise_video-20261105-221004.jsonl
   version: 1
   versions:
     1:

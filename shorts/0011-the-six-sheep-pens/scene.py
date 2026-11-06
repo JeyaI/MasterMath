@@ -53,13 +53,6 @@ def stick(a, b, color=WOOD, w=15) -> VGroup:
     return VGroup(body, head)
 
 
-def sheep(p, s=1.0) -> VGroup:
-    p = np.array(p, float)
-    fleece = Circle(radius=0.2 * s, color=INK, fill_color=INK, fill_opacity=1, stroke_width=0).move_to(p)
-    face = Circle(radius=0.09 * s, color=BG, fill_color=BG, fill_opacity=1, stroke_width=0).move_to(p + np.array([0.17 * s, 0.03 * s, 0]))
-    return VGroup(fleece, face)
-
-
 class Short(Scene):
     # ---- helpers ------------------------------------------------------------------------------
     def set_top(self, text, color=ACCENT, size=52):
@@ -92,10 +85,12 @@ class Short(Scene):
         beat(self, "hook")
         rng = np.random.RandomState(11)
         pile = VGroup()
-        for k in range(12):
-            c = H + np.array([rng.uniform(-1.7, 1.7), rng.uniform(-1.7, 1.7), 0])
-            ang = rng.uniform(0, np.pi)
-            d = 1.45 *np.array([np.cos(ang), np.sin(ang), 0])
+        for k in range(12):                                  # 2 tall x 6 wide, pointing up, slightly jittered
+            row, col = divmod(k, 6)
+            c = H + np.array([(col - 2.5) * 1.0 + rng.uniform(-0.05, 0.05),
+                              (0.5 - row) * 2.5 + rng.uniform(-0.1, 0.1), 0])
+            ang = np.pi / 2 + np.radians(rng.uniform(-12, 12))
+            d = 1.1 * np.array([np.cos(ang), np.sin(ang), 0])
             pile.add(stick(c - d, c + d))
         title = hook("12 matches")
         credit = footer("After H. E. Dudeney, Amusements in Mathematics")
@@ -179,13 +174,12 @@ class Short(Scene):
         # ---- the spokes -------------------------------------------------------------------------
         self.cap("Six spokes to the centre: each is a wall for two pens")
         spokes = VGroup(*[stick(hp(CENTRE), hp(c), color="#F4D9A6") for _, c in SPOKES])
-        fills, flock = [], []
+        fills = []
         for k in range(6):
             a, b = CORNERS[k], CORNERS[(k + 1) % 6]
             tri = Polygon(hp(CENTRE), hp(a), hp(b), stroke_width=0, fill_color=PIECES[k % 4], fill_opacity=0.42)
             cen = (hp(CENTRE) + hp(a) + hp(b)) / 3
             fills.append(tri)
-            flock.append(sheep(cen))
         self.add_sound(SFX["pop"], gain=-6)
         for k in range(6):
             self.play(GrowFromPoint(spokes[k], hp(CENTRE)), run_time=0.4)
@@ -193,14 +187,14 @@ class Short(Scene):
             self.set_top(f"Matches used: {7 + k} / 12", ACCENT)
             if k >= 1:
                 self.add_sound(SFX["tick"], gain=-8)
-                self.play(FadeIn(fills[k - 1]), GrowFromCenter(flock[k - 1]), run_time=0.3)
+                self.play(FadeIn(fills[k - 1]), run_time=0.3)
         self.add_sound(SFX["tick"], gain=-8)
-        self.play(FadeIn(fills[5]), GrowFromCenter(flock[5]), run_time=0.3)
+        self.play(FadeIn(fills[5]), run_time=0.3)
 
         # ---- payoff -------------------------------------------------------------------------------
         beat(self, "payoff")
         self.add_sound(SFX["chime"])
-        hexa = VGroup(*fills, rim, spokes, *flock)
+        hexa = VGroup(*fills, rim, spokes)
         self.set_top("Matches used: 12 / 12", GOOD)
         self.cap("6 equal pens, 12 matches ✓", GOOD, extra=[Flash(hp(CENTRE), color=GOOD, flash_radius=2.4)])
         self.play(Indicate(VGroup(*fills), color=GOOD, scale_factor=1.04), run_time=0.8)
@@ -238,7 +232,7 @@ class Short(Scene):
                 ya, yb = y0 + j / 3, y0 + (j + 1) / 3
                 poly = Polygon(ap((x0, ya)), ap((x0 + 1, ya)), ap((x0 + 1, yb)), ap((x0, yb)), stroke_width=0,
                                fill_color=PIECES[(j + (x0 > 0) * 2) % 4], fill_opacity=0.42)
-                pens.append(VGroup(poly, sheep((ap((x0 + 0.5, (ya + yb) / 2))))))
+                pens.append(VGroup(poly))
         self.add_sound(SFX["chime"], gain=-6)
         self.play(LaggedStart(*[FadeIn(p) for p in pens], lag_ratio=0.12), run_time=1.0)
         self.set_top("Matches used: 12 / 12", GOOD)
