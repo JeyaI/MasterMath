@@ -199,17 +199,15 @@ class Tick:
             if not got:
                 done["skipped"] = "another tick is running"
                 return done
-            for s in all_shorts():
-                if s.status == "script_review":
-                    self.read_thread(s, done)
-                elif s.status == "video_review":
-                    self.read_video(s, done)
-                elif s.status == "scheduled":
-                    self.watch_scheduled(s, done)
-            for s in [s for s in all_shorts() if s.status == "revise"]:
-                self.revise(s, done)
-            for s in [s for s in all_shorts() if s.status in ("animating", "revise_video")]:
-                self.make_video(s, done)            # review videos go to Discord: no YouTube needed (#48)
+            step = {"script_review": self.read_thread, "video_review": self.read_video,
+                    "scheduled": self.watch_scheduled}
+            for s, st in self.shorts():
+                if st in step:
+                    self.safely(step[st], s, done)
+            for s, _ in self.shorts("revise"):
+                self.safely(self.revise, s, done)
+            for s, _ in self.shorts("animating", "revise_video"):
+                self.safely(self.make_video, s, done)   # review videos go to Discord: no YouTube needed (#48)
             if draft:
                 why = self.no_room()
                 if why:
@@ -218,10 +216,32 @@ class Tick:
                     self.script(done)
         return done
 
+    def shorts(self, *statuses: str) -> list[tuple[Short, str]]:
+        """(Short, status) for every Short whose short.yaml loads, optionally only those statuses.
+        One unreadable short.yaml is logged and skipped, so it can't stop the other Shorts."""
+        out = []
+        for s in all_shorts():
+            try:
+                st = s.status
+            except Exception as e:  # noqa: BLE001
+                self.echo(f"  {s.name}: skipped, short.yaml doesn't load: {' '.join(str(e).split())[:200]}")
+                continue
+            if not statuses or st in statuses:
+                out.append((s, st))
+        return out
+
+    def safely(self, fn: Callable, s: Short, done: dict) -> None:
+        """One Short's step; an error in it is logged and the tick carries on with the others."""
+        try:
+            fn(s, done)
+        except Exception as e:  # noqa: BLE001
+            self.echo(f"  {s.name}: {fn.__name__} crashed: {type(e).__name__}: {' '.join(str(e).split())[:300]}")
+            done["failed"].append(s.name)
+
     def no_room(self) -> str | None:
-        lim, shorts = limits(), all_shorts()
-        waiting = sum(s.status in (*SCRIPT_LOOP, *VIDEO_LOOP) for s in shorts)
-        queued = sum(s.status in ("approved", "ready", "scheduled") for s in shorts)
+        lim, shorts = limits(), [st for _, st in self.shorts()]
+        waiting = sum(st in (*SCRIPT_LOOP, *VIDEO_LOOP) for st in shorts)
+        queued = sum(st in ("approved", "ready", "scheduled") for st in shorts)
         if waiting >= lim["max_waiting"]:
             return f"{waiting} drafts already in the loops (max_waiting: {lim['max_waiting']})"
         if queued >= lim["max_queued"]:
@@ -394,7 +414,7 @@ class Tick:
     def slot(self) -> dt.datetime:
         """When a Short approved now goes public, given the days already taken."""
         cfg = release.settings()
-        taken = [d for x in all_shorts() if x.status in ("scheduled", "published")
+        taken = [d for x, _ in self.shorts("scheduled", "published")
                  if (d := release.local_date((x.data().get("youtube") or {}).get("publish_at")
                                              or (x.data().get("youtube") or {}).get("published_at"), cfg))]
         return release.next_slot(self.now(), taken, cfg)

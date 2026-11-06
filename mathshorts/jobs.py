@@ -19,7 +19,7 @@ import subprocess
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from . import paths, sandbox
+from . import paths, sandbox, yamlio
 
 PROMPTS = paths.REPO / "scripts" / "jobs"
 KINDS = ("script", "revise", "animate", "revise_video")
@@ -112,10 +112,21 @@ def run(kind: str, short: str | None = None, comment: str | None = None) -> JobR
         dest = paths.shorts() / name
         if kind == "script" and dest.exists():
             return JobResult(False, name, error=f"{name} already exists in the main checkout", usage=usage)
+        if why := yaml_problem(src / "short.yaml"):     # it would stop every tick
+            return JobResult(False, name, error=f"the job's short.yaml doesn't load: {why}", usage=usage)
         shutil.copytree(src, dest, dirs_exist_ok=True)
         return JobResult(True, name, out_.get("summary", ""), usage=usage)
     finally:
         subprocess.run(["git", "worktree", "remove", "--force", str(tree)], cwd=root, capture_output=True)
+
+
+def yaml_problem(path: Path) -> str | None:
+    """Why a job's short.yaml can't be used (it must load and have a status), or None."""
+    try:
+        data = yamlio.load(path)
+    except Exception as e:  # noqa: BLE001 - any parse error counts
+        return " ".join(str(e).split())[:200]
+    return None if isinstance(data, dict) and data.get("status") else "no status"
 
 
 def parse(log: Path) -> dict:

@@ -674,12 +674,32 @@ def test_a_discord_failure_after_upload_does_not_upload_twice(root):
             raise RuntimeError("Discord timed out")
         return real_post(thread, content, files, reactions)
     d.post = flaky
-    with pytest.raises(RuntimeError):
-        t.run()
+    assert t.run()["failed"] == [s.name]                    # logged; the tick carries on
     assert video(s)[1]["video_id"] == "vid1"
     d.post = real_post
     t.run()
     assert s.status == "scheduled" and s.data()["youtube"]["video_id"] == "vid1" and yt.n == 1
+
+
+def test_an_unreadable_short_yaml_doesnt_stop_the_others(root):
+    clock = Clock()
+    d, t, yt, s, thread = in_review(root, clock=clock)
+    cli.main(["new", "--blank", "Broken"])
+    broken = all_shorts()[-1]
+    broken.yaml_path.write_text("status: revise\ninsight: one\n  two: three\n")   # what a job wrote on 2026-11-05
+    approve(d, t, s)
+    assert s.status == "scheduled"
+    assert t.run(draft=True)["scripted"]                    # no_room counts the readable ones
+
+
+def test_a_job_short_yaml_that_wont_load_is_refused(tmp_path):
+    p = tmp_path / "short.yaml"
+    p.write_text("status: revise\ninsight: Pens need not be squares. A second\n  answer: two squares\n")
+    assert "mapping values are not allowed" in jobs.yaml_problem(p)
+    p.write_text("title: x\n")
+    assert jobs.yaml_problem(p) == "no status"
+    p.write_text("status: revise\ninsight: >-\n  A second answer: two squares\n")
+    assert jobs.yaml_problem(p) is None
 
 
 def test_draft_waits_for_a_busy_tick_but_a_plain_tick_skips(root, monkeypatch):
