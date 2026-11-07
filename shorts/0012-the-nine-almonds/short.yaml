@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0012'
 title: The Nine Almonds
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-229
 tags:
   - counters
@@ -89,29 +89,17 @@ review:
   last_seen: '1568639369022148701'
 video:
   pending:
-    version: 2
-    file: /home/jeya/mathshorts/out/review/0012-the-nine-almonds/v2.mp4
-    sha256: e16f21f964249104772b2eb72e75b3d3a5309df46f751c5449ac84a0855d8eca
-    summary: Redrew the almonds in scene.py as a plumper kernel shape with a tapered tip. They're 
-      now a warm brown with a pale highlight and cream numbers, replacing the pale tan ovals. 
-      Nothing else changed, and no numbers or claims were touched, so verify.py is untouched. A full
-      preview was rendered and frames inspected, and `ms check` passes.
-    usage:
-      job: revise_video
-      short: 0012-the-nine-almonds
-      exit: 0
-      seconds: 85
-      subtype: success
-      is_error: false
-      num_turns: 20
-      total_cost_usd: 0.1755299
-      log: job-revise_video-20261107-095503.jsonl
-  version: 1
+  version: 2
   versions:
     1:
       file: /home/jeya/mathshorts/out/review/0012-the-nine-almonds/v1.mp4
       sha256: a516992f36f3df074162811f9f49b704d2bb094a05f4b61e9781400097d3c9cb
       message: '1568633261029203988'
-  comment: Almond color and shape probably should be redone to look more like an almond
+      video_id:
+    2:
+      file: /home/jeya/mathshorts/out/review/0012-the-nine-almonds/v2.mp4
+      sha256: e16f21f964249104772b2eb72e75b3d3a5309df46f751c5449ac84a0855d8eca
+      message: '1568640527040118976'
+  comment:
   warned:
   as_is:
