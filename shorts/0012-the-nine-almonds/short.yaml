@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0012'
 title: The Nine Almonds
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-229
 tags:
   - counters
@@ -86,7 +86,7 @@ review:
   version: 1
   messages:
     1: '1568143384919547936'
-  last_seen: '1568143384919547936'
+  last_seen: '1568639369022148701'
 video:
   pending:
   version: 1
@@ -95,6 +95,6 @@ video:
       file: /home/jeya/mathshorts/out/review/0012-the-nine-almonds/v1.mp4
       sha256: a516992f36f3df074162811f9f49b704d2bb094a05f4b61e9781400097d3c9cb
       message: '1568633261029203988'
-  comment:
+  comment: Almond color and shape probably should be redone to look more like an almond
   warned:
   as_is:

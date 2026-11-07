@@ -1,3 +1,4 @@
 {"at": "2026-11-06T01:01:58", "event": "script_done", "status": "script_review", "version": 1, "usage": {"job": "script", "short": null, "exit": 0, "seconds": 107, "subtype": "success", "is_error": false, "num_turns": 28, "total_cost_usd": 0.4082543, "log": "job-script-20261106-010007.jsonl"}}
 {"at": "2026-11-06T21:00:03", "event": "accept_script", "status": "animating", "version": 1}
 {"at": "2026-11-07T09:28:33", "event": "animated", "status": "video_review", "version": 1, "sha256": "a516992f36f3df074162811f9f49b704d2bb094a05f4b61e9781400097d3c9cb", "usage": {"job": "animate", "short": "0012-the-nine-almonds", "exit": 0, "seconds": 191, "subtype": "success", "is_error": false, "num_turns": 56, "total_cost_usd": 0.5266978999999999, "log": "job-animate-20261107-092423.jsonl"}}
+{"at": "2026-11-07T09:55:02", "event": "comment_video", "status": "revise_video", "version": 1, "comment": "Almond color and shape probably should be redone to look more like an almond"}
