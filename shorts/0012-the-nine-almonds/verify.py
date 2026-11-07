@@ -112,13 +112,15 @@ def shortest(step, goal=frozenset({CENTRE})):
     raise AssertionError("goal unreachable")
 
 
+L2_ANSWER = 8   # checked by search in main()
+
+
 def main() -> None:
     assert len(START) == 9 and CENTRE in START
     assert FINAL == {CENTRE}, FINAL
     assert N_MOVES == 4 and N_JUMPS == 8
     assert shortest(chains) == 4                  # 3 moves is impossible
-    L2_ANSWER = shortest(single_jumps)
-    assert L2_ANSWER == 8
+    assert shortest(single_jumps) == L2_ANSWER
     print(f"OK  book solution: {N_MOVES} moves, {N_JUMPS} jumps, ends on the centre; "
           f"BFS: fewest moves with chains = 4, with single jumps only = {L2_ANSWER}")
 

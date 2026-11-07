@@ -63,7 +63,7 @@ captions:
   - "Pause and try it"
   - "Move 1: one almond, four jumps"
   - "Move 2: 7 over 4"
-  - "Move 3: 6 over 2 and 7"
+  - "Move 3: 6 over 2, 7"
   - "Move 4: 5 over 6"
   - "4 moves. Fewest possible ✓"
   - "Comment just the number ↓"
@@ -87,3 +87,26 @@ review:
   messages:
     1: '1568143384919547936'
   last_seen: '1568143384919547936'
+video:
+  pending:
+    version: 1
+    file: /home/jeya/mathshorts/out/review/0012-the-nine-almonds/v1.mp4
+    sha256: a516992f36f3df074162811f9f49b704d2bb094a05f4b61e9781400097d3c9cb
+    summary: "The final full preview (v3) runs 49.7 s, `ms check` passes with no warnings, and `ms verify`
+      passes. The scene is built from `verify.py`: the board, the almond numbering and the four moves
+      with their jump paths. Each move leaves a coloured trail, with moves and jumps counters and a row
+      of move chips. The hook shows the board, then asks the question in plain words.\n\nTwo small edits:
+      I added a module-level `L2_ANSWER` to `verify.py`, and shortened the Move 3 caption to \"Move 3:
+      6 over 2, 7\" (in `short.yaml` too) to get it under 7 words.\n\nThe rules demo jump is shown and
+      then undone, so no solution jump is shown before the countdown. The bottom of the frame is fairly
+      empty on the Level 2 card."
+    usage:
+      job: animate
+      short: 0012-the-nine-almonds
+      exit: 0
+      seconds: 191
+      subtype: success
+      is_error: false
+      num_turns: 56
+      total_cost_usd: 0.5266978999999999
+      log: job-animate-20261107-092423.jsonl
