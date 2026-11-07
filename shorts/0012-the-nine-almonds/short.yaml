@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0012'
 title: The Nine Almonds
-status: video_review
+status: scheduled
 catalog_id: dudeney-amusements-229
 tags:
   - counters
@@ -78,9 +78,10 @@ youtube:
   tags:
     - math puzzle
     - puzzle
-  video_id:
-  url:
+  video_id: ZxWeQwwGfRw
+  url: https://youtube.com/shorts/ZxWeQwwGfRw
   published_at:
+  publish_at: '2026-11-07T12:00:00-05:00'
 review:
   thread_id: '1568143380641480736'
   version: 1
@@ -104,3 +105,8 @@ video:
   comment:
   warned:
   as_is:
+  approved:
+    version: 2
+    video_id: ZxWeQwwGfRw
+    sha256: e16f21f964249104772b2eb72e75b3d3a5309df46f751c5449ac84a0855d8eca
+    message: '1568641383751749663'
