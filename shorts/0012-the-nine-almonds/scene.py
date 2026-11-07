@@ -36,8 +36,8 @@ assert (N_MOVES, N_JUMPS, SIZE, L2_ANSWER) == (4, 8, 5, 8)
 
 P = 1.1                       # square pitch
 BY = 1.0                      # board centre y
-SHELL = ManimColor("#D9B27C")
-SHELL_EDGE = ManimColor("#8A5A2B")
+SHELL = ManimColor("#A66B3B")
+SHELL_EDGE = ManimColor("#5A3118")
 MOVE_COLORS = [PIECES[0], PIECES[1], PIECES[2], ACCENT]
 
 
@@ -58,11 +58,21 @@ def board(pitch: float = P, by: float = BY) -> VGroup:
 
 def almond(k: int, pitch: float = P) -> VGroup:
     s = pitch / P
-    body = Ellipse(width=0.72 * s, height=0.92 * s, fill_color=SHELL, fill_opacity=1,
-                   stroke_color=SHELL_EDGE, stroke_width=4)
-    shine = Ellipse(width=0.2 * s, height=0.38 * s, fill_color=ManimColor("#FFFFFF"), fill_opacity=0.35,
-                    stroke_width=0).move_to([-0.17 * s, 0.14 * s, 0])
-    num = Text(str(k), font=FONT, weight=BOLD, font_size=int(40 * s), color=BG).move_to([0.03 * s, -0.04 * s, 0])
+    def pt(x, y):
+        return np.array([x * s, y * s, 0.0])
+
+    # teardrop with a pointed tip, like a real almond kernel
+    body = VMobject(fill_color=SHELL, fill_opacity=1, stroke_color=SHELL_EDGE, stroke_width=4)
+    body.start_new_path(pt(0.0, 0.50))
+    body.add_cubic_bezier_curve_to(pt(0.22, 0.34), pt(0.44, 0.10), pt(0.42, -0.10))
+    body.add_cubic_bezier_curve_to(pt(0.40, -0.36), pt(0.22, -0.48), pt(0.0, -0.48))
+    body.add_cubic_bezier_curve_to(pt(-0.22, -0.48), pt(-0.40, -0.36), pt(-0.42, -0.10))
+    body.add_cubic_bezier_curve_to(pt(-0.44, 0.10), pt(-0.22, 0.34), pt(0.0, 0.50))
+    body.close_path() if hasattr(body, "close_path") else None
+    shine = Ellipse(width=0.12 * s, height=0.34 * s, fill_color=ManimColor("#F3D9AE"), fill_opacity=0.5,
+                    stroke_width=0).rotate(0.25).move_to(pt(-0.17, 0.0))
+    num = Text(str(k), font=FONT, weight=BOLD, font_size=int(38 * s), color=ManimColor("#FFF4E0")
+               ).move_to(pt(0.02, -0.12))
     return VGroup(body, shine, num).set_z_index(5)
 
 
