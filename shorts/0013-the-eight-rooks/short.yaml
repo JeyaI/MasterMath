@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0013'
 title: The Eight Rooks
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-295
 tags:
   - chessboard
@@ -134,34 +134,17 @@ review:
   comment:
 video:
   pending:
-    version: 2
-    file: /home/jeya/mathshorts/out/review/0013-the-eight-rooks/v2.mp4
-    sha256: 49f2fdd23ab8af814d7834434a29fbb80d8fdf140a075929372a240587b1b445
-    summary: "The opening now holds longer: about 3.5 s on the question, then 2.2–2.4 s on each rule caption.
-      During the row-by-row explanation, each picked square turns solid red and its column gets a red
-      tint. Level 2 is now a 10×10 board with 10 rooks, and the answer is 10! = 3,628,800. I updated verify.py
-      (which passes), short.yaml (answer and accept list), SCRIPT.md and scene.py.\n`ms check` has 0 errors.
-      It warns that the video is now 55.4 s against the 40–50 s target, because the added reading time
-      pushed it past. I checked the Level 2 frame, which is clean, and one frame of the red-square step
-      in the first preview, before I shrank the Level 2 board to fix an overlap. I did not re-look at
-      the red step after the final render."
-    usage:
-      job: revise_video
-      short: 0013-the-eight-rooks
-      exit: 0
-      seconds: 107
-      subtype: success
-      is_error: false
-      num_turns: 38
-      total_cost_usd: 0.27132249999999997
-      log: job-revise_video-20261107-234002.jsonl
-  version: 1
+  version: 2
   versions:
     1:
       file: /home/jeya/mathshorts/out/review/0013-the-eight-rooks/v1.mp4
       sha256: 8d6e4003ff934d30a76024750cb913ce8116d6369bd8671b1bd43e82ec2e69d3
       message: '1568841162494844958'
-  comment: "There needs to be longer in the beginning for people to read the text. \nWhen the explanation
-    is playing, lets cover \"picked\" squares as red to help aid the viewers.\nLevel 2 should be 10x10."
+      video_id:
+    2:
+      file: /home/jeya/mathshorts/out/review/0013-the-eight-rooks/v2.mp4
+      sha256: 49f2fdd23ab8af814d7834434a29fbb80d8fdf140a075929372a240587b1b445
+      message: '1568848296242577438'
+  comment:
   warned:
   as_is:
