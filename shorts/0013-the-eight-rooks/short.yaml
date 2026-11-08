@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0013'
 title: The Eight Rooks
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-295
 tags:
   - chessboard
@@ -94,22 +94,22 @@ level2:
         hundred twenty ways"]
   why: "One rook per row and column again: 6 x 5 x 4 x 3 x 2 x 1 = 720."
 captions:
-  - "Rooks attack along lines"
-  - "Cover every square"
-  - "No rook attacks another"
-  - "Another way"
-  - "How many ways in all?"
+  - "A rook attacks along its row and column."
+  - "Every square must be covered."
+  - "Here, no rook attacks another one."
+  - "There are other ways, too."
+  - "How many ways are there in all?"
   - "Pause and try it"
-  - "Two in a row would attack"
-  - "One rook per row"
-  - "And one per column"
-  - "Row 1: 8 columns free"
-  - "Row 2: only 7"
-  - "Then 6, 5, 4 ..."
-  - "Last row: 1 choice"
-  - "Choices multiply"
+  - "Two rooks in a row would attack each other."
+  - "So each row has exactly one rook."
+  - "And each column has exactly one, too."
+  - "In row 1, you can choose any of 8 columns."
+  - "In row 2, only 7 columns are left."
+  - "Then 6 choices, then 5, then 4, and so on."
+  - "The last row has only one choice."
+  - "We multiply all the choices together."
   - "8 × 7 × 6 × ... × 1"
-  - "40,320 ways ✓"
+  - "There are 40,320 ways ✓"
   - "Comment just the number ↓"
 music:
   piece: k545
@@ -127,8 +127,9 @@ youtube:
   published_at:
 review:
   thread_id: '1568792649895387319'
-  version: 1
+  version: 2
   messages:
     1: '1568792653821382761'
+    2: '1568832557972324363'
   last_seen: '1568831320870752438'
-  comment: rewrite the hook and captions in natural English
+  comment:

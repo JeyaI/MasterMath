@@ -4,7 +4,7 @@
 `dudeney-amusements-295`, The Eight Rooks (Dudeney, *Amusements in Mathematics*, public domain). Chosen because it is a clean counting puzzle with one visual idea (rooks fill rows, columns run out), a statement that retells in three captions, and an answer checked by brute force. It is not a dissection, which the recent Shorts and the top of `ms suggest` are full of. Runner-up: `dudeney-amusements-173`, Mrs. Perkins's Quilt (13 x 13 into 11 squares), which would be a fourth patchwork-style dissection in a row.
 
 ## Hook
-A chessboard pops in with 8 rooks on one row. Text: "8 rooks. Every square covered." then "No rook attacks another. How many ways?"
+A chessboard pops in with 8 rooks on one row. Text, as one sentence: "Can you place 8 rooks so that none of them attack each other?"
 
 ## Retelling
 A rook attacks every square along its row and column. Put 8 rooks on a chessboard so that every square is either occupied or attacked, and no rook attacks another. How many different arrangements are there? Mirror images and turns count as different.
@@ -15,22 +15,22 @@ Two rooks in one row would attack each other, so there is exactly one rook per r
 Checked against: the `SCRIPT.md` files and scene docstrings of 0001-0012. The nearest idea is 0004 (Bishops), which multiplies independent 2-way choices around closed diagonal loops. Here the choices shrink (8, 7, 6, ...) as columns are used up, and the picture is the disappearing columns, not loops. 0005 (Potato) and 0007 (Pigs) add increasing counts of cuts or fences, again a different picture.
 
 ## Beats
-1. Hook: board with 8 rooks in a row, "8 rooks. Every square covered." (3 s)
-2. "Rooks attack along lines": rays shoot out of one rook along row and column (2 s)
-3. "Cover every square": the row of rooks lights the whole board (2 s)
-4. "No rook attacks another": Dudeney's diagonal, rays touch no rook (2 s)
-5. "Another way": the other diagonal, then an irregular placement (3 s)
-6. "How many ways in all?" (2 s)
+1. Hook: board with 8 rooks in a row, "Can you place 8 rooks so that none of them attack each other?" (3 s)
+2. "A rook attacks along its row and column.": rays shoot out of one rook (2 s)
+3. "Every square must be covered.": the row of rooks lights the whole board (2 s)
+4. "Here, no rook attacks another one.": Dudeney's diagonal, rays touch no rook (2 s)
+5. "There are other ways, too.": the other diagonal, then an irregular placement (3 s)
+6. "How many ways are there in all?" (2 s)
 7. "Pause and try it" with 5 s countdown (6 s)
-8. "Two in a row would attack": two rooks in a row flash red (2 s)
-9. "One rook per row": rows light up one by one (2 s)
-10. "And one per column": columns light up (1 s)
-11. "Row 1: 8 columns free": top rook lands, ladder shows 8 (2 s)
-12. "Row 2: only 7": its column dims (2 s)
-13. "Then 6, 5, 4 ...": the rest fill quickly with the ladder counting down (3 s)
-14. "Last row: 1 choice" (1 s)
-15. "Choices multiply" / "8 × 7 × 6 × ... × 1": ladder numbers join into the product (3 s)
-16. "40,320 ways ✓": payoff (2 s)
+8. "Two rooks in a row would attack each other.": two rooks flash red (2 s)
+9. "So each row has exactly one rook.": rows light up one by one (2 s)
+10. "And each column has exactly one, too.": columns light up (1 s)
+11. "In row 1, you can choose any of 8 columns.": top rook lands, ladder shows 8 (2 s)
+12. "In row 2, only 7 columns are left.": its column dims (2 s)
+13. "Then 6 choices, then 5, then 4, and so on.": the rest fill quickly with the ladder counting down (3 s)
+14. "The last row has only one choice.": (1 s)
+15. "We multiply all the choices together." / "8 × 7 × 6 × ... × 1": ladder numbers join into the product (3 s)
+16. "There are 40,320 ways ✓": payoff (2 s)
 17. Level 2 card: 6 × 6 board with 6 rooks, "how many ways?" and "Comment just the number ↓", held 12 s
 
 Total about 50 s: roughly 38 s up to the payoff plus the 12 s Level 2 hold.
