@@ -31,12 +31,14 @@ Checked against: the `SCRIPT.md` files and scene docstrings of 0001-0012. The ne
 14. "The last row has only one choice.": (1 s)
 15. "We multiply all the choices together." / "8 × 7 × 6 × ... × 1": ladder numbers join into the product (3 s)
 16. "There are 40,320 ways ✓": payoff (2 s)
-17. Level 2 card: 6 × 6 board with 6 rooks, "how many ways?" and "Comment just the number ↓", held 12 s
+17. Level 2 card: 10 × 10 board with 10 rooks, "how many ways?" and "Comment just the number ↓", held 12 s
 
-Total about 50 s: roughly 38 s up to the payoff plus the 12 s Level 2 hold.
+Revision: the opening holds longer (about 3.5 s on the question, then 2+ s per rule caption) so the text can be read; in the row-by-row explanation each picked square turns red and its column is tinted red.
+
+Total about 55 s: roughly 38 s up to the payoff plus the 12 s Level 2 hold.
 
 ## Level 2
-Question: the same rules on a 6 by 6 board with 6 rooks; how many ways? Answer: **720**, because it is 6 × 5 × 4 × 3 × 2 × 1. No calculator is needed. `accept` includes "6!" and spelled-out forms.
+Question: the same rules on a 10 by 10 board with 10 rooks; how many ways? Answer: **3,628,800**, because it is 10 × 9 × 8 × ... × 1 (10!). `accept` includes "10!" and the comma form.
 
 ## Music
 `k545` (Mozart, Piano Sonata in C, K. 545). It is the least recently used key in `ms music` (last on 0007); the recent Shorts used gymnopedie-1, minuet-g and pachelbel-canon. Bright and quick suits a counting puzzle.

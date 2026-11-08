@@ -25,7 +25,7 @@ from lib.layout import ACCENT, BG, GOOD, GRID, INK, MUTED, PIECES, STAGE_Y, TITL
 from lib.components import CENTRE_X, Captions, badge, beat, countdown, footer, hook, label  # noqa: E402
 from lib.audio import write_sfx  # noqa: E402
 from verify import (  # noqa: E402
-    ANTI, DIAGONAL, L2_N, L2_WAYS, LADDER, N, SCATTER, WAYS, rooks,
+    ANTI, DIAGONAL, L2_COLS, L2_N, L2_WAYS, LADDER, N, SCATTER, WAYS, rooks,
 )
 
 SFX = {k: str(v) for k, v in write_sfx(REPO / "assets" / "sfx").items()}
@@ -33,7 +33,7 @@ CELL = 0.78
 BX, BY = CENTRE_X - 0.3, STAGE_Y + 0.2      # board centre; the ladder sits to its right
 LIGHT = interpolate_color(GRID, MUTED, 0.4)
 HOT = PIECES[0]
-assert (N, WAYS, L2_WAYS) == (8, 40320, 720)
+assert (N, WAYS, L2_WAYS) == (8, 40320, 3628800)
 
 
 def stage(cell: float, n: int, x: float = CENTRE_X, y: float = STAGE_Y):
@@ -85,7 +85,7 @@ class Short(Scene):
                        ).arrange(DOWN, buff=0.18).move_to([CENTRE_X, TITLE_Y, 0])
         credit = footer("After H. E. Dudeney, Amusements in Mathematics")
         self.play(FadeIn(title, shift=0.3 * DOWN), FadeIn(credit), run_time=0.5)
-        self.wait(1.0)
+        self.wait(3.5)
 
         # --- the rules ----------------------------------------------------------------------
         lone = row_rooks[3]
@@ -93,20 +93,20 @@ class Short(Scene):
         shoot = rays(P, 3, 3, N)
         self.add_sound(SFX["pop"])
         cap.show("A rook attacks along its row and column.", extra=[FadeOut(others), Create(shoot)])
-        self.wait(1.2)
+        self.wait(2.4)
 
         tint = VGroup(*[Cell(side_length=CELL, stroke_width=0, fill_color=ACCENT, fill_opacity=0.32)
                         .move_to(P(c, r)) for c in range(N) for r in range(N)]).set_z_index(2)
         self.add_sound(SFX["snip"])
         cap.show("Every square must be covered.", extra=[FadeOut(shoot), FadeIn(others), FadeIn(tint)])
-        self.wait(1.2)
+        self.wait(2.2)
 
         diag = VGroup(*men(DIAGONAL))
         diag_rays = VGroup(*[rays(P, c, r, N, width=5) for c, r in rooks(DIAGONAL)])
         self.add_sound(SFX["pop"])
         cap.show("Here, no rook attacks another one.", extra=[
             FadeOut(row_rooks), FadeOut(tint), FadeIn(diag), Create(diag_rays)])
-        self.wait(1.3)
+        self.wait(2.3)
 
         anti, scatter = VGroup(*men(ANTI)), VGroup(*men(SCATTER))
         self.add_sound(SFX["pop"])
@@ -174,12 +174,14 @@ class Short(Scene):
             piece = rook(CELL).move_to(P(SCATTER[r], r))
             self.add_sound(SFX["pop"])
             self.play(FadeIn(piece, shift=0.8 * DOWN), run_time=move)
-            cover = Rectangle(width=CELL, height=CELL * N, stroke_width=0, fill_color=BG,
-                              fill_opacity=0.62).move_to(
+            cover = Rectangle(width=CELL, height=CELL * N, stroke_width=0, fill_color=HOT,
+                              fill_opacity=0.32).move_to(
                 np.array([P(SCATTER[r], 0)[0], tiles.get_center()[1], 0])).set_z_index(4)
-            self.play(FadeOut(free), FadeIn(cover), run_time=move)
+            picked = Cell(side_length=CELL, stroke_width=0, fill_color=HOT, fill_opacity=0.85
+                          ).move_to(P(SCATTER[r], r)).set_z_index(5)      # the picked square, in red
+            self.play(FadeOut(free), FadeIn(cover), FadeIn(picked), run_time=move)
             placed.append(piece)
-            wall.append(cover)
+            wall.extend([cover, picked])
 
         step(0, 0.9, 0.45, "In row 1, you can choose any of 8 columns.")
         self.wait(0.3)
@@ -229,13 +231,13 @@ class Short(Scene):
         self.play(*[FadeOut(m) for m in list(self.mobjects)], run_time=0.3)
         self.clear()
 
-        c2 = 0.95
+        c2 = 0.58
         P2 = stage(c2, L2_N, y=STAGE_Y + 0.5)
         tiles2, _ = board(P2, c2, L2_N)
-        men2 = VGroup(*[rook(c2).move_to(P2(c, r)) for c, r in rooks((2, 5, 0, 3, 1, 4))])
+        men2 = VGroup(*[rook(c2).move_to(P2(c, r)) for c, r in rooks(L2_COLS)])
         ask = label("? ways", 72, ACCENT).move_to([CENTRE_X, P2(0, L2_N - 1)[1] - c2 / 2 - 0.75, 0])
         tag = badge("LEVEL 2").move_to([CENTRE_X, 6.45, 0])
-        q = VGroup(*[label(t, 44) for t in ("Same rules: a 6 by 6 board", "and 6 rooks.")]).arrange(DOWN, buff=0.12)
+        q = VGroup(*[label(t, 44) for t in ("Same rules: a 10 by 10 board", "and 10 rooks.")]).arrange(DOWN, buff=0.12)
         q.move_to([CENTRE_X, 5.3, 0])
         self.add_sound(SFX["chime"], gain=-8)
         self.play(GrowFromCenter(tag), FadeIn(q), FadeIn(tiles2), run_time=0.6)

@@ -6,7 +6,7 @@ Checks, in code, every claim the video makes:
   * the number of such placements is n!: 24, 120, 720 (brute force), and 8! = 40320 for the real board
   * the row-by-row choice counts 8, 7, 6, ..., 1 multiply to 8! (the video's ladder)
   * the three placements shown before the countdown are legal and different
-  * Level 2: a 6 x 6 board with six rooks -> 6! = 720
+  * Level 2: a 10 x 10 board with ten rooks -> 10! = 3,628,800
 
 Squares are (column, row) from the bottom left. The scene imports everything below.
 """
@@ -18,7 +18,8 @@ from math import factorial, prod
 Square = tuple[int, int]
 
 N, WAYS = 8, 40320
-L2_N, L2_WAYS = 6, 720
+L2_N, L2_WAYS = 10, 3628800
+L2_COLS = (2, 7, 0, 5, 9, 3, 8, 1, 6, 4)            # the rooks drawn on the Level 2 card
 LADDER = list(range(N, 0, -1))                     # 8, 7, 6, ... 1: free columns left for each row
 
 # Placements the video shows: column of the rook in each row, top row first.
@@ -60,7 +61,8 @@ def main() -> None:
     assert prod(LADDER) == factorial(N) == WAYS
     assert sum(1 for _ in permutations(range(N))) == WAYS
     assert all(legal(N, rooks(p)) for p in permutations(range(N)))   # every permutation is legal
-    assert factorial(L2_N) == L2_WAYS
+    assert factorial(L2_N) == L2_WAYS == 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1
+    assert sorted(L2_COLS) == list(range(L2_N)) and legal(L2_N, rooks(L2_COLS))
 
     shown = [DIAGONAL, ANTI, SCATTER]
     assert len(set(shown)) == 3 and all(sorted(p) == list(range(N)) for p in shown)

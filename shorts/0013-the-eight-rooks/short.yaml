@@ -88,11 +88,10 @@ level1:
     and each column too. Fill the rows one at a time: 8 columns are free for the first rook, 7 for the
     next, then 6, and so on down to 1. The choices multiply: 8 x 7 x 6 x 5 x 4 x 3 x 2 x 1 = 40320."
 level2:
-  statement: "Same rules on a 6 by 6 board with 6 rooks. How many ways?"
-  answer: 720
-  accept: [720, "720 ways", "6!", "6 factorial", "seven hundred twenty", "seven hundred and twenty", "seven
-        hundred twenty ways"]
-  why: "One rook per row and column again: 6 x 5 x 4 x 3 x 2 x 1 = 720."
+  statement: "Same rules on a 10 by 10 board with 10 rooks. How many ways?"
+  answer: 3628800
+  accept: [3628800, "3,628,800", "3628800 ways", "3,628,800 ways", "10!", "10 factorial"]
+  why: "One rook per row and column again: 10 x 9 x 8 x 7 x 6 x 5 x 4 x 3 x 2 x 1 = 3,628,800."
 captions:
   - "A rook attacks along its row and column."
   - "Every square must be covered."
@@ -117,7 +116,7 @@ music:
 youtube:
   title: "How many ways can 8 rooks cover a chessboard?"
   description: |
-    8 rooks, every square covered, none attacking another. How many ways can they be placed? Level 2: a 6 by 6 board with 6 rooks. Comment just the number.
+    8 rooks, every square covered, none attacking another. How many ways can they be placed? Level 2: a 10 by 10 board with 10 rooks. Comment just the number.
     After H. E. Dudeney, Amusements in Mathematics (1917), no. 295. Music: W. A. Mozart, Piano Sonata in C, K. 545.
   tags:
     - math puzzle
@@ -135,6 +134,27 @@ review:
   comment:
 video:
   pending:
+    version: 2
+    file: /home/jeya/mathshorts/out/review/0013-the-eight-rooks/v2.mp4
+    sha256: 49f2fdd23ab8af814d7834434a29fbb80d8fdf140a075929372a240587b1b445
+    summary: "The opening now holds longer: about 3.5 s on the question, then 2.2–2.4 s on each rule caption.
+      During the row-by-row explanation, each picked square turns solid red and its column gets a red
+      tint. Level 2 is now a 10×10 board with 10 rooks, and the answer is 10! = 3,628,800. I updated verify.py
+      (which passes), short.yaml (answer and accept list), SCRIPT.md and scene.py.\n`ms check` has 0 errors.
+      It warns that the video is now 55.4 s against the 40–50 s target, because the added reading time
+      pushed it past. I checked the Level 2 frame, which is clean, and one frame of the red-square step
+      in the first preview, before I shrank the Level 2 board to fix an overlap. I did not re-look at
+      the red step after the final render."
+    usage:
+      job: revise_video
+      short: 0013-the-eight-rooks
+      exit: 0
+      seconds: 107
+      subtype: success
+      is_error: false
+      num_turns: 38
+      total_cost_usd: 0.27132249999999997
+      log: job-revise_video-20261107-234002.jsonl
   version: 1
   versions:
     1:
