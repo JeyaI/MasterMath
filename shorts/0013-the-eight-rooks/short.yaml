@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0013'
 title: The Eight Rooks
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-295
 tags:
   - chessboard
@@ -131,7 +131,7 @@ review:
   messages:
     1: '1568792653821382761'
     2: '1568832557972324363'
-  last_seen: '1568831320870752438'
+  last_seen: '1568846430771351583'
   comment:
 video:
   pending:
@@ -141,6 +141,7 @@ video:
       file: /home/jeya/mathshorts/out/review/0013-the-eight-rooks/v1.mp4
       sha256: 8d6e4003ff934d30a76024750cb913ce8116d6369bd8671b1bd43e82ec2e69d3
       message: '1568841162494844958'
-  comment:
+  comment: "There needs to be longer in the beginning for people to read the text. \nWhen the explanation
+    is playing, lets cover \"picked\" squares as red to help aid the viewers.\nLevel 2 should be 10x10."
   warned:
   as_is:
