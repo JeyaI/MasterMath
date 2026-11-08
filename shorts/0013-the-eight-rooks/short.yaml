@@ -133,3 +133,24 @@ review:
     2: '1568832557972324363'
   last_seen: '1568831320870752438'
   comment:
+video:
+  pending:
+    version: 1
+    file: /home/jeya/mathshorts/out/review/0013-the-eight-rooks/v1.mp4
+    sha256: 8d6e4003ff934d30a76024750cb913ce8116d6369bd8671b1bd43e82ec2e69d3
+    summary: "The preview runs 49.7 s with 20 beats. `ms check` and `ms verify` both pass with no warnings.
+      I wrote `scene.py` from the accepted script's beats. The solution animation is custom: free columns
+      glow in each row, the rook drops, its column dims, and a ladder of choices counts down and flies
+      up into the product. `short.yaml` captions are unchanged.\nI looked at about 13 frames. The hook
+      text is three lines at 56 pt, so it's smaller than the other Shorts' hooks. In Level 2, the \"?
+      ways\" text sits close above the caption."
+    usage:
+      job: animate
+      short: 0013-the-eight-rooks
+      exit: 0
+      seconds: 210
+      subtype: success
+      is_error: false
+      num_turns: 67
+      total_cost_usd: 0.5437101999999999
+      log: job-animate-20261107-231003.jsonl
