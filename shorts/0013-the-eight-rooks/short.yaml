@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0013'
 title: The Eight Rooks
-status: script_review
+status: revise
 catalog_id: dudeney-amusements-295
 tags:
   - chessboard
@@ -130,4 +130,5 @@ review:
   version: 1
   messages:
     1: '1568792653821382761'
-  last_seen: '1568792653821382761'
+  last_seen: '1568831320870752438'
+  comment: rewrite the hook and captions in natural English
