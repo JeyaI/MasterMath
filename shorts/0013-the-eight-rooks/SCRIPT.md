@@ -20,8 +20,8 @@ Checked against: the `SCRIPT.md` files and scene docstrings of 0001-0012. The ne
 3. "Every square must be covered.": the row of rooks lights the whole board (2 s)
 4. "Here, no rook attacks another one.": Dudeney's diagonal, rays touch no rook (2 s)
 5. "There are other ways, too.": the other diagonal, then an irregular placement (3 s)
-6. "How many ways are there in all?" (2 s)
-7. "Pause and try it" with 5 s countdown (6 s)
+6. "How many ways are there in all?" (3 s, and it stays up through the countdown)
+7. "Pause and try it" appears above the board with a 5 s countdown (6 s)
 8. "Two rooks in a row would attack each other.": two rooks flash red (2 s)
 9. "So each row has exactly one rook.": rows light up one by one (2 s)
 10. "And each column has exactly one, too.": columns light up (1 s)
@@ -33,7 +33,7 @@ Checked against: the `SCRIPT.md` files and scene docstrings of 0001-0012. The ne
 16. "There are 40,320 ways ✓": payoff (2 s)
 17. Level 2 card: 10 × 10 board with 10 rooks, "how many ways?" and "Comment just the number ↓", held 12 s
 
-Revision: the opening holds longer (about 3.5 s on the question, then 2+ s per rule caption) so the text can be read; in the row-by-row explanation each picked square turns red and its column is tinted red.
+Revision: the opening holds longer (about 3.5 s on the question, then 2+ s per rule caption) so the text can be read; in the row-by-row explanation each picked square turns red and its column and its row are tinted red (squares where no other rook can go).
 
 Total about 55 s: roughly 38 s up to the payoff plus the 12 s Level 2 hold.
 

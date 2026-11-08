@@ -117,10 +117,12 @@ class Short(Scene):
         self.play(FadeOut(anti), FadeIn(scatter), run_time=0.4)
         self.wait(0.6)
         cap.show("How many ways are there in all?", ACCENT, extra=[FadeOut(title)])
-        self.wait(0.4)
+        self.wait(2.6)
 
-        # --- pause and try ------------------------------------------------------------------
-        cap.show("Pause and try it", ACCENT, extra=[FadeOut(scatter)])
+        # --- pause and try (the question stays up as the caption) ---------------------------
+        pause = label("Pause and try it", 64, ACCENT).move_to([CENTRE_X, TITLE_Y, 0])
+        beat(self, "Pause and try it")
+        self.play(FadeIn(pause, shift=0.25 * UP), FadeOut(scatter), run_time=0.45)
         countdown(self, 5, center=[BX, BY, 0], radius=0.95, tick_sound=SFX["tick"])
 
         # --- two in a row attack ------------------------------------------------------------
@@ -130,7 +132,7 @@ class Short(Scene):
         self.play(GrowFromCenter(a), GrowFromCenter(b), run_time=0.3)
         self.add_sound(SFX["snip"])
         cap.show("Two rooks in a row would attack each other.", HOT, extra=[
-            Create(beam), a.animate.set_color(HOT), b.animate.set_color(HOT)])
+            FadeOut(pause), Create(beam), a.animate.set_color(HOT), b.animate.set_color(HOT)])
         self.play(Flash(P(3, 2), color=HOT, flash_radius=0.6), run_time=0.5)
         self.wait(0.5)
 
@@ -179,9 +181,12 @@ class Short(Scene):
                 np.array([P(SCATTER[r], 0)[0], tiles.get_center()[1], 0])).set_z_index(4)
             picked = Cell(side_length=CELL, stroke_width=0, fill_color=HOT, fill_opacity=0.85
                           ).move_to(P(SCATTER[r], r)).set_z_index(5)      # the picked square, in red
-            self.play(FadeOut(free), FadeIn(cover), FadeIn(picked), run_time=move)
+            lane = Rectangle(width=CELL * N, height=CELL, stroke_width=0, fill_color=HOT,
+                             fill_opacity=0.32).move_to(
+                np.array([tiles.get_center()[0], P(0, r)[1], 0])).set_z_index(4)   # the attacked row
+            self.play(FadeOut(free), FadeIn(cover), FadeIn(lane), FadeIn(picked), run_time=move)
             placed.append(piece)
-            wall.extend([cover, picked])
+            wall.extend([cover, lane, picked])
 
         step(0, 0.9, 0.45, "In row 1, you can choose any of 8 columns.")
         self.wait(0.3)

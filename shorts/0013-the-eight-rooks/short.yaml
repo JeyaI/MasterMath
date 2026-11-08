@@ -98,7 +98,6 @@ captions:
   - "Here, no rook attacks another one."
   - "There are other ways, too."
   - "How many ways are there in all?"
-  - "Pause and try it"
   - "Two rooks in a row would attack each other."
   - "So each row has exactly one rook."
   - "And each column has exactly one, too."
@@ -134,6 +133,25 @@ review:
   comment:
 video:
   pending:
+    version: 3
+    file: /home/jeya/mathshorts/out/review/0013-the-eight-rooks/v3.mp4
+    sha256: 67a2c7d11297639762f9f14994ad8d5c66eb752923ab220ebd01356b0b830a07
+    summary: "\"How many ways are there in all?\" now holds about 3 s and stays up as the caption during
+      the whole countdown. \"Pause and try it\" appears as a heading above the board. In the row-by-row
+      build, each placed rook now tints its whole row red as well as its column. SCRIPT.md is updated.
+      `ms check` has 0 errors, but the video is 57.6 s against the 40–50 s target, which is a warning
+      only. I didn't run `ms verify`, because no numbers or shapes changed. I removed \"Pause and try
+      it\" from the `short.yaml` captions list, since it is no longer a caption."
+    usage:
+      job: revise_video
+      short: 0013-the-eight-rooks
+      exit: 0
+      seconds: 76
+      subtype: success
+      is_error: false
+      num_turns: 20
+      total_cost_usd: 0.2630523
+      log: job-revise_video-20261108-082003.jsonl
   version: 2
   versions:
     1:
