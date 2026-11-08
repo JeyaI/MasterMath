@@ -1,0 +1,133 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0013'
+title: The Eight Rooks
+status: script_review
+catalog_id: dudeney-amusements-295
+tags:
+  - chessboard
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 295
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    [Illustration:
+
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        | R | R | R | R | R | R | R | R |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+
+    FIG. 1.]
+
+    [Illustration:
+
+        +---+---+---+---+---+---+---+---+
+        | R |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   | R |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   | R |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   | R |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   | R |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   | R |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   | R |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   | R |
+        +---+---+---+---+---+---+---+---+
+
+    FIG. 2.]
+
+    It will be seen in the first diagram that every square on the board is
+    either occupied or attacked by a rook, and that every rook is "guarded"
+    (if they were alternately black and white rooks we should say
+    "attacked") by another rook. Placing the eight rooks on any row or file
+    obviously will have the same effect. In diagram 2 every square is again
+    either occupied or attacked, but in this case every rook is unguarded.
+    Now, in how many different ways can you so place the eight rooks on the
+    board that every square shall be occupied or attacked and no rook ever
+    guarded by another? I do not wish to go into the question of reversals
+    and reflections on this occasion, so that placing the rooks on the other
+    diagonal will count as different, and similarly with other repetitions
+    obtained by turning the board round.
+  solution: |
+    Obviously there must be a rook in every row and every column. Starting
+    with the top row, it is clear that we may put our first rook on any one
+    of eight different squares. Wherever it is placed, we have the option of
+    seven squares for the second rook in the second row. Then we have six
+    squares from which to select the third row, five in the fourth, and so
+    on. Therefore the number of our different ways must be 8 × 7 × 6 × 5 × 4
+    × 3 × 2 × 1 = 40,320 (that is 8!), which is the correct answer.
+
+    How many ways there are if mere reversals and reflections are not
+    counted as different has not yet been determined; it is a difficult
+    problem. But this point, on a smaller square, is considered in the next
+    puzzle.
+level1:
+  statement: "Place 8 rooks on a chessboard so that every square is occupied or attacked, and no rook
+    attacks another. How many different ways are there? Mirror images and turns count as different."
+  answer: "40320 ways."
+  insight: "Two rooks in one row or column would attack each other, so each row holds exactly one rook
+    and each column too. Fill the rows one at a time: 8 columns are free for the first rook, 7 for the
+    next, then 6, and so on down to 1. The choices multiply: 8 x 7 x 6 x 5 x 4 x 3 x 2 x 1 = 40320."
+level2:
+  statement: "Same rules on a 6 by 6 board with 6 rooks. How many ways?"
+  answer: 720
+  accept: [720, "720 ways", "6!", "6 factorial", "seven hundred twenty", "seven hundred and twenty", "seven
+        hundred twenty ways"]
+  why: "One rook per row and column again: 6 x 5 x 4 x 3 x 2 x 1 = 720."
+captions:
+  - "Rooks attack along lines"
+  - "Cover every square"
+  - "No rook attacks another"
+  - "Another way"
+  - "How many ways in all?"
+  - "Pause and try it"
+  - "Two in a row would attack"
+  - "One rook per row"
+  - "And one per column"
+  - "Row 1: 8 columns free"
+  - "Row 2: only 7"
+  - "Then 6, 5, 4 ..."
+  - "Last row: 1 choice"
+  - "Choices multiply"
+  - "8 × 7 × 6 × ... × 1"
+  - "40,320 ways ✓"
+  - "Comment just the number ↓"
+music:
+  piece: k545
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "How many ways can 8 rooks cover a chessboard?"
+  description: |
+    8 rooks, every square covered, none attacking another. How many ways can they be placed? Level 2: a 6 by 6 board with 6 rooks. Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 295. Music: W. A. Mozart, Piano Sonata in C, K. 545.
+  tags:
+    - math puzzle
+    - puzzle
+  video_id:
+  url:
+  published_at:
+review:
+  thread_id: '1568792649895387319'
+  version: 1
+  messages:
+    1: '1568792653821382761'
+  last_seen: '1568792653821382761'
