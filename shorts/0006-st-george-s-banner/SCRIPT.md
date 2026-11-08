@@ -31,7 +31,7 @@ The thin-cross beat before the pause uses the same flag: the arm starts at ½ ft
 - 0005 Potato: knife cuts counted piece by piece.
 
 ## Beats
-| # | Caption (2–6 words) | What happens | ~s |
+| # | Caption | What happens | ~s |
 |---|---|---|---|
 | 1 | *(hook)* How wide must the cross be / for equal red and white? | Flag pops in with dimension labels; hook text | 0–3 |
 | 2 | 4 feet by 3 feet | Dimension arrows pulse | 3–5 |

@@ -63,7 +63,8 @@ def footer(text: str) -> Text:
 class Captions:
     """One caption on screen at a time, cross-faded on each beat.
 
-    Each call to show() is a beat (see beat()); keep captions to 2-6 words.
+    Each call to show() is a beat (see beat()); write captions as natural spoken English
+    (one idea each, roughly 14 words at most), not headline-style fragments.
     """
 
     def __init__(self, scene: Scene, y: float = CAPTION_Y):

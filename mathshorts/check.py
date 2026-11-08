@@ -20,7 +20,7 @@ SAFE = (-3.8, -4.6, 3.2, 7.0)          # x0, y0, x1, y1; mirrors lib/layout.py
 EDGE_TOL = 0.1                         # about 12 px; labels are scaled to exactly the safe width
 OVERLAP_MIN = 0.02                     # square units of text-on-text before it counts
 DURATION = (40.0, 50.0)                # target, not a cap: a warning
-CAPTION_WORDS = (2, 6)                 # warning
+CAPTION_WORDS = (1, 14)                # warning: an upper bound for phone readability, not a target
 COUNTDOWN_S = 5
 COMMENT = "comment just the number"
 COMMENT_HOLD_MIN = 10.0
@@ -198,7 +198,7 @@ def check_captions(p: dict, data: dict) -> list[Finding]:
         n = words(c["text"])
         if n is not None and not lo <= n <= hi:
             out.append(Finding("warning", "caption", f"{c['text']!r} is {n} word{'s' * (n != 1)}; "
-                               f"the target is {lo}–{hi}", c["t"]))
+                               f"keep it under about {hi} so it reads on a phone", c["t"]))
     listed = [str(x) for x in data.get("captions") or []]
     shown = {norm(c["text"]) for c in p["captions"]}
     for c in p["captions"]:

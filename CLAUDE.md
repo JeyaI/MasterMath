@@ -15,7 +15,7 @@ An anonymous YouTube Shorts channel of animated math-puzzle solutions (Manim, 3B
 6. **Anonymity.** Commits are by `mathshorts`. No personal names or emails in the repo, descriptions or config. Secrets only in env vars (`~/.config/mathshorts.env`, template `config/mathshorts.env.example`); jobs get only the Claude token.
 
 ## The format (every Short)
-9:16, 1080×1920, 30 fps, aim for 40–50 s (a target, not a cap), no narration. Beats: hook (0–3 s), problem builds, "Pause and try it" with a 5 s countdown, animated insight and solution, ✓ payoff, Level 2 card (same trick, one step further, not solved), "Comment just the number ↓" held about 12 s. Captions are just a few concise words. Music is a public-domain composition synthesized by `lib/audio.py` (we own the recording), chosen by the `music.piece` key from its `PIECES` library, plus sound effects.
+9:16, 1080×1920, 30 fps, aim for 40–50 s (a target, not a cap), no narration. Beats: hook (0–4 s, the puzzle's question in one natural sentence), problem builds, "Pause and try it" with a 5 s countdown, animated insight and solution, ✓ payoff, Level 2 card (same trick, one step further, not solved), "Comment just the number ↓" held about 12 s. Captions read like natural spoken English (full phrases with articles and verbs, one idea each, no headline-style fragments) and stay short enough to read on a phone: roughly 14 words at most. Music is a public-domain composition synthesized by `lib/audio.py` (we own the recording), chosen by the `music.piece` key from its `PIECES` library, plus sound effects.
 
 ## Architecture: five modules, connected only through files
 | Module | Code | Data | Run |

@@ -10,7 +10,8 @@ You are running unattended, from `ms tick`. Nobody will answer questions. The re
 6. If the comment asks for something the rules forbid (CLAUDE.md non-negotiables), don't do it; say so in the summary.
 
 ## The reviewer's standing preferences
-- Hooks: pop in the figure, then ask the puzzle's actual question in plain words. No slogans or clever teaser lines.
+- Hooks: pop in the figure, then ask the puzzle's actual question as one full, natural sentence (e.g. "Can you place 8 rooks so that none of them attack each other?"). No slogans, clever teaser lines or fragments.
+- Captions: write each one the way a native speaker would say it out loud: a natural phrase or sentence with its articles and verbs, one idea per caption. No headline-style fragments ("8 rooks. Every square covered."). Readable on a phone means roughly 14 words at most, not as few as possible.
 
 ## How to run commands
 Run one command per Bash call: no `&&`, `;`, pipes or `cd`. Do not write scratch scripts to run. Anything not on the allowlist is denied, not asked about. Do not use `--open`.

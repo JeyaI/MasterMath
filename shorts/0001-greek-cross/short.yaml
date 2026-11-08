@@ -22,7 +22,7 @@ level2:
   accept: ["1/2", 0.5, ".5"]   # values that count as correct in comments
   why: "The cut is the diagonal of a 2×1 box: it rises 1 over a run of 2, so the slope is 1/2."
 
-# Caption beats, in order (2–6 words each). The scene shows these in sync with the animation.
+# Caption beats, in order (natural phrases, one idea each). The scene shows these in sync with the animation.
 captions:
   - "5 squares, each 1×1"
   - "Cut it into 4 pieces…"
