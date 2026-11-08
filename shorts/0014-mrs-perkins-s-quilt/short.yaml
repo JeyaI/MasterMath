@@ -1,0 +1,82 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0014'
+title: Mrs. Perkins's Quilt
+status: script_review
+catalog_id: dudeney-amusements-173
+tags:
+  - dissection
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 173
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    [Illustration]
+
+    It will be seen that in this case the square patchwork quilt is built up
+    of 169 pieces. The puzzle is to find the smallest possible number of
+    square portions of which the quilt could be composed and show how they
+    might be joined together. Or, to put it the reverse way, divide the
+    quilt into as few square portions as possible by merely cutting the
+    stitches.
+  solution: |
+    The following diagram shows how the quilt should be constructed.
+
+    [Illustration]
+
+    There is, I believe, practically only one solution to this puzzle. The
+    fewest separate squares must be eleven. The portions must be of the
+    sizes given, the three largest pieces must be arranged as shown, and the
+    remaining group of eight squares may be "reflected," but cannot be
+    differently arranged.
+level1:
+  statement: "A square quilt is sewn from 169 small square patches, 13 by 13. You may cut only along the
+    stitches, every piece must be a square, and one piece can't be the whole quilt. What is the fewest
+    number of square pieces the quilt can be cut into?"
+  answer: "11 squares."
+  insight: "Put the biggest squares in first. A 7 square and a 6 square together fill one side (7 + 6
+    = 13), and a second 6 square fills the other side. The gap left over is filled the same way, biggest
+    square first, with squares of sizes 4, 3, 3, 2, 2, 2, 1 and 1. That makes 3 + 8 = 11 squares, and
+    a search of every possible tiling shows that 10 or fewer is impossible."
+level2:
+  statement: "Same rules on a 5 by 5 quilt. What is the fewest number of square pieces?"
+  answer: 8
+  accept: [8, "8 squares", "eight", "Eight", "8 pieces"]
+  why: "Biggest first: a 3 square in the corner, then three 2 squares around it, then four single patches
+    fill the rest. Area 9 + 12 + 4 = 25, and 1 + 3 + 4 = 8 squares. Fewer is impossible."
+captions:
+  - "This quilt is sewn from 169 small square patches."
+  - "You may cut only along the stitches."
+  - "Every piece must be a square, but not the whole quilt."
+  - "How few squares can you cut it into?"
+  - "Pause and try it"
+  - "Using all 169 single patches works, but it's far too many."
+  - "Let's use the biggest squares we can instead."
+  - "A 7 square and a 6 square together fill one whole side."
+  - "A second 6 square fills the other side."
+  - "That leaves an awkward gap of 48 patches."
+  - "We fill the gap the same way: the biggest square that fits each time."
+  - "In the end, we have used 11 squares."
+  - "A full search shows that 10 squares are not enough."
+  - "The fewest is 11 squares ✓"
+  - "Comment just the number ↓"
+music:
+  piece: bwv846
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "What's the fewest squares a 13 by 13 quilt can be cut into?"
+  description: |
+    A 13 by 13 patchwork quilt, cut only along the stitches into square pieces. What is the fewest number of squares? Level 2: a 5 by 5 quilt. Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 173. Music: J. S. Bach, Prelude in C, BWV 846.
+  tags:
+    - math puzzle
+    - puzzle
+  video_id:
+  url:
+  published_at:
+review:
+  thread_id: '1568868164387872814'
+  version: 1
+  messages:
+    1: '1568868167839780895'
+  last_seen: '1568868167839780895'
