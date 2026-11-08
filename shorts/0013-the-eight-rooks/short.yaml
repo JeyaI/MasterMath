@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0013'
 title: The Eight Rooks
-status: video_review
+status: scheduled
 catalog_id: dudeney-amusements-295
 tags:
   - chessboard
@@ -120,9 +120,10 @@ youtube:
   tags:
     - math puzzle
     - puzzle
-  video_id:
-  url:
+  video_id: jJDbGBsNAYk
+  url: https://youtube.com/shorts/jJDbGBsNAYk
   published_at:
+  publish_at: '2026-11-08T10:00:00-05:00'
 review:
   thread_id: '1568792649895387319'
   version: 2
@@ -153,3 +154,8 @@ video:
   comment:
   warned:
   as_is:
+  approved:
+    version: 3
+    video_id: jJDbGBsNAYk
+    sha256: 67a2c7d11297639762f9f14994ad8d5c66eb752923ab220ebd01356b0b830a07
+    message: '1568981124535812137'
