@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0015'
 title: The Tube Inspector's Puzzle
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-242
 tags:
   - routes
@@ -38,11 +38,13 @@ level1:
     each line 1 mile long. An inspector must travel along every line at least once. He may start and finish
     at any stations. What is the fewest miles he must travel?"
   answer: "19 miles."
-  insight: "Count the lines meeting at each station. Six stations (the middle ones on the two long sides
-    of the grid) have an odd number of lines, and a walk can only start or end at an odd station. So two
-    of them are the start and the end, and the other four must be paired up by walking one short line
-    twice. Pairing them takes 2 repeated miles, so the total is 17 + 2 = 19, and a search of every possible
-    set of repeats shows that fewer is impossible."
+  insight: "Rule: he may start and end at any stations. Fact: passing through a station uses two of its
+    lines (in and out), so a station with an odd number of lines has one line left over. Only a start
+    or an end can use that line up. Optimal choice: six stations (the middle ones on the two long sides
+    of the grid) are odd, so starting and ending at two odd stations removes two leftovers for free; starting
+    at an even station would create a new leftover and cost more. The other four odd stations are paired
+    up by walking one short line twice each. That takes 2 repeated miles, so the total is 17 + 2 = 19,
+    and a search of every start, end and set of repeats shows that fewer is impossible."
 level2:
   statement: "Same rules on a smaller network: 9 stations in a 3 by 3 grid, joined by 12 lines of 1 mile
     each. What is the fewest miles the inspector must travel?"
@@ -60,11 +62,15 @@ captions:
   - "But every walk he tries ends up repeating some lines."
   - "Let's count how many lines meet at each station."
   - "Six stations have an odd number of lines."
-  - "He can only start or end a walk at an odd station."
-  - "Each time he passes through a station, he uses two of its lines."
-  - "So two odd stations are the start and the end."
-  - "The other four odd stations must be paired up."
-  - "Walking one short line twice fixes two stations at once."
+  - "Passing through a station always uses two of its lines."
+  - "So at an odd station, one line is always left over."
+  - "Only a start or an end can use up that leftover line."
+  - "The rules let him start and end anywhere he likes."
+  - "But to travel the least, he should start and end at odd stations."
+  - "Starting at an even station would create one more problem to fix."
+  - "So we start at B and end at K."
+  - "The other four odd stations still have a leftover line."
+  - "Riding one short line twice fixes two stations at once."
   - "Two repeated lines fix all four, so the extra cost is two miles."
   - "That makes seventeen plus two, which is nineteen miles."
   - "The shortest trip is 19 miles ✓"
@@ -85,10 +91,9 @@ youtube:
   published_at:
 review:
   thread_id: '1569155065523077341'
-  version: 1
+  version: 2
   messages:
     1: '1569155069679640657'
+    2: '1569442961203138590'
   last_seen: '1569441784101343353'
-  comment: Some clarity. He must start and end at odd nodes if he wants to end with the fewest miles
-    traveled. Be clear what is a rule and what is required for an optimal solution. Make sure to 
-    scaffold this logic.
+  comment:

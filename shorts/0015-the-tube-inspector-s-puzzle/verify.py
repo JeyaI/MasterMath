@@ -75,6 +75,17 @@ def shortest_walk(edges) -> int:
     raise AssertionError
 
 
+def walk_cost(edges, start: str, end: str, max_extra: int = 6) -> int | None:
+    """Fewest miles for a walk over every line that starts at `start` and ends at `end`: an Euler walk
+    exists iff the odd stations of the (doubled) graph are exactly {start, end} (none if start == end)."""
+    want = [] if start == end else sorted((start, end))
+    for k in range(max_extra + 1):
+        for extra in combinations(edges, k):
+            if odd_stations(list(edges) + list(extra)) == want:
+                return len(edges) + k
+    return None
+
+
 def main() -> None:
     assert len(POS) == 12 and len(LINES) == 17
     edges = set(LINES)
@@ -97,6 +108,16 @@ def main() -> None:
 
     # Lower bound by brute force
     assert shortest_walk(LINES) == MILES
+
+    # Rule vs optimal: a walk MAY start/end anywhere (rule), but an even endpoint costs extra miles.
+    stations = sorted({s for e in LINES for s in e})
+    even = [s for s in stations if s not in ODD]
+    cost = {(a, b): walk_cost(LINES, a, b) for a in stations for b in stations}
+    assert all(c is not None for c in cost.values()), "any start/end pair is allowed by the rules"
+    assert cost[(START, END)] == MILES
+    assert min(cost[(a, b)] for a in ODD for b in ODD if a != b) == MILES
+    assert min(cost[(a, b)] for a in stations for b in stations if a in even or b in even) > MILES
+    assert cost[(even[0], even[0])] > MILES      # even start and end at the same station: worse
 
     # Level 2
     _, lines2 = grid(L2_COLS, L2_ROWS)
