@@ -113,8 +113,22 @@ class Short(Scene):
         def flag(text: str, color, station: str):
             return badge(text, color).scale(0.38).move_to(pos[station] + np.array([0.0, 0.78, 0.0])).set_z_index(9)
 
+        mark = [None, 0.0]           # when the current caption appeared, and how long it needs
+
+        def settle():
+            """Hold the current caption long enough to read it (about 0.33 s a word plus 1 s)."""
+            if mark[0] is not None:
+                short = mark[1] - (self.renderer.time - mark[0])
+                if short > 0.01:
+                    self.wait(short)
+
         def say(text: str, color=INK, extra=(), run_time: float = 0.45):
+            settle()
+            mark[0], mark[1] = self.renderer.time, 1.0 + 0.33 * len(text.split())
             return cap.show(wrap(text), color, extra=extra, run_time=run_time)
+
+        def hop(f, station: str, run_time: float = 0.8):
+            return f.animate.move_to(pos[station] + np.array([0.0, 0.78, 0.0])).set_run_time(run_time)
 
         # --- hook: the network pops in, then the question ----------------------------------------
         beat(self, "hook")
@@ -129,7 +143,7 @@ class Short(Scene):
                        ).arrange(DOWN, buff=0.16).move_to([CENTRE_X, 5.55, 0])
         credit = footer("After H. E. Dudeney, Amusements in Mathematics")
         self.play(FadeIn(title, shift=0.3 * DOWN), FadeIn(credit), run_time=0.5)
-        self.wait(1.8)
+        self.wait(3.2)
 
         # --- the problem ---------------------------------------------------------------------------
         self.add_sound(SFX["pop"])
@@ -150,9 +164,14 @@ class Short(Scene):
         say("He may start and finish wherever he likes.", extra=[
             FadeOut(runner), net.line("A", "B").animate.set_color(MUTED)])
         self.play(FadeIn(fs, shift=0.6 * DOWN), FadeIn(fe, shift=0.6 * DOWN), run_time=0.5)
-        self.wait(0.7)
+        for a, b in (("A", "L"), ("K", "C"), ("F", "H")):
+            self.wait(0.5)
+            self.play(hop(fs, a), hop(fe, b))
+        self.wait(0.5)
 
         # --- pause and try ---------------------------------------------------------------------------
+        settle()
+        mark[0] = None
         cap.show("Pause and try it", ACCENT, extra=[
             FadeOut(fs), FadeOut(fe), FadeOut(self.ctr),
             net.lg.animate.set_opacity(0.25), net.sg.animate.set_opacity(0.25)])
@@ -215,7 +234,10 @@ class Short(Scene):
             dots[("B", "A")].animate.set_color(INK), dots[("B", "C")].animate.set_color(INK),
             left.animate.set_color(INK)])
         self.play(FadeIn(fe1, shift=0.6 * DOWN), FadeIn(fe2, shift=0.6 * DOWN), run_time=0.5)
-        self.wait(0.5)
+        for a, b in (("C", "J"), ("I", "A"), ("E", "H")):
+            self.wait(0.5)
+            self.play(hop(fe1, a), hop(fe2, b))
+        self.wait(0.3)
 
         # --- BEST: odd ends -----------------------------------------------------------------------------------
         self.add_sound(SFX["chime"], gain=-8)
@@ -295,7 +317,7 @@ class Short(Scene):
             *[l.animate.set_color(MUTED) for l in net.lg],
             *[st[s].animate.set_stroke(MUTED, 5) for s in net.pos]])
         self.add(path, runner2, miles)
-        self.play(t.animate.set_value(float(MILES)), run_time=5.0, rate_func=linear)
+        self.play(t.animate.set_value(float(MILES)), run_time=9.5, rate_func=linear)
         path.clear_updaters(); runner2.clear_updaters(); miles.clear_updaters()
 
         # --- payoff ----------------------------------------------------------------------------------------------------------------
@@ -304,7 +326,7 @@ class Short(Scene):
         self.add_sound(SFX["chime"])
         say(f"The shortest trip is {MILES} miles ✓", GOOD, extra=[
             FadeOut(miles), FadeIn(big), Flash(pos["F"], color=GOOD, flash_radius=1.6)])
-        self.wait(1.2)
+        self.wait(2.0)
 
         # --- Level 2 -------------------------------------------------------------------------------------------------------------
         beat(self, "Level 2")

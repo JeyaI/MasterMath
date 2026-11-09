@@ -96,6 +96,25 @@ review:
   comment:
 video:
   pending:
+    version: 2
+    file: /home/jeya/mathshorts/out/review/0015-the-tube-inspector-s-puzzle/v2.mp4
+    sha256: 3030e26dbf2bc250ca297bf5d9d6547be3e574d3592d32371ed9b1c8e8a22f4f
+    summary: "Slowed the pacing: every caption now stays on screen about 1 s plus 0.33 s per word, the
+      hook question is held longer, and the route trace and payoff are longer. The START/END flags now
+      hop between several stations in both the \"start wherever he likes\" and \"RULE\" beats.\n`ms verify`
+      and `ms check` pass with no errors. The one warning is that the video now runs 106.6 s against the
+      40–50 s target, which is a target and not a cap. That is the cost of readable pacing, and trimming
+      beats later would shorten it."
+    usage:
+      job: revise_video
+      short: 0015-the-tube-inspector-s-puzzle
+      exit: 0
+      seconds: 115
+      subtype: success
+      is_error: false
+      num_turns: 25
+      total_cost_usd: 0.2313992
+      log: job-revise_video-20261109-153022.jsonl
   version: 1
   versions:
     1:
