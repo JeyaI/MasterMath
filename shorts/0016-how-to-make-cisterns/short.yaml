@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0016'
 title: How To Make Cisterns
-status: video_review
+status: scheduled
 catalog_id: dudeney-amusements-201
 tags:
   - geometry
@@ -82,9 +82,10 @@ youtube:
   tags:
     - math puzzle
     - puzzle
-  video_id:
-  url:
+  video_id: -8y7mf970gY
+  url: https://youtube.com/shorts/-8y7mf970gY
   published_at:
+  publish_at: '2026-11-09T19:00:00-05:00'
 review:
   thread_id: '1569230450206048369'
   version: 3
@@ -106,3 +107,8 @@ video:
   comment:
   warned:
   as_is:
+  approved:
+    version: 1
+    video_id: -8y7mf970gY
+    sha256: 12a3627db80d7f547cc450867d3fc2c2e15e04868d82cec44f5c3a8c8ac5aae7
+    message: '1569483201083080776'
