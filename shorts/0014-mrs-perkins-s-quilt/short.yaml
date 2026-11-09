@@ -49,6 +49,9 @@ captions:
   - "You may cut only along the stitches."
   - "Every piece must be a square, but not the whole quilt."
   - "How few squares can you cut it into?"
+  - "Here is one try: the biggest square we can, a 12 square."
+  - "Then fill the rest with 25 single patches."
+  - "That works, with 26 pieces. Can you do better?"
   - "Using all 169 single patches works, but it's far too many."
   - "Let's start with big squares along the edges."
   - "A 7 square and a 6 square together fill one whole side."
@@ -83,6 +86,25 @@ review:
   comment:
 video:
   pending:
+    version: 2
+    file: /home/jeya/mathshorts/out/review/0014-mrs-perkins-s-quilt/v2.mp4
+    sha256: 2e494e96d3cdbf2df8a0387d762087e58d3766c262049cada8ab7d7ea5696cbe
+    summary: Added a sample greedy attempt before the pause. It shows one 12 square, then 25 single 
+      patches (12 + 12 + 1 along the two edges), with the counter reading 26 pieces. Captions say 
+      "Here is one try…", "Then fill the rest with 25 single patches." and "That works, with 26 
+      pieces. Can you do better?". The attempt is built from `verify.py` (tiling check passes), and 
+      SCRIPT.md and short.yaml are updated. `ms check` has 0 errors. The runtime is now about 62 s, 
+      over the 40–50 s target, which gives a warning only.
+    usage:
+      job: revise_video
+      short: 0014-mrs-perkins-s-quilt
+      exit: 0
+      seconds: 103
+      subtype: success
+      is_error: false
+      num_turns: 22
+      total_cost_usd: 0.2182941
+      log: job-revise_video-20261109-105504.jsonl
   version: 1
   versions:
     1:

@@ -73,7 +73,14 @@ QUILT: list[Square] = sorted(search(N, MIN_SQUARES) or [], key=lambda q: (-q[2],
 L2_QUILT: list[Square] = sorted(search(L2_N, L2_ANSWER) or [], key=lambda q: (-q[2], q[1], q[0]))
 
 
+# The greedy first attempt shown before the pause: the biggest square allowed (12), then single patches.
+ATTEMPT_BIG = 12
+ATTEMPT: list[Square] = [(0, 0, ATTEMPT_BIG)] + [(N - 1, r, 1) for r in range(N)] + [(c, N - 1, 1) for c in range(N - 1)]
+ATTEMPT_N = len(ATTEMPT)
+
+
 def main() -> None:
+    assert is_tiling(N, ATTEMPT) and ATTEMPT_N == 26 and ATTEMPT_N - 1 == 2 * ATTEMPT_BIG + 1 and ATTEMPT_N > MIN_SQUARES
     assert QUILT and is_tiling(N, QUILT) and len(QUILT) == MIN_SQUARES
     assert tuple(sorted((s for _, _, s in QUILT), reverse=True)) == SIZES, [s for _, _, s in QUILT]
     assert sum(s * s for s in SIZES) == N * N == 169

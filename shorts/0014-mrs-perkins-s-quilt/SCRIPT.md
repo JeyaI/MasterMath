@@ -20,6 +20,7 @@ Checked against: the `SCRIPT.md` files of 0009, 0011, 0012 and 0013, and the 001
 3. "You may cut only along the stitches." a cut line runs along a grid line (2.5 s)
 4. "Every piece must be a square, but not the whole quilt." the whole-quilt square flashes red and crosses out (3 s)
 5. "How few squares can you cut it into?" (2 s)
+5b. Sample greedy attempt (added after review): "Here is one try: the biggest square we can, a 12 square." then "Then fill the rest with 25 single patches." (12 + 2 x 12 + 1 singles) and "That works, with 26 pieces. Can you do better?" The counter reads 1, then 26, then returns to 169. (about 8 s)
 6. "Pause and try it" with 5 s countdown (6 s)
 7. "Using all 169 single patches works, but it's far too many." counter 169, then patches merge away (3.5 s)
 8. "Let's start with big squares along the edges." (2.5 s)

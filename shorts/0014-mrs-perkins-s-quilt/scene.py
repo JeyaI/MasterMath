@@ -25,7 +25,7 @@ import numpy as np  # noqa: E402
 from lib.layout import ACCENT, BG, GOOD, GRID, INK, MUTED, PIECES, STAGE_Y, TITLE_Y  # noqa: E402
 from lib.components import CENTRE_X, Captions, badge, beat, countdown, footer, hook, label  # noqa: E402
 from lib.audio import write_sfx  # noqa: E402
-from verify import L2_ANSWER, L2_N, MIN_SQUARES, N, QUILT, SIZES  # noqa: E402
+from verify import ATTEMPT, ATTEMPT_N, L2_ANSWER, L2_N, MIN_SQUARES, N, QUILT, SIZES  # noqa: E402
 
 SFX = {k: str(v) for k, v in write_sfx(REPO / "assets" / "sfx").items()}
 CELL = 0.52
@@ -116,6 +116,24 @@ class Short(Scene):
 
         cap.show("How few squares can you cut it into?", ACCENT)
         self.wait(1.2)
+
+        # --- a sample greedy attempt: biggest square first, then single patches -----------------
+        big_t = piece(P, CELL, ATTEMPT[0], PIECES[1])
+        ones = [piece(P, CELL, q, PIECES[2 + i % 2], text=False) for i, q in enumerate(ATTEMPT[1:])]
+        self.add_sound(SFX["pop"])
+        cap.show("Here is one try: the biggest square we can, a 12 square.", extra=[
+            GrowFromCenter(big_t), Transform(cnt, counter(1, "pieces"))], run_time=0.7)
+        self.wait(1.0)
+        self.add_sound(SFX["pop"], gain=-4)
+        cap.show("Then fill the rest with 25 single patches.", extra=[
+            LaggedStart(*[GrowFromCenter(o) for o in ones], lag_ratio=0.08),
+            Transform(cnt, counter(ATTEMPT_N, "pieces"))], run_time=2.2)
+        self.wait(1.0)
+        cap.show("That works, with 26 pieces. Can you do better?", ACCENT)
+        self.wait(1.2)
+        self.play(FadeOut(big_t), *[FadeOut(o) for o in ones], Transform(cnt, counter(169, "patches")),
+                  run_time=0.4)
+        self.remove(*ones)
 
         # --- pause and try --------------------------------------------------------------------
         pause = label("Pause and try it", 64, ACCENT).move_to([CENTRE_X, TITLE_Y, 0])
