@@ -59,19 +59,17 @@ captions:
   - "A man has a flat zinc sheet, eight feet by three feet."
   - "He cuts a square out of each of the four corners."
   - "Then he folds up the sides to make a cistern."
-  - "How big should the squares be so the cistern holds the most water?"
   - "Pause and try it"
   - "Tiny squares make a wide cistern, but it is very shallow."
   - "Big squares make a deep cistern, but it is tall and thin."
-  - "If the square has side x feet, the volume is x times the length times the width."
+  - "With side x, the volume is x times the length times the width."
   - "That is a cubic, so its peak is where the slope is zero."
-  - "The slope is twelve x squared minus 44 x plus 24, and we set it to zero."
-  - "The quadratic formula gives x equals 44 plus or minus 28, over 24."
-  - "So x is 3 or two thirds, but 3 feet is too big for the sheet."
-  - "The slope goes from positive to negative at two thirds, so that is the peak."
+  - "The slope is twelve x squared minus 44x plus 24, set to zero."
+  - "The quadratic formula gives x as 44 plus or minus 28, over 24."
+  - "So x is 3 or two thirds, but 3 feet is too big."
+  - "The slope turns from positive to negative at two thirds: the peak."
   - "At two thirds of a foot, the volume is 200 over 27 cubic feet."
   - "The squares should be two thirds of a foot, or eight inches ✓"
-  - "Now try a square sheet, twelve feet on each side."
   - "Comment just the number ↓"
 music:
   piece: pachelbel-canon
@@ -96,3 +94,27 @@ review:
     3: '1569450563832254648'
   last_seen: '1569449634722615377'
   comment:
+video:
+  pending:
+    version: 1
+    file: /home/jeya/mathshorts/out/review/0016-how-to-make-cisterns/v1.mp4
+    sha256: 12a3627db80d7f547cc450867d3fc2c2e15e04868d82cec44f5c3a8c8ac5aae7
+    summary: "scene.py is built and `ms verify` passes. `ms check` has 0 errors and one warning: the preview
+      runs 55.9 s against the 40–50 s target. About 11 s of that is the Level 2 hold and 6 s is the countdown,
+      and I could not trim the captions further without making them too short to read.\nThe solution is
+      a custom animation: the sheet folds into a box, a bar tracks volume as x changes, equations appear
+      line by line over a graph with a sliding tangent, and the peak is marked on the curve.\nI shortened
+      five captions to stay near 14 words and updated `short.yaml` to match. I also dropped the hook and
+      Level 2 lines from its `captions`, since the checker treats them as on-screen text rather than captions.
+      The final full preview was rendered after the last change, but I did not re-view its frames after
+      the last tweak, which was the hook title size."
+    usage:
+      job: animate
+      short: 0016-how-to-make-cisterns
+      exit: 0
+      seconds: 537
+      subtype: success
+      is_error: false
+      num_turns: 137
+      total_cost_usd: 1.2790580999999999
+      log: job-animate-20261109-155156.jsonl
