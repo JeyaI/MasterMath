@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0014'
 title: Mrs. Perkins's Quilt
-status: script_review
+status: revise
 catalog_id: dudeney-amusements-173
 tags:
   - dissection
@@ -79,4 +79,6 @@ review:
   version: 1
   messages:
     1: '1568868167839780895'
-  last_seen: '1568868167839780895'
+  last_seen: '1569366661755052154'
+  comment: Explanation in the script does not make sense at all. The approach is not greedy. Biggest
+    square that fits strategy is factually untrue.
