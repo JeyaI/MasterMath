@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0016'
 title: How To Make Cisterns
-status: animating
+status: video_review
 catalog_id: dudeney-amusements-201
 tags:
   - geometry
@@ -96,25 +96,12 @@ review:
   comment:
 video:
   pending:
-    version: 1
-    file: /home/jeya/mathshorts/out/review/0016-how-to-make-cisterns/v1.mp4
-    sha256: 12a3627db80d7f547cc450867d3fc2c2e15e04868d82cec44f5c3a8c8ac5aae7
-    summary: "scene.py is built and `ms verify` passes. `ms check` has 0 errors and one warning: the preview
-      runs 55.9 s against the 40–50 s target. About 11 s of that is the Level 2 hold and 6 s is the countdown,
-      and I could not trim the captions further without making them too short to read.\nThe solution is
-      a custom animation: the sheet folds into a box, a bar tracks volume as x changes, equations appear
-      line by line over a graph with a sliding tangent, and the peak is marked on the curve.\nI shortened
-      five captions to stay near 14 words and updated `short.yaml` to match. I also dropped the hook and
-      Level 2 lines from its `captions`, since the checker treats them as on-screen text rather than captions.
-      The final full preview was rendered after the last change, but I did not re-view its frames after
-      the last tweak, which was the hook title size."
-    usage:
-      job: animate
-      short: 0016-how-to-make-cisterns
-      exit: 0
-      seconds: 537
-      subtype: success
-      is_error: false
-      num_turns: 137
-      total_cost_usd: 1.2790580999999999
-      log: job-animate-20261109-155156.jsonl
+  version: 1
+  versions:
+    1:
+      file: /home/jeya/mathshorts/out/review/0016-how-to-make-cisterns/v1.mp4
+      sha256: 12a3627db80d7f547cc450867d3fc2c2e15e04868d82cec44f5c3a8c8ac5aae7
+      message: '1569457071802290227'
+  comment:
+  warned:
+  as_is:
