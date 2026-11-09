@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0015'
 title: The Tube Inspector's Puzzle
-status: video_review
+status: scheduled
 catalog_id: dudeney-amusements-242
 tags:
   - routes
@@ -83,9 +83,10 @@ youtube:
   tags:
     - math puzzle
     - puzzle
-  video_id:
-  url:
+  video_id: 1M5d6uXQDT4
+  url: https://youtube.com/shorts/1M5d6uXQDT4
   published_at:
+  publish_at: '2026-11-10T17:00:00-05:00'
 review:
   thread_id: '1569155065523077341'
   version: 2
@@ -116,3 +117,8 @@ video:
   comment:
   warned:
   as_is:
+  approved:
+    version: 3
+    video_id: 1M5d6uXQDT4
+    sha256: f8648b9b8835c6735b747effcb9dec6fcf85517de815e68d8da74d66f2938e44
+    message: '1569484389518409769'
