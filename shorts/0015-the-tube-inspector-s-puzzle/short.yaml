@@ -56,10 +56,8 @@ captions:
   - "Twelve stations are joined by seventeen lines, each a mile long."
   - "The inspector must ride along every single line."
   - "He may start and finish wherever he likes."
-  - "What is the fewest number of miles he can travel?"
   - "Pause and try it"
   - "Riding each line once would only be seventeen miles."
-  - "But every walk he tries ends up repeating some lines."
   - "Let's count how many lines meet at each station."
   - "Six stations have an odd number of lines."
   - "Passing through a station always uses two of its lines."
@@ -69,7 +67,6 @@ captions:
   - "But to travel the least, he should start and end at odd stations."
   - "Starting at an even station would create one more problem to fix."
   - "So we start at B and end at K."
-  - "The other four odd stations still have a leftover line."
   - "Riding one short line twice fixes two stations at once."
   - "Two repeated lines fix all four, so the extra cost is two miles."
   - "That makes seventeen plus two, which is nineteen miles."
@@ -97,3 +94,25 @@ review:
     2: '1569442961203138590'
   last_seen: '1569441784101343353'
   comment:
+video:
+  pending:
+    version: 1
+    file: /home/jeya/mathshorts/out/review/0015-the-tube-inspector-s-puzzle/v1.mp4
+    sha256: c2738470228a8f31d31b31b65540e9b4b7658fada9783dde124b100e66a2c6f9
+    summary: "The scene is built to the accepted script, with the RULE/FACT/BEST tags kept visibly apart.
+      `ms verify` passes, `ms check` has 0 errors, and a full `ms preview` is rendered. It runs 54.5 s,
+      so the duration warning remains (target 40–50 s).\nI dropped two script captions to save time (\"\
+      But every walk he tries…\" and \"The other four odd stations still have a leftover line\") and removed
+      them from short.yaml. The hook question is not a caption, and \"Pause and try it\" is now a caption.\n\
+      Two things to judge: the two-line captions are quick (about 1.5 s each), and the parity idea is
+      the same underlying theory as Short 0003, as the script already flagged."
+    usage:
+      job: animate
+      short: 0015-the-tube-inspector-s-puzzle
+      exit: 0
+      seconds: 328
+      subtype: success
+      is_error: false
+      num_turns: 77
+      total_cost_usd: 0.7667357
+      log: job-animate-20261109-151004.jsonl
