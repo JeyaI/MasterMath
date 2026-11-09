@@ -1,0 +1,94 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0016'
+title: How To Make Cisterns
+status: script_review
+catalog_id: dudeney-amusements-201
+tags:
+  - geometry
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 201
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    [Illustration]
+
+    Our friend in the illustration has a large sheet of zinc, measuring
+    (before cutting) eight feet by three feet, and he has cut out square
+    pieces (all of the same size) from the four corners and now proposes to
+    fold up the sides, solder the edges, and make a cistern. But the point
+    that puzzles him is this: Has he cut out those square pieces of the
+    correct size in order that the cistern may hold the greatest possible
+    quantity of water? You see, if you cut them very small you get a very
+    shallow cistern; if you cut them large you get a tall and slender one.
+    It is all a question of finding a way of cutting put these four square
+    pieces exactly the right size. How are we to avoid making them too small
+    or too large?
+  solution: |
+    Here is a general formula for solving this problem. Call the two sides
+    of the rectangle a and b. Then
+
+        a + b - (a² + b² - ab)^½
+        ---------------------------
+                     6
+
+    equals the side of the little square pieces to cut away. The
+    measurements given were 8 ft. by 3 ft., and the above rule gives 8 in.
+    as the side of the square pieces that have to be cut away. Of course it
+    will not always come out exact, as in this case (on account of that
+    square root), but you can get as near as you like with decimals.
+level1:
+  statement: "A flat zinc sheet is 8 feet by 3 feet. A square of the same size is cut from each of the
+    four corners, then the sides are folded up to make an open box (a cistern). How long should the side
+    of each cut-out square be, in inches, so the cistern holds as much water as possible?"
+  answer: "8 inches."
+  insight: "Cutting small squares gives a wide, shallow box; cutting big ones gives a tall, thin one.
+    Try every whole inch and compare the volumes: 6 in gives 12,096 cubic inches, 7 in gives 12,628, 8
+    in gives 12,800, 9 in gives 12,636 and 10 in gives 12,160. The volume rises, peaks at 8 inches, then
+    falls, and an exact check confirms 8 inches is the true peak."
+level2:
+  statement: "Same idea with a square zinc sheet 12 feet by 12 feet. Squares of the same size are cut
+    from the four corners and the sides folded up into an open box. How many feet long should the side
+    of each cut-out square be for the biggest box?"
+  answer: 2
+  accept: [2, "2 feet", "2 ft", "two", "Two", "two feet", "2'"]
+  why: "Try whole feet: 1 ft gives 1 x 10 x 10 = 100, 2 ft gives 2 x 8 x 8 = 128, 3 ft gives 3 x 6 x 6
+    = 108, and the volume falls after 2. The best cut is 2 feet."
+captions:
+  - "A man has a flat zinc sheet, eight feet by three feet."
+  - "He cuts a square out of each of the four corners."
+  - "Then he folds up the sides to make a cistern."
+  - "How big should the squares be so the cistern holds the most water?"
+  - "Pause and try it"
+  - "Tiny squares make a wide cistern, but it is very shallow."
+  - "Big squares make a deep cistern, but it is tall and thin."
+  - "So let's try every whole inch and measure the volume."
+  - "Cutting six inches holds about twelve thousand cubic inches."
+  - "Seven inches holds a little more."
+  - "Eight inches holds the most: twelve thousand eight hundred."
+  - "Nine inches holds less again, and ten inches even less."
+  - "The volume rises, peaks at eight inches, then falls."
+  - "An exact check confirms eight inches really is the peak."
+  - "The squares should be eight inches on each side ✓"
+  - "Now try a square sheet, twelve feet on each side."
+  - "Comment just the number ↓"
+music:
+  piece: pachelbel-canon
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "How big should the corner squares be to make the biggest cistern?"
+  description: |
+    Cut a square from each corner of an 8 by 3 foot zinc sheet and fold up the sides. What size of square holds the most water? Level 2: a square 12 foot sheet. Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 201. Music: Johann Pachelbel, Canon in D.
+  tags:
+    - math puzzle
+    - puzzle
+  video_id:
+  url:
+  published_at:
+review:
+  thread_id: '1569230450206048369'
+  version: 1
+  messages:
+    1: '1569230457386705007'
+  last_seen: '1569230457386705007'
