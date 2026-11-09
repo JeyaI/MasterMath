@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0016'
 title: How To Make Cisterns
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-201
 tags:
   - geometry
@@ -43,9 +43,10 @@ level1:
     of each cut-out square be, in inches, so the cistern holds as much water as possible?"
   answer: "8 inches."
   insight: "Cutting small squares gives a wide, shallow box; cutting big ones gives a tall, thin one.
-    Try every whole inch and compare the volumes: 6 in gives 12,096 cubic inches, 7 in gives 12,628, 8
-    in gives 12,800, 9 in gives 12,636 and 10 in gives 12,160. The volume rises, peaks at 8 inches, then
-    falls, and an exact check confirms 8 inches is the true peak."
+    With squares of side x inches the volume is V = x(96 - 2x)(36 - 2x) = 4x^3 - 264x^2 + 3456x. The peak
+    is where the slope is zero: V' = 12x^2 - 528x + 3456 = 12(x - 8)(x - 36). The roots are 8 and 36;
+    36 is off the sheet (x must be under 18), and V' changes from positive to negative at 8, so 8 inches
+    is the maximum, with volume 12,800 cubic inches."
 level2:
   statement: "Same idea with a square zinc sheet 12 feet by 12 feet. Squares of the same size are cut
     from the four corners and the sides folded up into an open box. How many feet long should the side
@@ -62,13 +63,13 @@ captions:
   - "Pause and try it"
   - "Tiny squares make a wide cistern, but it is very shallow."
   - "Big squares make a deep cistern, but it is tall and thin."
-  - "So let's try every whole inch and measure the volume."
-  - "Cutting six inches holds about twelve thousand cubic inches."
-  - "Seven inches holds a little more."
-  - "Eight inches holds the most: twelve thousand eight hundred."
-  - "Nine inches holds less again, and ten inches even less."
-  - "The volume rises, peaks at eight inches, then falls."
-  - "An exact check confirms eight inches really is the peak."
+  - "If the square has side x, the volume is x times the length times the width."
+  - "That is a cubic, so its peak is where the slope is zero."
+  - "The slope is twelve x squared minus 528 x plus 3456."
+  - "That factors as twelve times (x minus 8) times (x minus 36)."
+  - "The slope is zero at 8 and 36, but 36 is too big for the sheet."
+  - "The slope goes from positive to negative at 8, so that is the peak."
+  - "At eight inches the volume is twelve thousand eight hundred."
   - "The squares should be eight inches on each side ✓"
   - "Now try a square sheet, twelve feet on each side."
   - "Comment just the number ↓"
@@ -88,8 +89,9 @@ youtube:
   published_at:
 review:
   thread_id: '1569230450206048369'
-  version: 1
+  version: 2
   messages:
     1: '1569230457386705007'
+    2: '1569447948029526096'
   last_seen: '1569447348407636070'
-  comment: Shouldnt we solve analytically using calculus / finding max value point of a cubic?
+  comment:

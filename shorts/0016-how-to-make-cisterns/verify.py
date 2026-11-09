@@ -22,7 +22,8 @@ from math import isqrt
 A, B = 96, 36                    # sheet in inches
 BEST = 8                         # inches
 BEST_VOLUME = 12800              # cubic inches
-L2_SIDE_FT = 12                  # square sheet, feet
+CRIT_1, CRIT_2 = 8, 36           # roots of V'(x) = 12(x - 8)(x - 36)
+L2_SIDE_FT = 12                 # square sheet, feet
 L2_BEST_FT = 2
 
 
@@ -68,6 +69,16 @@ def main() -> None:
     assert (t2[1], t2[2], t2[3]) == (100, 128, 108)
     assert dudeney(a, a) == L2_BEST_FT
     assert all(volume(Fraction(k, 16), a, a) <= 128 for k in range(1, 96))
+
+    # Calculus route shown in the video: V(x) = 4x^3 - 264x^2 + 3456x, V'(x) = 12(x - 8)(x - 36)
+    for x in range(-50, 100):
+        assert volume(x) == 4 * x**3 - 264 * x**2 + 3456 * x
+        assert slope(x) == 12 * (x - 8) * (x - 36)
+        assert slope(x) == 12 * x * x - 528 * x + 3456
+    assert (CRIT_1, CRIT_2) == (8, 36) and CRIT_2 > min(A, B) // 2   # 36 is off the sheet (x < 18)
+    assert slope(7) > 0 and slope(9) < 0                    # rises then falls: a maximum
+    assert 24 * BEST - 528 == -336 < 0                      # V''(8) < 0
+    assert volume(BEST) == BEST_VOLUME == 12800
 
     print(f"OK  best cut {BEST} in, volume {BEST_VOLUME} cu in; level2 12 ft square: {L2_BEST_FT} ft")
 
