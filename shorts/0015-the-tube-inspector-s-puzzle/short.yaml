@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0015'
 title: The Tube Inspector's Puzzle
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-242
 tags:
   - routes
@@ -96,26 +96,7 @@ review:
   comment:
 video:
   pending:
-    version: 3
-    file: /home/jeya/mathshorts/out/review/0015-the-tube-inspector-s-puzzle/v3.mp4
-    sha256: f8648b9b8835c6735b747effcb9dec6fcf85517de815e68d8da74d66f2938e44
-    summary: The route walk-through drew its trace underneath the grid lines, so only the doubled 
-      lines showed and the path looked stuck. I fixed the layering so the whole trace now shows. The
-      line being ridden is thick yellow and finished lines are thinner green. I also removed the 
-      START/END flags that stayed on screen during the walk. No numbers or script text changed. `ms 
-      check` has 0 errors; the only warning is the existing duration (106.6 s). I didn't run `ms 
-      verify` because `verify.py` wasn't touched.
-    usage:
-      job: revise_video
-      short: 0015-the-tube-inspector-s-puzzle
-      exit: 0
-      seconds: 281
-      subtype: success
-      is_error: false
-      num_turns: 38
-      total_cost_usd: 0.33941849999999996
-      log: job-revise_video-20261109-154506.jsonl
-  version: 2
+  version: 3
   versions:
     1:
       file: /home/jeya/mathshorts/out/review/0015-the-tube-inspector-s-puzzle/v1.mp4
@@ -126,6 +107,11 @@ video:
       file: /home/jeya/mathshorts/out/review/0015-the-tube-inspector-s-puzzle/v2.mp4
       sha256: 3030e26dbf2bc250ca297bf5d9d6547be3e574d3592d32371ed9b1c8e8a22f4f
       message: '1569450143894208552'
-  comment: Trace is not shown cleanly in the walk around. Path seems to stay green
+      video_id:
+    3:
+      file: /home/jeya/mathshorts/out/review/0015-the-tube-inspector-s-puzzle/v3.mp4
+      sha256: f8648b9b8835c6735b747effcb9dec6fcf85517de815e68d8da74d66f2938e44
+      message: '1569454513948196948'
+  comment:
   warned:
   as_is:
