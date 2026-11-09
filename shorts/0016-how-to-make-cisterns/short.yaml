@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0016'
 title: How To Make Cisterns
-status: script_review
+status: revise
 catalog_id: dudeney-amusements-201
 tags:
   - geometry
@@ -91,4 +91,5 @@ review:
   version: 1
   messages:
     1: '1569230457386705007'
-  last_seen: '1569230457386705007'
+  last_seen: '1569447348407636070'
+  comment: Shouldnt we solve analytically using calculus / finding max value point of a cubic?
