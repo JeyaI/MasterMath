@@ -86,6 +86,24 @@ review:
   comment:
 video:
   pending:
+    version: 3
+    file: /home/jeya/mathshorts/out/review/0014-mrs-perkins-s-quilt/v3.mp4
+    sha256: 64aa7985beddf9abb62fca0aef9a21b2ed4a0e7a89316b5576e3c513a7af7cbc
+    summary: In the 12-square attempt, the 25 single patches now alternate colours like a 
+      checkerboard (by column plus row), not by the order they were created. They also all appear 
+      together in one pop, not one after another. I checked a frame from the new preview and `ms 
+      check` shows 0 errors. It still warns that the video is 61.5 s, over the 40–50 s target. I did
+      not run `ms verify`, since no numbers, shapes or claims changed.
+    usage:
+      job: revise_video
+      short: 0014-mrs-perkins-s-quilt
+      exit: 0
+      seconds: 70
+      subtype: success
+      is_error: false
+      num_turns: 12
+      total_cost_usd: 0.19092720000000002
+      log: job-revise_video-20261109-141504.jsonl
   version: 2
   versions:
     1:

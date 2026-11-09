@@ -119,15 +119,15 @@ class Short(Scene):
 
         # --- a sample greedy attempt: biggest square first, then single patches -----------------
         big_t = piece(P, CELL, ATTEMPT[0], PIECES[1])
-        ones = [piece(P, CELL, q, PIECES[2 + i % 2], text=False) for i, q in enumerate(ATTEMPT[1:])]
+        ones = [piece(P, CELL, q, PIECES[2 + (q[0] + q[1]) % 2], text=False) for q in ATTEMPT[1:]]
         self.add_sound(SFX["pop"])
         cap.show("Here is one try: the biggest square we can, a 12 square.", extra=[
             GrowFromCenter(big_t), Transform(cnt, counter(1, "pieces"))], run_time=0.7)
         self.wait(1.0)
         self.add_sound(SFX["pop"], gain=-4)
         cap.show("Then fill the rest with 25 single patches.", extra=[
-            LaggedStart(*[GrowFromCenter(o) for o in ones], lag_ratio=0.08),
-            Transform(cnt, counter(ATTEMPT_N, "pieces"))], run_time=2.2)
+            *[GrowFromCenter(o) for o in ones],
+            Transform(cnt, counter(ATTEMPT_N, "pieces"))], run_time=1.2)
         self.wait(1.0)
         cap.show("That works, with 26 pieces. Can you do better?", ACCENT)
         self.wait(1.2)
