@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0016'
 title: How To Make Cisterns
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-201
 tags:
   - geometry
@@ -40,13 +40,13 @@ puzzle:
 level1:
   statement: "A flat zinc sheet is 8 feet by 3 feet. A square of the same size is cut from each of the
     four corners, then the sides are folded up to make an open box (a cistern). How long should the side
-    of each cut-out square be, in inches, so the cistern holds as much water as possible?"
-  answer: "8 inches."
+    of each cut-out square be, in feet, so the cistern holds as much water as possible?"
+  answer: "2/3 of a foot (8 inches)."
   insight: "Cutting small squares gives a wide, shallow box; cutting big ones gives a tall, thin one.
-    With squares of side x inches the volume is V = x(96 - 2x)(36 - 2x) = 4x^3 - 264x^2 + 3456x. The peak
-    is where the slope is zero: V' = 12x^2 - 528x + 3456 = 12(x - 8)(x - 36). The roots are 8 and 36;
-    36 is off the sheet (x must be under 18), and V' changes from positive to negative at 8, so 8 inches
-    is the maximum, with volume 12,800 cubic inches."
+    With squares of side x feet the volume is V = x(8 - 2x)(3 - 2x) = 4x^3 - 22x^2 + 24x. The peak is
+    where the slope is zero: V' = 12x^2 - 44x + 24 = 0. The quadratic formula gives x = (44 +- sqrt(784))/24
+    = (44 +- 28)/24, so x = 3 or x = 2/3. 3 is off the sheet (x must be under 1.5), and V' changes from
+    positive to negative at 2/3, so 2/3 foot (8 inches) is the maximum, with volume 200/27 cubic feet."
 level2:
   statement: "Same idea with a square zinc sheet 12 feet by 12 feet. Squares of the same size are cut
     from the four corners and the sides folded up into an open box. How many feet long should the side
@@ -63,14 +63,14 @@ captions:
   - "Pause and try it"
   - "Tiny squares make a wide cistern, but it is very shallow."
   - "Big squares make a deep cistern, but it is tall and thin."
-  - "If the square has side x, the volume is x times the length times the width."
+  - "If the square has side x feet, the volume is x times the length times the width."
   - "That is a cubic, so its peak is where the slope is zero."
-  - "The slope is twelve x squared minus 528 x plus 3456."
-  - "That factors as twelve times (x minus 8) times (x minus 36)."
-  - "The slope is zero at 8 and 36, but 36 is too big for the sheet."
-  - "The slope goes from positive to negative at 8, so that is the peak."
-  - "At eight inches the volume is twelve thousand eight hundred."
-  - "The squares should be eight inches on each side ✓"
+  - "The slope is twelve x squared minus 44 x plus 24, and we set it to zero."
+  - "The quadratic formula gives x equals 44 plus or minus 28, over 24."
+  - "So x is 3 or two thirds, but 3 feet is too big for the sheet."
+  - "The slope goes from positive to negative at two thirds, so that is the peak."
+  - "At two thirds of a foot, the volume is 200 over 27 cubic feet."
+  - "The squares should be two thirds of a foot, or eight inches ✓"
   - "Now try a square sheet, twelve feet on each side."
   - "Comment just the number ↓"
 music:
@@ -89,10 +89,10 @@ youtube:
   published_at:
 review:
   thread_id: '1569230450206048369'
-  version: 2
+  version: 3
   messages:
     1: '1569230457386705007'
     2: '1569447948029526096'
+    3: '1569450563832254648'
   last_seen: '1569449634722615377'
-  comment: A human is not probably finding that factorization. Keep units in feet and use quadratic 
-    formula. Make sure instructions are on screen when audience is instructed to try it.
+  comment:
