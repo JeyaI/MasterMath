@@ -1,0 +1,91 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0015'
+title: The Tube Inspector's Puzzle
+status: script_review
+catalog_id: dudeney-amusements-242
+tags:
+  - routes
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 242
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    The man in our illustration is in a little dilemma. He has just been
+    appointed inspector of a certain system of tube railways, and it is his
+    duty to inspect regularly, within a stated period, all the company's
+    seventeen lines connecting twelve stations, as shown on the big poster
+    plan that he is contemplating. Now he wants to arrange his route so that
+    it shall take him over all the lines with as little travelling as
+    possible. He may begin where he likes and end where he likes. What is
+    his shortest route?
+
+    Could anything be simpler? But the reader will soon find that, however
+    he decides to proceed, the inspector must go over some of the lines more
+    than once. In other words, if we say that the stations are a mile apart,
+    he will have to travel more than seventeen miles to inspect every line.
+    There is the little difficulty. How far is he compelled to travel, and
+    which route do you recommend?
+
+    [Illustration]
+  solution: |
+    The inspector need only travel nineteen miles if he starts at B and
+    takes the following route: BADGDEFIFCBEHKLIHGJK. Thus the only portions
+    of line travelled over twice are the two sections D to G and F to I. Of
+    course, the route may be varied, but it cannot be shortened.
+level1:
+  statement: "A tube network has 12 stations, laid out in a grid 3 across and 4 down, joined by 17 lines,
+    each line 1 mile long. An inspector must travel along every line at least once. He may start and finish
+    at any stations. What is the fewest miles he must travel?"
+  answer: "19 miles."
+  insight: "Count the lines meeting at each station. Six stations (the middle ones on the two long sides
+    of the grid) have an odd number of lines, and a walk can only start or end at an odd station. So two
+    of them are the start and the end, and the other four must be paired up by walking one short line
+    twice. Pairing them takes 2 repeated miles, so the total is 17 + 2 = 19, and a search of every possible
+    set of repeats shows that fewer is impossible."
+level2:
+  statement: "Same rules on a smaller network: 9 stations in a 3 by 3 grid, joined by 12 lines of 1 mile
+    each. What is the fewest miles the inspector must travel?"
+  answer: 14
+  accept: [14, "14 miles", "fourteen", "Fourteen"]
+  why: "The four middle-of-the-side stations are odd. Two are the start and end; the other two are 2 miles
+    apart, so repeating that route adds 2. Total 12 + 2 = 14."
+captions:
+  - "Twelve stations are joined by seventeen lines, each a mile long."
+  - "The inspector must ride along every single line."
+  - "He may start and finish wherever he likes."
+  - "What is the fewest number of miles he can travel?"
+  - "Pause and try it"
+  - "Riding each line once would only be seventeen miles."
+  - "But every walk he tries ends up repeating some lines."
+  - "Let's count how many lines meet at each station."
+  - "Six stations have an odd number of lines."
+  - "He can only start or end a walk at an odd station."
+  - "Each time he passes through a station, he uses two of its lines."
+  - "So two odd stations are the start and the end."
+  - "The other four odd stations must be paired up."
+  - "Walking one short line twice fixes two stations at once."
+  - "Two repeated lines fix all four, so the extra cost is two miles."
+  - "That makes seventeen plus two, which is nineteen miles."
+  - "The shortest trip is 19 miles ✓"
+  - "Comment just the number ↓"
+music:
+  piece: fur-elise
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "What's the shortest trip that rides every line of this tube map?"
+  description: |
+    A tube network of 12 stations and 17 lines, 1 mile each. What is the fewest miles needed to ride every line? Level 2: a smaller 3 by 3 network. Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 242. Music: L. van Beethoven, Für Elise, WoO 59.
+  tags:
+    - math puzzle
+    - puzzle
+  video_id:
+  url:
+  published_at:
+review:
+  thread_id: '1569155065523077341'
+  version: 1
+  messages:
+    1: '1569155069679640657'
+  last_seen: '1569155069679640657'
