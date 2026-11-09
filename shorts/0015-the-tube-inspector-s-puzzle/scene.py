@@ -69,7 +69,7 @@ class Net:
         for a, b in edges:
             self.nbr[a].append(b)
             self.nbr[b].append(a)
-        self.lines = {e: Line(self.pos[e[0]], self.pos[e[1]], color=MUTED, stroke_width=lw).set_z_index(1)
+        self.lines = {e: Line(self.pos[e[0]], self.pos[e[1]], color=MUTED, stroke_width=lw).set_z_index(0)   # 0: the redrawn route trail (z 0, added later) sits on top
                       for e in edges}
         self.st = {n: Circle(radius=rad, fill_color=GRID, fill_opacity=1, stroke_color=MUTED,
                              stroke_width=5).move_to(p).set_z_index(3) for n, p in self.pos.items()}
@@ -303,17 +303,20 @@ class Short(Scene):
                 if v <= i:
                     break
                 a, b = seg(i)
-                end = b if v >= i + 1 else point(v)
-                g.add(Line(a, end, color=GOOD, stroke_width=11))
+                done = v >= i + 1
+                end = b if done else point(v)
+                # the line being ridden is bright yellow and thick; finished lines settle to thinner green
+                current = int(v) == i
+                g.add(Line(a, end, color=ACCENT if current else GOOD, stroke_width=13 if current else 8).set_z_index(6))
             return g.set_z_index(6)
 
         runner2 = always_redraw(lambda: Dot(point(t.get_value()), radius=0.18, color=INK).set_z_index(8))
         miles = always_redraw(lambda: label(f"{int(round(t.get_value() - 0.49))} miles", 56, GOOD)
                               .move_to([CENTRE_X, 5.5, 0]))
-        path = always_redraw(trail)
+        path = always_redraw(trail).set_z_index(6)   # the container keeps its own z-index across redraws
         self.add_sound(SFX["chime"], gain=-10)
         say("That makes seventeen plus two, which is nineteen miles.", extra=[
-            FadeOut(self.ctr), FadeOut(net.dg), FadeOut(extra_dots), FadeOut(doubles), FadeOut(self.tag),
+            FadeOut(self.ctr), FadeOut(net.dg), FadeOut(extra_dots), FadeOut(doubles), FadeOut(self.tag), FadeOut(fs2), FadeOut(fe3),
             *[l.animate.set_color(MUTED) for l in net.lg],
             *[st[s].animate.set_stroke(MUTED, 5) for s in net.pos]])
         self.add(path, runner2, miles)
