@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0014'
 title: Mrs. Perkins's Quilt
-status: animating
+status: video_review
 catalog_id: dudeney-amusements-173
 tags:
   - dissection
@@ -83,23 +83,12 @@ review:
   comment:
 video:
   pending:
-    version: 1
-    file: /home/jeya/mathshorts/out/review/0014-mrs-perkins-s-quilt/v1.mp4
-    sha256: b3dcce2845f579de29cf0e733ae951f079fdc830045876af78e5000cf39d42dd
-    summary: "The full preview (v2) is 55.5 s: about 42 s of Level 1, then the Level 2 card held about
-      12 s. `ms check` reports 0 errors and one duration warning, because the total is over 50 s only
-      through the Level 2 hold. `ms verify` passes.\nThe scene is built from verify.py's tiling. The build-up
-      is a counter showing 169, then 3, then 11. The long captions are scaled down to fit the width, so
-      they are small but readable.\nI removed \"Pause and try it\" from short.yaml's captions because
-      `ms check` flagged it as never shown; it still appears on screen as a title with the countdown,
-      as in 0013. The Level 2 \"? squares\" sits close to the caption."
-    usage:
-      job: animate
-      short: 0014-mrs-perkins-s-quilt
-      exit: 0
-      seconds: 237
-      subtype: success
-      is_error: false
-      num_turns: 73
-      total_cost_usd: 0.6258472
-      log: job-animate-20261109-104504.jsonl
+  version: 1
+  versions:
+    1:
+      file: /home/jeya/mathshorts/out/review/0014-mrs-perkins-s-quilt/v1.mp4
+      sha256: b3dcce2845f579de29cf0e733ae951f079fdc830045876af78e5000cf39d42dd
+      message: '1569378594281496717'
+  comment:
+  warned:
+  as_is:
