@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0015'
 title: The Tube Inspector's Puzzle
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-242
 tags:
   - routes
@@ -92,7 +92,7 @@ review:
   messages:
     1: '1569155069679640657'
     2: '1569442961203138590'
-  last_seen: '1569441784101343353'
+  last_seen: '1569448321662189719'
   comment:
 video:
   pending:
@@ -102,6 +102,8 @@ video:
       file: /home/jeya/mathshorts/out/review/0015-the-tube-inspector-s-puzzle/v1.mp4
       sha256: c2738470228a8f31d31b31b65540e9b4b7658fada9783dde124b100e66a2c6f9
       message: '1569445680823533689'
-  comment:
+  comment: Pacing is way too fast. Check how long it would take to read and comprehend the captions.
+    To show we can start and end anywhere, show the start and end flags moving around to different 
+    locations.
   warned:
   as_is:
