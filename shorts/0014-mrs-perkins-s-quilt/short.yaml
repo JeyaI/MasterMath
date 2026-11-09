@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0014'
 title: Mrs. Perkins's Quilt
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-173
 tags:
   - dissection
@@ -82,7 +82,7 @@ review:
   messages:
     1: '1568868167839780895'
     2: '1569367428071293039'
-  last_seen: '1569379208717926404'
+  last_seen: '1569429954985197693'
   comment:
 video:
   pending:
@@ -97,6 +97,7 @@ video:
       file: /home/jeya/mathshorts/out/review/0014-mrs-perkins-s-quilt/v2.mp4
       sha256: 2e494e96d3cdbf2df8a0387d762087e58d3766c262049cada8ab7d7ea5696cbe
       message: '1569380701025861692'
-  comment:
+  comment: On the coloring of the squares on the 12x12 attempt, make sure the 1x1 squares all 
+    alternate colors. Can also animate all the 1x1 squares in "one fell swoop"
   warned:
   as_is:
