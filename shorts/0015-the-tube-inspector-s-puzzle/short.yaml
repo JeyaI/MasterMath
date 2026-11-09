@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0015'
 title: The Tube Inspector's Puzzle
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-242
 tags:
   - routes
@@ -92,7 +92,7 @@ review:
   messages:
     1: '1569155069679640657'
     2: '1569442961203138590'
-  last_seen: '1569448321662189719'
+  last_seen: '1569452149320978574'
   comment:
 video:
   pending:
@@ -107,6 +107,6 @@ video:
       file: /home/jeya/mathshorts/out/review/0015-the-tube-inspector-s-puzzle/v2.mp4
       sha256: 3030e26dbf2bc250ca297bf5d9d6547be3e574d3592d32371ed9b1c8e8a22f4f
       message: '1569450143894208552'
-  comment:
+  comment: Trace is not shown cleanly in the walk around. Path seems to stay green
   warned:
   as_is:
