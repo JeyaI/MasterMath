@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0016'
 title: How To Make Cisterns
-status: script_review
+status: animating
 catalog_id: dudeney-amusements-201
 tags:
   - geometry
