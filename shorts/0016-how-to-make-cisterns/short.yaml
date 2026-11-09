@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0016'
 title: How To Make Cisterns
-status: script_review
+status: revise
 catalog_id: dudeney-amusements-201
 tags:
   - geometry
@@ -93,5 +93,6 @@ review:
   messages:
     1: '1569230457386705007'
     2: '1569447948029526096'
-  last_seen: '1569447348407636070'
-  comment:
+  last_seen: '1569449634722615377'
+  comment: A human is not probably finding that factorization. Keep units in feet and use quadratic 
+    formula. Make sure instructions are on screen when audience is instructed to try it.
