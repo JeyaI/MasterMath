@@ -8,3 +8,4 @@
 {"at": "2026-11-09T14:15:02", "event": "comment_video", "status": "revise_video", "version": 2, "comment": "On the coloring of the squares on the 12x12 attempt, make sure the 1x1 squares all alternate colors. Can also animate all the 1x1 squares in \"one fell swoop\""}
 {"at": "2026-11-09T14:17:36", "event": "revised_video", "status": "video_review", "version": 3, "sha256": "64aa7985beddf9abb62fca0aef9a21b2ed4a0e7a89316b5576e3c513a7af7cbc", "usage": {"job": "revise_video", "short": "0014-mrs-perkins-s-quilt", "exit": 0, "seconds": 70, "subtype": "success", "is_error": false, "num_turns": 12, "total_cost_usd": 0.19092720000000002, "log": "job-revise_video-20261109-141504.jsonl"}}
 {"at": "2026-11-09T14:25:52", "event": "approve_video", "status": "scheduled", "version": 3, "video_id": "v9UpYeDPn4s", "publish_at": "2026-11-09T16:00:00-05:00"}
+{"at": "2026-11-09T16:05:02", "event": "released", "status": "published", "video_id": "v9UpYeDPn4s"}

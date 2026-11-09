@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0014'
 title: Mrs. Perkins's Quilt
-status: scheduled
+status: published
 catalog_id: dudeney-amusements-173
 tags:
   - dissection
@@ -75,7 +75,7 @@ youtube:
     - puzzle
   video_id: v9UpYeDPn4s
   url: https://youtube.com/shorts/v9UpYeDPn4s
-  published_at:
+  published_at: '2026-11-09'
   publish_at: '2026-11-09T16:00:00-05:00'
 review:
   thread_id: '1568868164387872814'
