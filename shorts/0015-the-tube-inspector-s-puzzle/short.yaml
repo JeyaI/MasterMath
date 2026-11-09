@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0015'
 title: The Tube Inspector's Puzzle
-status: script_review
+status: revise
 catalog_id: dudeney-amusements-242
 tags:
   - routes
@@ -88,4 +88,7 @@ review:
   version: 1
   messages:
     1: '1569155069679640657'
-  last_seen: '1569155069679640657'
+  last_seen: '1569441784101343353'
+  comment: Some clarity. He must start and end at odd nodes if he wants to end with the fewest miles
+    traveled. Be clear what is a rule and what is required for an optimal solution. Make sure to 
+    scaffold this logic.
