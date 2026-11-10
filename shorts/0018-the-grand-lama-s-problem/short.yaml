@@ -1,0 +1,143 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0018'
+title: The Grand Lama's Problem
+status: script_review
+catalog_id: dudeney-amusements-291
+tags:
+  - chessboard
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 291
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    Once upon a time there was a Grand Lama who had a chessboard made of
+    pure gold, magnificently engraved, and, of course, of great value. Every
+    year a tournament was held at Lhassa among the priests, and whenever any
+    one beat the Grand Lama it was considered a great honour, and his name
+    was inscribed on the back of the board, and a costly jewel set in the
+    particular square on which the checkmate had been given. After this
+    sovereign pontiff had been defeated on four occasions he died--possibly
+    of chagrin.
+
+    [Illustration:
+
+        +---+---+---+---+---+---+---+---+
+        | * |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   | * |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   | * |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   | * |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+        |   |   |   |   |   |   |   |   |
+        +---+---+---+---+---+---+---+---+
+
+    ]
+
+    Now the new Grand Lama was an inferior chess-player, and preferred other
+    forms of innocent amusement, such as cutting off people's heads. So he
+    discouraged chess as a degrading game, that did not improve either the
+    mind or the morals, and abolished the tournament summarily. Then he sent
+    for the four priests who had had the effrontery to play better than a
+    Grand Lama, and addressed them as follows: "Miserable and heathenish
+    men, calling yourselves priests! Know ye not that to lay claim to a
+    capacity to do anything better than my predecessor is a capital offence?
+    Take that chessboard and, before day dawns upon the torture chamber, cut
+    it into four equal parts of the same shape, each containing sixteen
+    perfect squares, with one of the gems in each part! If in this you fail,
+    then shall other sports be devised for your special delectation. Go!"
+    The four priests succeeded in their apparently hopeless task. Can you
+    show how the board may be divided into four equal parts, each of
+    exactly the same shape, by cuts along the lines dividing the squares,
+    each part to contain one of the gems?
+  solution: |
+    The method of dividing the chessboard so that each of the four parts
+    shall be of exactly the same size and shape, and contain one of the
+    gems, is shown in the diagram. The method of shading the squares is
+    adopted to make the shape of the pieces clear to the eye. Two of the
+    pieces are shaded and two left white.
+
+    The reader may find it interesting to compare this puzzle with that of
+    the "Weaver" (No. 14, _Canterbury Puzzles_).
+
+    [Illustration: THE GRAND LAMA'S PROBLEM.
+
+        +===+===+===+===+===+===+===+===+
+        |:o:|   :   :   :   :   :   :   :
+        I...I...+===+===+===+===+===+===+
+        |:::| o |:::::::::::::::::::::::|
+        I...I...I...+===+===+===+===+...I
+        |:::|   |:o:|   :   :   :   |:::|
+        I...I...I...I...I===+===+...I...I
+        |:::|   |:::| o |:::::::|   |:::|
+        I...I...I...+===I===+...I...I...I
+        |:::|   |:::::::|   |:::|   |:::|
+        I...I...+===+===+...+...I...I...I
+        |:::|   :   :   :   |:::|   |:::|
+        I...+===+===+===+===I...I...I...I
+        |:::::::::::::::::::::::|   |:::|
+        +===+===+===+===+===+===+...I...I
+        |   :   :   :   :   :   :   |:::|
+        +===+===+===+===+===+===+===+===+
+
+    ]
+level1:
+  statement: "A chessboard has four gems on its diagonal, in the first four squares from one corner. Cut
+    the board along the lines between squares into four parts of exactly the same size and shape, so that
+    every part holds one gem. Can you do it?"
+  answer: "Yes. Each part is a long hook of 16 squares, and each is the first hook turned by a quarter
+    turn."
+  insight: "The gems are crowded into one corner, so straight cuts and quarters always put two gems in
+    one part. Instead, draw one long hook from the first gem, a column down the edge and a row along the
+    bottom, ending in a small curl. Turn it a quarter turn and it fits around the next gem. Three more
+    turns give the four parts, 16 squares each, one gem in each."
+level2:
+  statement: "The Grand Lama's next board is 10 by 10, and he wants it cut into 5 parts of exactly the
+    same size and shape. How many squares does each part hold?"
+  answer: 20
+  accept: [20, "20 squares", "twenty", "20 each", "twenty squares"]
+  why: "The board has 10 x 10 = 100 squares, and 5 equal parts share them equally: 100 / 5 = 20."
+captions:
+  - "Can you cut this board into four identical parts, one gem in each?"
+  - "A Grand Lama has a golden chessboard with four gems."
+  - "The gems sit in a row along the diagonal."
+  - "Cut along the lines into four parts of the same size and shape."
+  - "Every part must hold exactly one gem."
+  - "Pause and try it."
+  - "Cutting it into four quarters puts two gems together."
+  - "Straight strips fail too, so the parts must bend."
+  - "Start with a long hook that wraps around the first gem."
+  - "Turn the hook a quarter turn, and it fits around the next gem."
+  - "Turn it again and again, until the board is full."
+  - "Four identical hooks of 16 squares, one gem each ✓"
+  - "Level 2: a 10 by 10 board is cut into 5 equal parts."
+  - "How many squares does each part hold?"
+  - "Comment just the number ↓"
+music:
+  piece: gymnopedie-1
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "Can you cut this golden chessboard into 4 identical parts?"
+  description: |
+    A chessboard has four gems on its diagonal. Cut it along the lines into four parts of the same size and shape, with one gem in each. Level 2: a 10 by 10 board is cut into 5 equal parts. Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 291. Music: Erik Satie, Gymnopédie No. 1.
+  tags:
+    - math puzzle
+    - puzzle
+  video_id:
+  url:
+  published_at:
+review:
+  thread_id: '1569593067957260358'
+  version: 1
+  messages:
+    1: '1569593072046702613'
+  last_seen: '1569593072046702613'
