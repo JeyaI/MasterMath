@@ -1,0 +1,102 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0017'
+title: The Twickenham Puzzle
+status: script_review
+catalog_id: dudeney-amusements-217
+tags:
+  - counters
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 217
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    [Illustration:
+
+              ( I ) ((N))
+
+           ( M )        ((A))
+
+        ( H )              ((T))
+
+          ( E )          ((W))
+
+            ( C )     ((K))
+                  ( )
+
+    ]
+
+    In the illustration we have eleven discs in a circle. On five of the
+    discs we place white counters with black letters--as shown--and on five
+    other discs the black counters with white letters. The bottom disc is
+    left vacant. Starting thus, it is required to get the counters into
+    order so that they spell the word "Twickenham" in a clockwise direction,
+    leaving the vacant disc in the original position. The black counters
+    move in the direction that a clock-hand revolves, and the white counters
+    go the opposite way. A counter may jump over one of the opposite colour
+    if the vacant disc is next beyond. Thus, if your first move is with K,
+    then C can jump over K. If then K moves towards E, you may next jump W
+    over C, and so on. The puzzle may be solved in twenty-six moves.
+    Remember a counter cannot jump over one of its own colour.
+  solution: |
+    Play the counters in the following order: K C E K W T C E H M K W T A N
+    C E H M I K C E H M T, and there you are, at Twickenham. The position
+    itself will always determine whether you are to make a leap or a simple
+    move.
+level1:
+  statement: "Eleven discs sit in a ring, the bottom one empty. Five white and five black counters carry
+    the letters of TWICKENHAM. Black counters move clockwise and white ones anticlockwise: a counter may
+    step into the empty disc next to it, or jump over one counter of the other colour into the empty disc.
+    Rearrange them so that, read clockwise from the disc after the empty one, they spell TWICKENHAM, with
+    the empty disc back at the bottom. What is the fewest number of moves?"
+  answer: "26 moves."
+  insight: "The moves come in waves of one colour: black, then white, then black again. Played from the
+    start, the waves are 1, 2, 3, 4, 5, 5, 1, 4 and 1 moves long, and 1 + 2 + 3 + 4 + 5 + 5 + 1 + 4 +
+    1 = 26. A search of every position confirms that nothing shorter spells the word."
+level2:
+  statement: "Same rules on a ring of 9 discs, the bottom one empty. 4 white counters sit on one side
+    and 4 black ones on the other. Swap the two colours' places, with the empty disc staying at the bottom.
+    What is the fewest number of moves?"
+  answer: 24
+  accept: [24, "24 moves", "twenty-four", "twenty four", "24 moves."]
+  why: "Every white counter must get past every black one, which takes a jump each: 4 x 4 = 16 jumps.
+    Each of the 8 counters also needs one plain step: 8 more. 16 + 8 = 24 (the waves are 1, 2, 3, 4, 4,
+    4, 3, 2, 1 moves long)."
+captions:
+  - "What is the fewest number of moves that spells TWICKENHAM?"
+  - "Ten counters sit on a ring of eleven discs."
+  - "Black counters move clockwise, white ones move anticlockwise."
+  - "A counter can step into the empty disc."
+  - "Or it can jump over a counter of the other colour."
+  - "Spell TWICKENHAM clockwise, with the empty disc back at the bottom."
+  - "Try to find the shortest way."
+  - "Watch how the moves come in waves of one colour."
+  - "First one black counter moves, then two white ones."
+  - "Then three black counters, then four white ones."
+  - "Then a wave of five black counters, and one of five white."
+  - "Three short waves finish the word: one, four, and one."
+  - "TWICKENHAM, in 26 moves ✓"
+  - "26 is the fewest possible."
+  - "Level 2: 4 white and 4 black counters on 9 discs must swap sides."
+  - "How many moves does it take?"
+  - "Comment just the number ↓"
+music:
+  piece: minuet-g
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "How few moves does it take to spell TWICKENHAM?"
+  description: |
+    Ten counters on a ring of eleven discs. Black moves clockwise, white anticlockwise, by a step or a jump over the other colour. What is the fewest number of moves that spells TWICKENHAM? Level 2: 4 white and 4 black counters on 9 discs swap sides. Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 217. Music: Christian Petzold, Minuet in G, BWV Anh. 114.
+  tags:
+    - math puzzle
+    - puzzle
+  video_id:
+  url:
+  published_at:
+review:
+  thread_id: '1569517765054701621'
+  version: 1
+  messages:
+    1: '1569517770272411648'
+  last_seen: '1569517770272411648'
