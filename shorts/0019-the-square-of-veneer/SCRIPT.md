@@ -11,6 +11,8 @@ A square board is 5 inches on a side and marked in a one-inch grid. At each of t
 
 (Dudeney asks for the fewest pieces; we state four and do not claim that fewer is impossible.)
 
+**Uniqueness (reviewer question: "How do we know the solution is unique?").** We don't, and the script no longer implies it. Area alone allows many pairs of squares (3 and 4 also give 9 + 16 = 25; Dudeney says "an infinite number of different ways"), and the cut itself is not shown to be the only one. The puzzle asks for a way that works, so the video presents 25/13 and 60/13 as *one* valid answer found with the 13 by 13 grid, and `verify.py` now checks that other side pairs exist. Only Level 2 is unique, and `verify.py` checks that too (10 and 24 is the only whole-number split of 26²).
+
 ## Insight
 **Re-grid the board as 13 by 13, because 169 = 12² + 5².** The board is redrawn with a 13 by 13 grid of small squares (each 5/13 inch) fading over the nails. A counter shows 169, then splits into 144 + 25. The 5 by 5 block in the bottom-right corner lifts out whole. The L-shape that is left is cut along grid lines into a three-step staircase (B), a two-step staircase (C) and a thin strip (D). C slides down and left into the gap, D turns upright and slides in beside it, and the 12 by 12 square closes with no gap. Finally the nails fade back in over the cuts: the cut lines are at multiples of 5/13 inch, which are never whole inches, so none touches a nail. Sides: 5 × 5/13 = 25/13 and 12 × 5/13 = 60/13.
 
@@ -20,7 +22,7 @@ Checked against: the `SCRIPT.md` files of 0014 to 0018, and the `scene.py` docst
 1. Hook: the board and nails pop in, "Can you cut this square into four pieces that make two squares?" (4 s)
 2. "This 5 inch board has 16 nails, and the saw must not touch any." The nails highlight one by one. (3.5 s)
 3. "The four pieces must fit together into two perfect squares." A ghost of two squares of different size appears beside the board. (3 s)
-4. "What are the exact sides of the two squares?" (2.5 s)
+4. "Can you find one way, and give the exact sides of the two squares?" (2.5 s)
 5. "Pause and try it." with a 5 s countdown. (6 s)
 6. "Slice the board into a 13 by 13 grid of small squares." The grid draws in. (2.5 s)
 7. "Notice that 169 is 144 plus 25, which is 12 squared plus 5 squared." The counter splits. (3.5 s)
@@ -28,7 +30,7 @@ Checked against: the `SCRIPT.md` files of 0014 to 0018, and the `scene.py` docst
 9. "Cut the L into two staircases and one thin strip." The cuts glow along grid lines, three colours. (3 s)
 10. "Slide the staircase down, stand the strip upright, and it all fits." Pieces move into a 12 by 12 square. (3.5 s)
 11. "The grid lines are 5/13 inch apart, so no cut ever meets a nail." The nails return, all clear of the cuts. (3 s)
-12. "Each small square is 5/13 inch: the sides are 25/13 and 60/13 ✓" (3.5 s)
+12. "Each small square is 5/13 inch, so one answer is 25/13 and 60/13 ✓" (3.5 s)
 13. "Level 2: a 26 cm square is cut the same way." (2.5 s)
 14. "It makes two squares with whole number sides. How long is the larger side, in cm?" (3 s)
 15. "Comment just the number ↓" held (12 s)

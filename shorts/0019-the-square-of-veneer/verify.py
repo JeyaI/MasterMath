@@ -101,6 +101,11 @@ def main() -> None:
     # why: a cut at x = 5k/13 is a whole number only when 13 divides k
     assert all((SIDE_IN * k) % N != 0 for k in range(1, N))
 
+    # Not unique: area alone allows many pairs of sides (Dudeney: "an infinite number of ways"),
+    # e.g. 3 and 4 also give 3^2 + 4^2 = 5^2. We only claim 25/13 and 60/13 is one valid answer.
+    assert 3 ** 2 + 4 ** 2 == SIDE_IN ** 2
+    assert (3, 4) != (small_in, big_in)
+
     # Level 2
     assert L2_BIG ** 2 + L2_SMALL ** 2 == L2_SIDE ** 2
     # ...and it is the only way to write 26^2 as two squares of whole centimetres

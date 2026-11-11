@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0019'
 title: The Square Of Veneer
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-159
 tags:
   - dissection
@@ -107,7 +107,7 @@ level1:
   statement: "A square board, 5 inches on a side, has a nail at each of the 16 crossings of its one-inch
     grid. Cut it into four pieces, with cuts that touch no nail, so that the pieces fit together to make
     two different squares. What are the exact sides of the two squares?"
-  answer: "25/13 inch and 60/13 inch."
+  answer: "One valid answer: 25/13 inch and 60/13 inch (not the only pair of squares possible)."
   insight: "Cut the board along a 13 by 13 grid of small squares, each 5/13 inch wide. Since 169 = 144
     + 25, a 5 by 5 square comes out whole in the corner, and the leftover L-shape is cut into two staircases
     and a thin strip that slide into a 12 by 12 square. Grid lines are 5/13 inch apart, so none ever lands
@@ -124,7 +124,7 @@ captions:
   - "Can you cut this square into four pieces that make two squares?"
   - "This 5 inch board has 16 nails, and the saw must not touch any."
   - "The four pieces must fit together into two perfect squares."
-  - "What are the exact sides of the two squares?"
+  - "Can you find one way, and give the exact sides of the two squares?"
   - "Pause and try it."
   - "Slice the board into a 13 by 13 grid of small squares."
   - "Notice that 169 is 144 plus 25, which is 12 squared plus 5 squared."
@@ -132,7 +132,7 @@ captions:
   - "Cut the L into two staircases and one thin strip."
   - "Slide the staircase down, stand the strip upright, and it all fits."
   - "The grid lines are 5/13 inch apart, so no cut ever meets a nail."
-  - "Each small square is 5/13 inch: the sides are 25/13 and 60/13 ✓"
+  - "Each small square is 5/13 inch: so one answer is 25/13 and 60/13 ✓"
   - "Level 2: a 26 cm square is cut the same way."
   - "It makes two squares with whole number sides. How long is the larger side, in cm?"
   - "Comment just the number ↓"
@@ -152,8 +152,9 @@ youtube:
   published_at:
 review:
   thread_id: '1569880219999936657'
-  version: 1
+  version: 2
   messages:
     1: '1569880223149850637'
+    2: '1570131124825628712'
   last_seen: '1570130687799857235'
-  comment: How do we know the solution is unique?
+  comment:
