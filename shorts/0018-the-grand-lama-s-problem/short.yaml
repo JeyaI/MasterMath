@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0018'
 title: The Grand Lama's Problem
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-291
 tags:
   - chessboard
@@ -145,7 +145,7 @@ review:
     2: '1569878179076907079'
     3: '1569879446347849760'
     4: '1569881996346400898'
-  last_seen: '1570072421476737045'
+  last_seen: '1570076733082828932'
   comment:
 video:
   pending:
@@ -160,6 +160,6 @@ video:
       file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v2.mp4
       sha256: b05422f17c81200d28e4e5d87659a17deb70c4eac634969267f7e73dbc135180
       message: '1570073810395336847'
-  comment:
+  comment: Pause counter visual is messed up
   warned:
   as_is:
