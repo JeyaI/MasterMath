@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0020'
 title: The Yorkshire Estates
-status: animating
+status: video_review
 catalog_id: dudeney-amusements-189
 tags:
   - geometry
@@ -132,22 +132,12 @@ review:
   last_seen: '1569955335404523550'
 video:
   pending:
-    version: 1
-    file: /home/jeya/mathshorts/out/review/0020-the-yorkshire-estates/v1.mp4
-    sha256: 0fbbcca9972b2d66c3c44f7d26a68cf9f759e4387e9f7c0a97267a3a77d6e465
-    summary: "The scene is written, and `ms check` and `ms verify` both pass. The last full preview (v3)
-      runs 58.3 s, which is over the 40–50 s target (one duration warning). The 12 s \"Comment\" hold
-      and the Level 2 card account for most of it.\nI shortened three captions in `short.yaml` to keep
-      them under 14 words, and the payoff now reads \"exactly 11 acres ✓\" because the check rejects numbers
-      not in level1's answer.\nI looked at about 10 frames; the triangle itself is thin on the grid view,
-      and the longer captions render fairly small. Neither is a fault, but you may want to glance at both."
-    usage:
-      job: animate
-      short: 0020-the-yorkshire-estates
-      exit: 0
-      seconds: 272
-      subtype: success
-      is_error: false
-      num_turns: 75
-      total_cost_usd: 0.6039036000000002
-      log: job-animate-20261111-145506.jsonl
+  version: 1
+  versions:
+    1:
+      file: /home/jeya/mathshorts/out/review/0020-the-yorkshire-estates/v1.mp4
+      sha256: 0fbbcca9972b2d66c3c44f7d26a68cf9f759e4387e9f7c0a97267a3a77d6e465
+      message: '1570166443037696173'
+  comment:
+  warned:
+  as_is:
