@@ -132,8 +132,6 @@ captions:
   - "Slide the staircase down, stand the strip upright, and it all fits."
   - "The grid lines are 5/13 inch apart, so no cut ever meets a nail."
   - "So one answer is 25/13 inch and 60/13 inch ✓"
-  - "Another way: use a 17 by 17 grid, since 289 is 225 plus 64."
-  - "Stack the cut strips into a 15 by 15 square: 40/17 and 75/17 ✓"
   - "Level 2: a 26 cm square is cut the same way."
   - "It makes two whole number squares. How long is the larger side, in cm?"
   - "Comment just the number ↓"
@@ -163,6 +161,25 @@ review:
   comment:
 video:
   pending:
+    version: 2
+    file: /home/jeya/mathshorts/out/review/0019-the-square-of-veneer/v2.mp4
+    sha256: cd075d08636ec8ab0767b189702796dc9e3016c9d107565009da1377d1f9982e
+    summary: "The reviewer was right: the second solution used six pieces, not four. I removed the 17
+      by 17 construction from the video, `verify.py`, the `short.yaml` captions and `SCRIPT.md`, so the
+      Short now shows only the four-piece cut.\n`ms verify` passes and `ms check` has 0 errors. The preview
+      runs 51.0 s, a 1 s warning against the 40–50 s target. I did not pull frames: the one `ffmpeg` frame
+      grab failed on a filename-pattern error, and I didn't retry it.\nI did not find a four-piece second
+      construction, so the video no longer shows a second way."
+    usage:
+      job: revise_video
+      short: 0019-the-square-of-veneer
+      exit: 0
+      seconds: 112
+      subtype: success
+      is_error: false
+      num_turns: 25
+      total_cost_usd: 0.3171603
+      log: job-revise_video-20261111-135506.jsonl
   version: 1
   versions:
     1:

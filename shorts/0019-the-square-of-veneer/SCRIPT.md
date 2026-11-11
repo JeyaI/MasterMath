@@ -31,15 +31,13 @@ Checked against: the `SCRIPT.md` files of 0014 to 0018, and the `scene.py` docst
 10. "Slide the staircase down, stand the strip upright, and it all fits." Pieces move into a 12 by 12 square. (3.5 s)
 11. "The grid lines are 5/13 inch apart, so no cut ever meets a nail." The nails return, all clear of the cuts. (2.5 s)
 12. "Each small square is 5/13 inch, so one answer is 25/13 and 60/13 ✓" (3.5 s)
-13. **Second construction.** "Another way: use a 17 by 17 grid, since 289 is 225 plus 64." A fresh board gets a 17 by 17 grid; an 8 by 8 corner square is cut out whole. (3 s)
-14. "Cut the two edge strips in pieces and stack them into a 15 by 15 square. Sides: 40/17 and 75/17 ✓" The four strips slide and turn into the hole; the nails fade in, all clear. (4 s)
-15. "Level 2: a 26 cm square is cut the same way." (2.5 s)
-16. "It makes two squares with whole number sides. How long is the larger side, in cm?" (3 s)
-17. "Comment just the number ↓" held (12 s)
+13. "Level 2: a 26 cm square is cut the same way." (2.5 s)
+14. "It makes two squares with whole number sides. How long is the larger side, in cm?" (3 s)
+15. "Comment just the number ↓" held (12 s)
 
-Total: the beats before the hold add up to about 49 s (hook 3.5 s included), and the 12 s hold brings the Short to about 61 s. This is over the 40 to 50 s target, so if the preview runs long, shorten beats 9, 11 and 13 first.
+Total: about 42 s before the hold, and the 12 s hold brings the Short to about 54 s.
 
-**Second construction (reviewer comment: "Explicitly find a second construction THAT WORKS").** Beats 13 and 14 now show only a construction that passes (the rejected 3-and-4 idea is gone). It uses 17 by 17 cells of 5/17 inch, because 289 = 15² + 8². An 8 by 8 square is cut out whole in the corner; the rest is the 15 by 15 board minus a hole, plus a 2-wide strip on the right (cut into 2 by 6 and 2 by 3) and a 2-tall strip at the bottom (cut into 6 by 2 and 3 by 2). The four strips fill the 6 by 6 hole. That is six pieces, not four (we make no claim about fewer). Squares: 40/17 and 75/17 inch, and (40/17)² + (75/17)² = 25. Every cut is at a multiple of 5/17 inch, never a whole inch, so no nail is touched. `verify.py` (`check_second_construction`) checks the tiling of both squares, connectedness, the sides and the nails.
+**Second construction removed (reviewer comment: "this second solution does not use 4 pieces").** The 17 by 17 idea needed six pieces, but the puzzle asks for four, so it is cut from the video and from `verify.py`. The video shows only the four-piece 13 by 13 cut.
 
 ## Level 2
 "A 26 cm square board is cut the same way into two squares whose sides are whole numbers of centimetres. What is the side, in cm, of the larger square?" Answer: **24**. Why: 26 is twice 13, so the 5-12-13 cut doubles to 10 and 24 (100 + 576 = 676 = 26²). It is the only way to write 26² as two whole squares, which `verify.py` checks. Not solved in the video. No calculator needed.

@@ -9,8 +9,6 @@ Checks, in code, every claim the video makes:
     12 x 12 square: exposed as MOVES; the two squares have no gap and no overlap
   * the sides are 5 x 5/13 = 25/13 in. and 12 x 5/13 = 60/13 in., and (25/13)^2 + (60/13)^2 = 25
   * none of the 16 nails touches any cut (every cut sits at a multiple of 5/13 in., never a whole inch)
-  * a second construction that works: 17 x 17 grid, 289 = 225 + 64, six pieces, squares 40/17 and 75/17,
-    no nail touched (check_second_construction)
   * Level 2: the same cut on a 26 cm square gives squares of 10 cm and 24 cm (26^2 = 10^2 + 24^2)
 
 The scene imports everything below. Cells are (col, row), row 0 at the top, in 13 x 13 units.
@@ -50,63 +48,6 @@ BIG_SQUARE = block(0, BIG, 0, BIG)
 
 # Level 2: the same cut on a 26 cm square (each small cell is 2 cm)
 L2_SIDE, L2_BIG, L2_SMALL = 26, 24, 10
-
-
-# Second construction that WORKS: a 17 x 17 grid (cells 5/17 in.), 289 = 225 + 64 = 15^2 + 8^2.
-# Six pieces (not four): A is the 8 x 8 square cut out whole at the bottom-right; the rest of the
-# board is B (stays put) plus four strips that are re-stacked into the 15 x 15 square.
-N2 = 17
-BIG2, SMALL2 = 15, 8
-CELL2 = Fraction(SIDE_IN, N2)
-A2 = block(9, 17, 9, 17)
-P1, P2 = block(15, 17, 0, 6), block(15, 17, 6, 9)      # right strip, 2 x 6 and 2 x 3
-Q1, Q2 = block(0, 6, 15, 17), block(6, 9, 15, 17)      # bottom strip, 6 x 2 and 3 x 2
-B2 = block(0, N2, 0, N2) - A2 - P1 - P2 - Q1 - Q2
-PIECES2 = {"A": A2, "B": B2, "P1": P1, "P2": P2, "Q1": Q1, "Q2": Q2}
-# where the strips go inside the hole left by A in the 15 x 15 square (cols 9-14, rows 9-14)
-P1_MOVED = block(9, 11, 9, 15)                          # slides down and left
-Q1_MOVED = block(11, 13, 9, 15)                         # turned a quarter
-P2_MOVED = block(13, 15, 9, 12)
-Q2_MOVED = block(13, 15, 12, 15)                        # turned a quarter
-
-
-def check_second_construction() -> None:
-    assert N2 * N2 == BIG2 ** 2 + SMALL2 ** 2 == 289
-    whole = block(0, N2, 0, N2)
-    assert set().union(*PIECES2.values()) == whole
-    assert sum(len(p) for p in PIECES2.values()) == N2 * N2           # no overlap
-    # every piece is one connected piece
-    for k, p in PIECES2.items():
-        left = set(p)
-        stack = [left.pop()]
-        while stack:
-            c, r = stack.pop()
-            for n in ((c + 1, r), (c - 1, r), (c, r + 1), (c, r - 1)):
-                if n in left:
-                    left.discard(n)
-                    stack.append(n)
-        assert not left, k
-    # turned strips have the right shape (2 x 6 and 2 x 3 after a quarter turn of 6 x 2 and 3 x 2)
-    assert (len(Q1), len(Q2)) == (len(Q1_MOVED), len(Q2_MOVED)) == (12, 6)
-    assert max(c for c, r in Q1) - min(c for c, r in Q1) == max(r for c, r in Q1_MOVED) - min(r for c, r in Q1_MOVED) == 5
-    assert max(c for c, r in Q2) - min(c for c, r in Q2) == max(r for c, r in Q2_MOVED) - min(r for c, r in Q2_MOVED) == 2
-    # the moved pieces + B tile the 15 x 15 square exactly
-    moved = [B2, P1_MOVED, Q1_MOVED, P2_MOVED, Q2_MOVED]
-    assert sum(len(p) for p in moved) == BIG2 ** 2
-    assert set().union(*moved) == block(0, BIG2, 0, BIG2)
-    # sides
-    s, b = SMALL2 * CELL2, BIG2 * CELL2
-    assert (s, b) == (Fraction(40, 17), Fraction(75, 17)) and s ** 2 + b ** 2 == SIDE_IN ** 2
-    # no nail touches any cut (cut edges are between pieces, or piece and outside)
-    owner = {cell: k for k, p in PIECES2.items() for cell in p}
-    for (c, r), k in owner.items():
-        for dc, dr, a, e in ((1, 0, (c + 1, r), (c + 1, r + 1)), (0, 1, (c, r + 1), (c + 1, r + 1))):
-            o = owner.get((c + dc, r + dr))
-            if o is not None and o != k:
-                (x0, y0), (x1, y1) = (a[0] * CELL2, a[1] * CELL2), (e[0] * CELL2, e[1] * CELL2)
-                for nx, ny in NAILS:
-                    assert not (x0 == x1 == nx and y0 <= ny <= y1 or y0 == y1 == ny and x0 <= nx <= x1)
-    assert all((SIDE_IN * k) % N2 != 0 for k in range(1, N2))      # no cut is on a whole inch
 
 
 def main() -> None:
@@ -161,9 +102,8 @@ def main() -> None:
     assert all((SIDE_IN * k) % N != 0 for k in range(1, N))
 
     # Not unique: area alone allows many pairs of sides (Dudeney: "an infinite number of ways").
-    # We only claim 25/13 and 60/13 is one valid answer; the second construction gives 40/17, 75/17.
-    assert (Fraction(40, 17), Fraction(75, 17)) != (small_in, big_in)
-    check_second_construction()
+    # We only claim 25/13 and 60/13 is one valid answer; 3 and 4 also give 9 + 16 = 25 (but cut on nails).
+    assert 3 ** 2 + 4 ** 2 == SIDE_IN ** 2 and (Fraction(3), Fraction(4)) != (small_in, big_in)
 
     # Level 2
     assert L2_BIG ** 2 + L2_SMALL ** 2 == L2_SIDE ** 2

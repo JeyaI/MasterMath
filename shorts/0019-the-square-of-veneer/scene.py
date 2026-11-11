@@ -2,10 +2,9 @@
 
 Level 1: re-grid the 5 inch board as 13 x 13 (169 = 144 + 25). The 5 x 5 corner comes out whole; the
 L-shape left is cut along grid lines into B, C, D, and C slides, D turns, and they close into 12 x 12.
-Cuts sit at multiples of 5/13 inch, so no nail is touched. A second construction uses 17 x 17
-(289 = 225 + 64). Level 2: the same cut on a 26 cm square.
+Cuts sit at multiples of 5/13 inch, so no nail is touched. Level 2: the same cut on a 26 cm square.
 
-Every shape and number comes from verify.py (PIECES, MOVES, C_MOVED, D_MOVED, PIECES2, ...).
+Every shape and number comes from verify.py (PIECES, MOVES, C_MOVED, D_MOVED, ...).
 """
 from __future__ import annotations
 
@@ -27,17 +26,15 @@ from lib.layout import ACCENT, BG, GOOD, GRID, INK, MUTED, PIECES as COL, STAGE_
 from lib.components import CENTRE_X, Captions, badge, beat, countdown, footer, hook, label  # noqa: E402
 from lib.audio import write_sfx  # noqa: E402
 from verify import (  # noqa: E402
-    A, B, BIG, C, C_MOVED, CELL as CELL_IN, D, D_MOVED, L2_BIG, L2_SIDE, L2_SMALL, N, N2, NAILS, PIECES2,
-    P1_MOVED, P2_MOVED, Q1_MOVED, Q2_MOVED, SIDE_IN, SMALL,
+    A, B, BIG, C, C_MOVED, D, D_MOVED, L2_BIG, L2_SIDE, L2_SMALL, N, NAILS, SIDE_IN, SMALL,
 )
 
 SFX = {k: str(v) for k, v in write_sfx(REPO / "assets" / "sfx").items()}
 
 CELL, GX, GY = 0.44, -0.9, 0.7            # 13 x 13 board
-CELL2, GX2, GY2 = 0.32, -0.9, 0.5         # 17 x 17 board
 TOP_NUM_Y = 6.5
 BLUE, ORANGE, GREEN, PINK = COL[1], COL[0], COL[2], COL[3]
-assert (N, N2, BIG, SMALL) == (13, 17, 12, 5) and len(NAILS) == 16 and SIDE_IN == 5
+assert (N, BIG, SMALL) == (13, 12, 5) and len(NAILS) == 16 and SIDE_IN == 5
 
 
 def wrap(text: str) -> str:
@@ -228,41 +225,6 @@ class Short(Scene):
         assemble(0.6, 0.35, 0.45)
         self.play(FadeIn(big_lab, shift=0.2 * UP), FadeIn(small_lab, shift=0.2 * UP),
                   Flash(centre(P, D_MOVED | C_MOVED), color=GOOD, flash_radius=2.2), run_time=0.6)
-        self.wait(1.0)
-
-        # --- a second construction: 17 x 17 ---------------------------------------------------------
-        beat(self, "second construction")
-        old = [m for m in self.mobjects if m is not cap.current]
-        P2 = grid_fn(CELL2, GX2, GY2, N2)
-        W2 = N2 * CELL2
-        names = {"A": PINK, "B": BLUE, "P1": ORANGE, "P2": ORANGE, "Q1": GREEN, "Q2": GREEN}
-        pcs = {k: piece(P2, CELL2, PIECES2[k], names[k]) for k in PIECES2}
-        cnt2 = counter("289 = 225 + 64")
-        say("Another way: use a 17 by 17 grid, since 289 is 225 plus 64.", extra=[
-            *[FadeOut(m) for m in old], *[FadeIn(g) for g in pcs.values()], FadeIn(cnt2, shift=0.3 * DOWN)],
-            run_time=0.9)
-        self.remove(*old)
-        nails17 = VGroup(*[nail(P2(-0.5 + i * N2 / SIDE_IN, -0.5 + j * N2 / SIDE_IN), GOOD) for i, j in NAILS])
-        self.add_sound(SFX["pop"], gain=-4)
-        self.play(LaggedStart(*[GrowFromCenter(n) for n in nails17], lag_ratio=0.04), run_time=0.7)
-        self.wait(0.2)
-        target2 = np.array([1.75, 4.68, 0.0])
-        lift2 = target2 - centre(P2, PIECES2["A"])
-        self.add_sound(SFX["snip"])
-        self.play(FadeOut(nails17), pcs["A"].animate.shift(lift2), run_time=0.8)
-
-        moved = {"P1": P1_MOVED, "P2": P2_MOVED, "Q1": Q1_MOVED, "Q2": Q2_MOVED}
-        self.add_sound(SFX["snip"])
-        say("Stack the cut strips into a 15 by 15 square: 40/17 and 75/17 ✓", GOOD, run_time=0.5)
-        self.play(*[pcs[k].animate.shift(centre(P2, moved[k]) - centre(P2, PIECES2[k])) for k in ("P1", "P2")],
-                  run_time=0.8)
-        self.play(Rotate(pcs["Q1"], PI / 2), Rotate(pcs["Q2"], PI / 2), run_time=0.4)
-        self.play(*[pcs[k].animate.move_to(centre(P2, moved[k])) for k in ("Q1", "Q2")], run_time=0.7)
-        sq15 = set((c, r) for c in range(15) for r in range(15))
-        l2big = label("75/17 in", 60, BG).move_to(centre(P2, sq15) + [-0.5, 0.8, 0])
-        l2small = label("40/17 in", 36, BG).move_to(target2)
-        self.play(FadeIn(l2big, shift=0.2 * UP), FadeIn(l2small, shift=0.2 * UP),
-                  Flash(centre(P2, sq15), color=GOOD, flash_radius=2.0), run_time=0.6)
         self.wait(1.0)
 
         # --- Level 2 -------------------------------------------------------------------------------------
