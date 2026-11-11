@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0018'
 title: The Grand Lama's Problem
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-291
 tags:
   - chessboard
@@ -104,7 +104,8 @@ level2:
     same size and shape. How many squares does each part hold?"
   answer: 20
   accept: [20, "20 squares", "twenty", "20 each", "twenty squares"]
-  why: "The board has 10 x 10 = 100 squares, and 5 equal parts share them equally: 100 / 5 = 20."
+  why: "The board has 10 x 10 = 100 squares, and 5 equal parts share them equally: 100 / 5 = 20. Such
+    a cut exists, and verify.py builds one and checks it."
 captions:
   - "Can you cut this board into four identical parts, one gem in each?"
   - "A Grand Lama has a golden chessboard with four gems."
@@ -137,8 +138,9 @@ youtube:
   published_at:
 review:
   thread_id: '1569593067957260358'
-  version: 1
+  version: 2
   messages:
     1: '1569593072046702613'
+    2: '1569878179076907079'
   last_seen: '1569877812519764039'
-  comment: Is level 2 even possible? Is there a solution for that?
+  comment:

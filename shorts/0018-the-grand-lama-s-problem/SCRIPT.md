@@ -37,7 +37,7 @@ Checked against: the `SCRIPT.md` of 0014 (quilt: squares built up one by one), 0
 The beats before the final hold add up to 4+3+2+3+2+5+3+3+4+4+4+3+3+2 = 45 s, then the 12 s hold.
 
 ## Level 2
-"The Grand Lama's next board is 10 by 10, and he wants it cut into 5 parts of exactly the same size and shape. How many squares does each part hold?" Answer: **20**. Why: 100 squares shared equally by 5 parts. (Same idea as the main puzzle, equal parts must share the squares equally, one step further; no cutting needed.)
+"The Grand Lama's next board is 10 by 10, and he wants it cut into 5 parts of exactly the same size and shape. How many squares does each part hold?" Answer: **20**. Why: 100 squares shared equally by 5 parts. Yes, such a cut exists (`verify.py` builds and checks one: 5 identical pieces tiling the 10 x 10 board), so the question is well posed. (Reviewer asked whether Level 2 is possible; it is, and the answer is checked in code.) (Same idea as the main puzzle, equal parts must share the squares equally, one step further; no cutting needed.)
 
 ## Music
 `gymnopedie-1`, the least recently used key (0012, 0006), slow and sparse for a quiet puzzle.

@@ -134,6 +134,12 @@ def main() -> None:
 
     # Level 2
     assert L2_SIZE * L2_SIZE // L2_PIECES == L2_EACH and L2_SIZE * L2_SIZE % L2_PIECES == 0
+    # ...and such a cut really exists: a witness of 5 identical pieces tiling the 10 x 10 board
+    k = L2_SIZE // L2_PIECES
+    witness = [{(r, c) for r in range(k * i, k * i + k) for c in range(L2_SIZE)} for i in range(L2_PIECES)]
+    assert set().union(*witness) == {(r, c) for r in range(L2_SIZE) for c in range(L2_SIZE)}
+    assert all(len(p) == L2_EACH for p in witness)
+    assert all(normal(p) == normal(witness[0]) for p in witness)
 
     print("OK  4 pieces of 16 squares, one gem each, all the same shape; maps from piece 1:", MAPS,
           f"; level2 {L2_SIZE}x{L2_SIZE} in {L2_PIECES} -> {L2_EACH} each")
