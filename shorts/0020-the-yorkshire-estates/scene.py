@@ -25,7 +25,7 @@ from lib.layout import ACCENT, BG, GOOD, GRID, INK, MUTED, PIECES as COL, TITLE_
 from lib.components import CENTRE_X, Captions, badge, beat, countdown, label  # noqa: E402
 from lib.audio import write_sfx  # noqa: E402
 from verify import (  # noqa: E402
-    A, AREA_A, AREA_B, AREA_C, B, C, D, E, F, L2_AREAS, L2_BOX, L2_PTS, LEGS,
+    A, AREA_A, AREA_B, AREA_C, B, C, D, E, F, L2_AREAS, L2_PTS, LEGS, sq,
 )
 
 SFX = {k: str(v) for k, v in write_sfx(REPO / "assets" / "sfx").items()}
@@ -34,7 +34,8 @@ BLUE, ORANGE, GREEN, PINK = COL[1], COL[0], COL[2], COL[3]
 S1, S2, S3 = 0.18, 0.37, 0.8            # scale of the squares figure, the grid view, the Level 2 card
 O1 = np.array([CENTRE_X - 10.5 * S1, 1.25 - 8 * S1, 0.0])      # squares figure spans x -5..26, y -10..26
 O2 = np.array([CENTRE_X - 17 * S2 / 2, 0.9, 0.0])
-O3 = np.array([CENTRE_X - L2_BOX[0] * S3 / 2, 0.3, 0.0])
+S3 = 0.42                                # Level 2 figure spans x -4..8, y -5..7
+O3 = np.array([CENTRE_X - 2 * S3, -0.9 + 5 * S3, 0.0])
 COUNTER_Y = -1.5
 
 
@@ -221,34 +222,26 @@ class Short(Scene):
         self.play(*[FadeOut(m) for m in list(self.mobjects)], run_time=0.3)
         self.clear()
         P3 = lambda p: pt(O3, S3, p)
-        w, h = L2_BOX
-        gl = VGroup(*[Line(P3((x, 0)), P3((x, h)), color=MUTED, stroke_width=1.5) for x in range(w + 1)],
-                    *[Line(P3((0, y)), P3((w, y)), color=MUTED, stroke_width=1.5) for y in range(h + 1)])
-        gl.set_stroke(opacity=0.6)
-        frame = Polygon(P3((0, 0)), P3((w, 0)), P3((w, h)), P3((0, h)), stroke_color=MUTED,
-                        stroke_width=3, fill_color=GRID, fill_opacity=0.5)
         p, q, r = L2_PTS
         tri3 = Polygon(*[P3(x) for x in L2_PTS], stroke_color=ACCENT, stroke_width=5,
-                       fill_color=ACCENT, fill_opacity=0.85)
-        mids = {}
-        for (a, b), area, col in zip(((p, q), (q, r), (r, p)), (26, 18, 20), (BLUE, GREEN, PINK)):
-            m = (np.array(a) + np.array(b)) / 2
-            c = np.array([w / 2, h / 2])
-            out = m + (m - c) / np.linalg.norm(m - c) * 0.0
-            mids[area] = (out, col)
-        sq_labels = VGroup(
-            tag("26", P3((3.9, -0.55)), 56, BLUE),     # under side (0,0)-(5,1)
-            tag("18", P3((4.1, 3.0)), 56, GREEN),      # right of side (5,1)-(2,4)
-            tag("20", P3((0.55, 2.4)), 56, PINK),      # left of side (2,4)-(0,0)
-        )
+                       fill_color=ACCENT, fill_opacity=0.9)
+        l2_sq = []
+        for (a, b), third, area, col in zip(((p, q), (q, r), (r, p)), (r, p, q), (26, 18, 20),
+                                            (BLUE, GREEN, PINK)):
+            corners = outward_square(a, b, third)
+            assert sq(a, b) == area
+            poly = Polygon(*[P3(c) for c in corners], stroke_color=col, stroke_width=4,
+                           fill_color=col, fill_opacity=0.35)
+            l2_sq.append((poly, tag(str(area), P3(np.mean(np.array(corners), axis=0)), 56, INK)))
+        sq_labels = VGroup(*[t for _, t in l2_sq])
         assert sorted(L2_AREAS) == [18, 20, 26]
-        tg = badge("LEVEL 2").move_to([CENTRE_X, 6.3, 0])
+        tg = badge("LEVEL 2").move_to([CENTRE_X, 6.5, 0])
         sub = label("Three squares of 26, 20 and 18 acres\nsit on the sides of this triangle.", 44, INK)
-        sub.move_to([CENTRE_X, 4.9, 0])
+        sub.move_to([CENTRE_X, 5.3, 0])
         ask = label("triangle: ? acres", 72, ACCENT).move_to([CENTRE_X, -1.6, 0])
         self.add_sound(SFX["chime"], gain=-8)
         self.play(GrowFromCenter(tg), run_time=0.4)
-        self.play(FadeIn(frame), Create(gl), FadeIn(sub), run_time=0.8)
+        self.play(FadeIn(sub), *[GrowFromCenter(s) for s, _ in l2_sq], run_time=0.8)
         self.play(GrowFromCenter(tri3), run_time=0.5)
         self.play(LaggedStart(*[FadeIn(t, scale=0.6) for t in sq_labels], lag_ratio=0.25), run_time=0.8)
         cap.show("Level 2: squares of 26, 20 and 18 acres meet round a triangle.", run_time=0.5)

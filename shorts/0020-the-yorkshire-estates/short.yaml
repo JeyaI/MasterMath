@@ -132,6 +132,24 @@ review:
   last_seen: '1570169244295888949'
 video:
   pending:
+    version: 2
+    file: /home/jeya/mathshorts/out/review/0020-the-yorkshire-estates/v2.mp4
+    sha256: c97a25b556a0cf64dce6e128475e367b9930553fef6308e2bb7a8536204087fa
+    summary: The Level 2 card now draws the three squares (26, 20 and 18) on the sides of the 
+      triangle, in the same style as the main figure. The grid box that was there before is gone. 
+      Each square is built from `verify.py`'s points and checked against its area. `ms verify` 
+      passes and `ms check` reports no errors. The one warning is the 58 s length, which was already
+      over the 40–50 s target before this change. A frame from the new card looks clean.
+    usage:
+      job: revise_video
+      short: 0020-the-yorkshire-estates
+      exit: 0
+      seconds: 74
+      subtype: success
+      is_error: false
+      num_turns: 16
+      total_cost_usd: 0.18682970000000002
+      log: job-revise_video-20261111-151505.jsonl
   version: 1
   versions:
     1:
