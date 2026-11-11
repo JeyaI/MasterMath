@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0018'
 title: The Grand Lama's Problem
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-291
 tags:
   - chessboard
@@ -144,7 +144,7 @@ review:
     2: '1569878179076907079'
     3: '1569879446347849760'
     4: '1569881996346400898'
-  last_seen: '1569880616349212895'
+  last_seen: '1570072421476737045'
   comment:
 video:
   pending:
@@ -154,6 +154,7 @@ video:
       file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v1.mp4
       sha256: bd86a0e5cc1a5080f3f557d891d7aa83324c31874abf4016c72cf89515173122
       message: '1569890893027213423'
-  comment:
+  comment: Pacing is way too fast in the beginning for the amount of text shown. Show a failed 
+    attempt before asking the audience to try it
   warned:
   as_is:
