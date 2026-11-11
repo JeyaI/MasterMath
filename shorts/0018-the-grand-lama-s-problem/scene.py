@@ -86,18 +86,18 @@ class Short(Scene):
         credit = footer("After H. E. Dudeney, Amusements in Mathematics")
         self.play(FadeIn(title, shift=0.3 * DOWN), FadeIn(credit), run_time=0.5)
         cap.show("Can you cut this board into four identical parts, one gem in each?")
-        self.wait(0.8)
+        self.wait(2.0)
 
         # --- the rules ----------------------------------------------------------------------------
         self.add_sound(SFX["chime"], gain=-8)
         cap.show("A Grand Lama has a golden chessboard with four gems.", extra=[
             FadeOut(title), *[Flash(g, color=ACCENT, flash_radius=0.7, line_length=0.25) for g in gems]],
             run_time=0.8)
-        self.wait(0.5)
+        self.wait(1.8)
 
         diag = grid_line((0, 0), (4, 4), INK, 7)
         cap.show("The gems sit in a row along the diagonal.", extra=[Create(diag)], run_time=0.8)
-        self.wait(0.5)
+        self.wait(1.5)
         self.play(FadeOut(diag), run_time=0.3)
 
         sketch = VGroup(grid_line((0, 3), (8, 3), ACCENT, 8), grid_line((5, 3), (5, 8), ACCENT, 8),
@@ -105,11 +105,23 @@ class Short(Scene):
         self.add_sound(SFX["snip"])
         cap.show("Cut along the lines into four parts of the same size and shape.", extra=[
             LaggedStart(*[Create(s) for s in sketch], lag_ratio=0.4)], run_time=1.4)
-        self.wait(0.4)
+        self.wait(2.0)
         cap.show("Every part must hold exactly one gem.", extra=[FadeOut(sketch)], run_time=0.5)
         self.add_sound(SFX["pop"], gain=-4)
         self.play(*[Indicate(g, color=ACCENT, scale_factor=1.5) for g in gems], run_time=0.9)
-        self.wait(0.2)
+        self.wait(1.4)
+
+        # --- a failed attempt, shown before the audience tries ------------------------------------
+        quarter = VGroup(*[sq(r, c, PIECES[0], 0.45) for r in range(4) for c in range(4)]).set_z_index(3)
+        cross = VGroup(grid_line((0, 4), (8, 4), INK, 9), grid_line((4, 0), (4, 8), INK, 9))
+        self.add_sound(SFX["snip"])
+        cap.show("Let me try the obvious cut: four equal quarters.", extra=[Create(cross)], run_time=1.2)
+        self.wait(1.8)
+        cap.show("That fails, because one quarter holds every gem.")
+        self.add_sound(SFX["pop"], gain=-4)
+        self.play(FadeIn(quarter), *[Indicate(g, color=RED, scale_factor=1.6) for g in gems], run_time=0.9)
+        self.wait(1.8)
+        self.play(FadeOut(cross), FadeOut(quarter), run_time=0.4)
 
         # --- pause and try ------------------------------------------------------------------------
         disc = Cell(side_length=2.6, stroke_width=0, fill_color=BG, fill_opacity=0.92).move_to([GX, GY, 0])
@@ -119,19 +131,10 @@ class Short(Scene):
         self.play(FadeOut(disc), run_time=0.3)
 
         # --- obvious cuts fail ---------------------------------------------------------------------
-        quarter = VGroup(*[sq(r, c, PIECES[0], 0.45) for r in range(4) for c in range(4)]).set_z_index(3)
-        cross = VGroup(grid_line((0, 4), (8, 4), INK, 9), grid_line((4, 0), (4, 8), INK, 9))
-        self.add_sound(SFX["snip"])
-        cap.show("Four quarters fail, because one quarter holds every gem.", extra=[Create(cross)], run_time=0.9)
-        self.add_sound(SFX["pop"], gain=-4)
-        self.play(FadeIn(quarter), *[Indicate(g, color=RED, scale_factor=1.6) for g in gems], run_time=0.9)
-        self.wait(0.6)
-
         strips = VGroup(*[grid_line((k, 0), (k, 8), INK, 9) for k in (2, 4, 6)])
         redo = VGroup(*[sq(r, c, RED, 0.4) for r in range(4) for c in range(N)]).set_z_index(3)
         self.add_sound(SFX["snip"])
-        cap.show("Straight strips fail too, so the parts must bend.", extra=[
-            FadeOut(cross), FadeOut(quarter), Create(strips)], run_time=0.9)
+        cap.show("Straight strips fail as well, so the parts must bend.", extra=[Create(strips)], run_time=0.9)
         self.add_sound(SFX["pop"], gain=-4)
         self.play(FadeIn(redo), *[Indicate(g, color=RED, scale_factor=1.6) for g in gems[:2]], run_time=0.9)
         self.wait(0.6)

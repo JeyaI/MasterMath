@@ -112,9 +112,10 @@ captions:
   - "The gems sit in a row along the diagonal."
   - "Cut along the lines into four parts of the same size and shape."
   - "Every part must hold exactly one gem."
+  - "Let me try the obvious cut: four equal quarters."
+  - "That fails, because one quarter holds every gem."
   - "Pause and try it."
-  - "Four quarters fail, because one quarter holds every gem."
-  - "Straight strips fail too, so the parts must bend."
+  - "Straight strips fail as well, so the parts must bend."
   - "Start with a long hook that wraps around the first gem."
   - "Turn the hook a quarter turn, and it fits around the next gem."
   - "Turn it again and again, until the board is full."
@@ -148,6 +149,25 @@ review:
   comment:
 video:
   pending:
+    version: 2
+    file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v2.mp4
+    sha256: b05422f17c81200d28e4e5d87659a17deb70c4eac634969267f7e73dbc135180
+    summary: 'The opening is slower: the pauses after the question, the rules, the diagonal, the cut lines
+      and the one-gem rule are each about 1.5–2 s longer. A failed attempt now comes before "Pause and
+      try it": the quarter cut is shown and fails, in two captions. Straight strips stay after the pause.
+      SCRIPT.md, short.yaml captions and scene.py are updated; verify passes, and check has no errors.
+      It does warn that the video is now 60.4 s, over the 40–50 s target, which is a target and not a
+      cap.'
+    usage:
+      job: revise_video
+      short: 0018-the-grand-lama-s-problem
+      exit: 0
+      seconds: 82
+      subtype: success
+      is_error: false
+      num_turns: 24
+      total_cost_usd: 0.24856910000000004
+      log: job-revise_video-20261111-085005.jsonl
   version: 1
   versions:
     1:
