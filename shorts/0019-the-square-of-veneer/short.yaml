@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0019'
 title: The Square Of Veneer
-status: animating
+status: video_review
 catalog_id: dudeney-amusements-159
 tags:
   - dissection
@@ -163,23 +163,12 @@ review:
   comment:
 video:
   pending:
-    version: 1
-    file: /home/jeya/mathshorts/out/review/0019-the-square-of-veneer/v1.mp4
-    sha256: a7f5bb7a82a8765eb696a6c3fd745bc69b0a1f01f3e61f7a28f3a6743013f55e
-    summary: "The final preview (v3) runs 57.7 s, with a 12 s hold, so it is over the 40–50 s target.
-      That is the only warning; `ms check` and `ms verify` are otherwise clean. The second 17 by 17 construction
-      takes about 6 s, and cutting it is the easiest way to shorten the Short.\nChanges to short.yaml
-      captions: I removed the hook line, since other Shorts don't list it, and reworded three captions.
-      The payoff is now \"So one answer is 25/13 inch and 60/13 inch ✓\" so its numbers match the Level
-      1 answer, and the two others were shortened.\nThe nails are shown on the original cut layout, so
-      the pieces slide back for that beat and then slide into the squares again for the payoff."
-    usage:
-      job: animate
-      short: 0019-the-square-of-veneer
-      exit: 0
-      seconds: 513
-      subtype: success
-      is_error: false
-      num_turns: 87
-      total_cost_usd: 1.1269069000000003
-      log: job-animate-20261111-134006.jsonl
+  version: 1
+  versions:
+    1:
+      file: /home/jeya/mathshorts/out/review/0019-the-square-of-veneer/v1.mp4
+      sha256: a7f5bb7a82a8765eb696a6c3fd745bc69b0a1f01f3e61f7a28f3a6743013f55e
+      message: '1570148741191696434'
+  comment:
+  warned:
+  as_is:
