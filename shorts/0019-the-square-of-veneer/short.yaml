@@ -1,0 +1,158 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0019'
+title: The Square Of Veneer
+status: script_review
+catalog_id: dudeney-amusements-159
+tags:
+  - dissection
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 159
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    The following represents a piece of wood in my possession, 5 in. square.
+    By markings on the surface it is divided into twenty-five square inches.
+    I want to discover a way of cutting this piece of wood into the fewest
+    possible pieces that will fit together and form two perfect squares of
+    different sizes and of known dimensions. But, unfortunately, at every
+    one of the sixteen intersections of the cross lines a small nail has
+    been driven in at some time or other, and my fret-saw will be injured if
+    it comes in contact with any of these. I have therefore to find a method
+    of doing the work that will not necessitate my cutting through any of
+    those sixteen points. How is it to be done? Remember, the exact
+    dimensions of the two squares must be given.
+
+    [Illustration]
+  solution: |
+    [Illustration:
+
+        +---+---+---+---+---+---+---+---+---+---+---+---+---+
+        |   |   |  :|   |   |:  |   |  :|   |   |:  |  ||   |
+        |   |   |  :|   |   |:  |   |  :|   |   |:  |  ||   |
+        +---+---+---+---+---+---+---+---+---+---+---+---+---+
+        |   |   |  :|   |   |:  |   |  :|   |   |:  |  ||   |
+        |   |   |  :|   |   |:  |   |  :|   |   |:  |  ||   |
+        +---+---+---+---+---+---+---+---+---+---+---+---+---+
+        |   |   |  :|   |   |:  |   |  :|   |   |:  |  ||   |
+        |_ _|___|__:|___|___|:__|___|__:|___|___|:__|__||___|
+        +---+---+---+---+---+---+---+---+---+---+---+---+---+
+        |   |   |  :|   |   |:  |   |  :|   |   |:  |  ||   |
+        |   |   |  :|   |   |:  |   |  :|   |   |:  |  ||   |
+        +---+---+---+---+---+---+---+---+---+---+===+===+---+
+        |   |   |  :|   |   |:  |   |  :|   |  ||:  |   |   |
+        |   |   |  :|   |   |:  |   |  :|   |  ||:  |   |   |
+        +---+---+---+---+---+---+---+---+---+---+---+---+---+
+        |¯¯¯|¯¯¯|¯¯:|¯¯¯|¯¯¯|:¯¯|¯¯¯|¯¯:|¯¯¯|¯¯||:¯¯|¯¯¯|¯¯¯|
+        |   |   |  :|   |   |:  |   |  :|   |  ||:  |   |   |
+        +---+---+---+---+---+---+---+---+---+---+---+---+---+
+        |   |   |  :|   |   |:  |   |  :|   |  ||:  |   |   |
+        |   |   |  :|   |   |:  | B |  :|   |  ||:  | C |   |
+        +---+---+---+---+---+---+---+---+---+---+---+---+---+
+        |   |   |  :|   |   |:  |   |  :|   |  ||:  |   |   |
+        |_ _|___|__:|___|___|:__|___|__:|___|__||:__|___|___|
+        +---+---+---+---+---+---+---+---+===+===+===+===+===+
+        |   |   |  :|   |   |:  |   |  :||  |   |:  |   |   |
+        |   |   |  :|   |   |:  |   |  :||  |   |:  |   |   |
+        +---+---+---+---+---+---+---+---+---+---+---+---+---+
+        |   |   |  :|   |   |:  |   |  :||  |   |:  |   |   |
+        |   |   |  :|   |   |:  |   |  :||  |   |:  | A |   |
+        +---+---+---+---+---+---+---+---+---+---+---+---+---+
+        |¯¯¯|¯¯¯|¯¯:|¯¯¯|¯¯¯|:¯¯|¯¯¯|¯¯:||¯¯|¯¯¯|:¯¯|¯¯¯|¯¯¯|
+        |   |   |  :|   |   |:  |   |  :||  |   |:  |   |   |
+        +---+---+---+---+---+---+---+---+---+---+---+---+---+
+        |   |   |  :|   |   |:  |   |  :||  |   |:  |   |   |
+        |   |   |  :|   |   |:  |   |  :||  |   |:  |   |   |
+        +===+===+===+===+===+===+===+===+---+---+---+---+---+
+        |   |   |  :|   |   |:  |   |  :||  |   |:  |   |   |
+        |   |   |  :|   | D |:  |   |  :||  |   |:  |   |   |
+        +---+---+---+---+---+---+---+---+===+===+===+===+===+
+
+    ]
+
+    Any square number may be expressed as the sum of two squares in an
+    infinite number of different ways. The solution of the present puzzle
+    forms a simple demonstration of this rule. It is a condition that we
+    give actual dimensions.
+
+    In this puzzle I ignore the known dimensions of our square and work on
+    the assumption that it is 13n by 13n. The value of n we can afterwards
+    determine. Divide the square as shown (where the dotted lines indicate
+    the original markings) into 169 squares. As 169 is the sum of the two
+    squares 144 and 25, we will proceed to divide the veneer into two
+    squares, measuring respectively 12 × 12 and 5 × 5; and as we know that
+    two squares may be formed from one square by dissection in four pieces,
+    we seek a solution in this number. The dark lines in the diagram show
+    where the cuts are to be made. The square 5 × 5 is cut out whole, and
+    the larger square is formed from the remaining three pieces, B, C, and
+    D, which the reader can easily fit together.
+
+    Now, n is clearly 5/13 of an inch. Consequently our larger square must
+    be 60/13 in. × 60/13 in., and our smaller square 25/13 in. × 25/13 in.
+    The square of 60/13 added to the square of 25/13 is 25. The square is
+    thus divided into as few as four pieces that form two squares of known
+    dimensions, and all the sixteen nails are avoided.
+
+    Here is a general formula for finding two squares whose sum shall equal
+    a given square, say a². In the case of the solution of our puzzle p = 3,
+    q = 2, and a = 5.
+
+                             ________________________
+           2pqa           \/ a²( p² + q²)² - (2pqa)²
+         --------- = x;   --------------------------- = y
+          p² + q²                  p² + q²
+
+        Here x² + y² = a².
+level1:
+  statement: "A square board, 5 inches on a side, has a nail at each of the 16 crossings of its one-inch
+    grid. Cut it into four pieces, with cuts that touch no nail, so that the pieces fit together to make
+    two different squares. What are the exact sides of the two squares?"
+  answer: "25/13 inch and 60/13 inch."
+  insight: "Cut the board along a 13 by 13 grid of small squares, each 5/13 inch wide. Since 169 = 144
+    + 25, a 5 by 5 square comes out whole in the corner, and the leftover L-shape is cut into two staircases
+    and a thin strip that slide into a 12 by 12 square. Grid lines are 5/13 inch apart, so none ever lands
+    on a whole inch, and no nail is touched."
+level2:
+  statement: "A 26 cm square board is cut the same way into two squares whose sides are whole numbers
+    of centimetres. What is the side, in cm, of the larger square?"
+  answer: 24
+  accept: [24, "24 cm", "24cm", "twenty-four", "twenty four", "24 centimetres", "24 centimeters"]
+  why: "26 is twice 13, so every length in the 5-12-13 cut doubles: the squares have sides 10 and 24,
+    and 10 x 10 + 24 x 24 = 100 + 576 = 676 = 26 x 26. It is the only way to split 26 squared into two
+    whole squares."
+captions:
+  - "Can you cut this square into four pieces that make two squares?"
+  - "This 5 inch board has 16 nails, and the saw must not touch any."
+  - "The four pieces must fit together into two perfect squares."
+  - "What are the exact sides of the two squares?"
+  - "Pause and try it."
+  - "Slice the board into a 13 by 13 grid of small squares."
+  - "Notice that 169 is 144 plus 25, which is 12 squared plus 5 squared."
+  - "So cut a 5 by 5 square out whole; the rest must become 12 by 12."
+  - "Cut the L into two staircases and one thin strip."
+  - "Slide the staircase down, stand the strip upright, and it all fits."
+  - "The grid lines are 5/13 inch apart, so no cut ever meets a nail."
+  - "Each small square is 5/13 inch: the sides are 25/13 and 60/13 ✓"
+  - "Level 2: a 26 cm square is cut the same way."
+  - "It makes two squares with whole number sides. How long is the larger side, in cm?"
+  - "Comment just the number ↓"
+music:
+  piece: k545
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "Cut a square into 4 pieces that make 2 squares, without touching a nail"
+  description: |
+    A 5 inch square board has a nail at each of its 16 grid crossings. Cut it into four pieces, missing every nail, that fit together into two squares. What are their sides? Level 2: a 26 cm square is cut the same way. Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 159. Music: W. A. Mozart, Piano Sonata in C, K. 545.
+  tags:
+    - math puzzle
+    - puzzle
+  video_id:
+  url:
+  published_at:
+review:
+  thread_id: '1569880219999936657'
+  version: 1
+  messages:
+    1: '1569880223149850637'
+  last_seen: '1569880223149850637'
