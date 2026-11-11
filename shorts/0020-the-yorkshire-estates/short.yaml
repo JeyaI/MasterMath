@@ -144,5 +144,6 @@ video:
       sha256: c97a25b556a0cf64dce6e128475e367b9930553fef6308e2bb7a8536204087fa
       message: '1570170639510274158'
   comment:
-  warned:
+  warned: "⚠️ Couldn't upload or schedule v2: ||the YouTube token no longer works (('invalid_grant: Token
+    has been expired or revok"
   as_is:
