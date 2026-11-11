@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0018'
 title: The Grand Lama's Problem
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-291
 tags:
   - chessboard
@@ -100,11 +100,11 @@ level1:
     bottom, ending in a small curl. Turn it a quarter turn and it fits around the next gem. Three more
     turns give the four parts, 16 squares each, one gem in each."
 level2:
-  statement: "The Grand Lama's next board is 10 by 10, and he wants it cut into 5 parts of exactly the
+  statement: "The Grand Lama's next board is 12 by 12, and he wants it cut into 9 parts of exactly the
     same size and shape. How many squares does each part hold?"
-  answer: 20
-  accept: [20, "20 squares", "twenty", "20 each", "twenty squares"]
-  why: "The board has 10 x 10 = 100 squares, and 5 equal parts share them equally: 100 / 5 = 20. Such
+  answer: 16
+  accept: [16, "16 squares", "sixteen", "16 each", "sixteen squares"]
+  why: "The board has 12 x 12 = 144 squares, and 9 equal parts share them equally: 144 / 9 = 16. Such
     a cut exists, and verify.py builds one and checks it."
 captions:
   - "Can you cut this board into four identical parts, one gem in each?"
@@ -119,8 +119,7 @@ captions:
   - "Turn the hook a quarter turn, and it fits around the next gem."
   - "Turn it again and again, until the board is full."
   - "Four identical hooks of 16 squares, one gem each ✓"
-  - "Level 2: a 10 by 10 board is cut into 5 equal parts."
-  - "Here is the cut: five identical strips, side by side."
+  - "Level 2: a 12 by 12 board is cut into 9 equal parts."
   - "How many squares does each part hold?"
   - "Comment just the number ↓"
 music:
@@ -129,7 +128,7 @@ music:
 youtube:
   title: "Can you cut this golden chessboard into 4 identical parts?"
   description: |
-    A chessboard has four gems on its diagonal. Cut it along the lines into four parts of the same size and shape, with one gem in each. Level 2: a 10 by 10 board is cut into 5 equal parts. Comment just the number.
+    A chessboard has four gems on its diagonal. Cut it along the lines into four parts of the same size and shape, with one gem in each. Level 2: a 12 by 12 board is cut into 9 equal parts. Comment just the number.
     After H. E. Dudeney, Amusements in Mathematics (1917), no. 291. Music: Erik Satie, Gymnopédie No. 1.
   tags:
     - math puzzle
@@ -139,10 +138,11 @@ youtube:
   published_at:
 review:
   thread_id: '1569593067957260358'
-  version: 3
+  version: 4
   messages:
     1: '1569593072046702613'
     2: '1569878179076907079'
     3: '1569879446347849760'
+    4: '1569881996346400898'
   last_seen: '1569880616349212895'
-  comment: Let's do 12x12 with 9 parts. No need to show the construction this time.
+  comment:

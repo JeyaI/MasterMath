@@ -30,15 +30,14 @@ Checked against: the `SCRIPT.md` of 0014 (quilt: squares built up one by one), 0
 10. "Turn the hook a quarter turn, and it fits around the next gem." ghost copy turns and lands on piece 2 (4 s)
 11. "Turn it again and again, until the board is full." pieces 3 and 4 (4 s)
 12. "Four identical hooks of 16 squares, one gem each ✓" payoff (3 s)
-13. "Level 2: a 10 by 10 board is cut into 5 equal parts." (3 s) the plain 10 x 10 board appears
-14. "Here is the cut: five identical strips, side by side." (4 s) four cut lines draw across and the five strips fill in with five colours (the construction is shown, the count is not)
-15. "How many squares does each part hold?" (2 s)
-16. "Comment just the number ↓" held about 12 s
+13. "Level 2: a 12 by 12 board is cut into 9 equal parts." (4 s) the plain 12 x 12 board appears; the cut is not shown
+14. "How many squares does each part hold?" (3 s)
+15. "Comment just the number ↓" held about 12 s
 
-The beats before the final hold add up to 4+3+2+3+2+5+3+3+4+4+4+3+3+4+2 = 49 s, then the 12 s hold.
+The beats before the final hold add up to 4+3+2+3+2+5+3+3+4+4+4+3+4+3 = 47 s, then the 12 s hold.
 
 ## Level 2
-"The Grand Lama's next board is 10 by 10, and he wants it cut into 5 parts of exactly the same size and shape. How many squares does each part hold?" Answer: **20**. Why: 100 squares shared equally by 5 parts. Yes, such a cut exists (`verify.py` builds and checks one: 5 identical 2 x 10 strips tiling the 10 x 10 board, exported as `L2_PIECES_CELLS` and drawn in the video, without the count), so the question is well posed. (Reviewer asked whether Level 2 is possible; it is, and the answer is checked in code.) (Same idea as the main puzzle, equal parts must share the squares equally, one step further; no cutting needed.)
+"The Grand Lama's next board is 12 by 12, and he wants it cut into 9 parts of exactly the same size and shape. How many squares does each part hold?" Answer: **16**. Why: 144 squares shared equally by 9 parts. Such a cut exists (`verify.py` checks a witness: 9 identical 4 x 4 blocks tiling the 12 x 12 board, as `L2_PIECES_CELLS`), so the question is well posed. Per the reviewer, the video does not show the construction, only the plain board. (Same idea as the main puzzle, equal parts must share the squares equally, one step further; no cutting needed.)
 
 ## Music
 `gymnopedie-1`, the least recently used key (0012, 0006), slow and sparse for a quiet puzzle.
@@ -48,4 +47,4 @@ The beats before the final hold add up to 4+3+2+3+2+5+3+3+4+4+4+3+3+4+2 = 49 s, 
 - "Same shape" includes turning, which is how Dudeney's pieces relate here; none needs a mirror flip. Say "turn", never "flip".
 - Rotation is about each piece, not the board centre: the ghost turns and then slides. Do not show it spinning around the board centre.
 - The solution is not claimed to be unique, and the video does not say so.
-- Level 2 is plain division and may feel easy for a 10 x 10 board; if the reviewer wants more bite, try "12 by 12 into 9 parts" (16).
+- Level 2 is plain division (144 / 9), a little harder by hand than before but still no calculator needed.

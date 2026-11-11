@@ -11,7 +11,7 @@ Checks, in code, every claim the video makes:
     four 2-column strips (two gems share a strip)
   * the gems are stuck close together, so the pieces cannot be simple blocks: every piece is a long thin
     hook (its bounding box is at least 7 squares in one direction)
-  * Level 2: a 10 x 10 board cut into 5 equal pieces gives 100 / 5 = 20 squares each
+  * Level 2: a 12 x 12 board cut into 9 equal pieces gives 144 / 9 = 16 squares each
 
 The scene imports everything below. Cells are (row, column), row 0 at the top.
 """
@@ -32,13 +32,13 @@ SHADING = [
     ".......#",
 ]
 
-L2_SIZE = 10
-L2_PIECES = 5
-L2_EACH = 20
-# The Level 2 construction shown in the video: 5 identical 2 x 10 strips (row 0 at the top)
-_K = L2_SIZE // L2_PIECES
-L2_PIECES_CELLS = [{(r, c) for r in range(_K * i, _K * i + _K) for c in range(L2_SIZE)}
-                   for i in range(L2_PIECES)]
+L2_SIZE = 12
+L2_PIECES = 9
+L2_EACH = 16
+# A witness that the Level 2 cut exists (not drawn in the video): 9 identical 4 x 4 blocks
+_K = 4
+L2_PIECES_CELLS = [{(r, c) for r in range(_K * i, _K * i + _K) for c in range(_K * j, _K * j + _K)}
+                   for i in range(L2_SIZE // _K) for j in range(L2_SIZE // _K)]
 
 
 def components(cells: set) -> list[set]:
