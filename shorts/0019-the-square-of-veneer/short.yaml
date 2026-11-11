@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0019'
 title: The Square Of Veneer
-status: script_review
+status: revise
 catalog_id: dudeney-amusements-159
 tags:
   - dissection
@@ -155,4 +155,5 @@ review:
   version: 1
   messages:
     1: '1569880223149850637'
-  last_seen: '1569880223149850637'
+  last_seen: '1570130687799857235'
+  comment: How do we know the solution is unique?

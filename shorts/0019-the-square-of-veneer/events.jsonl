@@ -1,1 +1,2 @@
 {"at": "2026-11-10T20:03:33", "event": "script_done", "status": "script_review", "version": 1, "usage": {"job": "script", "short": null, "exit": 0, "seconds": 181, "subtype": "success", "is_error": false, "num_turns": 32, "total_cost_usd": 0.5684273, "log": "job-script-20261110-200028.jsonl"}}
+{"at": "2026-11-11T12:40:04", "event": "comment", "status": "revise", "version": 1, "comment": "How do we know the solution is unique?"}
