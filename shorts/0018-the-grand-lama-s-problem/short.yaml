@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0018'
 title: The Grand Lama's Problem
-status: script_review
+status: revise
 catalog_id: dudeney-amusements-291
 tags:
   - chessboard
@@ -142,5 +142,5 @@ review:
   messages:
     1: '1569593072046702613'
     2: '1569878179076907079'
-  last_seen: '1569877812519764039'
-  comment:
+  last_seen: '1569879295587917865'
+  comment: Show the level 2 construction in the video.
