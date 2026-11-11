@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0018'
 title: The Grand Lama's Problem
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-291
 tags:
   - chessboard
@@ -120,6 +120,7 @@ captions:
   - "Turn it again and again, until the board is full."
   - "Four identical hooks of 16 squares, one gem each ✓"
   - "Level 2: a 10 by 10 board is cut into 5 equal parts."
+  - "Here is the cut: five identical strips, side by side."
   - "How many squares does each part hold?"
   - "Comment just the number ↓"
 music:
@@ -138,9 +139,10 @@ youtube:
   published_at:
 review:
   thread_id: '1569593067957260358'
-  version: 2
+  version: 3
   messages:
     1: '1569593072046702613'
     2: '1569878179076907079'
+    3: '1569879446347849760'
   last_seen: '1569879295587917865'
-  comment: Show the level 2 construction in the video.
+  comment:

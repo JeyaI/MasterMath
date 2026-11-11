@@ -35,6 +35,10 @@ SHADING = [
 L2_SIZE = 10
 L2_PIECES = 5
 L2_EACH = 20
+# The Level 2 construction shown in the video: 5 identical 2 x 10 strips (row 0 at the top)
+_K = L2_SIZE // L2_PIECES
+L2_PIECES_CELLS = [{(r, c) for r in range(_K * i, _K * i + _K) for c in range(L2_SIZE)}
+                   for i in range(L2_PIECES)]
 
 
 def components(cells: set) -> list[set]:
@@ -135,8 +139,7 @@ def main() -> None:
     # Level 2
     assert L2_SIZE * L2_SIZE // L2_PIECES == L2_EACH and L2_SIZE * L2_SIZE % L2_PIECES == 0
     # ...and such a cut really exists: a witness of 5 identical pieces tiling the 10 x 10 board
-    k = L2_SIZE // L2_PIECES
-    witness = [{(r, c) for r in range(k * i, k * i + k) for c in range(L2_SIZE)} for i in range(L2_PIECES)]
+    witness = L2_PIECES_CELLS
     assert set().union(*witness) == {(r, c) for r in range(L2_SIZE) for c in range(L2_SIZE)}
     assert all(len(p) == L2_EACH for p in witness)
     assert all(normal(p) == normal(witness[0]) for p in witness)
