@@ -113,7 +113,7 @@ captions:
   - "Cut along the lines into four parts of the same size and shape."
   - "Every part must hold exactly one gem."
   - "Pause and try it."
-  - "Cutting it into four quarters puts two gems together."
+  - "Four quarters fail, because one quarter holds every gem."
   - "Straight strips fail too, so the parts must bend."
   - "Start with a long hook that wraps around the first gem."
   - "Turn the hook a quarter turn, and it fits around the next gem."
@@ -146,3 +146,25 @@ review:
     4: '1569881996346400898'
   last_seen: '1569880616349212895'
   comment:
+video:
+  pending:
+    version: 1
+    file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v1.mp4
+    sha256: bd86a0e5cc1a5080f3f557d891d7aa83324c31874abf4016c72cf89515173122
+    summary: "Scene.py written from verify.py's shapes. The final `ms preview` is 49.9 s, with `ms check`
+      and `ms verify` both passing and no warnings. I looked at the frames and fixed a safe-zone overflow
+      during the turn and a badge overlap on the Level 2 card.\nI changed one caption in short.yaml, the
+      quarters beat. It now reads \"Four quarters fail, because one quarter holds every gem.\", because
+      all four gems sit in the top-left quarter and \"two gems together\" was inaccurate.\nThe Level 2
+      card shows only the plain 12×12 board, as requested. The hook question appears as the first caption
+      under the \"The Grand Lama's Problem\" title."
+    usage:
+      job: animate
+      short: 0018-the-grand-lama-s-problem
+      exit: 0
+      seconds: 264
+      subtype: success
+      is_error: false
+      num_turns: 85
+      total_cost_usd: 0.7387709000000002
+      log: job-animate-20261110-204007.jsonl
