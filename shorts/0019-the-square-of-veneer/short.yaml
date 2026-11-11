@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0019'
 title: The Square Of Veneer
-status: revise
+status: script_review
 catalog_id: dudeney-amusements-159
 tags:
   - dissection
@@ -133,8 +133,8 @@ captions:
   - "Slide the staircase down, stand the strip upright, and it all fits."
   - "The grid lines are 5/13 inch apart, so no cut ever meets a nail."
   - "Each small square is 5/13 inch: so one answer is 25/13 and 60/13 ✓"
-  - "Another pair works: 3 and 4, since 9 plus 16 is 25."
-  - "But its cuts follow the inch lines, so they run into the nails."
+  - "Another way: use a 17 by 17 grid, since 289 is 225 plus 64."
+  - "Stack the cut strips into a 15 by 15 square: 40/17 and 75/17 ✓"
   - "Level 2: a 26 cm square is cut the same way."
   - "It makes two squares with whole number sides. How long is the larger side, in cm?"
   - "Comment just the number ↓"
@@ -154,11 +154,11 @@ youtube:
   published_at:
 review:
   thread_id: '1569880219999936657'
-  version: 3
+  version: 4
   messages:
     1: '1569880223149850637'
     2: '1570131124825628712'
     3: '1570133672257130690'
+    4: '1570136671192752150'
   last_seen: '1570135728204153044'
-  comment: Explicitly find a second construction THAT WORKS! I dont care about a construction that 
-    doesnt pass
+  comment:
