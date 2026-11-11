@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0020'
 title: The Yorkshire Estates
-status: script_review
+status: animating
 catalog_id: dudeney-amusements-189
 tags:
   - geometry

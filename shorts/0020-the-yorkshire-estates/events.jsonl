@@ -1,1 +1,2 @@
 {"at": "2026-11-11T01:02:01", "event": "script_done", "status": "script_review", "version": 1, "usage": {"job": "script", "short": null, "exit": 0, "seconds": 96, "subtype": "success", "is_error": false, "num_turns": 28, "total_cost_usd": 0.3920873, "log": "job-script-20261111-010020.jsonl"}}
+{"at": "2026-11-11T14:55:05", "event": "accept_script", "status": "animating", "version": 1}
