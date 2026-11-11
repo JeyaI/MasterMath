@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0018'
 title: The Grand Lama's Problem
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-291
 tags:
   - chessboard
@@ -149,32 +149,17 @@ review:
   comment:
 video:
   pending:
-    version: 2
-    file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v2.mp4
-    sha256: b05422f17c81200d28e4e5d87659a17deb70c4eac634969267f7e73dbc135180
-    summary: 'The opening is slower: the pauses after the question, the rules, the diagonal, the cut lines
-      and the one-gem rule are each about 1.5–2 s longer. A failed attempt now comes before "Pause and
-      try it": the quarter cut is shown and fails, in two captions. Straight strips stay after the pause.
-      SCRIPT.md, short.yaml captions and scene.py are updated; verify passes, and check has no errors.
-      It does warn that the video is now 60.4 s, over the 40–50 s target, which is a target and not a
-      cap.'
-    usage:
-      job: revise_video
-      short: 0018-the-grand-lama-s-problem
-      exit: 0
-      seconds: 82
-      subtype: success
-      is_error: false
-      num_turns: 24
-      total_cost_usd: 0.24856910000000004
-      log: job-revise_video-20261111-085005.jsonl
-  version: 1
+  version: 2
   versions:
     1:
       file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v1.mp4
       sha256: bd86a0e5cc1a5080f3f557d891d7aa83324c31874abf4016c72cf89515173122
       message: '1569890893027213423'
-  comment: Pacing is way too fast in the beginning for the amount of text shown. Show a failed 
-    attempt before asking the audience to try it
+      video_id:
+    2:
+      file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v2.mp4
+      sha256: b05422f17c81200d28e4e5d87659a17deb70c4eac634969267f7e73dbc135180
+      message: '1570073810395336847'
+  comment:
   warned:
   as_is:
