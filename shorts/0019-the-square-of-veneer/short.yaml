@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0019'
 title: The Square Of Veneer
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-159
 tags:
   - dissection
@@ -159,7 +159,7 @@ review:
     2: '1570131124825628712'
     3: '1570133672257130690'
     4: '1570136671192752150'
-  last_seen: '1570135728204153044'
+  last_seen: '1570149392940273778'
   comment:
 video:
   pending:
@@ -169,6 +169,6 @@ video:
       file: /home/jeya/mathshorts/out/review/0019-the-square-of-veneer/v1.mp4
       sha256: a7f5bb7a82a8765eb696a6c3fd745bc69b0a1f01f3e61f7a28f3a6743013f55e
       message: '1570148741191696434'
-  comment:
+  comment: Umm... this second solution does not use 4 pieces.
   warned:
   as_is:
