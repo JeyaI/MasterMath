@@ -1,0 +1,132 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0020'
+title: The Yorkshire Estates
+status: script_review
+catalog_id: dudeney-amusements-189
+tags:
+  - geometry
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 189
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    [Illustration]
+
+    I was on a visit to one of the large towns of Yorkshire. While walking
+    to the railway station on the day of my departure a man thrust a
+    hand-bill upon me, and I took this into the railway carriage and read it
+    at my leisure. It informed me that three Yorkshire neighbouring estates
+    were to be offered for sale. Each estate was square in shape, and they
+    joined one another at their corners, just as shown in the diagram.
+    Estate A contains exactly 370 acres, B contains 116 acres, and C 74
+    acres.
+
+    Now, the little triangular bit of land enclosed by the three square
+    estates was not offered for sale, and, for no reason in particular, I
+    became curious as to the area of that piece. How many acres did it
+    contain?
+  solution: |
+    The triangular piece of land that was not for sale contains exactly
+    eleven acres. Of course it is not difficult to find the answer if we
+    follow the eccentric and tricky tracks of intricate trigonometry; or I
+    might say that the application of a well-known formula reduces the
+    problem to finding one-quarter of the square root of (4 × 370 × 116)
+    -(370 + 116 - 74)²--that is a quarter of the square root of 1936, which
+    is one-quarter of 44, or 11 acres. But all that the reader really
+    requires to know is the Pythagorean law on which many puzzles have been
+    built, that in any right-angled triangle the square of the hypotenuse is
+    equal to the sum of the squares of the other two sides. I shall dispense
+    with all "surds" and similar absurdities, notwithstanding the fact that
+    the sides of our triangle are clearly incommensurate, since we cannot
+    exactly extract the square roots of the three square areas.
+
+    [Illustration:
+
+            A
+          |\
+          |  \.
+          |    \ .
+          |5     \  .
+          |   7    \   .
+        E +--------- +C   .
+          |          | ` .   .
+          |          |     `.   .
+          |4         |4       ` . .
+          |   7      |            ` ..
+          D----------+----------------- B
+                     F
+
+    ]
+
+    In the above diagram ABC represents our triangle. ADB is a right-angled
+    triangle, AD measuring 9 and BD measuring 17, because the square of 9
+    added to the square of 17 equals 370, the known area of the square on
+    AB. Also AEC is a right-angled triangle, and the square of 5 added to
+    the square of 7 equals 74, the square estate on A C. Similarly, CFB is a
+    right-angled triangle, for the square of 4 added to the square of 10
+    equals 116, the square estate on BC. Now, although the sides of our
+    triangular estate are incommensurate, we have in this diagram all the
+    exact figures that we need to discover the area with precision.
+
+    The area of our triangle ADB is clearly half of 9 × 17, or 76½ acres.
+    The area of AEC is half of 5 × 7, or 17½ acres; the area of CFB is half
+    of 4 × 10, or 20 acres; and the area of the oblong EDFC is obviously 4 ×
+    7, or 28 acres. Now, if we add together 17½, 20, and 28 = 65½, and
+    deduct this sum from the area of the large triangle ADB (which we have
+    found to be 76½ acres), what remains must clearly be the area of ABC.
+    That is to say, the area we want must be 76½ - 65½ = 11 acres exactly.
+level1:
+  statement: "Three square estates of 370, 116 and 74 acres meet corner to corner, leaving a small triangle
+    of land between them. How many acres does that triangle cover?"
+  answer: "11 acres."
+  insight: "Each square's area is a sum of two squares: 370 = 17 squared + 9 squared, 74 = 7 squared +
+    5 squared, 116 = 10 squared + 4 squared. So each side of the triangle runs a whole number of grid
+    steps across and down. Put the triangle on a grid, take the big right triangle 17 by 9 (76.5), and
+    subtract the two small corner triangles (17.5 and 20) and the 7 by 4 rectangle (28). What is left
+    is 11."
+level2:
+  statement: "Three square fields of 26, 20 and 18 acres meet corner to corner round a small triangle.
+    How many acres is the triangle?"
+  answer: 9
+  accept: [9, "9 acres", "nine", "nine acres"]
+  why: "26 = 1 + 25, 20 = 4 + 16 and 18 = 9 + 9, so the triangle fits on a grid with corners (0,0), (5,1)
+    and (2,4). The 5 by 4 box has area 20; cut away corner triangles of 2.5, 4.5 and 4, which total 11.
+    20 - 11 = 9."
+captions:
+  - "How many acres is the triangle between these three square estates?"
+  - "The three squares meet corner to corner and enclose a small triangle."
+  - "The estates cover 370, 116 and 74 acres."
+  - "How many acres does the triangle in the middle cover?"
+  - "Pause and try it."
+  - "Each square's area is a sum of two squares, so look for whole numbers."
+  - "370 is 17 squared plus 9 squared, so that side goes 17 across and 9 down."
+  - "74 is 7 squared plus 5 squared, and 116 is 10 squared plus 4 squared."
+  - "Now every corner of the triangle sits on a grid point."
+  - "Start with the big right triangle: half of 17 times 9 is 76 and a half."
+  - "Take away the two small corner triangles, 17 and a half and 20."
+  - "Take away the 7 by 4 rectangle, which is 28 acres."
+  - "What is left is the triangle: 76.5 minus 65.5 is 11 acres ✓"
+  - "Level 2: squares of 26, 20 and 18 acres meet round a triangle."
+  - "Same trick: how many acres is the triangle?"
+  - "Comment just the number ↓"
+music:
+  piece: bwv846
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "Three square fields, one tiny triangle: how many acres?"
+  description: |
+    Three square estates of 370, 116 and 74 acres meet corner to corner. How many acres is the triangle between them? Level 2: squares of 26, 20 and 18 acres. Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 189. Music: J. S. Bach, Prelude in C, BWV 846.
+  tags:
+    - math puzzle
+    - puzzle
+  video_id:
+  url:
+  published_at:
+review:
+  thread_id: '1569955329838424095'
+  version: 1
+  messages:
+    1: '1569955335404523550'
+  last_seen: '1569955335404523550'
