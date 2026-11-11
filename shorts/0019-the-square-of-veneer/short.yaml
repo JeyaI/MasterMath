@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0019'
 title: The Square Of Veneer
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-159
 tags:
   - dissection
@@ -161,31 +161,17 @@ review:
   comment:
 video:
   pending:
-    version: 2
-    file: /home/jeya/mathshorts/out/review/0019-the-square-of-veneer/v2.mp4
-    sha256: cd075d08636ec8ab0767b189702796dc9e3016c9d107565009da1377d1f9982e
-    summary: "The reviewer was right: the second solution used six pieces, not four. I removed the 17
-      by 17 construction from the video, `verify.py`, the `short.yaml` captions and `SCRIPT.md`, so the
-      Short now shows only the four-piece cut.\n`ms verify` passes and `ms check` has 0 errors. The preview
-      runs 51.0 s, a 1 s warning against the 40–50 s target. I did not pull frames: the one `ffmpeg` frame
-      grab failed on a filename-pattern error, and I didn't retry it.\nI did not find a four-piece second
-      construction, so the video no longer shows a second way."
-    usage:
-      job: revise_video
-      short: 0019-the-square-of-veneer
-      exit: 0
-      seconds: 112
-      subtype: success
-      is_error: false
-      num_turns: 25
-      total_cost_usd: 0.3171603
-      log: job-revise_video-20261111-135506.jsonl
-  version: 1
+  version: 2
   versions:
     1:
       file: /home/jeya/mathshorts/out/review/0019-the-square-of-veneer/v1.mp4
       sha256: a7f5bb7a82a8765eb696a6c3fd745bc69b0a1f01f3e61f7a28f3a6743013f55e
       message: '1570148741191696434'
-  comment: Umm... this second solution does not use 4 pieces.
+      video_id:
+    2:
+      file: /home/jeya/mathshorts/out/review/0019-the-square-of-veneer/v2.mp4
+      sha256: cd075d08636ec8ab0767b189702796dc9e3016c9d107565009da1377d1f9982e
+      message: '1570150697196851320'
+  comment:
   warned:
   as_is:
