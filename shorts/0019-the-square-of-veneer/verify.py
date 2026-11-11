@@ -105,6 +105,12 @@ def main() -> None:
     # e.g. 3 and 4 also give 3^2 + 4^2 = 5^2. We only claim 25/13 and 60/13 is one valid answer.
     assert 3 ** 2 + 4 ** 2 == SIDE_IN ** 2
     assert (3, 4) != (small_in, big_in)
+    # Second construction shown in the video: the 3-4-5 pair, cut on the board's own inch grid.
+    # Its 3 x 3 corner square has an edge along y = 2 from x = 2 to 5 (in inches), which passes
+    # through the nails at (3, 2) and (4, 2), so that cut is not allowed.
+    edge = [(x, 2) for x in range(2, 6)]
+    assert [n for n in edge if n in NAILS] == [(2, 2), (3, 2), (4, 2)]
+    assert all(c in NAILS for c in [(3, 2), (4, 2)])
 
     # Level 2
     assert L2_BIG ** 2 + L2_SMALL ** 2 == L2_SIDE ** 2

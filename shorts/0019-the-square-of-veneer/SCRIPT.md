@@ -29,13 +29,17 @@ Checked against: the `SCRIPT.md` files of 0014 to 0018, and the `scene.py` docst
 8. "So cut a 5 by 5 square out whole; the rest must become 12 by 12." The corner square lifts out, leaving an L. (3 s)
 9. "Cut the L into two staircases and one thin strip." The cuts glow along grid lines, three colours. (3 s)
 10. "Slide the staircase down, stand the strip upright, and it all fits." Pieces move into a 12 by 12 square. (3.5 s)
-11. "The grid lines are 5/13 inch apart, so no cut ever meets a nail." The nails return, all clear of the cuts. (3 s)
+11. "The grid lines are 5/13 inch apart, so no cut ever meets a nail." The nails return, all clear of the cuts. (2.5 s)
 12. "Each small square is 5/13 inch, so one answer is 25/13 and 60/13 ✓" (3.5 s)
-13. "Level 2: a 26 cm square is cut the same way." (2.5 s)
-14. "It makes two squares with whole number sides. How long is the larger side, in cm?" (3 s)
-15. "Comment just the number ↓" held (12 s)
+13. **Second construction.** "Another pair works: 3 and 4, since 9 plus 16 is 25." A fresh copy of the board is cut with a 3 by 3 corner square on the inch grid. (3 s)
+14. "But its cuts follow the inch lines, so they run into the nails." The cut edge flashes red through two nails. (3 s)
+15. "Level 2: a 26 cm square is cut the same way." (2.5 s)
+16. "It makes two squares with whole number sides. How long is the larger side, in cm?" (3 s)
+17. "Comment just the number ↓" held (12 s)
 
-Total: the beats before the hold add up to about 46 s (hook 3.5 s included), and the 12 s hold brings the Short to about 58 s. This is over the 40 to 50 s target, so if the preview runs long, shorten beats 9 and 11 first.
+Total: the beats before the hold add up to about 49 s (hook 3.5 s included), and the 12 s hold brings the Short to about 61 s. This is over the 40 to 50 s target, so if the preview runs long, shorten beats 9, 11 and 13 first.
+
+**Second construction (reviewer comment: "Explicitly show a second construction").** Beats 13 and 14 show a different pair of squares, 3 and 4 (3² + 4² = 5²), built on the board's own one-inch grid, and say why it is rejected: its cut edge runs along a whole-inch line through nails. This shows the answer is not the only pair of squares, and why the 13 by 13 grid is needed. `verify.py` checks the sums and that the edge passes through nails. We do not claim the 3-4 board cannot be dissected some other way that avoids the nails.
 
 ## Level 2
 "A 26 cm square board is cut the same way into two squares whose sides are whole numbers of centimetres. What is the side, in cm, of the larger square?" Answer: **24**. Why: 26 is twice 13, so the 5-12-13 cut doubles to 10 and 24 (100 + 576 = 676 = 26²). It is the only way to write 26² as two whole squares, which `verify.py` checks. Not solved in the video. No calculator needed.
