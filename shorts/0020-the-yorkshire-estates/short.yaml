@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0020'
 title: The Yorkshire Estates
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-189
 tags:
   - geometry
@@ -129,7 +129,7 @@ review:
   version: 1
   messages:
     1: '1569955335404523550'
-  last_seen: '1569955335404523550'
+  last_seen: '1570169244295888949'
 video:
   pending:
   version: 1
@@ -138,6 +138,6 @@ video:
       file: /home/jeya/mathshorts/out/review/0020-the-yorkshire-estates/v1.mp4
       sha256: 0fbbcca9972b2d66c3c44f7d26a68cf9f759e4387e9f7c0a97267a3a77d6e465
       message: '1570166443037696173'
-  comment:
+  comment: Graphic for level 2 looks wrong, show the squares themselves
   warned:
   as_is:
