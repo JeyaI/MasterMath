@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0019'
 title: The Square Of Veneer
-status: script_review
+status: revise
 catalog_id: dudeney-amusements-159
 tags:
   - dissection
@@ -156,5 +156,5 @@ review:
   messages:
     1: '1569880223149850637'
     2: '1570131124825628712'
-  last_seen: '1570130687799857235'
-  comment:
+  last_seen: '1570133409332854916'
+  comment: Explicitly show a second construction
