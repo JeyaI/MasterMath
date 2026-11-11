@@ -100,13 +100,13 @@ captions:
   - "How many acres does the triangle in the middle cover?"
   - "Pause and try it."
   - "Each square's area is a sum of two squares, so look for whole numbers."
-  - "370 is 17 squared plus 9 squared, so that side goes 17 across and 9 down."
-  - "74 is 7 squared plus 5 squared, and 116 is 10 squared plus 4 squared."
+  - "370 is 17 squared plus 9 squared: 17 across and 9 down."
+  - "74 is 7 squared plus 5 squared; 116 is 10 squared plus 4 squared."
   - "Now every corner of the triangle sits on a grid point."
-  - "Start with the big right triangle: half of 17 times 9 is 76 and a half."
+  - "The big right triangle is half of 17 times 9, so 76 and a half."
   - "Take away the two small corner triangles, 17 and a half and 20."
   - "Take away the 7 by 4 rectangle, which is 28 acres."
-  - "What is left is the triangle: 76.5 minus 65.5 is 11 acres ✓"
+  - "What is left is the triangle: exactly 11 acres ✓"
   - "Level 2: squares of 26, 20 and 18 acres meet round a triangle."
   - "Same trick: how many acres is the triangle?"
   - "Comment just the number ↓"
@@ -130,3 +130,24 @@ review:
   messages:
     1: '1569955335404523550'
   last_seen: '1569955335404523550'
+video:
+  pending:
+    version: 1
+    file: /home/jeya/mathshorts/out/review/0020-the-yorkshire-estates/v1.mp4
+    sha256: 0fbbcca9972b2d66c3c44f7d26a68cf9f759e4387e9f7c0a97267a3a77d6e465
+    summary: "The scene is written, and `ms check` and `ms verify` both pass. The last full preview (v3)
+      runs 58.3 s, which is over the 40–50 s target (one duration warning). The 12 s \"Comment\" hold
+      and the Level 2 card account for most of it.\nI shortened three captions in `short.yaml` to keep
+      them under 14 words, and the payoff now reads \"exactly 11 acres ✓\" because the check rejects numbers
+      not in level1's answer.\nI looked at about 10 frames; the triangle itself is thin on the grid view,
+      and the longer captions render fairly small. Neither is a fault, but you may want to glance at both."
+    usage:
+      job: animate
+      short: 0020-the-yorkshire-estates
+      exit: 0
+      seconds: 272
+      subtype: success
+      is_error: false
+      num_turns: 75
+      total_cost_usd: 0.6039036000000002
+      log: job-animate-20261111-145506.jsonl
