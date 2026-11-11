@@ -121,22 +121,21 @@ level2:
     and 10 x 10 + 24 x 24 = 100 + 576 = 676 = 26 x 26. It is the only way to split 26 squared into two
     whole squares."
 captions:
-  - "Can you cut this square into four pieces that make two squares?"
   - "This 5 inch board has 16 nails, and the saw must not touch any."
   - "The four pieces must fit together into two perfect squares."
   - "Can you find one way, and give the exact sides of the two squares?"
   - "Pause and try it."
   - "Slice the board into a 13 by 13 grid of small squares."
   - "Notice that 169 is 144 plus 25, which is 12 squared plus 5 squared."
-  - "So cut a 5 by 5 square out whole; the rest must become 12 by 12."
+  - "Cut out a 5 by 5 square whole; the rest must become 12 by 12."
   - "Cut the L into two staircases and one thin strip."
   - "Slide the staircase down, stand the strip upright, and it all fits."
   - "The grid lines are 5/13 inch apart, so no cut ever meets a nail."
-  - "Each small square is 5/13 inch: so one answer is 25/13 and 60/13 ✓"
+  - "So one answer is 25/13 inch and 60/13 inch ✓"
   - "Another way: use a 17 by 17 grid, since 289 is 225 plus 64."
   - "Stack the cut strips into a 15 by 15 square: 40/17 and 75/17 ✓"
   - "Level 2: a 26 cm square is cut the same way."
-  - "It makes two squares with whole number sides. How long is the larger side, in cm?"
+  - "It makes two whole number squares. How long is the larger side, in cm?"
   - "Comment just the number ↓"
 music:
   piece: k545
@@ -162,3 +161,25 @@ review:
     4: '1570136671192752150'
   last_seen: '1570135728204153044'
   comment:
+video:
+  pending:
+    version: 1
+    file: /home/jeya/mathshorts/out/review/0019-the-square-of-veneer/v1.mp4
+    sha256: a7f5bb7a82a8765eb696a6c3fd745bc69b0a1f01f3e61f7a28f3a6743013f55e
+    summary: "The final preview (v3) runs 57.7 s, with a 12 s hold, so it is over the 40–50 s target.
+      That is the only warning; `ms check` and `ms verify` are otherwise clean. The second 17 by 17 construction
+      takes about 6 s, and cutting it is the easiest way to shorten the Short.\nChanges to short.yaml
+      captions: I removed the hook line, since other Shorts don't list it, and reworded three captions.
+      The payoff is now \"So one answer is 25/13 inch and 60/13 inch ✓\" so its numbers match the Level
+      1 answer, and the two others were shortened.\nThe nails are shown on the original cut layout, so
+      the pieces slide back for that beat and then slide into the squares again for the payoff."
+    usage:
+      job: animate
+      short: 0019-the-square-of-veneer
+      exit: 0
+      seconds: 513
+      subtype: success
+      is_error: false
+      num_turns: 87
+      total_cost_usd: 1.1269069000000003
+      log: job-animate-20261111-134006.jsonl
