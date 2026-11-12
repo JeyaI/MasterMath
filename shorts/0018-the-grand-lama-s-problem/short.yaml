@@ -149,6 +149,23 @@ review:
   comment:
 video:
   pending:
+    version: 5
+    file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v5.mp4
+    sha256: 518bf2f972f8855345428c54bef0751613129640bcb7d863bce5ab41efa4401e
+    summary: "Fixed the spiky line at the bottom tip of the gem by giving the gem's facets rounded line
+      joints (scene.py). I looked at a frame from the new preview, and the tip is now clean. No numbers
+      or claims changed, so I didn't re-run `ms verify`. `ms check` has 0 errors and one warning: the
+      video runs 60.1 s against the 40–50 s target, which this change didn't affect."
+    usage:
+      job: revise_video
+      short: 0018-the-grand-lama-s-problem
+      exit: 0
+      seconds: 65
+      subtype: success
+      is_error: false
+      num_turns: 14
+      total_cost_usd: 0.1031107
+      log: job-revise_video-20261111-203510.jsonl
   version: 4
   versions:
     1:

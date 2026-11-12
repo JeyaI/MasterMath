@@ -20,6 +20,7 @@ from manim import (  # noqa: E402
     DOWN, PI, RIGHT, UP, Create, FadeIn, FadeOut, Flash, GrowFromCenter, Indicate, LaggedStart, Line,
     Polygon, Rotate, Scene, Square as Cell, VGroup, there_and_back, BOLD,
 )
+from manim import LineJointType  # noqa: E402
 import numpy as np  # noqa: E402
 
 from lib.layout import ACCENT, BG, GOOD, GRID, INK, MUTED, PIECES, STAGE_Y, TITLE_Y  # noqa: E402
@@ -64,6 +65,8 @@ def gem(r, c) -> VGroup:
         (Polygon(L, ML, B), "#2E9BE0"), (Polygon(ML, MR, B), "#5CC8FF"), (Polygon(MR, R, B), "#1C7CC4"),
     ]
     parts = [f.set_fill(col, 1).set_stroke("#FFFFFF", 2.5) for f, col in facets]
+    for q in parts:
+        q.joint_type = LineJointType.ROUND   # sharp tips otherwise miter into long spikes
     return VGroup(*parts).set_z_index(10)
 
 
