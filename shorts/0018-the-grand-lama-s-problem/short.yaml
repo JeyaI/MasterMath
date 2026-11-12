@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0018'
 title: The Grand Lama's Problem
-status: video_review
+status: scheduled
 catalog_id: dudeney-amusements-291
 tags:
   - chessboard
@@ -134,9 +134,10 @@ youtube:
   tags:
     - math puzzle
     - puzzle
-  video_id:
-  url:
+  video_id: aWNQW-WmwC8
+  url: https://youtube.com/shorts/aWNQW-WmwC8
   published_at:
+  publish_at: '2026-11-11T22:00:00-05:00'
 review:
   thread_id: '1569593067957260358'
   version: 4
@@ -179,5 +180,10 @@ video:
   comment:
   warned:
   as_is:
+  approved:
+    version: 5
+    video_id: aWNQW-WmwC8
+    sha256: 518bf2f972f8855345428c54bef0751613129640bcb7d863bce5ab41efa4401e
+    message: '1570253330352185375'
 last_error: "ms check: ERROR   scene     the scene did not run:; TypeError: countdown() got an unexpected
   keyword argument 'z_index'; 0018-the-grand-lama-s-problem: 1 error(s), 0 warning(s)"
