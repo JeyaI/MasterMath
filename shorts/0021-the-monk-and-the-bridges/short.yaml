@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0021'
 title: The Monk And The Bridges
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-261
 tags:
   - routes
@@ -108,7 +108,7 @@ review:
   version: 1
   messages:
     1: '1570242216444567653'
-  last_seen: '1570242216444567653'
+  last_seen: '1570582098048192566'
 video:
   pending:
   version: 1
@@ -117,6 +117,7 @@ video:
       file: /home/jeya/mathshorts/out/review/0021-the-monk-and-the-bridges/v1.mp4
       sha256: 57e6a768bd3e7e4c6d9f71282db7eb38565d8da6745017726f2386dc695c0b84
       message: '1570569165486428192'
-  comment:
+  comment: Draw the diagram in a less obvious way, with actual bridges before using the graph 
+    depiction
   warned:
   as_is:
