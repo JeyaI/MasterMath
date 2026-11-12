@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0021'
 title: The Monk And The Bridges
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-261
 tags:
   - routes
@@ -109,7 +109,7 @@ review:
   version: 1
   messages:
     1: '1570242216444567653'
-  last_seen: '1570582098048192566'
+  last_seen: '1570584340373708895'
 video:
   pending:
   version: 2
@@ -123,6 +123,8 @@ video:
       file: /home/jeya/mathshorts/out/review/0021-the-monk-and-the-bridges/v2.mp4
       sha256: 74ff42c10bc4c557a30ef84319e2f77292b2e2bc2b0f73a7a83c237fefce00c3
       message: '1570583583767269569'
-  comment:
+  comment: Keep the graphic on the screen when pause and try it is going. Let's use an emoji style 
+    art for the monk (cartoon monk drawing, not just a circle). When the traversal orders are on 
+    screen, the text is not very aligned. What's the level 2 answer?
   warned:
   as_is:
