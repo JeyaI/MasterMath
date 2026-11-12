@@ -14,3 +14,4 @@
 {"at": "2026-11-11T20:03:36", "event": "animate", "status": "animating", "as_is": true}
 {"at": "2026-11-11T20:05:18", "event": "animated", "status": "video_review", "version": 3, "sha256": "d16a5f8e48ed81d2be6dbf25987382ab423cc185ac005a651d00317df30c0429", "usage": {}}
 {"at": "2026-11-11T20:15:04", "event": "comment_video", "status": "revise_video", "version": 3, "comment": "Let's change the gem graphic to look like the 💎 emoji"}
+{"at": "2026-11-11T20:17:52", "event": "revised_video", "status": "video_review", "version": 4, "sha256": "1e756dd5a6e66996a4547fb7b62b190e0e994a93ce111a21ba651f817824c486", "usage": {"job": "revise_video", "short": "0018-the-grand-lama-s-problem", "exit": 0, "seconds": 70, "subtype": "success", "is_error": false, "num_turns": 11, "total_cost_usd": 0.10996149999999999, "log": "job-revise_video-20261111-201507.jsonl"}}

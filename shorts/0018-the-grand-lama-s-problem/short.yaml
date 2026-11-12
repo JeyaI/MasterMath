@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0018'
 title: The Grand Lama's Problem
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-291
 tags:
   - chessboard
@@ -149,25 +149,7 @@ review:
   comment:
 video:
   pending:
-    version: 4
-    file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v4.mp4
-    sha256: 1e756dd5a6e66996a4547fb7b62b190e0e994a93ce111a21ba651f817824c486
-    summary: The gem is now a faceted blue brilliant cut that looks like the 💎 emoji. It has a flat 
-      table, crown facets and a pointed bottom, replacing the plain white diamond. It is drawn in 
-      `scene.py` and is the same size and position, so all the animations that use it still work. 
-      `ms verify` passes and `ms check` has no errors. The only warning is that the duration is 60.1
-      s, outside the 40–50 s target, as it was before this change.
-    usage:
-      job: revise_video
-      short: 0018-the-grand-lama-s-problem
-      exit: 0
-      seconds: 70
-      subtype: success
-      is_error: false
-      num_turns: 11
-      total_cost_usd: 0.10996149999999999
-      log: job-revise_video-20261111-201507.jsonl
-  version: 3
+  version: 4
   versions:
     1:
       file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v1.mp4
@@ -183,7 +165,12 @@ video:
       file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v3.mp4
       sha256: d16a5f8e48ed81d2be6dbf25987382ab423cc185ac005a651d00317df30c0429
       message: '1570243045721374870'
-  comment: Let's change the gem graphic to look like the 💎 emoji
+      video_id:
+    4:
+      file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v4.mp4
+      sha256: 1e756dd5a6e66996a4547fb7b62b190e0e994a93ce111a21ba651f817824c486
+      message: '1570246213331067072'
+  comment:
   warned:
   as_is:
 last_error: "ms check: ERROR   scene     the scene did not run:; TypeError: countdown() got an unexpected
