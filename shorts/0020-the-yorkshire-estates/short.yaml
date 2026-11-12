@@ -143,6 +143,7 @@ video:
       file: /home/jeya/mathshorts/out/review/0020-the-yorkshire-estates/v2.mp4
       sha256: c97a25b556a0cf64dce6e128475e367b9930553fef6308e2bb7a8536204087fa
       message: '1570170639510274158'
+      video_id: 7pIN47cN5vw
   comment:
   warned: "⚠️ Couldn't upload or schedule v2: ||the YouTube token no longer works (('invalid_grant: Token
     has been expired or revok"
