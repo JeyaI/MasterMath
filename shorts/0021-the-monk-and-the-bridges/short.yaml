@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0021'
 title: The Monk And The Bridges
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-261
 tags:
   - routes
@@ -112,25 +112,7 @@ review:
   last_seen: '1570584340373708895'
 video:
   pending:
-    version: 3
-    file: /home/jeya/mathshorts/out/review/0021-the-monk-and-the-bridges/v3.mp4
-    sha256: 7c28de8fba27a65f280070cfc732241f824b1ac27d90a10be415c502c994a9e7
-    summary: "The picture and the monk now stay on screen during \"Pause and try it\", with the countdown
-      moved below them. The monk is a cartoon figure (round face, brown robe, rope belt) in both the river
-      scene and the map. The route strings now sit on one baseline, so the letters line up. Level 2 answer:
-      it's in the Level 2 section of SCRIPT.md, and verify.py computes it. I kept it out of this summary.
-      `ms verify` and `ms check` pass with no errors; the only warning is the 64.8 s length, as before."
-    usage:
-      job: revise_video
-      short: 0021-the-monk-and-the-bridges
-      exit: 0
-      seconds: 169
-      subtype: success
-      is_error: false
-      num_turns: 44
-      total_cost_usd: 0.3632968000000001
-      log: job-revise_video-20261112-184507.jsonl
-  version: 2
+  version: 3
   versions:
     1:
       file: /home/jeya/mathshorts/out/review/0021-the-monk-and-the-bridges/v1.mp4
@@ -141,8 +123,11 @@ video:
       file: /home/jeya/mathshorts/out/review/0021-the-monk-and-the-bridges/v2.mp4
       sha256: 74ff42c10bc4c557a30ef84319e2f77292b2e2bc2b0f73a7a83c237fefce00c3
       message: '1570583583767269569'
-  comment: Keep the graphic on the screen when pause and try it is going. Let's use an emoji style 
-    art for the monk (cartoon monk drawing, not just a circle). When the traversal orders are on 
-    screen, the text is not very aligned. What's the level 2 answer?
+      video_id:
+    3:
+      file: /home/jeya/mathshorts/out/review/0021-the-monk-and-the-bridges/v3.mp4
+      sha256: 7c28de8fba27a65f280070cfc732241f824b1ac27d90a10be415c502c994a9e7
+      message: '1570586350879641611'
+  comment:
   warned:
   as_is:
