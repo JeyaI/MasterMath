@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0021'
 title: The Monk And The Bridges
-status: animating
+status: video_review
 catalog_id: dudeney-amusements-261
 tags:
   - routes
@@ -111,22 +111,12 @@ review:
   last_seen: '1570242216444567653'
 video:
   pending:
-    version: 1
-    file: /home/jeya/mathshorts/out/review/0021-the-monk-and-the-bridges/v1.mp4
-    sha256: 57e6a768bd3e7e4c6d9f71282db7eb38565d8da6745017726f2386dc695c0b84
-    summary: "The scene is built and the last full preview (v2) runs 62.3 s. `ms check` shows 0 errors,
-      and its one warning is the duration. The Level 2 card and the 12 s \"Comment\" hold take most of
-      the extra time over the 40–50 s target. `ms verify` passes.\nI checked frames across the Short and
-      fixed a safe-zone overflow and cramped text. I reworded two captions to stay under 14 words, in
-      both `scene.py` and `short.yaml`.\nUnsure: the Level 2 map is small in the frame, so you may want
-      it larger. The viewer has to link the route letters to the bridge colours."
-    usage:
-      job: animate
-      short: 0021-the-monk-and-the-bridges
-      exit: 0
-      seconds: 271
-      subtype: success
-      is_error: false
-      num_turns: 67
-      total_cost_usd: 0.6897834000000002
-      log: job-animate-20261112-173506.jsonl
+  version: 1
+  versions:
+    1:
+      file: /home/jeya/mathshorts/out/review/0021-the-monk-and-the-bridges/v1.mp4
+      sha256: 57e6a768bd3e7e4c6d9f71282db7eb38565d8da6745017726f2386dc695c0b84
+      message: '1570569165486428192'
+  comment:
+  warned:
+  as_is:
