@@ -22,7 +22,7 @@ Different from the recent Shorts: I read the `SCRIPT.md` of 0020 (grid area by s
 3. (6-10 s) "Two bridges lead to the island, two lead off it, and one crosses the river." The bridges draw in pair by pair.
 4. (10-12 s) "He must cross every bridge once, and only once."
 5. (12-14 s) "How many different routes could he take?"
-6. (14-19 s) "Pause and try it." 5 s countdown.
+6. (14-19 s) "Pause and try it." 5 s countdown below the picture, which stays on screen. The monk is a cartoon, emoji-style figure.
 7. (19-22 s) "Every route has to start at the monk and end at the monastery."
 8. (22-24 s) "Let's call the bridges a, b, c, d and e." Labels appear.
 9. (24-27 s) "The two bridges in each pair are twins, so ignore their names for now." Labels fade; twins tinted alike.

@@ -112,6 +112,24 @@ review:
   last_seen: '1570584340373708895'
 video:
   pending:
+    version: 3
+    file: /home/jeya/mathshorts/out/review/0021-the-monk-and-the-bridges/v3.mp4
+    sha256: 7c28de8fba27a65f280070cfc732241f824b1ac27d90a10be415c502c994a9e7
+    summary: "The picture and the monk now stay on screen during \"Pause and try it\", with the countdown
+      moved below them. The monk is a cartoon figure (round face, brown robe, rope belt) in both the river
+      scene and the map. The route strings now sit on one baseline, so the letters line up. Level 2 answer:
+      it's in the Level 2 section of SCRIPT.md, and verify.py computes it. I kept it out of this summary.
+      `ms verify` and `ms check` pass with no errors; the only warning is the 64.8 s length, as before."
+    usage:
+      job: revise_video
+      short: 0021-the-monk-and-the-bridges
+      exit: 0
+      seconds: 169
+      subtype: success
+      is_error: false
+      num_turns: 44
+      total_cost_usd: 0.3632968000000001
+      log: job-revise_video-20261112-184507.jsonl
   version: 2
   versions:
     1:

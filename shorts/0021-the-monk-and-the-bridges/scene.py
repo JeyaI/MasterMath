@@ -116,17 +116,37 @@ def picture():
     roof = Polygon([PIC_HOUSE[0] - 0.55, PIC_HOUSE[1] + 0.12, 0], [PIC_HOUSE[0] + 0.55, PIC_HOUSE[1] + 0.12, 0],
                    [PIC_HOUSE[0], PIC_HOUSE[1] + 0.65, 0], fill_color="#B5483A", fill_opacity=1, stroke_width=0)
     house = VGroup(wall, roof)
-    pwords = VGroup(label("monk", 32, INK).move_to([PIC_MONK[0], PIC_MONK[1] - 0.6, 0]),
+    pwords = VGroup(label("monk", 32, INK).move_to([PIC_MONK[0] + 1.1, PIC_MONK[1] - 0.05, 0]),
                     label("monastery", 32, INK).move_to([-0.2, 6.3, 0]),
                     label("island", 30, INK).move_to([-0.3, 4.15, 0]))
     scene = VGroup(near, far, water, isl, bridges)
     return scene, planks, scene, pwords, house
 
 
-def route_mob(route, size=46):
-    g = VGroup(*[label(ch, size, TWIN_COLOR[ch], weight="BOLD") for ch in route]).arrange(
-        direction=np.array([1.0, 0, 0]), buff=0.2)
+def make_monk(scale=1.0):
+    """A cartoon, emoji-style monk: brown robe with a rope belt, round face, bald head with a fringe."""
+    from manim import Ellipse, Polygon, RoundedRectangle, Arc
+    robe = Polygon([-0.45, -0.7, 0], [0.45, -0.7, 0], [0.26, 0.05, 0], [-0.26, 0.05, 0],
+                   fill_color="#7B4A2A", fill_opacity=1, stroke_color="#4A2A14", stroke_width=3)
+    belt = RoundedRectangle(corner_radius=0.03, width=0.6, height=0.08, fill_color="#E8D9A8", fill_opacity=1,
+                            stroke_width=0).move_to([0, -0.25, 0])
+    hood = Ellipse(width=0.62, height=0.3, fill_color="#7B4A2A", fill_opacity=1,
+                   stroke_color="#4A2A14", stroke_width=3).move_to([0, 0.02, 0])
+    head = Circle(radius=0.32, fill_color="#FFD9A0", fill_opacity=1, stroke_color="#C98F4E",
+                  stroke_width=3).move_to([0, 0.3, 0])
+    eyes = VGroup(*[Dot([x, 0.32, 0], radius=0.04, color="#2B2B2B") for x in (-0.12, 0.12)])
+    smile = Arc(radius=0.12, start_angle=3.6, angle=2.0, stroke_color="#2B2B2B", stroke_width=3
+                ).move_to([0, 0.2, 0])
+    cheeks = VGroup(*[Dot([x, 0.24, 0], radius=0.05, color="#F4A08A") for x in (-0.2, 0.2)])
+    g = VGroup(robe, belt, hood, head, cheeks, eyes, smile)
+    g.scale(scale)
     return g
+
+
+def route_mob(route, size=46):
+    """Letters coloured by twin pair, bottom-aligned so they sit on one baseline (a, c, e are shorter than b, d)."""
+    return VGroup(*[label(ch, size, TWIN_COLOR[ch], weight="BOLD") for ch in route]).arrange(
+        direction=np.array([1.0, 0, 0]), buff=0.25, aligned_edge=DOWN)
 
 
 def counter(text, color=ACCENT, size=84):
@@ -148,7 +168,7 @@ class Short(Scene):
         # ---------- hook: the map pops in ----------
         m = BridgeMap(BRIDGES, POS1)
         P = m.P
-        monk = Dot(P["M"], radius=0.17, color=ACCENT).set_z_index(6)
+        monk = make_monk(0.9).move_to(v3(P["M"])).set_z_index(6)
         words = VGroup(label("monk", 32, MUTED).move_to(P["M"] + np.array([0, -0.75, 0])),
                        label("monastery", 32, MUTED).move_to(P["Y"] + np.array([-0.45, -0.75, 0])),
                        label("island", 32, MUTED).move_to(P["I"] + np.array([1.1, 0.0, 0])))
@@ -169,7 +189,7 @@ class Short(Scene):
         self.add_sound(SFX["pop"], gain=-4)
         cap.show("A monk wants to walk home to the monastery.",
                  extra=[GrowFromCenter(monk)], run_time=0.5)
-        self.play(Indicate(monk, color=INK, scale_factor=1.8), run_time=0.8)
+        self.play(monk.animate.scale(1.6), run_time=0.8, rate_func=there_and_back)
         self.wait(0.4)
 
         cap.show("Two bridges reach the island, two leave it, and one crosses directly.")
@@ -188,15 +208,12 @@ class Short(Scene):
 
         # ---------- pause and try ----------
         cap.show("Pause and try it.", ACCENT)
-        everything = VGroup(pic_all, monk)
-        self.play(FadeOut(everything), run_time=0.3)
-        countdown(self, 5, center=[CENTRE_X, 3.5, 0], radius=1.1, tick_sound=SFX["tick"])
-        self.play(FadeIn(everything), run_time=0.3)
+        countdown(self, 5, center=[CENTRE_X, -0.5, 0], radius=0.9, tick_sound=SFX["tick"])
 
         # ---------- start and end ----------
         cap.show("Every route has to start at the monk and end at the monastery.")
-        self.play(Flash(v3(PIC_MONK), color=ACCENT, flash_radius=0.8, line_length=0.25),
-                  Indicate(monk, color=ACCENT, scale_factor=1.8), run_time=0.9)
+        self.play(Flash(v3(PIC_MONK), color=ACCENT, flash_radius=0.8, line_length=0.25), run_time=0.9)
+        self.play(monk.animate.scale(1.6), run_time=0.5, rate_func=there_and_back)
         self.play(Flash(v3(PIC_HOUSE), color=GOOD, flash_radius=0.8, line_length=0.25),
                   Indicate(house, color=GOOD, scale_factor=1.25), run_time=0.9)
         self.wait(0.4)
@@ -312,7 +329,7 @@ class Short(Scene):
         sub = label("The same river, but with six bridges.\nHe ends where he started.", 44, INK)
         sub.move_to([CENTRE_X, 5.35, 0])
         ask = label("routes: ?", 72, ACCENT).move_to([CENTRE_X, -1.6, 0])
-        monk2 = Dot(m2.P["M"], radius=0.17, color=ACCENT).set_z_index(6)
+        monk2 = make_monk(0.9).move_to(m2.P["M"]).set_z_index(6)
         self.add_sound(SFX["chime"], gain=-8)
         self.play(GrowFromCenter(tg), run_time=0.4)
         self.play(FadeIn(sub), LaggedStart(*[GrowFromCenter(c) for c in m2.curves], lag_ratio=0.12),
