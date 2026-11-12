@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0018'
 title: The Grand Lama's Problem
-status: needs_attention
+status: animating
 catalog_id: dudeney-amusements-291
 tags:
   - chessboard
@@ -162,6 +162,6 @@ video:
       message: '1570073810395336847'
   comment: Pause counter visual is messed up
   warned:
-  as_is:
+  as_is: true
 last_error: "ms check: ERROR   scene     the scene did not run:; TypeError: countdown() got an unexpected
   keyword argument 'z_index'; 0018-the-grand-lama-s-problem: 1 error(s), 0 warning(s)"
