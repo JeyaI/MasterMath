@@ -17,7 +17,7 @@ REPO = HERE.parents[1]
 sys.path[:0] = [str(REPO), str(HERE)]
 
 from manim import (  # noqa: E402
-    DOWN, PI, Circle, RIGHT, UP, Create, FadeIn, FadeOut, Flash, GrowFromCenter, Indicate, LaggedStart, Line,
+    DOWN, PI, RIGHT, UP, Create, FadeIn, FadeOut, Flash, GrowFromCenter, Indicate, LaggedStart, Line,
     Polygon, Rotate, Scene, Square as Cell, VGroup, there_and_back, BOLD,
 )
 import numpy as np  # noqa: E402
@@ -124,11 +124,9 @@ class Short(Scene):
         self.play(FadeOut(cross), FadeOut(quarter), run_time=0.4)
 
         # --- pause and try ------------------------------------------------------------------------
-        disc = Circle(radius=1.3, stroke_width=0, fill_color=BG, fill_opacity=0.95).move_to([GX, GY, 0])
-        disc.set_z_index(12)
-        cap.show("Pause and try it.", ACCENT, extra=[FadeIn(disc)])
-        countdown(self, 5, center=[GX, GY, 0], radius=1.0, tick_sound=SFX["tick"], z_index=13)
-        self.play(FadeOut(disc), run_time=0.3)
+        # The timer sits in the empty title slot above the board, so the board stays in full view.
+        cap.show("Pause and try it.", ACCENT)
+        countdown(self, 5, center=[CENTRE_X, TITLE_Y + 0.1, 0], radius=0.8, tick_sound=SFX["tick"])
 
         # --- obvious cuts fail ---------------------------------------------------------------------
         strips = VGroup(*[grid_line((k, 0), (k, 8), INK, 9) for k in (2, 4, 6)])
