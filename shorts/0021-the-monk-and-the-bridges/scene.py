@@ -85,6 +85,44 @@ class BridgeMap:
                         for n in self.base])
 
 
+WATER, GRASS, ISLAND, PLANK, EDGE, WALL = "#1F4E79", "#2F5233", "#4C7A45", "#C8A26B", "#5A4326", "#D9C7A0"
+PIC_MONK, PIC_HOUSE = (-2.8, 1.95), (-2.4, 6.3)
+# bridge ends (near bank / island edge / far bank) in the picture
+PIC_BRIDGES = {"a": ((-1.2, 2.6), (-1.2, 3.9)), "b": ((0.6, 2.6), (0.6, 3.9)),
+               "c": ((-1.2, 4.4), (-1.2, 5.7)), "d": ((0.6, 4.4), (0.6, 5.7)),
+               "e": ((2.6, 2.6), (2.6, 5.7))}
+PIC_LABEL = {"a": (-1.7, 3.25), "b": (1.1, 3.25), "c": (-1.7, 5.05), "d": (1.1, 5.05), "e": (2.95, 4.15)}
+
+
+def picture():
+    """A little river scene: monk's bank, river, island, far bank with the monastery, five real bridges."""
+    from manim import Ellipse, Polygon, Rectangle
+    water = Rectangle(width=7.0, height=3.0, fill_color=WATER, fill_opacity=1, stroke_width=0)
+    water.move_to([-0.3, 4.15, 0])
+    near = Rectangle(width=7.0, height=1.5, fill_color=GRASS, fill_opacity=1, stroke_width=0)
+    near.move_to([-0.3, 1.95, 0])
+    far = Rectangle(width=7.0, height=1.4, fill_color=GRASS, fill_opacity=1, stroke_width=0)
+    far.move_to([-0.3, 6.3, 0])
+    isl = Ellipse(width=3.2, height=1.1, fill_color=ISLAND, fill_opacity=1, stroke_width=0)
+    isl.move_to([-0.3, 4.15, 0])
+    planks, bridges = {}, VGroup()
+    for n, (p, q) in PIC_BRIDGES.items():
+        edge = Line(v3(p), v3(q)).set_stroke(EDGE, 30)
+        plank = Line(v3(p), v3(q)).set_stroke(PLANK, 18)
+        planks[n] = plank
+        bridges.add(VGroup(edge, plank))
+    wall = Rectangle(width=0.8, height=0.55, fill_color=WALL, fill_opacity=1, stroke_width=0)
+    wall.move_to([PIC_HOUSE[0], PIC_HOUSE[1] - 0.15, 0])
+    roof = Polygon([PIC_HOUSE[0] - 0.55, PIC_HOUSE[1] + 0.12, 0], [PIC_HOUSE[0] + 0.55, PIC_HOUSE[1] + 0.12, 0],
+                   [PIC_HOUSE[0], PIC_HOUSE[1] + 0.65, 0], fill_color="#B5483A", fill_opacity=1, stroke_width=0)
+    house = VGroup(wall, roof)
+    pwords = VGroup(label("monk", 32, INK).move_to([PIC_MONK[0], PIC_MONK[1] - 0.6, 0]),
+                    label("monastery", 32, INK).move_to([-0.2, 6.3, 0]),
+                    label("island", 30, INK).move_to([-0.3, 4.15, 0]))
+    scene = VGroup(near, far, water, isl, bridges)
+    return scene, planks, scene, pwords, house
+
+
 def route_mob(route, size=46):
     g = VGroup(*[label(ch, size, TWIN_COLOR[ch], weight="BOLD") for ch in route]).arrange(
         direction=np.array([1.0, 0, 0]), buff=0.2)
@@ -115,11 +153,15 @@ class Short(Scene):
                        label("monastery", 32, MUTED).move_to(P["Y"] + np.array([-0.45, -0.75, 0])),
                        label("island", 32, MUTED).move_to(P["I"] + np.array([1.1, 0.0, 0])))
 
+        # the real-life picture first: a river, an island and five actual bridges
+        land, planks, pic, pwords, house = picture()
+        monk.move_to(v3(PIC_MONK))
+        pic_all = VGroup(pic, pwords, house)
+
         beat(self, "hook")
         self.add_sound(SFX["pop"])
-        self.play(LaggedStart(*[GrowFromCenter(c) for c in m.curves], lag_ratio=0.12),
-                  GrowFromCenter(m.node_group), run_time=0.9)
-        self.play(FadeIn(words), run_time=0.3)
+        self.play(GrowFromCenter(pic), run_time=0.9)
+        self.play(FadeIn(VGroup(pwords, house)), run_time=0.3)
         cap.show("Can you count the routes that\ncross all five bridges exactly once?", run_time=0.5)
         self.wait(1.4)
 
@@ -133,12 +175,12 @@ class Short(Scene):
         cap.show("Two bridges reach the island, two leave it, and one crosses directly.")
         pairs = [(("a", "b"), BLUE), (("c", "d"), GREEN), (("e",), ORANGE)]
         for names, col in pairs:
-            self.play(*[m.base[n].animate.set_stroke(col, 10) for n in names], run_time=0.5)
+            self.play(*[planks[n].animate.set_stroke(col, 18) for n in names], run_time=0.5)
             self.wait(0.1)
-        self.play(*[m.base[n].animate.set_stroke(INK, 6) for n in m.base], run_time=0.3)
+        self.play(*[planks[n].animate.set_stroke(PLANK, 18) for n in planks], run_time=0.3)
 
         cap.show("He must cross every bridge once, and only once.")
-        self.play(Indicate(m.curves, color=ACCENT, scale_factor=1.04), run_time=1.0)
+        self.play(Indicate(VGroup(*planks.values()), color=ACCENT, scale_factor=1.04), run_time=1.0)
         self.wait(0.5)
 
         cap.show("How many different routes could he take?", ACCENT)
@@ -146,33 +188,45 @@ class Short(Scene):
 
         # ---------- pause and try ----------
         cap.show("Pause and try it.", ACCENT)
-        everything = VGroup(m.curves, m.node_group, words, monk)
+        everything = VGroup(pic_all, monk)
         self.play(FadeOut(everything), run_time=0.3)
         countdown(self, 5, center=[CENTRE_X, 3.5, 0], radius=1.1, tick_sound=SFX["tick"])
         self.play(FadeIn(everything), run_time=0.3)
 
         # ---------- start and end ----------
         cap.show("Every route has to start at the monk and end at the monastery.")
-        self.play(Flash(P["M"], color=ACCENT, flash_radius=0.8, line_length=0.25),
-                  Indicate(m.nodes["M"], color=ACCENT, scale_factor=1.25), run_time=0.9)
-        self.play(Flash(P["Y"], color=GOOD, flash_radius=0.8, line_length=0.25),
-                  Indicate(m.nodes["Y"], color=GOOD, scale_factor=1.25), run_time=0.9)
+        self.play(Flash(v3(PIC_MONK), color=ACCENT, flash_radius=0.8, line_length=0.25),
+                  Indicate(monk, color=ACCENT, scale_factor=1.8), run_time=0.9)
+        self.play(Flash(v3(PIC_HOUSE), color=GOOD, flash_radius=0.8, line_length=0.25),
+                  Indicate(house, color=GOOD, scale_factor=1.25), run_time=0.9)
         self.wait(0.4)
 
-        labs = m.labels()
+        plabs = VGroup(*[label(n, 44, TWIN_COLOR[n]).move_to(v3(PIC_LABEL[n])).set_z_index(4)
+                         for n in planks])
         self.add_sound(SFX["pop"], gain=-6)
         cap.show("Let's call the bridges a, b, c, d and e.",
-                 extra=[LaggedStart(*[FadeIn(x, scale=0.6) for x in labs], lag_ratio=0.2)], run_time=0.9)
+                 extra=[LaggedStart(*[FadeIn(x, scale=0.6) for x in plabs], lag_ratio=0.2)], run_time=0.9)
         self.wait(0.4)
 
         # ---------- twins ----------
         self.add_sound(SFX["chime"], gain=-8)
         cap.show("The two bridges in each pair are twins, so ignore their names for now.",
-                 extra=[FadeOut(labs),
-                        *[m.base[n].animate.set_stroke(TWIN_COLOR[n], 8) for n in m.base]], run_time=1.0)
-        self.play(Indicate(VGroup(m.base["a"], m.base["b"]), color=INK, scale_factor=1.05), run_time=0.6)
-        self.play(Indicate(VGroup(m.base["c"], m.base["d"]), color=INK, scale_factor=1.05), run_time=0.6)
+                 extra=[FadeOut(plabs),
+                        *[planks[n].animate.set_stroke(TWIN_COLOR[n], 18) for n in planks]], run_time=1.0)
+        self.play(Indicate(VGroup(planks["a"], planks["b"]), color=INK, scale_factor=1.05), run_time=0.6)
+        self.play(Indicate(VGroup(planks["c"], planks["d"]), color=INK, scale_factor=1.05), run_time=0.6)
         self.wait(0.4)
+
+        # ---------- from the picture to a simple map ----------
+        for n, c in m.base.items():
+            c.set_stroke(TWIN_COLOR[n], 8)
+        cap.show("Let's redraw it as a simple map: three places, joined by five bridges.",
+                 extra=[FadeOut(pic_all), monk.animate.move_to(P["M"])], run_time=0.8)
+        self.add_sound(SFX["pop"], gain=-6)
+        self.play(LaggedStart(*[GrowFromCenter(c) for c in m.curves], lag_ratio=0.12),
+                  GrowFromCenter(m.node_group), run_time=0.9)
+        self.play(FadeIn(words), run_time=0.3)
+        self.wait(0.6)
 
         # ---------- four shapes ----------
         cap.show("Looking only at the places he visits, there are just four different shapes.")

@@ -80,6 +80,7 @@ captions:
   - "Every route has to start at the monk and end at the monastery."
   - "Let's call the bridges a, b, c, d and e."
   - "The two bridges in each pair are twins, so ignore their names for now."
+  - "Let's redraw it as a simple map: three places, joined by five bridges."
   - "Looking only at the places he visits, there are just four different shapes."
   - "In every shape, the first pair of twins can be named in two ways."
   - "The second pair of twins can be named in two ways too."
@@ -111,6 +112,25 @@ review:
   last_seen: '1570582098048192566'
 video:
   pending:
+    version: 2
+    file: /home/jeya/mathshorts/out/review/0021-the-monk-and-the-bridges/v2.mp4
+    sha256: 74ff42c10bc4c557a30ef84319e2f77292b2e2bc2b0f73a7a83c237fefce00c3
+    summary: "The puzzle now opens on a river scene instead of a graph: monk's bank, river, island, monastery,
+      and five plank bridges. It is used for the hook, the bridge-pair tinting, the a–e labels and the
+      twins beat. A new caption, \"Let's redraw it as a simple map: three places, joined by five bridges.\"\
+      , turns it into the M/I/Y graph. I added that caption to SCRIPT.md and short.yaml. verify.py is
+      unchanged and passes. ms check reports 0 errors and one warning: the preview runs 64.9 s, over the
+      40–50 s target, and I did not trim it."
+    usage:
+      job: revise_video
+      short: 0021-the-monk-and-the-bridges
+      exit: 0
+      seconds: 109
+      subtype: success
+      is_error: false
+      num_turns: 24
+      total_cost_usd: 0.31523779999999996
+      log: job-revise_video-20261112-183507.jsonl
   version: 1
   versions:
     1:

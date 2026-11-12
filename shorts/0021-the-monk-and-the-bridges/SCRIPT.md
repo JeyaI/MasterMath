@@ -26,6 +26,7 @@ Different from the recent Shorts: I read the `SCRIPT.md` of 0020 (grid area by s
 7. (19-22 s) "Every route has to start at the monk and end at the monastery."
 8. (22-24 s) "Let's call the bridges a, b, c, d and e." Labels appear.
 9. (24-27 s) "The two bridges in each pair are twins, so ignore their names for now." Labels fade; twins tinted alike.
+9b. (about 2 s) "Let's redraw it as a simple map: three places, joined by five bridges." The river picture (bank, river, island, monastery, five real bridges, used from the hook on) turns into the M / I / Y graph. Added after the reviewer asked for real bridges before the graph.
 10. (27-31 s) "Looking only at the places he visits, there are just four different shapes." The four shapes are traced.
 11. (31-33 s) "In every shape, the first pair of twins can be named in two ways."
 12. (33-35 s) "The second pair of twins can be named in two ways too."
