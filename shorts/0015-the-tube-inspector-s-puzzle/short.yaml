@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0015'
 title: The Tube Inspector's Puzzle
-status: scheduled
+status: published
 catalog_id: dudeney-amusements-242
 tags:
   - routes
@@ -85,7 +85,7 @@ youtube:
     - puzzle
   video_id: 1M5d6uXQDT4
   url: https://youtube.com/shorts/1M5d6uXQDT4
-  published_at:
+  published_at: '2026-11-10'
   publish_at: '2026-11-10T17:00:00-05:00'
 review:
   thread_id: '1569155065523077341'
