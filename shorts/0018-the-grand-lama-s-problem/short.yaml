@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0018'
 title: The Grand Lama's Problem
-status: scheduled
+status: published
 catalog_id: dudeney-amusements-291
 tags:
   - chessboard
@@ -136,7 +136,7 @@ youtube:
     - puzzle
   video_id: aWNQW-WmwC8
   url: https://youtube.com/shorts/aWNQW-WmwC8
-  published_at:
+  published_at: '2026-11-11'
   publish_at: '2026-11-11T22:00:00-05:00'
 review:
   thread_id: '1569593067957260358'
