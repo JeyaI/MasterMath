@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0018'
 title: The Grand Lama's Problem
-status: revise_video
+status: video_review
 catalog_id: dudeney-amusements-291
 tags:
   - chessboard
@@ -149,24 +149,7 @@ review:
   comment:
 video:
   pending:
-    version: 5
-    file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v5.mp4
-    sha256: 518bf2f972f8855345428c54bef0751613129640bcb7d863bce5ab41efa4401e
-    summary: "Fixed the spiky line at the bottom tip of the gem by giving the gem's facets rounded line
-      joints (scene.py). I looked at a frame from the new preview, and the tip is now clean. No numbers
-      or claims changed, so I didn't re-run `ms verify`. `ms check` has 0 errors and one warning: the
-      video runs 60.1 s against the 40–50 s target, which this change didn't affect."
-    usage:
-      job: revise_video
-      short: 0018-the-grand-lama-s-problem
-      exit: 0
-      seconds: 65
-      subtype: success
-      is_error: false
-      num_turns: 14
-      total_cost_usd: 0.1031107
-      log: job-revise_video-20261111-203510.jsonl
-  version: 4
+  version: 5
   versions:
     1:
       file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v1.mp4
@@ -187,7 +170,12 @@ video:
       file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v4.mp4
       sha256: 1e756dd5a6e66996a4547fb7b62b190e0e994a93ce111a21ba651f817824c486
       message: '1570246213331067072'
-  comment: Little bit of lines going too far at the bottom of the gem emoji
+      video_id:
+    5:
+      file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v5.mp4
+      sha256: 518bf2f972f8855345428c54bef0751613129640bcb7d863bce5ab41efa4401e
+      message: '1570251197690937374'
+  comment:
   warned:
   as_is:
 last_error: "ms check: ERROR   scene     the scene did not run:; TypeError: countdown() got an unexpected
