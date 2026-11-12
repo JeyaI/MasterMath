@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0018'
 title: The Grand Lama's Problem
-status: animating
+status: video_review
 catalog_id: dudeney-amusements-291
 tags:
   - chessboard
@@ -149,12 +149,7 @@ review:
   comment:
 video:
   pending:
-    version: 3
-    file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v3.mp4
-    sha256: d16a5f8e48ed81d2be6dbf25987382ab423cc185ac005a651d00317df30c0429
-    summary: Your scene, as it is.
-    usage: {}
-  version: 2
+  version: 3
   versions:
     1:
       file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v1.mp4
@@ -165,8 +160,13 @@ video:
       file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v2.mp4
       sha256: b05422f17c81200d28e4e5d87659a17deb70c4eac634969267f7e73dbc135180
       message: '1570073810395336847'
-  comment: Pause counter visual is messed up
+      video_id:
+    3:
+      file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v3.mp4
+      sha256: d16a5f8e48ed81d2be6dbf25987382ab423cc185ac005a651d00317df30c0429
+      message: '1570243045721374870'
+  comment:
   warned:
-  as_is: true
+  as_is:
 last_error: "ms check: ERROR   scene     the scene did not run:; TypeError: countdown() got an unexpected
   keyword argument 'z_index'; 0018-the-grand-lama-s-problem: 1 error(s), 0 warning(s)"
