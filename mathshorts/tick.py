@@ -25,7 +25,7 @@ reactions are read as data. Every change is committed, one Short per commit, and
 Short's events.jsonl.
 
 No spoilers (#46): a thread opens with the puzzle alone, and everything about the solution (job
-summaries, errors, SCRIPT.md, videos) goes inside Discord spoiler tags, so you can try it first.
+the script's beats, summaries, errors, videos) goes inside Discord spoiler tags, so you can try it first.
 """
 from __future__ import annotations
 
@@ -45,6 +45,7 @@ from typing import Callable
 
 from . import jobs, paths, release, sandbox, youtube, yamlio
 from .discord import ACCEPT, CROSS, FILE_LIMIT, STOP
+from .discord import LIMIT as DISCORD_LIMIT
 from .shorts import SCRIPT_LOOP, VIDEO_LOOP, Short, all_shorts
 
 ATTEMPTS = 2
@@ -56,6 +57,41 @@ def spoiler(text: str) -> str:
     """Hide text behind Discord spoiler tags. A `||` or code fence inside would end the spoiler early."""
     text = (text or "").strip().replace("||", "| |").replace("```", "'''")
     return f"||{text}||" if text else ""
+
+
+_BEAT = re.compile(r"^\s*(\d+[a-z]?)\.\s*(\([^)]*\))?\s*(.*)$")
+_QUOTE = re.compile(r"[\"“]([^\"”]+)[\"”]")
+
+
+def script_beats(text: str) -> list[str] | None:
+    """SCRIPT.md's `## Beats` as one line each, captions only (#51): `6. (14-19 s) Pause and try it.`
+    A beat with no quoted caption keeps its whole text. None if there's no Beats section."""
+    m = re.search(r"^##\s+Beats\s*$(.*?)(?=^##\s|\Z)", text or "", re.M | re.S)
+    if not m:
+        return None
+    out = []
+    for line in m.group(1).splitlines():
+        b = _BEAT.match(line)
+        if not b:
+            continue
+        num, when, rest = b.groups()
+        caps = _QUOTE.findall(rest)
+        caption = " ".join(c.strip() for c in caps) if caps else rest.strip()
+        out.append(" ".join(x for x in (f"{num}.", when, caption) if x))
+    return out or None
+
+
+def chunk_lines(lines: list[str], limit: int) -> list[str]:
+    """Join lines into as few blocks as fit `limit` characters each (a too-long line is cut)."""
+    blocks, cur = [], ""
+    for line in lines:
+        line = line[:limit]
+        if cur and len(cur) + 1 + len(line) > limit:
+            blocks.append(cur)
+            cur = line
+        else:
+            cur = f"{cur}\n{line}" if cur else line
+    return blocks + [cur] if cur else blocks
 
 
 def answers(d: dict) -> list[str]:
@@ -607,11 +643,23 @@ class Tick:
         return self.d.post(thread, head)
 
     def post_version(self, thread: str, s: Short, version: int, summary: str) -> str:
-        head = (f"**Script v{version}** · {title(s)}\n{spoiler(summary)}\n\n"
-                f"React {ACCEPT} to accept, {CROSS} to abandon, or reply to revise.")
-        return self.d.post(thread, head,
-                           files={f"SPOILER_{s.number}-script-v{version}.md": s.folder / "SCRIPT.md"},
-                           reactions=(ACCEPT, CROSS))
+        """The script's beats inline, behind a spoiler (#51); the reactions go on the last message,
+        whose id is returned. Without a Beats section, the summary and SCRIPT.md attached, as before."""
+        top = f"**Script v{version}** · {title(s)}"
+        prompt = f"React {ACCEPT} to accept, {CROSS} to abandon, or reply to revise."
+        path = s.folder / "SCRIPT.md"
+        beats = script_beats(path.read_text()) if path.exists() else None
+        if not beats:
+            return self.d.post(thread, f"{top}\n{spoiler(summary)}\n\n{prompt}",
+                               files={f"SPOILER_{s.number}-script-v{version}.md": path},
+                               reactions=(ACCEPT, CROSS))
+        room = DISCORD_LIMIT - len(top) - len(prompt) - 8       # newlines and the two `||`
+        blocks = [spoiler(b) for b in chunk_lines(beats, room)]
+        blocks[0] = f"{top}\n{blocks[0]}"
+        blocks[-1] = f"{blocks[-1]}\n\n{prompt}"
+        for b in blocks[:-1]:
+            self.d.post(thread, b)
+        return self.d.post(thread, blocks[-1], reactions=(ACCEPT, CROSS))
 
     def post_video(self, thread: str, s: Short, version: int, ver: dict, summary: str) -> str:
         """The video itself as a spoilered attachment (a compressed copy if the master is over the cap)."""

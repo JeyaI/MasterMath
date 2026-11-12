@@ -6,7 +6,7 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **51**
+Next id: **52**
 
 ## Open
 
@@ -140,6 +140,11 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #51 · Post the script to Discord as its beats, inline, instead of an attached SCRIPT.md
+status: done · 2026-11-12 · P2 · feature
+In script review, the only part of a script that matters is the beats. Right now `post_version` (`mathshorts/tick.py`) posts a spoilered summary and attaches the whole `SCRIPT.md` (0021's runs to about 1,000 words: puzzle choice, insight, Level 2, music, risks). Instead, post just the beats as an inline message, one line per beat with its time range and caption (e.g. `6. (14-19 s) Pause and try it.`), all inside a spoiler, and drop both the attachment and the summary. Keep the version line and the ✅/❌ prompt. `SCRIPT.md` stays on disk as it is, since the animate and revise jobs read its Insight, Level 2 and Music sections. Pull the beats from its `## Beats` section; if that section is missing, fall back to attaching the file as before. Watch Discord's 2,000-character limit: 0021's beats with their stage directions come to about 2,000, so show the captions only (no stage directions) and split into a second message if it's still too long. Do the same for revised versions (`revise` job), and update the script-review paragraph in OPERATING.md.
+- **Resolution:** `post_version` posts `## Beats` captions inline in a spoiler (`script_beats`), split across messages under 2,000 characters with ✅/❌ on the last; no Beats section falls back to the attachment.
 
 ### #41 · Thumbnails for scheduled Shorts
 status: done · 2026-11-05 · P3 · feature

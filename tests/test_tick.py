@@ -78,7 +78,8 @@ class FakeRunner:
         if kind in ("animate", "revise_video"):
             (folder / "scene.py").write_text(f"# scene\n# {comment or 'first cut'}\n")
         else:
-            (folder / "SCRIPT.md").write_text(f"# Script\n{comment or 'first draft'}\n")
+            (folder / "SCRIPT.md").write_text(getattr(self, "script_md", None)
+                                              or f"# Script\n{comment or 'first draft'}\n")
         return JobResult(True, short, summary="Frogs swap places. Answer: fifteen jumps; Level 2 is 24.", usage={"total_cost_usd": 1.5})
 
 
@@ -181,6 +182,61 @@ def test_draft_posts_a_verified_script_for_review(root):
     assert d.reactors(thread, first["id"], ACCEPT) == {BOT}         # pre-added for you to tap
     assert [e["event"] for e in s.events()] == ["script_done"]
     assert s.events()[0]["usage"] == {"total_cost_usd": 1.5}
+
+
+BEATS_MD = """# Script
+
+## Beats
+1. (0-4 s) Hook: "Can six frogs swap sides?" Frogs pop in.
+2. (4-9 s) "Pause and try it." 5 s countdown.
+2b. (about 2 s) The board slides left.
+3. (9-12 s) “It takes fifteen jumps ✓”
+
+## Level 2
+Eight frogs: 24.
+"""
+
+
+def test_script_posts_its_beats_inline_and_spoilered(root):
+    runner = FakeRunner()
+    runner.script_md = BEATS_MD
+    d, t = make(root, runner)
+    t.run(draft=True)
+    s = all_shorts()[0]
+    thread = s.data()["review"]["thread_id"]
+    post = d.threads[thread][1]
+    assert post["files"] == {}                                       # no SCRIPT.md attached (#51)
+    assert post["content"] == (
+        f"**Script v1** · {tick.title(s)}\n"
+        "||1. (0-4 s) Can six frogs swap sides?\n2. (4-9 s) Pause and try it.\n"
+        "2b. (about 2 s) The board slides left.\n3. (9-12 s) It takes fifteen jumps ✓||\n\n"
+        f"React {ACCEPT} to accept, {CROSS} to abandon, or reply to revise.")
+    assert "Level 2" not in post["content"] and "Frogs swap places" not in post["content"]
+    assert current_message(s) == post["id"] and d.reactors(thread, post["id"], ACCEPT) == {BOT}
+
+
+def test_long_beats_split_and_reactions_go_on_the_last_message(root):
+    runner = FakeRunner()
+    lines = "\n".join(f'{i}. ({i}-{i + 1} s) "{"word " * 20}number {i}."' for i in range(1, 40))
+    runner.script_md = f"## Beats\n{lines}\n"
+    d, t = make(root, runner)
+    t.run(draft=True)
+    s = all_shorts()[0]
+    thread = s.data()["review"]["thread_id"]
+    posts = d.threads[thread][1:]
+    assert len(posts) == 3 and all(len(p["content"]) <= 2000 for p in posts)
+    assert all(p["content"].count("||") == 2 for p in posts)
+    assert posts[0]["content"].startswith("**Script v1**") and "React" in posts[-1]["content"]
+    assert current_message(s) == posts[-1]["id"]
+    assert d.reactors(thread, posts[0]["id"], ACCEPT) == set()
+    body = "".join(p["content"] for p in posts)
+    assert all(f"number {i}." in body for i in range(1, 40))
+
+
+def test_script_beats_parsing():
+    assert tick.script_beats("# Script\nno beats here\n") is None
+    assert tick.script_beats("## Beats\n\n## Level 2\n") is None
+    assert tick.chunk_lines(["aaa", "bb", "c"], 6) == ["aaa\nbb", "c"]
 
 
 def test_check_mark_from_me_accepts_and_others_are_ignored(root):
