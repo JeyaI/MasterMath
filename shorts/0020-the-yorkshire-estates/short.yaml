@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0020'
 title: The Yorkshire Estates
-status: scheduled
+status: published
 catalog_id: dudeney-amusements-189
 tags:
   - geometry
@@ -123,7 +123,7 @@ youtube:
     - puzzle
   video_id: 7pIN47cN5vw
   url: https://youtube.com/shorts/7pIN47cN5vw
-  published_at:
+  published_at: '2026-11-11'
   publish_at: '2026-11-11T21:00:00-05:00'
 review:
   thread_id: '1569955329838424095'
