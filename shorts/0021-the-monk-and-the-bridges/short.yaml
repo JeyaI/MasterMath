@@ -1,0 +1,111 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0021'
+title: The Monk And The Bridges
+status: script_review
+catalog_id: dudeney-amusements-261
+tags:
+  - routes
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 261
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    In this case I give a rough plan of a river with an island and five
+    bridges. On one side of the river is a monastery, and on the other side
+    is seen a monk in the foreground. Now, the monk has decided that he will
+    cross every bridge once, and only once, on his return to the monastery.
+    This is, of course, quite easy to do, but on the way he thought to
+    himself, "I wonder how many different routes there are from which I
+    might have selected." Could you have told him? That is the puzzle. Take
+    your pencil and trace out a route that will take you once over all the
+    five bridges. Then trace out a second route, then a third, and see if
+    you can count all the variations. You will find that the difficulty is
+    twofold: you have to avoid dropping routes on the one hand and counting
+    the same routes more than once on the other.
+
+    [Illustration]
+  solution: |
+    [Illustration]
+
+    The problem of the Bridges may be reduced to the simple diagram shown
+    in illustration. The point M represents the Monk, the point I the
+    Island, and the point Y the Monastery. Now the only direct ways from M
+    to I are by the bridges a and b; the only direct ways from I to Y are
+    by the bridges c and d; and there is a direct way from M to Y by the
+    bridge e. Now, what we have to do is to count all the routes that will
+    lead from M to Y, passing over all the bridges, a, b, c, d, and e once
+    and once only. With the simple diagram under the eye it is quite easy,
+    without any elaborate rule, to count these routes methodically. Thus,
+    starting from a, b, we find there are only two ways of completing the
+    route; with _a, c_, there are only two routes; with a, d, only two
+    routes; and so on. It will be found that there are sixteen such routes
+    in all, as in the following list:--
+
+        a b e c d                      b c d a e
+        a b e d c                      b c e a d
+        a c d b e                      b d c a e
+        a c e b d                      b d e a c
+        a d e b c                      e c a b d
+        a d c b e                      e c b a d
+        b a e c d                      e d a b c
+        b a e d c                      e d b a c
+
+    If the reader will transfer the letters indicating the bridges from the
+    diagram to the corresponding bridges in the original illustration,
+    everything will be quite obvious.
+level1:
+  statement: "A monk wants to walk home to his monastery across a river with an island. Two bridges join
+    his bank to the island, two join the island to the monastery's bank, and one crosses the river directly.
+    He will cross every bridge exactly once. How many different routes could he take?"
+  answer: "16 routes."
+  insight: "Treat the two bridges in each pair as twins and look only at the places he visits. There are
+    just 4 different shapes of walk. Each shape can then be labelled in 2 x 2 ways by choosing which twin
+    is which, so 4 x 4 = 16 routes."
+level2:
+  statement: "A monk starts on his bank, M. Two bridges join M to an island, two join the island to the
+    far bank, and two more join M directly to the far bank. He crosses all six bridges exactly once and
+    finishes back at M. How many different routes are there?"
+  answer: 64
+  accept: [64, "64 routes", "sixty-four", "sixty four"]
+  why: "Ignoring which twin is which, there are 8 different shapes of walk. Each of the three twin pairs
+    can be labelled 2 ways, so each shape gives 2 x 2 x 2 = 8 routes. 8 x 8 = 64."
+captions:
+  - "Can you count the routes that cross all five bridges exactly once?"
+  - "A monk wants to walk home to the monastery."
+  - "Two bridges lead to the island, two lead off it, and one crosses the river."
+  - "He must cross every bridge once, and only once."
+  - "How many different routes could he take?"
+  - "Pause and try it."
+  - "Every route has to start at the monk and end at the monastery."
+  - "Let's call the bridges a, b, c, d and e."
+  - "The two bridges in each pair are twins, so ignore their names for now."
+  - "Looking only at the places he visits, there are just four different shapes."
+  - "In every shape, the first pair of twins can be named in two ways."
+  - "The second pair of twins can be named in two ways too."
+  - "So each shape gives 2 times 2, which is 4 routes."
+  - "Four shapes times four names makes 16 routes ✓"
+  - "Level 2: the same river, but with six bridges and a walk back to the start."
+  - "Same trick: how many routes are there now?"
+  - "Comment just the number ↓"
+music:
+  piece: fur-elise
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "A monk must cross all five bridges once: how many routes?"
+  description: |
+    A monk wants to cross all five bridges exactly once on his way home. How many different routes could he take? Level 2: six bridges and a walk back to the start. Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 261.
+    Music: L. van Beethoven, Für Elise, WoO 59.
+  tags:
+    - math puzzle
+    - puzzle
+  video_id:
+  url:
+  published_at:
+review:
+  thread_id: '1570242211939881052'
+  version: 1
+  messages:
+    1: '1570242216444567653'
+  last_seen: '1570242216444567653'
