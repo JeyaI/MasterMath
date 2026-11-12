@@ -49,11 +49,22 @@ def piece_group(cells, color, opacity=1.0) -> VGroup:
     return VGroup(*[sq(r, c, color, opacity) for r, c in sorted(cells)])
 
 
-def gem(r, c) -> Polygon:
-    d = CELL * 0.3
+def gem(r, c) -> VGroup:
+    """A faceted brilliant-cut gem, like the 💎 emoji: flat table on top, crown facets, pointed pavilion."""
+    s = CELL * 0.4
     p = at(r, c)
-    return Polygon(p + [0, d, 0], p + [d, 0, 0], p + [0, -d, 0], p + [-d, 0, 0], fill_color="#FFFFFF",
-                   fill_opacity=1, stroke_color=ACCENT, stroke_width=5).set_z_index(10)
+
+    def pt(x, y):
+        return p + np.array([x * s, y * s, 0.0])
+
+    TL, TR, L, R, B = pt(-0.5, 0.65), pt(0.5, 0.65), pt(-1, 0.2), pt(1, 0.2), pt(0, -0.95)
+    ML, MR = pt(-0.33, 0.2), pt(0.33, 0.2)           # girdle points under the table's corners
+    facets = [
+        (Polygon(L, TL, ML), "#7FDBFF"), (Polygon(TL, TR, MR, ML), "#C9F2FF"), (Polygon(TR, R, MR), "#4FB8F0"),
+        (Polygon(L, ML, B), "#2E9BE0"), (Polygon(ML, MR, B), "#5CC8FF"), (Polygon(MR, R, B), "#1C7CC4"),
+    ]
+    parts = [f.set_fill(col, 1).set_stroke("#FFFFFF", 2.5) for f, col in facets]
+    return VGroup(*parts).set_z_index(10)
 
 
 def grid_line(a, b, color=ACCENT, w=10):
