@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0018'
 title: The Grand Lama's Problem
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-291
 tags:
   - chessboard
@@ -145,7 +145,7 @@ review:
     2: '1569878179076907079'
     3: '1569879446347849760'
     4: '1569881996346400898'
-  last_seen: '1570244347255857216'
+  last_seen: '1570249755790024865'
   comment:
 video:
   pending:
@@ -170,7 +170,7 @@ video:
       file: /home/jeya/mathshorts/out/review/0018-the-grand-lama-s-problem/v4.mp4
       sha256: 1e756dd5a6e66996a4547fb7b62b190e0e994a93ce111a21ba651f817824c486
       message: '1570246213331067072'
-  comment:
+  comment: Little bit of lines going too far at the bottom of the gem emoji
   warned:
   as_is:
 last_error: "ms check: ERROR   scene     the scene did not run:; TypeError: countdown() got an unexpected
