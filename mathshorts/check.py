@@ -24,6 +24,8 @@ CAPTION_WORDS = (1, 14)                # warning: an upper bound for phone reada
 COUNTDOWN_S = 5
 COMMENT = "comment just the number"
 COMMENT_HOLD_MIN = 10.0
+TITLE_HASHTAGS = 3                     # generic tags ending the YouTube title, e.g. "#math #puzzle #logic"
+TITLE_MAX = 100                        # YouTube's limit; youtube.metadata cuts anything past it
 YAML_SKIP = {"id", "video_id", "url", "published_at", "built_at", "catalog_id", "last_error", "status"}
 
 
@@ -100,6 +102,21 @@ def music_credit_problem(short: Short) -> str | None:
         return str(e)
     if credit not in ((short.data().get("youtube") or {}).get("description") or ""):
         return f"the YouTube description must credit its music: \"{credit}\""
+    return None
+
+
+def title_problem(data: dict) -> str | None:
+    """Why the YouTube title doesn't end in exactly TITLE_HASHTAGS hashtags within TITLE_MAX characters."""
+    title = str((data.get("youtube") or {}).get("title") or "").strip()
+    words = title.split()
+    tail = 0
+    while tail < len(words) and words[-1 - tail].startswith("#"):
+        tail += 1
+    if tail != TITLE_HASHTAGS or any(w.startswith("#") for w in words[:-tail or None]):
+        return (f"the YouTube title should end with {TITLE_HASHTAGS} generic hashtags "
+                f"(e.g. \"#math #puzzle #logic\"): {title!r}")
+    if len(title) > TITLE_MAX:
+        return f"the YouTube title is {len(title)} characters; YouTube allows {TITLE_MAX}"
     return None
 
 
@@ -277,6 +294,8 @@ def run(short: Short) -> list[Finding]:
     findings = []
     if problem := music_credit_problem(short):
         findings.append(Finding("error", "music", problem))
+    if problem := title_problem(data):
+        findings.append(Finding("warning", "title", problem))
     try:
         p = probe(short)
     except RuntimeError as e:

@@ -202,7 +202,7 @@ Keep software sessions separate from drafting sessions.
 | | `ms verify <n>` | Run the answer checks |
 | | `ms preview <n> [--at 0:12] [--open]` | Full preview, or one beat |
 | | `ms compare <n> [--open]` | Before/after side by side |
-| | `ms check <n>` | Format rules and on-screen match, in seconds, without rendering. Errors exit non-zero; warnings (duration outside 40–50 s, caption length, a countdown ring covering the puzzle or no question on screen during the pause) are targets |
+| | `ms check <n>` | Format rules and on-screen match, in seconds, without rendering. Errors exit non-zero; warnings (duration outside 40–50 s, caption length, a YouTube title not ending in 3 generic hashtags, a countdown ring covering the puzzle or no question on screen during the pause) are targets |
 | | `ms note <n> "0:12 text"` | Log a review note |
 | | `ms music [<key>] [--open]` | List the music library, least recently used first; a key writes a 46 s WAV to `out/music/` |
 | | `ms approve <n>` | Your sign-off; refuses if the description doesn't credit the Short's piece |

@@ -6,7 +6,7 @@ Follow CLAUDE.md, and steps 1, 3 and 4 of `.claude/skills/draft-short/SKILL.md`,
 
 1. Choose the puzzle yourself, as in the skill's `pick` path. Then run `ms new <id> --scripting` (the flag matters: it puts the Short in the script loop). Run it once only.
 2. Write `verify.py` and get `ms verify <n>` passing before anything else in the Short.
-3. Fill `short.yaml`. Never edit `status`. The Discord thread opens with `title` and `level1.statement` in plain view, so neither may give away the answer or the trick; `level1.statement` is the full puzzle as the Short poses it.
+3. Fill `short.yaml`. Never edit `status`. The Discord thread opens with `title` and `level1.statement` in plain view, so neither may give away the answer or the trick; `level1.statement` is the full puzzle as the Short poses it. `youtube.title` ends with three generic hashtags (see the skill's step 4).
 4. Write `SCRIPT.md` in the Short's folder, under 1,800 words, with these sections:
    - **Puzzle**: catalog id, one line on why you chose it, and the runner-up.
    - **Hook**: the opening on-screen text (about 3–4 s): the puzzle's question.

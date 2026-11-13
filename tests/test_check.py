@@ -131,3 +131,11 @@ def test_pause_question_is_at_most_two_lines():
     assert len(reminder("How many different routes could the monk take?")) == 2
     with pytest.raises(ValueError):
         reminder("How many different routes could the monk take if he must cross every bridge just once?")
+
+
+def test_title_ends_with_three_hashtags():
+    ok = {"youtube": {"title": "The Monk and the Bridges #math #puzzle #logic"}}
+    assert check.title_problem(ok) is None
+    for bad in ("The Monk and the Bridges", "The Monk #math #puzzle", "#math The Monk #puzzle #logic #quiz",
+                "The Monk " + "x" * 90 + " #math #puzzle #logic"):
+        assert check.title_problem({"youtube": {"title": bad}}), bad
