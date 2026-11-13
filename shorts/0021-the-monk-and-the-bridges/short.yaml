@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0021'
 title: The Monk And The Bridges
-status: video_review
+status: scheduled
 catalog_id: dudeney-amusements-261
 tags:
   - routes
@@ -101,9 +101,10 @@ youtube:
   tags:
     - math puzzle
     - puzzle
-  video_id:
-  url:
+  video_id: Nz0tBjnQzSA
+  url: https://youtube.com/shorts/Nz0tBjnQzSA
   published_at:
+  publish_at: '2026-11-12T21:00:00-05:00'
 review:
   thread_id: '1570242211939881052'
   version: 1
@@ -137,3 +138,8 @@ video:
   comment:
   warned:
   as_is:
+  approved:
+    version: 4
+    video_id: Nz0tBjnQzSA
+    sha256: 98813130341da94f0fb81ad7f7c43cfd9f1111d16d97cca8ce419b3a2ec2926a
+    message: '1570591787842539592'
