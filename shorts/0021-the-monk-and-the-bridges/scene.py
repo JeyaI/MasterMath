@@ -208,7 +208,14 @@ class Short(Scene):
 
         # ---------- pause and try ----------
         cap.show("Pause and try it.", ACCENT)
-        countdown(self, 5, center=[CENTRE_X, -0.5, 0], radius=0.9, tick_sound=SFX["tick"])
+        rules = VGroup(
+            label("Walk from the monk to the monastery.", 40, INK),
+            label("Cross every bridge exactly once.", 40, INK),
+            label("Count the different routes.", 40, INK),
+        ).arrange(DOWN, buff=0.3).move_to([CENTRE_X, 0.0, 0])
+        self.play(FadeIn(rules, shift=0.2 * UP), run_time=0.4)
+        countdown(self, 5, center=[CENTRE_X, -1.85, 0], radius=0.65, tick_sound=SFX["tick"])
+        self.play(FadeOut(rules), run_time=0.3)
 
         # ---------- start and end ----------
         cap.show("Every route has to start at the monk and end at the monastery.")

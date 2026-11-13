@@ -112,6 +112,24 @@ review:
   last_seen: '1570588070255009913'
 video:
   pending:
+    version: 4
+    file: /home/jeya/mathshorts/out/review/0021-the-monk-and-the-bridges/v4.mp4
+    sha256: 98813130341da94f0fb81ad7f7c43cfd9f1111d16d97cca8ce419b3a2ec2926a
+    summary: 'During "Pause and try it" the rules now show as three large lines (size 40) under the river
+      picture: walk from the monk to the monastery, cross every bridge exactly once, count the different
+      routes. They fade out after the countdown, which moved down and got slightly smaller to make room.
+      No numbers or claims changed, so verify.py is untouched. SCRIPT.md beat 6 is updated. ms check has
+      0 errors, and the only warning is the existing 65.5 s length.'
+    usage:
+      job: revise_video
+      short: 0021-the-monk-and-the-bridges
+      exit: 0
+      seconds: 174
+      subtype: success
+      is_error: false
+      num_turns: 25
+      total_cost_usd: 0.23458820000000002
+      log: job-revise_video-20261112-190009.jsonl
   version: 3
   versions:
     1:
