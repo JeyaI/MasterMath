@@ -1,0 +1,82 @@
+# One Short. Change `status` only through ms commands (see OPERATING.md).
+id: '0022'
+title: The Twelve Pennies
+status: script_review
+catalog_id: dudeney-amusements-230
+tags:
+  - counters
+source:
+  kind: dudeney-amusements
+  credit: After Henry Ernest Dudeney, Amusements in Mathematics (1917), no. 230
+  license: Public domain (USA); author d. 1930
+puzzle:
+  text: |
+    Here is a pretty little puzzle that only requires twelve pennies or
+    counters. Arrange them in a circle, as shown in the illustration. Now
+    take up one penny at a time and, passing it over two pennies, place it
+    on the third penny. Then take up another single penny and do the same
+    thing, and so on, until, in six such moves, you have the coins in six
+    pairs in the positions 1, 2, 3, 4, 5, 6. You can move in either
+    direction round the circle at every play, and it does not matter
+    whether the two jumped over are separate or a pair. This is quite easy
+    if you use just a little thought.
+
+    [Illustration]
+  solution: |
+    Here is one of several solutions. Move 12 to 3, 7 to 4, 10 to 6, 8 to 1,
+    9 to 5, 11 to 2.
+level1:
+  statement: "Twelve pennies sit in a circle, numbered 1 to 12. A move lifts one single penny, jumps it
+    over exactly two pennies (a pair counts as two), in either direction, and drops it on the penny just
+    beyond. Empty places are skipped. Can you finish in six moves with the pennies in six pairs, on places
+    1 to 6?"
+  answer: "Yes: 12 to 3, 7 to 4, 10 to 6, 8 to 1, 9 to 5, 11 to 2."
+  insight: "Every jump turns two single pennies into one pair, so six jumps is exactly what twelve pennies
+    need. Only the pennies from places 7 to 12 move, each onto a penny from places 1 to 6, and the gaps
+    they leave behind let later jumps reach across the empty places."
+level2:
+  statement: "Now 20 pennies sit in a circle, with the same kind of move: jump one single penny over two
+    pennies and land on the next one. What is the fewest number of moves that turns all 20 into pairs?"
+  answer: 10
+  accept: [10, "10 moves", "ten", "ten moves"]
+  why: "Each move turns two singles into one pair, so 20 singles need 20 / 2 = 10 moves, and 10 is achievable."
+captions:
+  - "Can you jump twelve pennies into six pairs in just six moves?"
+  - "Twelve pennies sit in a circle, numbered one to twelve."
+  - "In one move, you lift a single penny and jump it over two others."
+  - "It lands on the next penny, which makes a pair."
+  - "A pair counts as two pennies, and you can jump either way round."
+  - "The goal is six pairs, on places one to six."
+  - "Pause and try it."
+  - "Every jump turns two single pennies into one pair."
+  - "So twelve pennies need exactly six jumps, no more."
+  - "Pennies 7 to 12 will each jump onto one of the pennies 1 to 6."
+  - "Penny 12 jumps over 1 and 2, and lands on 3."
+  - "Penny 7 jumps back over 6 and 5, and lands on 4."
+  - "Empty places don't count, so penny 10 jumps over 9 and 8 to land on 6."
+  - "Pennies 8, 9 and 11 finish the job the same way."
+  - "Six jumps, six pairs, on places one to six ✓"
+  - "Level 2: now there are twenty pennies in the circle."
+  - "Same trick: what is the fewest number of moves to make pairs?"
+  - "Comment just the number ↓"
+music:
+  piece: pachelbel-canon
+  license: public-domain composition; recording synthesised by lib/audio.py
+youtube:
+  title: "Twelve pennies, six jumps: can you make six pairs? #math #puzzle #logic"
+  description: |
+    Twelve pennies sit in a circle. Jump a single penny over two others onto the next one. Can you make six pairs in just six moves? Level 2: twenty pennies. Comment just the number.
+    After H. E. Dudeney, Amusements in Mathematics (1917), no. 230.
+    Music: Johann Pachelbel, Canon in D.
+  tags:
+    - math puzzle
+    - puzzle
+  video_id:
+  url:
+  published_at:
+review:
+  thread_id: '1570604620202381495'
+  version: 1
+  messages:
+    1: '1570604631799894027'
+  last_seen: '1570604631799894027'
