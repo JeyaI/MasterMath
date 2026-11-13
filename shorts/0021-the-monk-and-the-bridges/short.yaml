@@ -1,7 +1,7 @@
 # One Short. Change `status` only through ms commands (see OPERATING.md).
 id: '0021'
 title: The Monk And The Bridges
-status: video_review
+status: revise_video
 catalog_id: dudeney-amusements-261
 tags:
   - routes
@@ -109,7 +109,7 @@ review:
   version: 1
   messages:
     1: '1570242216444567653'
-  last_seen: '1570584340373708895'
+  last_seen: '1570588070255009913'
 video:
   pending:
   version: 3
@@ -128,6 +128,7 @@ video:
       file: /home/jeya/mathshorts/out/review/0021-the-monk-and-the-bridges/v3.mp4
       sha256: 7c28de8fba27a65f280070cfc732241f824b1ac27d90a10be415c502c994a9e7
       message: '1570586350879641611'
-  comment:
+  comment: Put the rules on the screen when the pause and try it is going. Make the text of the 
+    rules larger to be more legible.
   warned:
   as_is:
