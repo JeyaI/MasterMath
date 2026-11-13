@@ -10,14 +10,6 @@ Next id: **52**
 
 ## Open
 
-### #50 · Check the first custom thumbnail on a released Short
-status: open · P3 · chore
-After #41, the first ✅ upload (0009 or 0010 tonight) calls `thumbnails.set`. Check the approval message for a "thumbnail wasn't set" note. If YouTube refused it because the channel isn't verified, verify the channel (YouTube Studio → Settings → Channel → Feature eligibility). Once it's live, see where the thumbnail actually shows for a Short: channel Shorts tab, search, subscriptions. If YouTube ignores it everywhere, there's no harm in keeping the call.
-
-### #49 · Check that Discord video attachments are good enough to judge a Short on the phone
-status: open · P2 · chore
-Since #48, review videos arrive as MP4 attachments in the thread. On the first one (0009 v1, 5.4 MB, sent as it is), check on the phone app that it plays inline at full height, that the sound works, and that you can scrub to a timestamp. Also check a compressed copy (`vN-discord.mp4`, sent when a render is over 9.5 MB) for blur in text and thin lines. If attachments don't work, raise `review.max_mb` (needs a server boost) or bring back an unlisted YouTube link for review only.
-
 ### #43 · Find the best time to release
 status: open · P3 · feature
 Releases used to go out at a fixed 5:00 PM New York (`release:` in `config/pipeline.yaml`). Since #44, they follow the ✅ (about an hour later), so release times vary by themselves; record each Short's release hour when comparing. Find out whether another time, or two different slots on a 2-Short day, does better: start from the YouTube Analytics API (when viewers are on, views in the first hours per Short, ties in with #12), or a simple A/B over a few weeks. Then change `release.time`, or give `release.py` a list of times.
@@ -145,6 +137,16 @@ status: open · P3 · bug
 status: done · 2026-11-12 · P2 · feature
 In script review, the only part of a script that matters is the beats. Right now `post_version` (`mathshorts/tick.py`) posts a spoilered summary and attaches the whole `SCRIPT.md` (0021's runs to about 1,000 words: puzzle choice, insight, Level 2, music, risks). Instead, post just the beats as an inline message, one line per beat with its time range and caption (e.g. `6. (14-19 s) Pause and try it.`), all inside a spoiler, and drop both the attachment and the summary. Keep the version line and the ✅/❌ prompt. `SCRIPT.md` stays on disk as it is, since the animate and revise jobs read its Insight, Level 2 and Music sections. Pull the beats from its `## Beats` section; if that section is missing, fall back to attaching the file as before. Watch Discord's 2,000-character limit: 0021's beats with their stage directions come to about 2,000, so show the captions only (no stage directions) and split into a second message if it's still too long. Do the same for revised versions (`revise` job), and update the script-review paragraph in OPERATING.md.
 - **Resolution:** `post_version` posts `## Beats` captions inline in a spoiler (`script_beats`), split across messages under 2,000 characters with ✅/❌ on the last; no Beats section falls back to the attachment.
+
+### #50 · Check the first custom thumbnail on a released Short
+status: done · 2026-11-12 · P3 · chore
+After #41, the first ✅ upload (0009 or 0010 tonight) calls `thumbnails.set`. Check the approval message for a "thumbnail wasn't set" note. If YouTube refused it because the channel isn't verified, verify the channel (YouTube Studio → Settings → Channel → Feature eligibility). Once it's live, see where the thumbnail actually shows for a Short: channel Shorts tab, search, subscriptions. If YouTube ignores it everywhere, there's no harm in keeping the call.
+- **Resolution:** checked by hand; done.
+
+### #49 · Check that Discord video attachments are good enough to judge a Short on the phone
+status: done · 2026-11-12 · P2 · chore
+Since #48, review videos arrive as MP4 attachments in the thread. On the first one (0009 v1, 5.4 MB, sent as it is), check on the phone app that it plays inline at full height, that the sound works, and that you can scrub to a timestamp. Also check a compressed copy (`vN-discord.mp4`, sent when a render is over 9.5 MB) for blur in text and thin lines. If attachments don't work, raise `review.max_mb` (needs a server boost) or bring back an unlisted YouTube link for review only.
+- **Resolution:** checked by hand; done.
 
 ### #41 · Thumbnails for scheduled Shorts
 status: done · 2026-11-05 · P3 · feature
