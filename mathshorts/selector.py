@@ -19,7 +19,7 @@ def rank(records: list[dict], annotations: dict, used_ids: set[str],
          recent: list[dict], config: dict, n: int = 5) -> list[Candidate]:
     """
     records      catalog records
-    annotations  id -> {visual_potential, tags, skip, ...}
+    annotations  id -> {visual_potential, difficulty, tags, skip, ...}
     used_ids     catalog ids already turned into Shorts (any status)
     recent       newest-first list of {"tags": [...], "source": ...} for the latest Shorts
     config       config/selector.yaml contents
@@ -39,9 +39,14 @@ def rank(records: list[dict], annotations: dict, used_ids: set[str],
         visual = int(ann.get("visual_potential", 0) or 0)
         if visual < config.get("min_visual", 4):
             continue
+        known = ann.get("difficulty") is not None
+        difficulty = int(ann["difficulty"]) if known else 3     # unscored counts as middling
+        if difficulty > config.get("max_difficulty", 5):
+            continue
         tags = list(ann.get("tags") or [])
-        score = visual * w.get("visual", 1.0)
-        reasons = [f"visual {visual}/5" + (" (human)" if ann.get("scored_by") == "human" else "")]
+        human = " (human)" if ann.get("scored_by") == "human" else ""
+        score = visual * w.get("visual", 1.0) + difficulty * w.get("difficulty", 0.0)
+        reasons = [f"visual {visual}/5{human}", f"difficulty {difficulty if known else '?'}/5{human}"]
         for t in tags:
             if tag_w.get(t):
                 score += tag_w[t]

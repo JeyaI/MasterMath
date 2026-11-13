@@ -1,2091 +1,2522 @@
 # Judgements about catalog puzzles. Edit freely; set scored_by: human on anything
-# you change so it's clear a person looked. Fields: visual_potential (1-5), tags,
-# skip (true = never suggest), notes. Re-scraping never overwrites entries here.
+# you change so it's clear a person looked. Fields: visual_potential (1-5),
+# difficulty (1 easy - 5 hard), tags, skip (true = never suggest), notes.
+# Re-scraping never overwrites entries here.
 dudeney-amusements-001:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-002:
   visual_potential: 1
+  difficulty: 2
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-003:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-004:
   visual_potential: 1
+  difficulty: 2
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-005:
   visual_potential: 1
+  difficulty: 2
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-006:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-007:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-008:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-009:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-010:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-011:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-012:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-013:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-014:
   visual_potential: 1
+  difficulty: 3
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-015:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-016:
   visual_potential: 1
+  difficulty: 4
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-017:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-018:
   visual_potential: 1
+  difficulty: 2
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-019:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-020:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-021:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-022:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-023:
   visual_potential: 1
+  difficulty: 2
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-024:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-025:
   visual_potential: 1
+  difficulty: 3
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-026:
   visual_potential: 1
+  difficulty: 2
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-027:
   visual_potential: 1
+  difficulty: 4
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-028:
   visual_potential: 1
+  difficulty: 4
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-029:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-030:
   visual_potential: 1
+  difficulty: 3
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-031:
   visual_potential: 1
+  difficulty: 3
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-032:
   visual_potential: 1
+  difficulty: 5
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-033:
   visual_potential: 1
+  difficulty: 2
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-034:
   visual_potential: 1
+  difficulty: 3
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-035:
   visual_potential: 1
+  difficulty: 3
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-036:
   visual_potential: 1
+  difficulty: 4
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-037:
   visual_potential: 1
+  difficulty: 2
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-038:
   visual_potential: 1
+  difficulty: 2
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-039:
   visual_potential: 1
+  difficulty: 1
   tags:
     - money
   scored_by: heuristic
 dudeney-amusements-040:
   visual_potential: 1
+  difficulty: 2
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-041:
   visual_potential: 1
+  difficulty: 1
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-042:
   visual_potential: 1
+  difficulty: 2
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-043:
   visual_potential: 1
+  difficulty: 1
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-044:
   visual_potential: 1
+  difficulty: 2
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-045:
   visual_potential: 1
+  difficulty: 1
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-046:
   visual_potential: 1
+  difficulty: 1
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-047:
   visual_potential: 1
+  difficulty: 1
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-048:
   visual_potential: 1
+  difficulty: 1
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-049:
   visual_potential: 1
+  difficulty: 1
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-050:
   visual_potential: 1
+  difficulty: 1
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-051:
   visual_potential: 1
+  difficulty: 2
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-052:
   visual_potential: 1
+  difficulty: 2
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-053:
   visual_potential: 1
+  difficulty: 1
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-054:
   visual_potential: 1
+  difficulty: 2
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-055:
   visual_potential: 1
+  difficulty: 2
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-056:
   visual_potential: 1
+  difficulty: 3
   tags:
     - age
   scored_by: heuristic
 dudeney-amusements-057:
   visual_potential: 3
+  difficulty: 1
   tags:
     - clocks
   scored_by: heuristic
 dudeney-amusements-058:
   visual_potential: 3
+  difficulty: 1
   tags:
     - clocks
   scored_by: heuristic
 dudeney-amusements-059:
   visual_potential: 3
+  difficulty: 2
   tags:
     - clocks
   scored_by: heuristic
 dudeney-amusements-060:
   visual_potential: 3
+  difficulty: 3
   tags:
     - clocks
   scored_by: heuristic
 dudeney-amusements-061:
   visual_potential: 3
+  difficulty: 3
   tags:
     - clocks
   scored_by: heuristic
 dudeney-amusements-062:
   visual_potential: 3
+  difficulty: 2
   tags:
     - clocks
   scored_by: heuristic
 dudeney-amusements-063:
   visual_potential: 3
+  difficulty: 1
   tags:
     - clocks
   scored_by: heuristic
 dudeney-amusements-064:
   visual_potential: 3
+  difficulty: 2
   tags:
     - clocks
   scored_by: heuristic
 dudeney-amusements-065:
   visual_potential: 3
+  difficulty: 1
   tags:
     - clocks
   scored_by: heuristic
 dudeney-amusements-066:
   visual_potential: 3
+  difficulty: 2
   tags:
     - clocks
   scored_by: heuristic
 dudeney-amusements-067:
   visual_potential: 2
+  difficulty: 1
   tags:
     - speed
   scored_by: heuristic
 dudeney-amusements-068:
   visual_potential: 2
+  difficulty: 1
   tags:
     - speed
   scored_by: heuristic
 dudeney-amusements-069:
   visual_potential: 2
+  difficulty: 2
   tags:
     - speed
   scored_by: heuristic
 dudeney-amusements-070:
   visual_potential: 2
+  difficulty: 1
   tags:
     - speed
   scored_by: heuristic
 dudeney-amusements-071:
   visual_potential: 2
+  difficulty: 1
   tags:
     - speed
   scored_by: heuristic
 dudeney-amusements-072:
   visual_potential: 2
+  difficulty: 3
   tags:
     - speed
   scored_by: heuristic
 dudeney-amusements-073:
   visual_potential: 2
+  difficulty: 2
   tags:
     - speed
   scored_by: heuristic
 dudeney-amusements-074:
   visual_potential: 2
+  difficulty: 1
   tags:
     - speed
   scored_by: heuristic
 dudeney-amusements-075:
   visual_potential: 2
+  difficulty: 1
   tags:
     - speed
   scored_by: heuristic
 dudeney-amusements-076:
   visual_potential: 2
+  difficulty: 3
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-077:
   visual_potential: 2
+  difficulty: 3
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-078:
   visual_potential: 2
+  difficulty: 4
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-079:
   visual_potential: 2
+  difficulty: 4
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-080:
   visual_potential: 2
+  difficulty: 3
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-081:
   visual_potential: 3
+  difficulty: 4
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-082:
   visual_potential: 2
+  difficulty: 5
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-083:
   visual_potential: 2
+  difficulty: 3
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-084:
   visual_potential: 2
+  difficulty: 4
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-085:
   visual_potential: 2
+  difficulty: 5
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-086:
   visual_potential: 2
+  difficulty: 3
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-087:
   visual_potential: 2
+  difficulty: 4
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-088:
   visual_potential: 2
+  difficulty: 5
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-089:
   visual_potential: 1
+  difficulty: 2
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-090:
   visual_potential: 2
+  difficulty: 5
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-091:
   visual_potential: 2
+  difficulty: 5
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-092:
   visual_potential: 2
+  difficulty: 2
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-093:
   visual_potential: 2
+  difficulty: 5
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-094:
   visual_potential: 2
+  difficulty: 5
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-095:
   visual_potential: 2
+  difficulty: 4
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-096:
   visual_potential: 2
+  difficulty: 4
   tags:
     - digits
   scored_by: heuristic
 dudeney-amusements-097:
   visual_potential: 3
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-098:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-099:
   visual_potential: 2
+  difficulty: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-100:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-101:
   visual_potential: 3
+  difficulty: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-102:
   visual_potential: 3
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-103:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-104:
   visual_potential: 3
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-105:
   visual_potential: 3
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-106:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-107:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-108:
   visual_potential: 3
+  difficulty: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-109:
   visual_potential: 3
+  difficulty: 5
   tags: []
   scored_by: heuristic
 dudeney-amusements-110:
   visual_potential: 3
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-111:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-112:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-113:
   visual_potential: 3
+  difficulty: 4
   tags: []
   scored_by: heuristic
 dudeney-amusements-114:
   visual_potential: 3
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-115:
   visual_potential: 3
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-116:
   visual_potential: 2
+  difficulty: 4
   tags: []
   scored_by: heuristic
 dudeney-amusements-117:
   visual_potential: 3
+  difficulty: 4
   tags: []
   scored_by: heuristic
 dudeney-amusements-118:
   visual_potential: 4
+  difficulty: 5
   tags: []
   scored_by: heuristic
 dudeney-amusements-119:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-120:
   visual_potential: 3
+  difficulty: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-121:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-122:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-123:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-124:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-125:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-126:
   visual_potential: 3
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-127:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-128:
   visual_potential: 3
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-129:
   visual_potential: 3
+  difficulty: 5
   tags: []
   scored_by: heuristic
 dudeney-amusements-130:
   visual_potential: 3
+  difficulty: 5
   tags: []
   scored_by: heuristic
 dudeney-amusements-131:
   visual_potential: 3
+  difficulty: 4
   tags: []
   scored_by: heuristic
 dudeney-amusements-132:
   visual_potential: 3
+  difficulty: 4
   tags: []
   scored_by: heuristic
 dudeney-amusements-133:
   visual_potential: 3
+  difficulty: 5
   tags: []
   scored_by: heuristic
 dudeney-amusements-134:
   visual_potential: 2
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-135:
   visual_potential: 3
+  difficulty: 5
   tags: []
   scored_by: heuristic
 dudeney-amusements-136:
   visual_potential: 3
+  difficulty: 4
   tags: []
   scored_by: heuristic
 dudeney-amusements-137:
   visual_potential: 2
+  difficulty: 5
   tags: []
   scored_by: heuristic
 dudeney-amusements-138:
   visual_potential: 3
+  difficulty: 5
   tags: []
   scored_by: heuristic
 dudeney-amusements-139:
   visual_potential: 3
+  difficulty: 5
   tags: []
   scored_by: heuristic
 dudeney-amusements-140:
   visual_potential: 2
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-141:
   visual_potential: 3
+  difficulty: 3
   tags: []
   scored_by: heuristic
 dudeney-amusements-142:
   visual_potential: 5
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-143:
   visual_potential: 4
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-144:
   visual_potential: 4
+  difficulty: 3
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-145:
   visual_potential: 4
+  difficulty: 1
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-146:
   visual_potential: 5
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-147:
   visual_potential: 5
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-148:
   visual_potential: 4
+  difficulty: 3
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-149:
   visual_potential: 4
+  difficulty: 1
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-150:
   visual_potential: 5
+  difficulty: 5
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-151:
   visual_potential: 5
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-152:
   visual_potential: 5
+  difficulty: 3
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-153:
   visual_potential: 4
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-154:
   visual_potential: 5
+  difficulty: 3
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-155:
   visual_potential: 5
+  difficulty: 5
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-156:
   visual_potential: 5
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-157:
   visual_potential: 5
+  difficulty: 4
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-158:
   visual_potential: 5
+  difficulty: 5
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-159:
   visual_potential: 5
+  difficulty: 4
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-160:
   visual_potential: 5
+  difficulty: 4
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-161:
   visual_potential: 4
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-162:
   visual_potential: 4
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-163:
   visual_potential: 3
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-164:
   visual_potential: 5
+  difficulty: 4
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-165:
   visual_potential: 5
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-166:
   visual_potential: 4
+  difficulty: 1
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-167:
   visual_potential: 4
+  difficulty: 1
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-168:
   visual_potential: 4
+  difficulty: 3
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-169:
   visual_potential: 4
+  difficulty: 4
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-170:
   visual_potential: 5
+  difficulty: 1
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-171:
   visual_potential: 5
+  difficulty: 1
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-172:
   visual_potential: 5
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-173:
   visual_potential: 5
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-174:
   visual_potential: 5
+  difficulty: 4
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-175:
   visual_potential: 5
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-176:
   visual_potential: 5
+  difficulty: 2
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-177:
   visual_potential: 4
+  difficulty: 1
   tags:
     - dissection
   scored_by: heuristic
 dudeney-amusements-178:
   visual_potential: 4
+  difficulty: 2
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-179:
   visual_potential: 4
+  difficulty: 2
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-180:
   visual_potential: 5
+  difficulty: 3
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-181:
   visual_potential: 4
+  difficulty: 2
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-182:
   visual_potential: 4
+  difficulty: 1
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-183:
   visual_potential: 4
+  difficulty: 1
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-184:
   visual_potential: 4
+  difficulty: 1
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-185:
   visual_potential: 5
+  difficulty: 1
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-186:
   visual_potential: 4
+  difficulty: 2
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-187:
   visual_potential: 4
+  difficulty: 3
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-188:
   visual_potential: 4
+  difficulty: 2
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-189:
   visual_potential: 5
+  difficulty: 3
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-190:
   visual_potential: 4
+  difficulty: 3
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-191:
   visual_potential: 4
+  difficulty: 1
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-192:
   visual_potential: 4
+  difficulty: 2
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-193:
   visual_potential: 4
+  difficulty: 3
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-194:
   visual_potential: 4
+  difficulty: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-195:
   visual_potential: 4
+  difficulty: 3
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-196:
   visual_potential: 4
+  difficulty: 2
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-197:
   visual_potential: 4
+  difficulty: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-198:
   visual_potential: 4
+  difficulty: 3
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-199:
   visual_potential: 4
+  difficulty: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-200:
   visual_potential: 4
+  difficulty: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-201:
   visual_potential: 5
+  difficulty: 2
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-202:
   visual_potential: 4
+  difficulty: 1
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-203:
   visual_potential: 4
+  difficulty: 3
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-204:
   visual_potential: 4
+  difficulty: 3
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-205:
   visual_potential: 5
+  difficulty: 1
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-206:
   visual_potential: 4
+  difficulty: 2
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-207:
   visual_potential: 4
+  difficulty: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-208:
   visual_potential: 4
+  difficulty: 1
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-209:
   visual_potential: 4
+  difficulty: 1
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-210:
   visual_potential: 4
+  difficulty: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-211:
   visual_potential: 4
+  difficulty: 1
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-212:
   visual_potential: 4
+  difficulty: 2
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-213:
   visual_potential: 4
+  difficulty: 4
   tags:
     - geometry
   scored_by: heuristic
 dudeney-amusements-214:
   visual_potential: 5
+  difficulty: 3
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-215:
   visual_potential: 4
+  difficulty: 5
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-216:
   visual_potential: 4
+  difficulty: 2
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-217:
   visual_potential: 5
+  difficulty: 2
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-218:
   visual_potential: 5
+  difficulty: 5
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-219:
   visual_potential: 4
+  difficulty: 3
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-220:
   visual_potential: 4
+  difficulty: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-221:
   visual_potential: 4
+  difficulty: 1
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-222:
   visual_potential: 5
+  difficulty: 1
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-223:
   visual_potential: 5
+  difficulty: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-224:
   visual_potential: 4
+  difficulty: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-225:
   visual_potential: 4
+  difficulty: 3
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-226:
   visual_potential: 4
+  difficulty: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-227:
   visual_potential: 5
+  difficulty: 5
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-228:
   visual_potential: 4
+  difficulty: 1
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-229:
   visual_potential: 5
+  difficulty: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-230:
   visual_potential: 4
+  difficulty: 2
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-231:
   visual_potential: 4
+  difficulty: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-232:
   visual_potential: 4
+  difficulty: 5
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-233:
   visual_potential: 4
+  difficulty: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-234:
   visual_potential: 5
+  difficulty: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-235:
   visual_potential: 5
+  difficulty: 3
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-236:
   visual_potential: 4
+  difficulty: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-237:
   visual_potential: 4
+  difficulty: 3
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-238:
   visual_potential: 4
+  difficulty: 4
   tags:
     - counters
   scored_by: heuristic
 dudeney-amusements-239:
   visual_potential: 5
+  difficulty: 3
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-240:
   visual_potential: 4
+  difficulty: 2
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-241:
   visual_potential: 4
+  difficulty: 3
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-242:
   visual_potential: 5
+  difficulty: 2
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-243:
   visual_potential: 4
+  difficulty: 2
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-244:
   visual_potential: 4
+  difficulty: 2
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-245:
   visual_potential: 5
+  difficulty: 3
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-246:
   visual_potential: 5
+  difficulty: 4
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-247:
   visual_potential: 4
+  difficulty: 2
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-248:
   visual_potential: 4
+  difficulty: 2
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-249:
   visual_potential: 4
+  difficulty: 3
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-250:
   visual_potential: 3
+  difficulty: 5
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-251:
   visual_potential: 4
+  difficulty: 3
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-252:
   visual_potential: 4
+  difficulty: 1
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-253:
   visual_potential: 4
+  difficulty: 2
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-254:
   visual_potential: 4
+  difficulty: 4
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-255:
   visual_potential: 4
+  difficulty: 3
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-256:
   visual_potential: 4
+  difficulty: 2
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-257:
   visual_potential: 4
+  difficulty: 3
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-258:
   visual_potential: 4
+  difficulty: 1
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-259:
   visual_potential: 4
+  difficulty: 4
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-260:
   visual_potential: 4
+  difficulty: 1
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-261:
   visual_potential: 4
+  difficulty: 3
   tags:
     - routes
   scored_by: heuristic
 dudeney-amusements-262:
   visual_potential: 3
+  difficulty: 4
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-263:
   visual_potential: 3
+  difficulty: 2
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-264:
   visual_potential: 3
+  difficulty: 3
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-265:
   visual_potential: 3
+  difficulty: 3
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-266:
   visual_potential: 3
+  difficulty: 3
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-267:
   visual_potential: 3
+  difficulty: 5
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-268:
   visual_potential: 3
+  difficulty: 3
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-269:
   visual_potential: 3
+  difficulty: 5
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-270:
   visual_potential: 3
+  difficulty: 4
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-271:
   visual_potential: 3
+  difficulty: 5
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-272:
   visual_potential: 3
+  difficulty: 4
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-273:
   visual_potential: 3
+  difficulty: 4
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-274:
   visual_potential: 3
+  difficulty: 4
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-275:
   visual_potential: 4
+  difficulty: 4
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-276:
   visual_potential: 3
+  difficulty: 5
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-277:
   visual_potential: 4
+  difficulty: 5
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-278:
   visual_potential: 3
+  difficulty: 5
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-279:
   visual_potential: 3
+  difficulty: 5
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-280:
   visual_potential: 3
+  difficulty: 4
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-281:
   visual_potential: 4
+  difficulty: 5
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-282:
   visual_potential: 3
+  difficulty: 4
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-283:
   visual_potential: 3
+  difficulty: 5
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-284:
   visual_potential: 4
+  difficulty: 5
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-285:
   visual_potential: 3
+  difficulty: 5
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-286:
   visual_potential: 3
+  difficulty: 3
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-287:
   visual_potential: 3
+  difficulty: 2
   tags:
     - combinatorics
   scored_by: heuristic
 dudeney-amusements-288:
   visual_potential: 5
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-289:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-290:
   visual_potential: 5
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-291:
   visual_potential: 5
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-292:
   visual_potential: 4
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-293:
   visual_potential: 4
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-294:
   visual_potential: 5
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-295:
   visual_potential: 5
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-296:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-297:
   visual_potential: 4
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-298:
   visual_potential: 4
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-299:
   visual_potential: 5
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-300:
   visual_potential: 5
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-301:
   visual_potential: 4
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-302:
   visual_potential: 5
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-303:
   visual_potential: 5
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-304:
   visual_potential: 4
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-305:
   visual_potential: 4
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-306:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-307:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-308:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-309:
   visual_potential: 4
+  difficulty: 2
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-310:
   visual_potential: 4
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-311:
   visual_potential: 5
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-312:
   visual_potential: 5
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-313:
   visual_potential: 5
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-314:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-315:
   visual_potential: 5
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-316:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-317:
   visual_potential: 4
+  difficulty: 2
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-318:
   visual_potential: 5
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-319:
   visual_potential: 5
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-320:
   visual_potential: 5
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-321:
   visual_potential: 5
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-322:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-323:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-324:
   visual_potential: 4
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-325:
   visual_potential: 4
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-326:
   visual_potential: 5
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-327:
   visual_potential: 4
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-328:
   visual_potential: 5
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-329:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-330:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-331:
   visual_potential: 4
+  difficulty: 2
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-332:
   visual_potential: 4
+  difficulty: 2
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-333:
   visual_potential: 5
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-334:
   visual_potential: 5
+  difficulty: 2
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-335:
   visual_potential: 4
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-336:
   visual_potential: 4
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-337:
   visual_potential: 5
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-338:
   visual_potential: 4
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-339:
   visual_potential: 5
+  difficulty: 2
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-340:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-341:
   visual_potential: 4
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-342:
   visual_potential: 5
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-343:
   visual_potential: 4
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-344:
   visual_potential: 4
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-345:
   visual_potential: 4
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-346:
   visual_potential: 4
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-347:
   visual_potential: 4
+  difficulty: 2
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-348:
   visual_potential: 4
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-349:
   visual_potential: 4
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-350:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-351:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-352:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-353:
   visual_potential: 4
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-354:
   visual_potential: 5
+  difficulty: 3
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-355:
   visual_potential: 4
+  difficulty: 2
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-356:
   visual_potential: 4
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-357:
   visual_potential: 3
+  difficulty: 2
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-358:
   visual_potential: 4
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-359:
   visual_potential: 5
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-360:
   visual_potential: 5
+  difficulty: 4
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-361:
   visual_potential: 4
+  difficulty: 5
   tags:
     - chessboard
   scored_by: heuristic
 dudeney-amusements-362:
   visual_potential: 3
+  difficulty: 3
   tags:
     - measuring
   scored_by: heuristic
 dudeney-amusements-363:
   visual_potential: 3
+  difficulty: 1
   tags:
     - measuring
   scored_by: heuristic
 dudeney-amusements-364:
   visual_potential: 3
+  difficulty: 2
   tags:
     - measuring
   scored_by: heuristic
 dudeney-amusements-365:
   visual_potential: 3
+  difficulty: 2
   tags:
     - measuring
   scored_by: heuristic
 dudeney-amusements-366:
   visual_potential: 3
+  difficulty: 2
   tags:
     - measuring
   scored_by: heuristic
 dudeney-amusements-367:
   visual_potential: 2
+  difficulty: 2
   tags:
     - measuring
   scored_by: heuristic
 dudeney-amusements-368:
   visual_potential: 3
+  difficulty: 1
   tags:
     - measuring
   scored_by: heuristic
 dudeney-amusements-369:
   visual_potential: 2
+  difficulty: 1
   tags:
     - measuring
   scored_by: heuristic
 dudeney-amusements-370:
   visual_potential: 3
+  difficulty: 3
   tags:
     - measuring
   scored_by: heuristic
 dudeney-amusements-371:
   visual_potential: 3
+  difficulty: 3
   tags:
     - measuring
   scored_by: heuristic
 dudeney-amusements-372:
   visual_potential: 3
+  difficulty: 4
   tags:
     - measuring
   scored_by: heuristic
 dudeney-amusements-373:
   visual_potential: 3
+  difficulty: 2
   tags:
     - logic
   scored_by: heuristic
 dudeney-amusements-374:
   visual_potential: 2
+  difficulty: 4
   tags:
     - logic
   scored_by: heuristic
 dudeney-amusements-375:
   visual_potential: 3
+  difficulty: 3
   tags:
     - logic
   scored_by: heuristic
 dudeney-amusements-376:
   visual_potential: 3
+  difficulty: 5
   tags:
     - logic
   scored_by: heuristic
 dudeney-amusements-377:
   visual_potential: 3
+  difficulty: 2
   tags:
     - logic
   scored_by: heuristic
 dudeney-amusements-378:
   visual_potential: 3
+  difficulty: 4
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-379:
   visual_potential: 3
+  difficulty: 2
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-380:
   visual_potential: 3
+  difficulty: 4
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-381:
   visual_potential: 3
+  difficulty: 5
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-382:
   visual_potential: 3
+  difficulty: 4
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-383:
   visual_potential: 3
+  difficulty: 3
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-384:
   visual_potential: 3
+  difficulty: 5
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-385:
   visual_potential: 3
+  difficulty: 4
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-386:
   visual_potential: 3
+  difficulty: 2
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-387:
   visual_potential: 3
+  difficulty: 3
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-388:
   visual_potential: 3
+  difficulty: 2
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-389:
   visual_potential: 3
+  difficulty: 2
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-390:
   visual_potential: 2
+  difficulty: 3
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-391:
   visual_potential: 3
+  difficulty: 1
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-392:
   visual_potential: 3
+  difficulty: 2
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-393:
   visual_potential: 4
+  difficulty: 3
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-394:
   visual_potential: 4
+  difficulty: 4
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-395:
   visual_potential: 3
+  difficulty: 3
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-396:
   visual_potential: 3
+  difficulty: 5
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-397:
   visual_potential: 3
+  difficulty: 2
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-398:
   visual_potential: 3
+  difficulty: 4
   tags:
     - games
   scored_by: heuristic
 dudeney-amusements-399:
   visual_potential: 3
+  difficulty: 4
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-400:
   visual_potential: 4
+  difficulty: 5
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-401:
   visual_potential: 3
+  difficulty: 5
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-402:
   visual_potential: 3
+  difficulty: 5
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-403:
   visual_potential: 3
+  difficulty: 5
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-404:
   visual_potential: 3
+  difficulty: 5
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-405:
   visual_potential: 3
+  difficulty: 2
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-406:
   visual_potential: 3
+  difficulty: 3
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-407:
   visual_potential: 3
+  difficulty: 2
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-408:
   visual_potential: 3
+  difficulty: 4
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-409:
   visual_potential: 3
+  difficulty: 5
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-410:
   visual_potential: 3
+  difficulty: 5
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-411:
   visual_potential: 3
+  difficulty: 4
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-412:
   visual_potential: 3
+  difficulty: 4
   tags:
     - magic-squares
   scored_by: heuristic
 dudeney-amusements-413:
   visual_potential: 3
+  difficulty: 4
   tags:
     - paradox
   scored_by: heuristic
 dudeney-amusements-414:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-415:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-416:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-417:
   visual_potential: 3
+  difficulty: 5
   tags: []
   scored_by: heuristic
 dudeney-amusements-418:
   visual_potential: 3
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-419:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-420:
   visual_potential: 3
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-421:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-422:
   visual_potential: 3
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-423:
   visual_potential: 4
+  difficulty: 4
   tags: []
   scored_by: heuristic
 dudeney-amusements-424:
   visual_potential: 3
+  difficulty: 1
   tags: []
   scored_by: heuristic
 dudeney-amusements-425:
   visual_potential: 3
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-426:
   visual_potential: 2
+  difficulty: 5
   tags: []
   scored_by: heuristic
 dudeney-amusements-427:
   visual_potential: 3
+  difficulty: 2
   tags: []
   scored_by: heuristic
 dudeney-amusements-428:
   visual_potential: 3
+  difficulty: 5
   tags: []
   scored_by: heuristic
 dudeney-amusements-429:
   visual_potential: 3
+  difficulty: 4
   tags: []
   scored_by: heuristic
 dudeney-amusements-430:
   visual_potential: 3
+  difficulty: 5
   tags: []
   scored_by: heuristic

@@ -96,3 +96,34 @@ def test_heuristic_bonuses_do_not_stack():
     assert score(text=wordy, has_figure=True) == 5
     dissection = {**rec, "section": "Various Dissection Puzzles"}
     assert catalog.heuristic({**dissection, "text": "", "has_figure": True})["visual_potential"] == 4
+
+
+def test_difficulty_heuristic():
+    easy = {"section": "Age And Kinship Puzzles", "text": "How old is Rover?", "solution": "Ten."}
+    assert catalog.difficulty(easy) == 1
+    assert catalog.heuristic(easy)["difficulty"] == 1
+    long_text = "word " * 200
+    hard = {"section": "Magic Square Problems", "text": long_text + " In how many ways can it be done?",
+            "solution": "It is impossible. " + "x" * 1600}
+    assert catalog.difficulty(hard) == 5                    # capped
+    assert catalog.difficulty({**easy, "text": "1 2 3 4 5 6 7 8"}) == 2
+
+
+def test_difficulty_backfills_old_heuristic_entries_but_not_human_ones(root):
+    from mathshorts import yamlio
+    f = FIXTURES / "dudeney_sample.txt"
+    catalog.add_source("dudeney-amusements", file=f)
+    ann = catalog.annotations()
+    for k in ann:                                           # entries from before #53 have no difficulty
+        del ann[k]["difficulty"]
+    ann["dudeney-amusements-001"]["scored_by"] = "human"
+    yamlio.save(catalog.annotations_path(), ann)
+    catalog.add_source("dudeney-amusements", file=f)
+    ann = catalog.annotations()
+    assert ann["dudeney-amusements-002"]["difficulty"] in range(1, 6)
+    assert "difficulty" not in ann["dudeney-amusements-001"]
+    # a human's difficulty survives --rescore
+    ann["dudeney-amusements-001"]["difficulty"] = 5
+    yamlio.save(catalog.annotations_path(), ann)
+    catalog.add_source("dudeney-amusements", file=f, rescore=True)
+    assert catalog.annotations()["dudeney-amusements-001"]["difficulty"] == 5

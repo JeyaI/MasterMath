@@ -77,7 +77,7 @@ def cmd_show(a):
     r = catalog.get(a.id)
     ann = catalog.annotations().get(a.id) or {}
     p(f"{r['id']}  ·  {r['title']}  ·  {r.get('section') or '-'}")
-    p(f"annotation: visual {ann.get('visual_potential', '?')}/5, tags {list(ann.get('tags') or [])}, "
+    p(f"annotation: visual {ann.get('visual_potential', '?')}/5, difficulty {ann.get('difficulty', '?')}/5, tags {list(ann.get('tags') or [])}, "
       f"scored_by {ann.get('scored_by', '-')}" + (", SKIP" if ann.get("skip") else ""))
     if r.get("has_figure"):
         p(f"figure: see {catalog.sources()[r['source']].get('html', 'the HTML edition')} (puzzle {r['number']})")

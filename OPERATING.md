@@ -79,7 +79,7 @@ You're the editor: you accept scripts, watch each video on your phone and approv
 2. If it isn't registered yet, ask Claude Code: "add <book> as a source" (`/work-issue`). It adds an entry to `catalog/sources.yaml` and a parser if needed.
 3. `ms sources add <source>`. It downloads (cached in `~/.cache/mathshorts`), parses into `catalog/<source>.jsonl`, and gives new puzzles a heuristic score in `catalog/annotations.yaml`.
    - If the download is blocked, download the `.txt` in a browser and run `ms sources add <source> --file path/to/book.txt`.
-4. Run `ms suggest -n 15` and skim. For any score that looks wrong, edit `catalog/annotations.yaml`: change `visual_potential`, add `tags`, set `skip: true` for puzzles you'll never make, and set `scored_by: human`. Re-scraping never overwrites these.
+4. Run `ms suggest -n 15` and skim. For any score that looks wrong, edit `catalog/annotations.yaml`: change `visual_potential` or `difficulty` (1 easy – 5 hard; `ms suggest` prefers easy ones), add `tags`, set `skip: true` for puzzles you'll never make, and set `scored_by: human`. Re-scraping never overwrites these.
 5. Commit: `git add catalog && git commit -m "catalog: add <source>"`.
 
 ---

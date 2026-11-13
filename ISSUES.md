@@ -6,13 +6,17 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **54**
+Next id: **56**
 
 ## Open
 
-### #53 · Score each puzzle's difficulty and prefer easy ones in `ms suggest`
-status: open · P2 · feature
-Easy puzzles suit Shorts better: a viewer should be able to get them during the 5 s pause, or at least feel they nearly did. Nothing in the catalog says how hard a puzzle is, so the selector can't favour easy ones. Add a `difficulty` (1 easy – 5 hard) to `catalog/annotations.yaml`, next to `visual_potential`. Fill it in first with a heuristic in `mathshorts/catalog.py` (e.g. the length of the puzzle and its solution, how many numbers or steps it has, answers like "it is impossible"), marked `scored_by: heuristic`. Then have Claude or the human re-score the top of `ms suggest`, and never overwrite entries marked `scored_by: human`. In `config/selector.yaml`, add a `difficulty` weight (negative, per point) and maybe a `max_difficulty` cut-off like `min_visual`, and use them in `selector.rank()`, with tests. Mention the score in the draft-short `pick` path and the script job, so the chosen puzzle's difficulty is stated in `SCRIPT.md`. Afterwards, compare retention of easy vs hard Shorts (ties in with #12).
+### #54 · Re-score difficulty at the top of `ms suggest`
+status: open · P2 · content
+The #53 heuristic only sees length and keywords, so it misjudges some: The Four Knights' Tours (339) scores 2/5 because its text is short. Read the top 20–30 of `ms suggest`, set `difficulty` (and `visual_potential` where it's off) by hand, and mark them `scored_by: human`.
+
+### #55 · Compare retention of easy vs hard Shorts
+status: open · P3 · feature
+Once ~10 Shorts have analytics, check whether low-difficulty Shorts hold viewers better (ties in with #12), and tune `weights.difficulty` / `max_difficulty` in `config/selector.yaml` to match.
 
 ### #43 · Find the best time to release
 status: open · P3 · feature
@@ -136,6 +140,11 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #53 · Score each puzzle's difficulty and prefer easy ones in `ms suggest`
+status: done · 2026-11-12 · P2 · feature
+Easy puzzles suit Shorts better: a viewer should be able to get them during the 5 s pause, or at least feel they nearly did. Nothing in the catalog says how hard a puzzle is, so the selector can't favour easy ones. Add a `difficulty` (1 easy – 5 hard) to `catalog/annotations.yaml`, next to `visual_potential`. Fill it in first with a heuristic in `mathshorts/catalog.py` (e.g. the length of the puzzle and its solution, how many numbers or steps it has, answers like "it is impossible"), marked `scored_by: heuristic`. Then have Claude or the human re-score the top of `ms suggest`, and never overwrite entries marked `scored_by: human`. In `config/selector.yaml`, add a `difficulty` weight (negative, per point) and maybe a `max_difficulty` cut-off like `min_visual`, and use them in `selector.rank()`, with tests. Mention the score in the draft-short `pick` path and the script job, so the chosen puzzle's difficulty is stated in `SCRIPT.md`. Afterwards, compare retention of easy vs hard Shorts (ties in with #12).
+- **Resolution:** `catalog.difficulty()` scores length, numbers, how-many-ways/fewest questions, "impossible" answers and hard sections; backfilled on all 430 heuristic entries (human ones untouched); `selector.yaml` has `weights.difficulty: -0.5` and `max_difficulty: 5`; `ms show`/`suggest`, the `pick` path and the script job state it. Follow-ups: #54, #55.
 
 ### #52 · Keep the question on screen during "Pause and try it", and stop the countdown covering the puzzle
 status: done · 2026-11-12 · P2 · bug
