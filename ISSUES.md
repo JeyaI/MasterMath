@@ -6,9 +6,13 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **53**
+Next id: **54**
 
 ## Open
+
+### #53 · Score each puzzle's difficulty and prefer easy ones in `ms suggest`
+status: open · P2 · feature
+Easy puzzles suit Shorts better: a viewer should be able to get them during the 5 s pause, or at least feel they nearly did. Nothing in the catalog says how hard a puzzle is, so the selector can't favour easy ones. Add a `difficulty` (1 easy – 5 hard) to `catalog/annotations.yaml`, next to `visual_potential`. Fill it in first with a heuristic in `mathshorts/catalog.py` (e.g. the length of the puzzle and its solution, how many numbers or steps it has, answers like "it is impossible"), marked `scored_by: heuristic`. Then have Claude or the human re-score the top of `ms suggest`, and never overwrite entries marked `scored_by: human`. In `config/selector.yaml`, add a `difficulty` weight (negative, per point) and maybe a `max_difficulty` cut-off like `min_visual`, and use them in `selector.rank()`, with tests. Mention the score in the draft-short `pick` path and the script job, so the chosen puzzle's difficulty is stated in `SCRIPT.md`. Afterwards, compare retention of easy vs hard Shorts (ties in with #12).
 
 ### #43 · Find the best time to release
 status: open · P3 · feature
