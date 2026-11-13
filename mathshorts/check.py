@@ -191,6 +191,31 @@ def check_beats(p: dict) -> list[Finding]:
     return out
 
 
+def _countdown_window(p: dict, cd: dict) -> list[dict]:
+    """Snapshots taken while the ring is up: after its fade-in and after the draining play."""
+    end = cd["t"] + 0.3 + cd["seconds"] + 0.05
+    return [s for s in p["snapshots"] if cd["t"] < s["t"] <= end]
+
+
+def check_countdown(p: dict) -> list[Finding]:
+    """#52: the ring must not sit on the puzzle, and the question must stay on screen during the pause."""
+    out = []
+    for cd in p["countdowns"]:
+        window = _countdown_window(p, cd)
+        covered = list(dict.fromkeys(cd.get("covers") or []))
+        if covered:
+            out.append(Finding("warning", "countdown",
+                               f"the countdown ring covers {', '.join(repr(n) for n in covered[:3])}"
+                               f"{' and more' if len(covered) > 3 else ''}; try another pause_and_try slot",
+                               cd["t"], None))
+        texts = {str(t["text"]).strip().lower() for s in window for o in s["objects"] for t in o["texts"] if t["text"]}
+        others = {t for t in texts if "pause and try" not in t and not t.isdigit()}
+        if window and not others:
+            out.append(Finding("warning", "countdown", "only \"Pause and try it\" is on screen during the "
+                               "countdown; keep the question up (pause_and_try's `question`)", cd["t"], None))
+    return out
+
+
 def check_captions(p: dict, data: dict) -> list[Finding]:
     out = []
     lo, hi = CAPTION_WORDS
@@ -256,7 +281,7 @@ def run(short: Short) -> list[Finding]:
         p = probe(short)
     except RuntimeError as e:
         return findings + [Finding("error", "scene", str(e))]
-    for rule in (check_beats, check_safe_zone, check_overlaps, check_duration):
+    for rule in (check_beats, check_safe_zone, check_overlaps, check_countdown, check_duration):
         findings += rule(p)
     findings += check_captions(p, data) + check_numbers(p, data)
     return findings

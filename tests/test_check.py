@@ -80,3 +80,54 @@ def test_word_count_treats_equations_as_equations():
 
 def test_superscripts_match_latex():
     assert check.norm("2⁸ = 256") == check.norm("2^8 = 256")
+
+
+PAUSE_SCENE = '''
+from manim import Scene, Square
+from lib.components import CENTRE_X, Captions, beat, countdown, hook, label, pause_and_try
+from lib.layout import STAGE_Y
+
+
+class Short(Scene):
+    def construct(self):
+        beat(self, "hook")
+        title = hook("How many squares?")
+        self.add(title)
+        self.add(Square(4).move_to([CENTRE_X, STAGE_Y, 0]))
+        cap = Captions(self)
+        cap.show("Count every square")
+        {pause}
+'''
+
+
+def _pause_short(root, pause: str):
+    d = root / "shorts" / "0001-t"
+    d.mkdir(exist_ok=True)
+    (d / "short.yaml").write_text(YAML)
+    (d / "verify.py").write_text("print('ok')\n")
+    (d / "scene.py").write_text(PAUSE_SCENE.replace("{pause}", pause))
+    return find("0001")
+
+
+def test_pause_and_try_keeps_puzzle_and_question_in_view(root):
+    s = _pause_short(root, 'self.slot = pause_and_try(self, cap, "How many squares are there?")')
+    p = check.probe(s)
+    assert p["countdowns"][0]["covers"] == []                  # auto avoided the square and the title
+    assert not check.check_countdown(p)
+    texts = {t["text"] for snap in p["snapshots"] for o in snap["objects"] for t in o["texts"]}
+    assert "How many squares are\nthere?" in texts or "How many squares are there?" in texts
+
+
+def test_countdown_on_the_figure_without_the_question_warns(root):
+    s = _pause_short(root, 'self.remove(title); cap.show("Pause and try it"); '
+                           'countdown(self, 5, center=[CENTRE_X, STAGE_Y, 0])')
+    msgs = [f.message for f in check.check_countdown(check.probe(s))]
+    assert any("covers" in m and "Square" in m for m in msgs)
+    assert any("keep the question up" in m for m in msgs)
+
+
+def test_pause_question_is_at_most_two_lines():
+    from lib.components import reminder
+    assert len(reminder("How many different routes could the monk take?")) == 2
+    with pytest.raises(ValueError):
+        reminder("How many different routes could the monk take if he must cross every bridge just once?")

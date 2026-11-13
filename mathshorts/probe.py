@@ -166,7 +166,23 @@ def run(folder: Path) -> dict:
     orig_countdown = comp.countdown
 
     def countdown(scene, seconds, *a, **k):
-        state["countdowns"].append({"t": now(scene), "seconds": seconds})
+        center = k.get("center", a[0] if a else None)
+        radius = k.get("radius", a[1] if len(a) > 1 else 0.9)
+        covers = []
+        if center is not None:                     # what the ring will sit on, shape by shape (#52)
+            r = float(radius) + 0.1
+            ring = (center[0] - r, center[1] - r, center[0] + r, center[1] + r)
+            for top in scene.mobjects:
+                for b in comp._visible_boxes([top]):
+                    w, h = min(b[2], ring[2]) - max(b[0], ring[0]), min(b[3], ring[3]) - max(b[1], ring[1])
+                    if w > 0 and h > 0 and w * h >= 0.02:
+                        d = describe(top)
+                        covers.append(next((t["text"] for t in d["texts"] if t["text"]), None)
+                                      or f"{d['kind']} at {d['bounds']}")
+                        break
+        state["countdowns"].append({"t": now(scene), "seconds": seconds,
+                                    "center": [round(float(v), 3) for v in center[:2]] if center is not None else None,
+                                    "radius": float(radius), "covers": covers})
         return orig_countdown(scene, seconds, *a, **k)
 
     comp.countdown = countdown

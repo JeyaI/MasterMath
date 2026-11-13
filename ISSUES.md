@@ -6,7 +6,7 @@ The software backlog. Add items freely; one line is enough. Work them with `/wor
 - **priority:** `P1` now · `P2` soon · `P3` someday
 - **type:** `bug` · `feature` · `content` · `chore`
 
-Next id: **52**
+Next id: **53**
 
 ## Open
 
@@ -132,6 +132,11 @@ status: open · P3 · bug
 `render.mix` asks loudnorm for -14 LUFS, but ebur128 measures -16.0 on 0001's final, both native and in Docker. Likely single-pass loudnorm on a quiet track. Try two-pass, or confirm that -16 is acceptable and change the target.
 
 ## Done
+
+### #52 · Keep the question on screen during "Pause and try it", and stop the countdown covering the puzzle
+status: done · 2026-11-12 · P2 · bug
+While the 5 s "Pause and try it" countdown runs, the viewer should still see what they're solving: the question (or a short reminder of it) stays on screen for the whole countdown, not just the "Pause and try it" caption. And the countdown ring (`lib.components.countdown`, placed by each scene's `center`) often overlaps or blends into the puzzle figure, hiding details needed to solve it. Give the countdown a spot that never covers the figure or the question (e.g. a reserved slot in the layout, or a check in `ms check`/`probe.py` that flags overlap with puzzle mobjects). Touches `lib/`, so re-preview existing Shorts and look at the pause frames.
+- **Resolution:** new `lib.components.pause_and_try(scene, cap, question)` keeps the question above the "Pause and try it" caption and puts the countdown in the `PAUSE_SLOTS` slot (top, corners, low, middle, sides) covering least, or one the draft names; `ms check` warns when a ring covers anything or no question is shown. Applies from 0022; published Shorts and 0019/0021 left as they are.
 
 ### #51 · Post the script to Discord as its beats, inline, instead of an attached SCRIPT.md
 status: done · 2026-11-12 · P2 · feature

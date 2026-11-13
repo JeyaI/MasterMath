@@ -5,7 +5,7 @@ You are running unattended, from `ms tick`. Nobody will answer questions, so do 
 Follow CLAUDE.md, and steps 5 and 6 of `.claude/skills/draft-short/SKILL.md`, with these changes:
 
 1. Read the Short's `SCRIPT.md` (the accepted script: build from its beats and captions), `short.yaml`, `verify.py`, and `events.jsonl` (the reviewer's earlier comments).
-2. Write `scene.py`, class `Short`, importing its shapes and numbers from `verify.py`. The solution animation must be custom to this puzzle; only the frame (hook, captions, countdown, Level 2 card) is shared.
+2. Write `scene.py`, class `Short`, importing its shapes and numbers from `verify.py`. The solution animation must be custom to this puzzle; only the frame (hook, captions, `pause_and_try`, Level 2 card) is shared. During the pause, the puzzle and its question stay in view (see step 5 of the skill).
 3. Run `ms preview <n>`, pull 6–10 frames with `ffmpeg -ss T -i <video> -frames:v 1 <png>` and look at them: overlaps, text off-screen, leftover objects, unreadable sizes, empty stretches. Fix what you find and render again. Fill the frame: a sparse layout is the most common fault.
 4. Run `ms check <n>` and fix every error. Warnings are targets; aim for 40–50 s.
 5. Keep `short.yaml`'s `captions` in step with the scene, and `ms verify <n>` passing. Never edit `status`.
